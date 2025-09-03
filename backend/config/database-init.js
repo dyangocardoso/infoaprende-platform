@@ -28,7 +28,7 @@ async function initializeDatabase() {
     
     // Sincronizar tablas (crear si no existen)
     console.log('🔄 Sincronizando tablas...');
-    await sequelizeInstance.sync({ alter: true });
+    await sequelizeInstance.sync({ force: false, alter: false });
     console.log('✅ Tablas sincronizadas correctamente');
     
     // Verificar si ya existen usuarios

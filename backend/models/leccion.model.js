@@ -60,8 +60,8 @@ function defineLeccionModel(sequelizeInstance) {
         fields: ['orden']
       },
       {
-        unique: true,
-        fields: ['curso_id', 'orden']
+        fields: ['curso_id', 'orden'],
+        unique: true
       }
     ]
   });
