@@ -1,16 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { ProgresoContext } from './ProgresoContext';
 
-const ProgresoContext = createContext();
-
-export const useProgreso = () => {
-  const context = useContext(ProgresoContext);
-  if (!context) {
-    throw new Error('useProgreso debe ser usado dentro de ProgresoProvider');
-  }
-  return context;
-};
-
-export const ProgresoProvider = ({ children }) => {
+export default function ProgresoProvider({ children }) {
   const [progreso, setProgreso] = useState({
     cursosCompletados: [],
     temasCompletados: [],
@@ -35,7 +26,7 @@ export const ProgresoProvider = ({ children }) => {
   }, [progreso]);
 
   // Marcar lección como completada
-  const completarLeccion = (cursoId, temaId, puntos = 10) => {
+  const completarLeccion = useCallback((cursoId, temaId, puntos = 10) => {
     const leccionId = `${cursoId}-${temaId}`;
     
     setProgreso(prev => {
@@ -90,10 +81,10 @@ export const ProgresoProvider = ({ children }) => {
         logros: nuevosLogros
       };
     });
-  };
+  }, []);
 
   // Obtener progreso de un curso específico
-  const getProgresoCurso = (cursoId) => {
+  const getProgresoCurso = useCallback((cursoId) => {
     const temasData = {
       'nociones-computador': 3, // Corregido: son 3 temas, no 4
       'intro-informatica': 7, // Nuevo curso con 7 temas
@@ -116,27 +107,27 @@ export const ProgresoProvider = ({ children }) => {
       porcentaje,
       completado: progreso.cursosCompletados.includes(cursoId)
     };
-  };
+  }, [progreso.temasCompletados, progreso.cursosCompletados]);
 
   // Verificar si una lección está completada
-  const isLeccionCompletada = (cursoId, temaId) => {
+  const isLeccionCompletada = useCallback((cursoId, temaId) => {
     const leccionId = `${cursoId}-${temaId}`;
     return progreso.leccionesCompletadas.includes(leccionId);
-  };
+  }, [progreso.leccionesCompletadas]);
 
   // Verificar si un tema está completado
-  const isTemaCompletado = (cursoId, temaId) => {
+  const isTemaCompletado = useCallback((cursoId, temaId) => {
     const temaId_completo = `${cursoId}-${temaId}`;
     return progreso.temasCompletados.includes(temaId_completo);
-  };
+  }, [progreso.temasCompletados]);
 
   // Agregar tiempo de estudio
-  const agregarTiempoEstudio = (minutos) => {
+  const agregarTiempoEstudio = useCallback((minutos) => {
     setProgreso(prev => ({
       ...prev,
       tiempoEstudio: prev.tiempoEstudio + minutos
     }));
-  };
+  }, []);
 
   // Verificar y otorgar logros
   const verificarLogros = (logrosActuales, stats) => {
@@ -193,7 +184,7 @@ export const ProgresoProvider = ({ children }) => {
   };
 
   // Reiniciar progreso (para testing)
-  const reiniciarProgreso = () => {
+  const reiniciarProgreso = useCallback(() => {
     setProgreso({
       cursosCompletados: [],
       temasCompletados: [],
@@ -204,7 +195,7 @@ export const ProgresoProvider = ({ children }) => {
       logros: []
     });
     localStorage.removeItem('progreso-infoaprende');
-  };
+  }, []);
 
   const value = {
     progreso,
@@ -221,4 +212,4 @@ export const ProgresoProvider = ({ children }) => {
       {children}
     </ProgresoContext.Provider>
   );
-};
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useProgreso } from '../../context/ProgresoContext';
+import { useProgreso } from '../../hooks/useProgreso';
 import './CursoBase.css';
 
 export default function NocionesComputador() {

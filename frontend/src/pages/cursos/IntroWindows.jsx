@@ -12,110 +12,129 @@ export default function IntroWindows() {
     temas: [
       {
         id: 1,
-        titulo: "Dispositivos básicos",
-        tematica: "Reconocimiento de elementos de interacción",
-        contenido: "Identifica y comprende el funcionamiento de los dispositivos básicos necesarios para interactuar con Windows.",
+        titulo: "Elementos y funciones básicas",
+        tematica: "Ratón, teclado, ventanas, escritorio, barra de tareas y menú Inicio",
+        contenido: "Aprende los elementos básicos de Windows y las funciones fundamentales para interactuar eficientemente con el sistema operativo.",
         actividades: [
-          "Reconocer mouse, teclado y monitor",
-          "Conectar dispositivos correctamente",
-          "Verificar funcionamiento básico",
-          "Solución de problemas simples"
+          "Ratón: uso correcto, tipos de clic y navegación",
+          "Teclado: teclas principales y atajos básicos",
+          "Teclado en pantalla: activación y uso",
+          "Ventanas: maximizar, minimizar, cerrar y organizar",
+          "Escritorio: personalización y accesos directos",
+          "Barra de tareas: funciones básicas y configuración",
+          "Menú Inicio: navegación y búsqueda básica"
         ]
       },
       {
         id: 2,
-        titulo: "Manejo de ventanas",
-        tematica: "Interacción con el entorno gráfico",
-        contenido: "Aprende a manipular ventanas: abrir, cerrar, minimizar, maximizar y redimensionar para una mejor experiencia de uso.",
+        titulo: "Explorador de Windows",
+        tematica: "Partes, vistas, personalización, archivos, carpetas, unidades y operaciones",
+        contenido: "Domina el Explorador de Windows para gestionar eficientemente todos tus archivos, carpetas y unidades de almacenamiento.",
         actividades: [
-          "Abrir y cerrar ventanas",
-          "Minimizar y maximizar",
-          "Redimensionar ventanas",
-          "Organizar múltiples ventanas"
+          "Partes del Explorador: panel de navegación, área principal",
+          "Vistas: iconos, lista, detalles y personalización",
+          "Archivos: propiedades, tipos y extensiones",
+          "Carpetas: crear, organizar y estructura",
+          "Unidades: discos duros, USB y unidades de red",
+          "Operaciones: copiar, mover, renombrar y eliminar",
+          "Búsqueda avanzada de archivos",
+          "Personalización: ordenar, filtrar y agrupar"
         ]
       },
       {
         id: 3,
         titulo: "Escritorio de Windows",
-        tematica: "Organización visual y funcional",
-        contenido: "Domina el escritorio de Windows, personalízalo y organiza tus elementos para un trabajo más eficiente.",
+        tematica: "Partes, organización visual y personalización",
+        contenido: "Conoce a fondo el escritorio de Windows, sus componentes y cómo personalizarlo para optimizar tu experiencia de trabajo.",
         actividades: [
-          "Personalizar fondo de pantalla",
-          "Organizar iconos del escritorio",
-          "Crear y eliminar accesos directos",
-          "Configurar resolución de pantalla"
+          "Partes del escritorio: iconos, fondo, área de trabajo",
+          "Iconos del escritorio: tipos y funciones",
+          "Organización visual: alineación y distribución",
+          "Personalización del fondo de pantalla",
+          "Temas y combinaciones de colores",
+          "Protector de pantalla y configuración",
+          "Resolución de pantalla y escalado",
+          "Accesos directos: crear, modificar y eliminar"
         ]
       },
       {
         id: 4,
         titulo: "Barra de tareas",
-        tematica: "Acceso rápido y control de aplicaciones",
-        contenido: "Utiliza la barra de tareas para acceder rápidamente a programas y controlar aplicaciones abiertas.",
+        tematica: "Partes, acceso rápido y control de aplicaciones",
+        contenido: "Aprende a utilizar la barra de tareas como centro de control para acceder rápidamente a programas y gestionar aplicaciones.",
         actividades: [
-          "Anclar programas a la barra",
-          "Cambiar entre aplicaciones",
-          "Personalizar área de notificaciones",
-          "Configurar opciones de la barra"
+          "Partes de la barra: botón Inicio, área de aplicaciones, notificaciones",
+          "Anclar y desanclar programas",
+          "Cambio entre aplicaciones abiertas",
+          "Área de notificaciones: íconos del sistema",
+          "Acceso rápido a herramientas",
+          "Personalización de la barra de tareas",
+          "Control de aplicaciones en ejecución",
+          "Configuración de opciones avanzadas"
         ]
       },
       {
         id: 5,
         titulo: "Menú de Inicio",
         tematica: "Navegación y personalización del sistema",
-        contenido: "Navega eficientemente por el menú de inicio y personalízalo según tus necesidades y preferencias.",
+        contenido: "Domina el menú de Inicio como punto central de navegación y personalización de tu sistema Windows.",
         actividades: [
-          "Buscar programas y archivos",
-          "Organizar mosaicos y grupos",
-          "Acceder a configuraciones",
-          "Personalizar menú de inicio"
+          "Navegación por las secciones del menú",
+          "Lista de aplicaciones y programas",
+          "Mosaicos y grupos de aplicaciones",
+          "Búsqueda de programas y archivos",
+          "Personalización de mosaicos",
+          "Configuración de opciones del menú",
+          "Acceso a configuraciones del sistema",
+          "Apagado y opciones de energía"
         ]
       },
       {
         id: 6,
-        titulo: "Explorador de Windows",
-        tematica: "Gestión de archivos y carpetas",
-        contenido: "Gestiona tus archivos y carpetas de manera eficiente usando el Explorador de Windows.",
+        titulo: "Papelera de reciclaje",
+        tematica: "Restauración y eliminación de elementos",
+        contenido: "Comprende el funcionamiento de la papelera de reciclaje para gestionar eficientemente elementos eliminados.",
         actividades: [
-          "Navegar por carpetas",
-          "Crear y eliminar archivos",
-          "Copiar y mover elementos",
-          "Buscar archivos específicos"
+          "Ubicación y acceso a la papelera",
+          "Enviar archivos y carpetas a la papelera",
+          "Visualizar contenido de la papelera",
+          "Restaurar elementos eliminados",
+          "Restauración a ubicación original",
+          "Eliminación permanente de elementos",
+          "Vaciar papelera de reciclaje",
+          "Configuración de propiedades de la papelera"
         ]
       },
       {
         id: 7,
-        titulo: "Papelera de reciclaje",
-        tematica: "Restauración y eliminación de elementos",
-        contenido: "Comprende el funcionamiento de la papelera de reciclaje para gestionar elementos eliminados.",
+        titulo: "Gestión de usuarios y seguridad",
+        tematica: "Tipos de cuentas, control parental, compartir carpetas y permisos",
+        contenido: "Aprende a gestionar usuarios y configurar medidas de seguridad para proteger tu sistema y datos.",
         actividades: [
-          "Enviar archivos a la papelera",
-          "Restaurar elementos eliminados",
-          "Vaciar papelera de reciclaje",
-          "Eliminación permanente"
+          "Tipos de cuentas: administrador, estándar y invitado",
+          "Crear y eliminar cuentas de usuario",
+          "Configuración de control parental",
+          "Restricciones de tiempo y aplicaciones",
+          "Compartir carpetas en la red",
+          "Configuración de permisos de archivos",
+          "Permisos de lectura, escritura y ejecución",
+          "Seguridad básica del sistema"
         ]
       },
       {
         id: 8,
-        titulo: "Usuarios y control parental",
-        tematica: "Configuración de perfiles y seguridad",
-        contenido: "Configura usuarios y controles parentales para un uso seguro y personalizado del sistema.",
+        titulo: "Herramientas y utilidades",
+        tematica: "Windows Defender, compresión de archivos e instalación/desinstalación de programas",
+        contenido: "Conoce las herramientas esenciales de Windows para mantener tu sistema seguro, organizado y funcionando correctamente.",
         actividades: [
-          "Crear cuentas de usuario",
-          "Configurar controles parentales",
-          "Gestionar permisos de usuario",
-          "Cambiar entre usuarios"
-        ]
-      },
-      {
-        id: 9,
-        titulo: "Aplicaciones y configuración",
-        tematica: "Herramientas, protección y personalización del entorno",
-        contenido: "Instala aplicaciones, configura el sistema y personaliza tu entorno de trabajo en Windows.",
-        actividades: [
-          "Instalar y desinstalar programas",
-          "Configurar opciones del sistema",
-          "Personalizar apariencia",
-          "Configurar seguridad básica"
+          "Windows Defender: protección antivirus",
+          "Análisis de seguridad del sistema",
+          "Firewall de Windows",
+          "Compresión de archivos: crear archivos ZIP",
+          "Extraer archivos comprimidos",
+          "Instalación de programas y aplicaciones",
+          "Desinstalación de programas",
+          "Panel de control y configuración del sistema"
         ]
       }
     ]

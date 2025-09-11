@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useProgreso } from '../context/ProgresoContext';
+import { useProgreso } from '../hooks/useProgreso';
 import './Home.css';
 
 export default function Home() {

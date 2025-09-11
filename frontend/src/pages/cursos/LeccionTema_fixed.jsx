@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useProgreso } from '../../context/ProgresoContext';
+import { useProgreso } from '../../hooks/useProgreso';
 import './LeccionTema.css';
 
 // Datos de ejemplo para las lecciones

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useContenido } from '../../context/ContenidoContext';
-import { useProgreso } from '../../context/ProgresoContext';
+import { useContenido } from '../../hooks/useContenido';
+import { useProgreso } from '../../hooks/useProgreso';
 import './ContenidoTeorico.css';
 
 export default function ContenidoTeorico() {
@@ -11,25 +11,31 @@ export default function ContenidoTeorico() {
   const { completarLeccion, agregarTiempoEstudio } = useProgreso();
   
   const [seccionActual, setSeccionActual] = useState(1);
-  const [tiempoInicio, setTiempoInicio] = useState(Date.now());
-  const [mostrarActividad, setMostrarActividad] = useState(false);
   const [respuestaActividad, setRespuestaActividad] = useState('');
   const [actividadesCompletadas, setActividadesCompletadas] = useState([]);
+  
+  // Usar ref para el tiempo de inicio para evitar re-renders
+  const tiempoInicioRef = useRef(Date.now());
 
   const contenidoLeccion = getContenidoLeccion(cursoId, temaId);
   const secciones = getSecciones(cursoId, temaId);
   const seccion = getSeccion(cursoId, temaId, seccionId || seccionActual);
   const recursos = getRecursos(cursoId, temaId);
 
-  // Registrar tiempo de estudio al salir
+  // Función para registrar tiempo de estudio
+  const registrarTiempoEstudio = useCallback(() => {
+    const tiempoEstudio = Math.round((Date.now() - tiempoInicioRef.current) / 60000); // en minutos
+    if (tiempoEstudio > 0) {
+      agregarTiempoEstudio(tiempoEstudio);
+    }
+  }, [agregarTiempoEstudio]);
+
+  // Registrar tiempo de estudio al salir del componente
   useEffect(() => {
     return () => {
-      const tiempoEstudio = Math.round((Date.now() - tiempoInicio) / 60000); // en minutos
-      if (tiempoEstudio > 0) {
-        agregarTiempoEstudio(tiempoEstudio);
-      }
+      registrarTiempoEstudio();
     };
-  }, [tiempoInicio, agregarTiempoEstudio]);
+  }, [registrarTiempoEstudio]);
 
   // Navegación entre secciones
   const irASeccion = (numeroSeccion) => {
@@ -53,15 +59,16 @@ export default function ContenidoTeorico() {
   const completarActividad = (actividadIndex) => {
     const nuevasCompletadas = [...actividadesCompletadas, `${seccionActual}-${actividadIndex}`];
     setActividadesCompletadas(nuevasCompletadas);
-    setMostrarActividad(false);
     setRespuestaActividad('');
   };
 
   // Completar lección completa
-  const completarLeccionCompleta = () => {
+  const completarLeccionCompleta = useCallback(() => {
+    // Registrar tiempo de estudio antes de completar
+    registrarTiempoEstudio();
     completarLeccion(cursoId, temaId, 15); // 15 puntos por completar contenido teórico
     navigate(`/curso/${cursoId}`);
-  };
+  }, [cursoId, temaId, completarLeccion, navigate, registrarTiempoEstudio]);
 
   const getCursoTitulo = (cursoId) => {
     const titulos = {
@@ -140,7 +147,7 @@ export default function ContenidoTeorico() {
         <aside className="sidebar-navegacion">
           <h4>📚 Contenidos</h4>
           <ul className="lista-secciones">
-            {secciones.map((sec, index) => (
+            {secciones.map((sec) => (
               <li 
                 key={sec.id} 
                 className={`seccion-item ${seccionActual === sec.id ? 'active' : ''}`}

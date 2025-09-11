@@ -1,16 +1,7 @@
-import React, { createContext, useContext } from 'react';
+import React from 'react';
+import { ContenidoContext } from './ContenidoContext';
 
-const ContenidoContext = createContext();
-
-export const useContenido = () => {
-  const context = useContext(ContenidoContext);
-  if (!context) {
-    throw new Error('useContenido debe ser usado dentro de ContenidoProvider');
-  }
-  return context;
-};
-
-export const ContenidoProvider = ({ children }) => {
+export default function ContenidoProvider({ children }) {
   // Base de datos de contenido teórico estructurado
   const contenidoDatabase = {
     'nociones-computador': {
@@ -496,221 +487,763 @@ export const ContenidoProvider = ({ children }) => {
         ]
       }
     },
-    'intro-windows': {
+    'intro-informatica': {
       '1': {
-        titulo: "Dispositivos Básicos del Computador",
-        duracion: "20-25 minutos",
+        titulo: "Evolución histórica",
+        duracion: "30-35 minutos",
         objetivos: [
-          "Identificar los dispositivos básicos de entrada y salida",
-          "Comprender la función de cada dispositivo en el sistema",
-          "Reconocer la importancia de los periféricos en Windows",
-          "Aprender sobre la conectividad y compatibilidad de dispositivos"
+          "Conocer los principales hitos en la evolución de la tecnología informática",
+          "Comprender la importancia de los pioneros de la computación",
+          "Entender la transición desde dispositivos mecánicos hasta la era digital",
+          "Valorar el impacto de cada avance en el desarrollo tecnológico actual"
         ],
         secciones: [
           {
             id: 1,
-            titulo: "Dispositivos de Entrada",
+            titulo: "Los primeros dispositivos de cálculo",
             contenido: `
-              <h3>⌨️ Dispositivos de Entrada</h3>
-              <p>Los <strong>dispositivos de entrada</strong> permiten al usuario enviar información al computador.</p>
+              <h3>🧮 Los inicios del cálculo automatizado</h3>
+              <p>La historia de la informática comenzó mucho antes de las computadoras modernas, con dispositivos simples pero revolucionarios para su época.</p>
               
-              <h4>Principales dispositivos:</h4>
-              <div class="dispositivos-grid">
-                <div class="dispositivo">
-                  <h5>⌨️ Teclado</h5>
+              <h4>📿 El Ábaco (3000 a.C. - presente)</h4>
+              <div class="dispositivo-historico">
+                <div class="info-dispositivo">
+                  <h5>Características:</h5>
                   <ul>
-                    <li>Dispositivo principal para escribir texto</li>
-                    <li>Incluye teclas especiales (Ctrl, Alt, Windows)</li>
-                    <li>Tipos: mecánico, de membrana, virtual</li>
+                    <li><strong>Origen:</strong> Mesopotamia y China antigua</li>
+                    <li><strong>Funcionamiento:</strong> Cuentas deslizantes en varillas</li>
+                    <li><strong>Operaciones:</strong> Suma, resta, multiplicación, división</li>
+                    <li><strong>Importancia:</strong> Primer dispositivo de cálculo portátil</li>
                   </ul>
                 </div>
-                <div class="dispositivo">
-                  <h5>🖱️ Mouse</h5>
+                <div class="impacto">
+                  <h5>💡 Legado del ábaco:</h5>
+                  <p>Aunque simple, el ábaco estableció principios fundamentales:</p>
                   <ul>
-                    <li>Controla el cursor en pantalla</li>
-                    <li>Botones: izquierdo, derecho, rueda</li>
-                    <li>Tipos: óptico, láser, inalámbrico</li>
+                    <li>Representación numérica posicional</li>
+                    <li>Cálculo manual sistemático</li>
+                    <li>Base para futuras máquinas calculadoras</li>
                   </ul>
                 </div>
-                <div class="dispositivo">
-                  <h5>📱 Pantalla Táctil</h5>
+              </div>
+
+              <h4>⚙️ La Pascalina (1642)</h4>
+              <div class="dispositivo-historico">
+                <div class="inventor">
+                  <h5>👨‍🔬 Blaise Pascal (1623-1662)</h5>
+                  <p>Matemático, físico y filósofo francés que revolucionó el cálculo mecánico.</p>
+                </div>
+                <div class="info-dispositivo">
+                  <h5>Características de la Pascalina:</h5>
                   <ul>
-                    <li>Permite tocar directamente la pantalla</li>
-                    <li>Común en tablets y laptops modernas</li>
-                    <li>Gestos: tocar, deslizar, pellizcar</li>
+                    <li><strong>Material:</strong> Engranajes de metal y madera</li>
+                    <li><strong>Función:</strong> Suma y resta automática</li>
+                    <li><strong>Innovación:</strong> Acarreo automático entre dígitos</li>
+                    <li><strong>Limitación:</strong> Solo operaciones básicas</li>
+                  </ul>
+                </div>
+                <div class="importancia">
+                  <h5>🎯 Importancia histórica:</h5>
+                  <ul>
+                    <li>Primera calculadora mecánica funcional</li>
+                    <li>Automatización del cálculo aritmético</li>
+                    <li>Precursora de máquinas más complejas</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🔢 La máquina de Leibniz (1674)</h4>
+              <div class="dispositivo-historico">
+                <div class="inventor">
+                  <h5>👨‍🔬 Gottfried Wilhelm Leibniz (1646-1716)</h5>
+                  <p>Matemático y filósofo alemán, co-inventor del cálculo infinitesimal.</p>
+                </div>
+                <div class="info-dispositivo">
+                  <h5>Mejoras sobre la Pascalina:</h5>
+                  <ul>
+                    <li><strong>Operaciones:</strong> Suma, resta, multiplicación, división</li>
+                    <li><strong>Mecanismo:</strong> Rueda escalonada (cilindro de Leibniz)</li>
+                    <li><strong>Innovación:</strong> Multiplicación mediante sumas repetidas</li>
+                    <li><strong>Visión:</strong> "Es indigno que hombres excelentes pierdan horas trabajando como esclavos en el trabajo de cálculo"</li>
                   </ul>
                 </div>
               </div>
             `,
             multimedia: {
-              imagen: "/images/teoria/dispositivos-entrada.jpg",
-              video: "/videos/teoria/como-usar-mouse-teclado.mp4"
+              imagen: "/images/teoria/dispositivos-calculo-antiguos.jpg",
+              video: "/videos/teoria/historia-calculo.mp4"
             },
             actividades: [
               {
-                tipo: "practica",
-                pregunta: "Identifica todos los dispositivos de entrada en tu computador",
-                ayuda: "Busca: teclado, mouse, micrófono, cámara web"
+                tipo: "reflexion",
+                pregunta: "¿Qué características del ábaco lo convirtieron en un dispositivo tan duradero a lo largo de la historia?",
+                ayuda: "Piensa en su simplicidad, portabilidad y eficiencia para la época"
+              },
+              {
+                tipo: "comparacion",
+                pregunta: "Compara las limitaciones de la Pascalina con las mejoras de la máquina de Leibniz",
+                ayuda: "Considera las operaciones que podía realizar cada una"
               }
             ]
           },
           {
             id: 2,
-            titulo: "Dispositivos de Salida",
+            titulo: "La era de las máquinas electromecánicas",
             contenido: `
-              <h3>🖥️ Dispositivos de Salida</h3>
-              <p>Los <strong>dispositivos de salida</strong> muestran información del computador al usuario.</p>
+              <h3>⚙️ Del cálculo mecánico a la programación</h3>
+              <p>El siglo XIX marcó un salto cualitativo hacia máquinas más sofisticadas que sentaron las bases conceptuales de la computación moderna.</p>
               
-              <h4>Principales dispositivos:</h4>
-              <div class="dispositivos-grid">
-                <div class="dispositivo">
-                  <h5>🖥️ Monitor</h5>
+              <h4>🏭 La máquina analítica de Charles Babbage (1837)</h4>
+              <div class="maquina-babbage">
+                <div class="inventor-destacado">
+                  <h5>👨‍🔬 Charles Babbage (1791-1871)</h5>
+                  <p><strong>"El padre de la computadora"</strong></p>
+                  <p>Matemático e inventor británico que concibió la primera máquina de computación de propósito general.</p>
+                </div>
+
+                <div class="componentes-maquina">
+                  <h5>🔧 Componentes revolucionarios:</h5>
+                  <div class="componente">
+                    <h6>📥 Mill (Molino) - Unidad de procesamiento</h6>
+                    <ul>
+                      <li>Equivalente a la CPU moderna</li>
+                      <li>Realizaba cálculos aritméticos</li>
+                      <li>Operaciones lógicas básicas</li>
+                    </ul>
+                  </div>
+                  <div class="componente">
+                    <h6>🗄️ Store (Almacén) - Memoria</h6>
+                    <ul>
+                      <li>Equivalente a la RAM moderna</li>
+                      <li>Almacenaba números y resultados</li>
+                      <li>Capacidad: 1,000 números de 40 dígitos</li>
+                    </ul>
+                  </div>
+                  <div class="componente">
+                    <h6>📋 Reader - Entrada de datos</h6>
+                    <ul>
+                      <li>Tarjetas perforadas para instrucciones</li>
+                      <li>Tarjetas separadas para datos</li>
+                      <li>Sistema de entrada programable</li>
+                    </ul>
+                  </div>
+                  <div class="componente">
+                    <h6>🖨️ Printer - Salida de resultados</h6>
+                    <ul>
+                      <li>Impresión automática de resultados</li>
+                      <li>Grabado en metal</li>
+                      <li>Múltiples formatos de salida</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="conceptos-revolucionarios">
+                  <h5>💡 Conceptos revolucionarios introducidos:</h5>
                   <ul>
-                    <li>Muestra la interfaz visual de Windows</li>
-                    <li>Tipos: LCD, LED, OLED</li>
-                    <li>Resoluciones: HD, Full HD, 4K</li>
+                    <li><strong>Programabilidad:</strong> Instrucciones cambiables mediante tarjetas</li>
+                    <li><strong>Bucles:</strong> Repetición automática de operaciones</li>
+                    <li><strong>Bifurcación condicional:</strong> Decisiones basadas en resultados</li>
+                    <li><strong>Separación de programa y datos:</strong> Concepto fundamental moderno</li>
                   </ul>
                 </div>
-                <div class="dispositivo">
-                  <h5>🔊 Altavoces</h5>
+              </div>
+
+              <h4>👩‍💻 Ada Lovelace: La primera programadora (1815-1852)</h4>
+              <div class="ada-lovelace">
+                <div class="biografia">
+                  <h5>📚 Augusta Ada King, Condesa de Lovelace</h5>
+                  <p>Matemática británica, hija del poeta Lord Byron, colaboradora de Charles Babbage.</p>
+                </div>
+
+                <div class="contribuciones">
+                  <h5>🎯 Contribuciones históricas:</h5>
+                  <div class="contribucion">
+                    <h6>📝 Algoritmo para calcular números de Bernoulli</h6>
+                    <ul>
+                      <li>Primer algoritmo diseñado para ser ejecutado por una máquina</li>
+                      <li>Detallado paso a paso en sus "Notas"</li>
+                      <li>Considerado el primer programa informático</li>
+                    </ul>
+                  </div>
+                  <div class="contribucion">
+                    <h6>🔮 Visión profética sobre las computadoras</h6>
+                    <ul>
+                      <li>"La máquina podría actuar sobre otras cosas además de números"</li>
+                      <li>Predijo el uso de computadoras para música y arte</li>
+                      <li>Entendió el potencial de procesamiento simbólico</li>
+                    </ul>
+                  </div>
+                  <div class="contribucion">
+                    <h6>🧠 Conceptos de programación</h6>
+                    <ul>
+                      <li>Subrutinas y funciones</li>
+                      <li>Bucles y iteraciones</li>
+                      <li>Programación estructurada</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="cita-famosa">
+                  <h5>💬 Cita histórica:</h5>
+                  <blockquote>
+                    "La Máquina Analítica no pretende originar nada. Puede hacer lo que sepamos cómo ordenarle que realice."
+                  </blockquote>
+                  <p><em>Esta cita establece la diferencia entre inteligencia artificial y programación.</em></p>
+                </div>
+              </div>
+
+              <h4>📊 Las máquinas tabuladoras de Hollerith (1890)</h4>
+              <div class="hollerith">
+                <div class="inventor">
+                  <h5>👨‍💼 Herman Hollerith (1860-1929)</h5>
+                  <p>Estadístico estadounidense que revolucionó el procesamiento de datos masivos.</p>
+                </div>
+
+                <div class="contexto-censo">
+                  <h5>🏛️ El problema del censo estadounidense</h5>
                   <ul>
-                    <li>Reproducen sonidos del sistema</li>
-                    <li>Integrados o externos</li>
-                    <li>Control de volumen desde Windows</li>
+                    <li><strong>Censo de 1880:</strong> Tardó 7 años en procesarse manualmente</li>
+                    <li><strong>Población creciente:</strong> El censo de 1890 habría tardado 10 años</li>
+                    <li><strong>Necesidad urgente:</strong> Automatización del conteo</li>
                   </ul>
                 </div>
-                <div class="dispositivo">
-                  <h5>🖨️ Impresora</h5>
+
+                <div class="solucion-hollerith">
+                  <h5>💡 La solución de Hollerith:</h5>
+                  <div class="maquina-tabuladora">
+                    <h6>🔌 Máquina tabuladora eléctrica</h6>
+                    <ul>
+                      <li><strong>Tarjetas perforadas:</strong> Cada persona = una tarjeta</li>
+                      <li><strong>Sistema eléctrico:</strong> Agujeros permiten paso de corriente</li>
+                      <li><strong>Contadores automáticos:</strong> Registro eléctrico de datos</li>
+                      <li><strong>Clasificación automática:</strong> Separación por categorías</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="resultado-historico">
+                  <h5>🏆 Resultados del censo de 1890:</h5>
                   <ul>
-                    <li>Convierte documentos digitales a papel</li>
-                    <li>Tipos: inyección, láser</li>
-                    <li>Funciones: imprimir, escanear, copiar</li>
+                    <li><strong>Tiempo:</strong> Reducido de 7 años a 2.5 años</li>
+                    <li><strong>Precisión:</strong> Mayor exactitud en los datos</li>
+                    <li><strong>Ahorro:</strong> $5 millones de dólares</li>
+                    <li><strong>Capacidad:</strong> Procesamiento de 62 millones de registros</li>
                   </ul>
+                </div>
+
+                <div class="legado-hollerith">
+                  <h5>🌟 Legado empresarial:</h5>
+                  <p>Hollerith fundó la <strong>Tabulating Machine Company</strong> en 1896, que posteriormente se convirtió en <strong>IBM</strong> (International Business Machines) en 1924.</p>
                 </div>
               </div>
             `,
             multimedia: {
-              imagen: "/images/teoria/dispositivos-salida.jpg",
-              video: "/videos/teoria/configurar-monitor-audio.mp4"
+              imagen: "/images/teoria/maquina-analitica-babbage.jpg",
+              video: "/videos/teoria/babbage-ada-lovelace.mp4"
             },
             actividades: [
               {
-                tipo: "identificacion",
-                pregunta: "¿Qué dispositivos de salida tienes conectados a tu PC?",
-                ayuda: "Revisa: monitor, altavoces, auriculares, impresora"
+                tipo: "analisis",
+                pregunta: "¿Qué componentes de la máquina analítica de Babbage puedes identificar en las computadoras modernas?",
+                ayuda: "Compara Mill, Store, Reader y Printer con CPU, RAM, dispositivos de entrada y salida"
+              },
+              {
+                tipo: "investigacion",
+                pregunta: "Investiga cómo el trabajo de Ada Lovelace influyó en el concepto moderno de programación",
+                ayuda: "Enfócate en su visión sobre el potencial de las máquinas más allá del cálculo numérico"
               }
             ]
           },
           {
             id: 3,
-            titulo: "Conexión y Configuración",
+            titulo: "Los pioneros de la computación moderna",
             contenido: `
-              <h3>🔌 Conectando Dispositivos en Windows</h3>
-              <p>Windows reconoce automáticamente la mayoría de dispositivos cuando se conectan.</p>
+              <h3>🚀 La revolución electrónica (1930-1950)</h3>
+              <p>El siglo XX trajo consigo la era de la computación electrónica, marcada por visionarios que establecieron los fundamentos teóricos y prácticos de la informática moderna.</p>
               
-              <h4>Tipos de conexiones:</h4>
-              <div class="conexiones-grid">
-                <div class="conexion">
-                  <h5>🔌 USB</h5>
-                  <p>Universal Serial Bus - Conexión más común</p>
-                  <ul>
-                    <li>USB-A: Puerto rectangular tradicional</li>
-                    <li>USB-C: Puerto ovalado moderno</li>
-                    <li>Plug and Play: conectar y usar</li>
-                  </ul>
+              <h4>🧮 Alan Turing: El padre de la ciencia computacional (1912-1954)</h4>
+              <div class="turing-section">
+                <div class="biografia-turing">
+                  <h5>👨‍🔬 Alan Mathison Turing</h5>
+                  <p>Matemático, lógico, criptógrafo y científico de la computación británico que revolucionó múltiples campos.</p>
                 </div>
-                <div class="conexion">
-                  <h5>📶 Bluetooth</h5>
-                  <p>Conexión inalámbrica de corto alcance</p>
-                  <ul>
-                    <li>Mouse y teclados inalámbricos</li>
-                    <li>Auriculares y altavoces</li>
-                    <li>Emparejamiento necesario</li>
-                  </ul>
-                </div>
-                <div class="conexion">
-                  <h5>🌐 Wi-Fi</h5>
-                  <p>Conexión inalámbrica a internet</p>
-                  <ul>
-                    <li>Red doméstica o pública</li>
-                    <li>Contraseña requerida</li>
-                    <li>Configuración automática</li>
-                  </ul>
+
+                <div class="contribuciones-turing">
+                  <h5>🎯 Contribuciones fundamentales:</h5>
+                  
+                  <div class="contribucion-detallada">
+                    <h6>🤖 La Máquina de Turing (1936)</h6>
+                    <div class="maquina-turing">
+                      <p><strong>Concepto:</strong> Modelo matemático de computación que define un dispositivo abstracto capaz de resolver cualquier problema computable.</p>
+                      <div class="componentes-maquina-turing">
+                        <ul>
+                          <li><strong>Cinta infinita:</strong> Memoria de almacenamiento dividida en celdas</li>
+                          <li><strong>Cabezal lector/escritor:</strong> Lee y modifica símbolos en la cinta</li>
+                          <li><strong>Estado interno:</strong> Determina la acción siguiente</li>
+                          <li><strong>Tabla de transiciones:</strong> Reglas de funcionamiento (programa)</li>
+                        </ul>
+                      </div>
+                      <div class="importancia-maquina">
+                        <h6>💡 Importancia:</h6>
+                        <ul>
+                          <li>Estableció los límites teóricos de la computación</li>
+                          <li>Definió qué problemas son computables</li>
+                          <li>Base para el diseño de lenguajes de programación</li>
+                          <li>Fundamento de la ciencia computacional moderna</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="contribucion-detallada">
+                    <h6>🔐 Máquina Enigma y Colossus (1940-1945)</h6>
+                    <div class="trabajo-guerra">
+                      <p><strong>Contexto:</strong> Durante la Segunda Guerra Mundial, Turing trabajó en Bletchley Park descifrando códigos nazis.</p>
+                      <ul>
+                        <li><strong>Enigma:</strong> Descifrado de la máquina de cifrado alemana</li>
+                        <li><strong>Colossus:</strong> Primera computadora electrónica programable</li>
+                        <li><strong>Impacto:</strong> Acortó la guerra en aproximadamente 2 años</li>
+                        <li><strong>Legado:</strong> Avances en criptografía y computación</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="contribucion-detallada">
+                    <h6>🧠 Test de Turing (1950)</h6>
+                    <div class="test-turing">
+                      <p><strong>Pregunta fundamental:</strong> "¿Pueden las máquinas pensar?"</p>
+                      <div class="funcionamiento-test">
+                        <h6>🔬 Funcionamiento del test:</h6>
+                        <ol>
+                          <li>Un interrogador humano</li>
+                          <li>Una máquina y un humano (identidades ocultas)</li>
+                          <li>Conversación a través de texto</li>
+                          <li>Si la máquina no puede ser distinguida, "pasa" el test</li>
+                        </ol>
+                      </div>
+                      <p><strong>Impacto:</strong> Estableció criterios para evaluar la inteligencia artificial, influyendo en décadas de investigación en IA.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              
-              <h4>📋 Pasos para conectar dispositivos:</h4>
-              <ol>
-                <li><strong>Conectar físicamente</strong> (USB) o activar (Bluetooth)</li>
-                <li><strong>Windows detecta</strong> automáticamente el dispositivo</li>
-                <li><strong>Instala drivers</strong> si es necesario</li>
-                <li><strong>Notificación</strong> confirma que está listo</li>
-                <li><strong>Configurar</strong> según necesidades</li>
-              </ol>
+
+              <h4>🏗️ John von Neumann: La arquitectura moderna (1903-1957)</h4>
+              <div class="von-neumann-section">
+                <div class="biografia-neumann">
+                  <h5>👨‍🔬 John von Neumann</h5>
+                  <p>Matemático húngaro-estadounidense, polímata que contribuyó a múltiples campos incluyendo matemáticas, física, economía y computación.</p>
+                </div>
+
+                <div class="arquitectura-neumann">
+                  <h5>🏛️ Arquitectura de von Neumann (1945)</h5>
+                  <p><strong>Documento clave:</strong> "First Draft of a Report on the EDVAC"</p>
+                  
+                  <div class="componentes-arquitectura">
+                    <h6>🔧 Componentes fundamentales:</h6>
+                    <div class="componente-detalle">
+                      <h6>🧠 Unidad Central de Procesamiento (CPU)</h6>
+                      <ul>
+                        <li><strong>Unidad de Control:</strong> Dirige las operaciones</li>
+                        <li><strong>Unidad Aritmético-Lógica (ALU):</strong> Realiza cálculos</li>
+                        <li><strong>Registros:</strong> Almacenamiento temporal de alta velocidad</li>
+                      </ul>
+                    </div>
+                    <div class="componente-detalle">
+                      <h6>💾 Memoria Principal</h6>
+                      <ul>
+                        <li><strong>Programa almacenado:</strong> Instrucciones en memoria</li>
+                        <li><strong>Datos:</strong> Información a procesar</li>
+                        <li><strong>Acceso uniforme:</strong> Misma memoria para ambos</li>
+                      </ul>
+                    </div>
+                    <div class="componente-detalle">
+                      <h6>📥 Unidad de Entrada</h6>
+                      <ul>
+                        <li>Dispositivos para introducir datos</li>
+                        <li>Teclado, tarjetas perforadas, sensores</li>
+                      </ul>
+                    </div>
+                    <div class="componente-detalle">
+                      <h6>📤 Unidad de Salida</h6>
+                      <ul>
+                        <li>Dispositivos para mostrar resultados</li>
+                        <li>Monitor, impresora, altavoces</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="principios-clave">
+                    <h6>🎯 Principios revolucionarios:</h6>
+                    <ul>
+                      <li><strong>Programa almacenado:</strong> Las instrucciones se guardan en memoria</li>
+                      <li><strong>Ejecución secuencial:</strong> Instrucciones ejecutadas una tras otra</li>
+                      <li><strong>Datos e instrucciones:</strong> Tratados de forma similar</li>
+                      <li><strong>Direccionamiento:</strong> Acceso a cualquier posición de memoria</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="legado-neumann">
+                  <h5>🌟 Legado perdurable:</h5>
+                  <p>La arquitectura de von Neumann sigue siendo la base de prácticamente todas las computadoras modernas, desde smartphones hasta supercomputadoras.</p>
+                </div>
+              </div>
+
+              <h4>💻 Las primeras computadoras electrónicas</h4>
+              <div class="primeras-computadoras">
+                
+                <div class="computadora-historica">
+                  <h5>⚡ ENIAC (1946)</h5>
+                  <div class="detalles-eniac">
+                    <div class="especificaciones">
+                      <h6>📊 Especificaciones:</h6>
+                      <ul>
+                        <li><strong>Nombre completo:</strong> Electronic Numerical Integrator and Computer</li>
+                        <li><strong>Peso:</strong> 30 toneladas</li>
+                        <li><strong>Tamaño:</strong> 167 m² de superficie</li>
+                        <li><strong>Tubos de vacío:</strong> 17,468 unidades</li>
+                        <li><strong>Velocidad:</strong> 5,000 operaciones por segundo</li>
+                        <li><strong>Programación:</strong> Recableado manual</li>
+                      </ul>
+                    </div>
+                    <div class="proposito">
+                      <h6>🎯 Propósito original:</h6>
+                      <p>Calcular tablas de trayectorias balísticas para el ejército estadounidense durante la Segunda Guerra Mundial.</p>
+                    </div>
+                    <div class="significado">
+                      <h6>💡 Significado histórico:</h6>
+                      <ul>
+                        <li>Primera computadora electrónica de propósito general</li>
+                        <li>1,000 veces más rápida que las máquinas electromecánicas</li>
+                        <li>Demostró la viabilidad de la computación electrónica</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="computadora-historica">
+                  <h5>🏢 UNIVAC I (1951)</h5>
+                  <div class="detalles-univac">
+                    <div class="especificaciones">
+                      <h6>📊 Especificaciones:</h6>
+                      <ul>
+                        <li><strong>Nombre completo:</strong> UNIVersal Automatic Computer I</li>
+                        <li><strong>Memoria:</strong> 1,000 palabras</li>
+                        <li><strong>Almacenamiento:</strong> Cintas magnéticas</li>
+                        <li><strong>Velocidad:</strong> 455 operaciones por segundo</li>
+                        <li><strong>Costo:</strong> $1.5 millones (equivalente a $15 millones hoy)</li>
+                      </ul>
+                    </div>
+                    <div class="hito-comercial">
+                      <h6>📺 Hito mediático:</h6>
+                      <p>UNIVAC I se hizo famosa al predecir correctamente la victoria de Eisenhower en las elecciones presidenciales de 1952, siendo transmitido en vivo por televisión.</p>
+                    </div>
+                    <div class="importancia-comercial">
+                      <h6>💼 Importancia comercial:</h6>
+                      <ul>
+                        <li>Primera computadora producida comercialmente en Estados Unidos</li>
+                        <li>Estableció el mercado de computadoras empresariales</li>
+                        <li>Demostró aplicaciones más allá del ámbito militar</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="computadora-historica">
+                  <h5>🔬 IBM 701 (1952)</h5>
+                  <div class="detalles-ibm">
+                    <div class="contexto">
+                      <h6>🏭 Contexto empresarial:</h6>
+                      <p>IBM entró en el mercado de computadoras electrónicas después de dominar las máquinas tabuladoras.</p>
+                    </div>
+                    <div class="especificaciones">
+                      <h6>📊 Características:</h6>
+                      <ul>
+                        <li><strong>Apodo:</strong> "Defense Calculator"</li>
+                        <li><strong>Propósito:</strong> Aplicaciones científicas y de ingeniería</li>
+                        <li><strong>Arquitectura:</strong> Programa almacenado</li>
+                        <li><strong>Producción:</strong> 19 unidades construidas</li>
+                      </ul>
+                    </div>
+                    <div class="legado-ibm">
+                      <h6>🌟 Legado:</h6>
+                      <ul>
+                        <li>Estableció a IBM como líder en computación</li>
+                        <li>Inició la serie 700 de computadoras científicas</li>
+                        <li>Sentó bases para el futuro dominio de IBM</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             `,
             multimedia: {
-              imagen: "/images/teoria/conexiones-dispositivos.jpg",
-              video: "/videos/teoria/conectar-dispositivos-windows.mp4"
+              imagen: "/images/teoria/turing-von-neumann.jpg",
+              video: "/videos/teoria/pioneros-computacion.mp4"
             },
             actividades: [
               {
-                tipo: "practica",
-                pregunta: "Conecta y desconecta un dispositivo USB observando las notificaciones",
-                ayuda: "Usa una memoria USB o mouse USB para practicar"
+                tipo: "conceptual",
+                pregunta: "Explica cómo la máquina de Turing influyó en el desarrollo de los lenguajes de programación modernos",
+                ayuda: "Piensa en los conceptos de estado, transiciones y computabilidad"
+              },
+              {
+                tipo: "comparacion",
+                pregunta: "Compara las características de ENIAC, UNIVAC I e IBM 701, identificando la evolución tecnológica",
+                ayuda: "Considera tamaño, velocidad, propósito y impacto comercial"
               }
             ]
           },
           {
             id: 4,
-            titulo: "Administrador de Dispositivos",
+            titulo: "La revolución del microprocesador",
             contenido: `
-              <h3>⚙️ Administrador de Dispositivos en Windows</h3>
-              <p>Herramienta para ver y gestionar todos los dispositivos conectados.</p>
+              <h3>🔬 La miniaturización que cambió el mundo (1960-1980)</h3>
+              <p>La invención del microprocesador marcó el inicio de la era de las computadoras personales y la democratización de la tecnología informática.</p>
               
-              <h4>🚀 Cómo acceder:</h4>
-              <ol>
-                <li>Clic derecho en "Este equipo"</li>
-                <li>Seleccionar "Propiedades"</li>
-                <li>Clic en "Administrador de dispositivos"</li>
-              </ol>
-              
-              <h4>📱 Qué puedes hacer:</h4>
-              <div class="funciones-admin">
-                <div class="funcion">
-                  <h5>👀 Ver dispositivos</h5>
-                  <p>Lista organizada por categorías</p>
+              <h4>🧪 El camino hacia la miniaturización</h4>
+              <div class="antecedentes-miniaturizacion">
+                <div class="problemas-tubes">
+                  <h5>⚡ Limitaciones de los tubos de vacío</h5>
+                  <ul>
+                    <li><strong>Tamaño:</strong> Computadoras ocupaban edificios enteros</li>
+                    <li><strong>Calor:</strong> Generación excesiva de temperatura</li>
+                    <li><strong>Consumo:</strong> Altísimo consumo energético</li>
+                    <li><strong>Confiabilidad:</strong> Fallos frecuentes de tubos</li>
+                    <li><strong>Costo:</strong> Extremadamente caras de mantener</li>
+                  </ul>
                 </div>
-                <div class="funcion">
-                  <h5>🔄 Actualizar drivers</h5>
-                  <p>Mejorar compatibilidad y rendimiento</p>
+
+                <div class="solucion-transistor">
+                  <h5>🔄 El transistor: La revolución silenciosa (1947)</h5>
+                  <div class="inventores-transistor">
+                    <p><strong>Inventores:</strong> John Bardeen, Walter Brattain y William Shockley (Bell Labs)</p>
+                    <p><strong>Premio Nobel:</strong> 1956 por esta invención revolucionaria</p>
+                  </div>
+                  <div class="ventajas-transistor">
+                    <h6>✨ Ventajas del transistor:</h6>
+                    <ul>
+                      <li><strong>Tamaño:</strong> Miles de veces más pequeño</li>
+                      <li><strong>Velocidad:</strong> Conmutación instantánea</li>
+                      <li><strong>Consumo:</strong> Energía mínima</li>
+                      <li><strong>Durabilidad:</strong> Sin partes móviles</li>
+                      <li><strong>Costo:</strong> Producción masiva económica</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="funcion">
-                  <h5>❌ Desactivar dispositivos</h5>
-                  <p>Temporalmente sin desconectar</p>
-                </div>
-                <div class="funcion">
-                  <h5>🔧 Resolver problemas</h5>
-                  <p>Diagnosticar dispositivos con errores</p>
+
+                <div class="circuitos-integrados">
+                  <h5>🎯 Circuitos integrados (1958)</h5>
+                  <div class="inventores-ci">
+                    <p><strong>Co-inventores:</strong></p>
+                    <ul>
+                      <li><strong>Jack Kilby (Texas Instruments):</strong> Primer circuito integrado</li>
+                      <li><strong>Robert Noyce (Fairchild):</strong> Proceso de fabricación planar</li>
+                    </ul>
+                  </div>
+                  <div class="impacto-ci">
+                    <h6>💡 Impacto de los circuitos integrados:</h6>
+                    <ul>
+                      <li>Múltiples transistores en un solo chip</li>
+                      <li>Reducción dramática de tamaño y costo</li>
+                      <li>Aumento de confiabilidad</li>
+                      <li>Base para la electrónica moderna</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-              
-              <h4>⚠️ Símbolos importantes:</h4>
-              <ul>
-                <li><strong>▲ Amarillo:</strong> Advertencia o problema</li>
-                <li><strong>❌ Rojo:</strong> Error grave</li>
-                <li><strong>↓ Gris:</strong> Dispositivo desactivado</li>
-                <li><strong>✅ Sin símbolo:</strong> Funcionando correctamente</li>
-              </ul>
+
+              <h4>🏭 Intel y el nacimiento del microprocesador</h4>
+              <div class="historia-intel">
+                <div class="fundacion-intel">
+                  <h5>🚀 Fundación de Intel (1968)</h5>
+                  <div class="fundadores">
+                    <p><strong>Fundadores:</strong></p>
+                    <ul>
+                      <li><strong>Robert Noyce:</strong> Co-inventor del circuito integrado</li>
+                      <li><strong>Gordon Moore:</strong> Creador de la Ley de Moore</li>
+                    </ul>
+                  </div>
+                  <div class="mision-inicial">
+                    <p><strong>Misión inicial:</strong> Crear memorias de semiconductores para computadoras</p>
+                  </div>
+                </div>
+
+                <div class="ley-moore">
+                  <h5>📈 La Ley de Moore (1965)</h5>
+                  <div class="prediccion">
+                    <blockquote>
+                      "El número de transistores en un chip se duplica aproximadamente cada 18-24 meses"
+                    </blockquote>
+                    <p><em>- Gordon Moore, co-fundador de Intel</em></p>
+                  </div>
+                  <div class="impacto-ley">
+                    <h6>🎯 Impacto de la predicción:</h6>
+                    <ul>
+                      <li>Guía para el desarrollo de la industria</li>
+                      <li>Profecía autocumplida durante 50+ años</li>
+                      <li>Base para planificación tecnológica</li>
+                      <li>Impulso de la innovación constante</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔬 Intel 4004: El primer microprocesador (1971)</h4>
+              <div class="intel-4004">
+                <div class="contexto-creacion">
+                  <h5>🎯 El contexto de la creación</h5>
+                  <div class="proyecto-busicom">
+                    <h6>📟 Proyecto de calculadora Busicom</h6>
+                    <ul>
+                      <li><strong>Cliente:</strong> Busicom, empresa japonesa de calculadoras</li>
+                      <li><strong>Problema:</strong> Necesitaban chips personalizados para calculadoras</li>
+                      <li><strong>Solución Intel:</strong> Un chip programable universal</li>
+                      <li><strong>Visión:</strong> Un procesador que pudiera programarse para múltiples tareas</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="equipo-desarrollo">
+                    <h6>👥 Equipo de desarrollo clave:</h6>
+                    <ul>
+                      <li><strong>Ted Hoff:</strong> Arquitecto principal, concibió la idea</li>
+                      <li><strong>Federico Faggin:</strong> Diseñador de chips, implementó el diseño</li>
+                      <li><strong>Stan Mazor:</strong> Ingeniero de software, definió instrucciones</li>
+                      <li><strong>Masatoshi Shima:</strong> Ingeniero de Busicom, colaborador clave</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="especificaciones-4004">
+                  <h5>📊 Especificaciones técnicas del Intel 4004</h5>
+                  <div class="specs-tecnicas">
+                    <div class="spec-grupo">
+                      <h6>🔧 Características físicas</h6>
+                      <ul>
+                        <li><strong>Transistores:</strong> 2,300 (versus 17,468 de ENIAC)</li>
+                        <li><strong>Tecnología:</strong> 10 micrones</li>
+                        <li><strong>Tamaño del chip:</strong> 12 mm²</li>
+                        <li><strong>Encapsulado:</strong> DIP de 16 pines</li>
+                      </ul>
+                    </div>
+                    <div class="spec-grupo">
+                      <h6>⚡ Rendimiento</h6>
+                      <ul>
+                        <li><strong>Velocidad:</strong> 740 KHz</li>
+                        <li><strong>Operaciones:</strong> 92,000 instrucciones por segundo</li>
+                        <li><strong>Bus de datos:</strong> 4 bits</li>
+                        <li><strong>Memoria direccionable:</strong> 4,096 bits</li>
+                      </ul>
+                    </div>
+                    <div class="spec-grupo">
+                      <h6>💰 Aspectos comerciales</h6>
+                      <ul>
+                        <li><strong>Precio inicial:</strong> $200 (equivalente a $1,300 hoy)</li>
+                        <li><strong>Fecha de lanzamiento:</strong> 15 de noviembre de 1971</li>
+                        <li><strong>Mercado objetivo:</strong> Calculadoras y dispositivos simples</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="importancia-historica">
+                  <h5>🌟 Importancia histórica del 4004</h5>
+                  <div class="hitos-logrados">
+                    <div class="hito">
+                      <h6>🥇 Primer microprocesador comercial</h6>
+                      <p>Estableció el concepto de CPU en un solo chip</p>
+                    </div>
+                    <div class="hito">
+                      <h6>🔄 Programabilidad universal</h6>
+                      <p>Un chip que podía realizar múltiples tareas según su programación</p>
+                    </div>
+                    <div class="hito">
+                      <h6>📉 Democratización de la computación</h6>
+                      <p>Hizo posible computadoras más pequeñas y económicas</p>
+                    </div>
+                    <div class="hito">
+                      <h6>🏭 Nacimiento de una industria</h6>
+                      <p>Creó el mercado de microprocesadores que continúa hoy</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="slogan-historico">
+                  <h5>💬 El eslogan que cambió la historia</h5>
+                  <blockquote>
+                    "A microprogrammable computer on a chip!"
+                  </blockquote>
+                  <p><em>- Anuncio publicitario de Intel, 1971</em></p>
+                  <p>Este eslogan introdujo el concepto de "computadora en un chip" al mundo.</p>
+                </div>
+              </div>
+
+              <h4>🚀 La evolución de los microprocesadores Intel</h4>
+              <div class="evolucion-intel">
+                <div class="timeline-procesadores">
+                  <div class="procesador-historico">
+                    <h5>🔢 Intel 8008 (1972)</h5>
+                    <ul>
+                      <li><strong>Transistores:</strong> 3,500</li>
+                      <li><strong>Bus de datos:</strong> 8 bits (doblando al 4004)</li>
+                      <li><strong>Aplicaciones:</strong> Terminales de computadora</li>
+                      <li><strong>Importancia:</strong> Primer procesador de 8 bits</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="procesador-historico">
+                    <h5>⚡ Intel 8080 (1974)</h5>
+                    <ul>
+                      <li><strong>Transistores:</strong> 6,000</li>
+                      <li><strong>Velocidad:</strong> 2 MHz</li>
+                      <li><strong>Aplicaciones:</strong> Primeras computadoras personales</li>
+                      <li><strong>Importancia:</strong> Base para el Altair 8800</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="procesador-historico">
+                    <h5>🏆 Intel 8086 (1978)</h5>
+                    <ul>
+                      <li><strong>Transistores:</strong> 29,000</li>
+                      <li><strong>Bus de datos:</strong> 16 bits</li>
+                      <li><strong>Arquitectura:</strong> x86 (aún en uso hoy)</li>
+                      <li><strong>Importancia:</strong> Base para las PC IBM</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="crecimiento-exponencial">
+                  <h5>📈 Crecimiento exponencial (1971-1978)</h5>
+                  <div class="estadisticas">
+                    <ul>
+                      <li><strong>Transistores:</strong> De 2,300 a 29,000 (12.6x más)</li>
+                      <li><strong>Velocidad:</strong> De 740 KHz a 5 MHz (6.7x más rápido)</li>
+                      <li><strong>Capacidad:</strong> De 4 bits a 16 bits de procesamiento</li>
+                      <li><strong>Aplicaciones:</strong> De calculadoras a computadoras completas</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="reflexion-final">
+                <h4>🎯 Reflexión: Del sueño a la realidad</h4>
+                <p>En menos de una década (1971-1980), el microprocesador transformó la computación de laboratorios especializados a herramientas personales. Esta revolución cumplió la visión de los pioneros: hacer que la potencia de cálculo estuviera disponible para todos, estableciendo las bases de nuestra sociedad digital actual.</p>
+              </div>
             `,
             multimedia: {
-              imagen: "/images/teoria/administrador-dispositivos.jpg",
-              video: "/videos/teoria/usar-administrador-dispositivos.mp4"
+              imagen: "/images/teoria/intel-4004-microprocesador.jpg",
+              video: "/videos/teoria/revolucion-microprocesador.mp4"
             },
             actividades: [
               {
-                tipo: "exploracion",
-                pregunta: "Abre el Administrador de dispositivos y explora las categorías",
-                ayuda: "Busca: Audio, Teclados, Mouse, Monitores"
+                tipo: "calculo",
+                pregunta: "Calcula cuántas veces más transistores tiene el Intel 8086 (1978) comparado con el 4004 (1971) y verifica si cumple la Ley de Moore",
+                ayuda: "4004: 2,300 transistores, 8086: 29,000 transistores. La Ley de Moore predice duplicación cada 2 años"
+              },
+              {
+                tipo: "analisis",
+                pregunta: "Analiza cómo el microprocesador Intel 4004 cumplió la visión de democratizar la computación",
+                ayuda: "Considera tamaño, costo, consumo energético y aplicaciones posibles"
               }
             ]
           }
@@ -718,83 +1251,6680 @@ export const ContenidoProvider = ({ children }) => {
         recursos: {
           documentos: [
             {
-              titulo: "Guía de Dispositivos para Windows",
+              titulo: "Historia completa de la computación",
               tipo: "PDF",
-              url: "/recursos/intro-windows/dispositivos-basicos.pdf"
+              url: "/recursos/intro-informatica/historia-computacion.pdf"
             },
             {
-              titulo: "Manual de Conexiones USB y Bluetooth",
+              titulo: "Biografías de pioneros informáticos",
+              tipo: "PDF", 
+              url: "/recursos/intro-informatica/pioneros-informatica.pdf"
+            },
+            {
+              titulo: "Línea temporal interactiva",
               tipo: "PDF",
-              url: "/recursos/intro-windows/conexiones-dispositivos.pdf"
+              url: "/recursos/intro-informatica/linea-temporal-informatica.pdf"
             }
           ],
           videos: [
             {
-              titulo: "Conectar Dispositivos en Windows",
-              duracion: "8 min",
-              url: "/videos/conectar-dispositivos-windows.mp4"
+              titulo: "Documental: Los pioneros de la computación",
+              duracion: "45 min",
+              url: "/videos/documentales/pioneros-computacion.mp4"
+            },
+            {
+              titulo: "Charles Babbage y Ada Lovelace",
+              duracion: "20 min", 
+              url: "/videos/historia/babbage-lovelace.mp4"
+            },
+            {
+              titulo: "Alan Turing: El genio incomprendido",
+              duracion: "25 min",
+              url: "/videos/biografia/alan-turing.mp4"
+            },
+            {
+              titulo: "La historia del microprocesador Intel",
+              duracion: "18 min",
+              url: "/videos/tecnologia/historia-microprocesador.mp4"
             }
           ],
           enlaces: [
             {
-              titulo: "Soporte Microsoft - Dispositivos",
-              url: "https://support.microsoft.com/es-es/windows/dispositivos"
+              titulo: "Museo de Historia de la Computación",
+              url: "https://www.computerhistory.org/"
+            },
+            {
+              titulo: "Archivo Alan Turing",
+              url: "https://www.turing.org.uk/"
+            },
+            {
+              titulo: "Intel - Historia del Microprocesador",
+              url: "https://www.intel.com/content/www/us/en/history/museum-story-of-intel-4004.html"
+            },
+            {
+              titulo: "Máquina de Turing Simulador",
+              url: "https://turingmachinesimulator.com/"
             }
           ]
         },
         evaluacion: {
-          preRequisitos: ["Conocimientos básicos de computación"],
+          preRequisitos: ["Conocimientos básicos sobre computadoras"],
           criterios: [
-            "Identificar dispositivos de entrada y salida",
-            "Explicar cómo conectar dispositivos en Windows",
-            "Usar el Administrador de dispositivos",
-            "Resolver problemas básicos de conectividad"
+            "Identificar los principales hitos en la evolución histórica de la informática",
+            "Explicar las contribuciones de los pioneros: Babbage, Ada Lovelace, Turing, von Neumann",
+            "Comprender la importancia de la transición de máquinas mecánicas a electrónicas",
+            "Valorar el impacto del microprocesador en la democratización de la computación",
+            "Relacionar eventos históricos con desarrollos tecnológicos actuales"
           ],
-          tiempoEstimado: "20 minutos"
+          tiempoEstimado: "45 minutos"
         }
       },
       '2': {
-        titulo: "Uso Básico de Windows",
-        duracion: "25-30 minutos",
+        titulo: "Fundamentos y conceptos",
+        duracion: "30-35 minutos",
         objetivos: [
-          "Familiarizarse con la interfaz de Windows",
-          "Aprender a usar el menú Inicio y la barra de tareas",
-          "Dominar las operaciones básicas con ventanas",
-          "Conocer los gestos y métodos de navegación esenciales"
+          "Comprender qué es la informática como ciencia",
+          "Distinguir entre datos e información",
+          "Identificar los componentes de un sistema de información",
+          "Entender el ciclo básico de procesamiento de información"
         ],
         secciones: [
           {
             id: 1,
-            titulo: "El Escritorio de Windows",
+            titulo: "¿Qué es la Informática?",
             contenido: `
-              <h3>🖥️ Conociendo el Escritorio</h3>
-              <p>El <strong>escritorio</strong> es la pantalla principal que ves al iniciar Windows. Es tu espacio de trabajo principal.</p>
+              <h3>💻 La Informática como Ciencia</h3>
+              <p>La <strong>informática</strong> es la ciencia que estudia el tratamiento automático de la información mediante el uso de computadoras.</p>
               
-              <h4>Elementos del escritorio:</h4>
+              <h4>🔍 Definición Completa:</h4>
+              <div class="definicion-informatica">
+                <div class="componente-definicion">
+                  <h5>📊 Información</h5>
+                  <p>Conjunto de datos organizados y procesados que tienen significado y utilidad</p>
+                </div>
+                <div class="componente-definicion">
+                  <h5>⚙️ Tratamiento Automático</h5>
+                  <p>Procesamiento realizado por máquinas sin intervención humana constante</p>
+                </div>
+                <div class="componente-definicion">
+                  <h5>🖥️ Computadoras</h5>
+                  <p>Máquinas capaces de ejecutar algoritmos y procesar información</p>
+                </div>
+              </div>
+
+              <h4>🌐 Áreas de la Informática:</h4>
+              <div class="areas-informatica">
+                <div class="area">
+                  <h5>👨‍💻 Programación</h5>
+                  <ul>
+                    <li>Desarrollo de software</li>
+                    <li>Algoritmos y estructuras de datos</li>
+                    <li>Lenguajes de programación</li>
+                  </ul>
+                </div>
+                <div class="area">
+                  <h5>🏗️ Sistemas</h5>
+                  <ul>
+                    <li>Arquitectura de computadores</li>
+                    <li>Redes de computadoras</li>
+                    <li>Bases de datos</li>
+                  </ul>
+                </div>
+                <div class="area">
+                  <h5>🤖 Inteligencia Artificial</h5>
+                  <ul>
+                    <li>Machine Learning</li>
+                    <li>Procesamiento de lenguaje natural</li>
+                    <li>Robótica</li>
+                  </ul>
+                </div>
+                <div class="area">
+                  <h5>🔒 Seguridad</h5>
+                  <ul>
+                    <li>Ciberseguridad</li>
+                    <li>Criptografía</li>
+                    <li>Protección de datos</li>
+                  </ul>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/areas-informatica.jpg",
+              video: "/videos/teoria/que-es-informatica.mp4"
+            },
+            actividades: [
+              {
+                tipo: "reflexion",
+                pregunta: "¿Qué dispositivos informáticos utilizas en tu vida diaria?",
+                ayuda: "Piensa en smartphones, computadoras, tablets, smartwatch, etc."
+              },
+              {
+                tipo: "investigacion",
+                pregunta: "Busca tres ejemplos de cómo la informática ha cambiado una actividad cotidiana",
+                ayuda: "Considera: comunicación, entretenimiento, educación, compras"
+              }
+            ]
+          },
+          {
+            id: 2,
+            titulo: "Datos vs Información",
+            contenido: `
+              <h3>📊 Diferencia entre Datos e Información</h3>
+              <p>Es fundamental comprender la diferencia entre <strong>datos</strong> e <strong>información</strong> para entender cómo funcionan los sistemas informáticos.</p>
+              
+              <div class="comparacion-datos-info">
+                <div class="columna-datos">
+                  <h4>📋 DATOS</h4>
+                  <div class="caracteristicas">
+                    <h5>¿Qué son?</h5>
+                    <p>Hechos crudos, símbolos o números sin procesar</p>
+                    
+                    <h5>Características:</h5>
+                    <ul>
+                      <li>Sin contexto</li>
+                      <li>Sin significado aparente</li>
+                      <li>No organizados</li>
+                      <li>Materia prima</li>
+                    </ul>
+                    
+                    <h5>🔢 Ejemplos:</h5>
+                    <ul>
+                      <li>25, 30, 28, 32</li>
+                      <li>Juan, María, Pedro</li>
+                      <li>01/03/2025</li>
+                      <li>12345678</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="flecha-transformacion">
+                  <h4>⚙️ PROCESAMIENTO</h4>
+                  <p>Los datos se organizan, analizan y contextualizan</p>
+                </div>
+                
+                <div class="columna-informacion">
+                  <h4>💡 INFORMACIÓN</h4>
+                  <div class="caracteristicas">
+                    <h5>¿Qué es?</h5>
+                    <p>Datos procesados con significado y utilidad</p>
+                    
+                    <h5>Características:</h5>
+                    <ul>
+                      <li>Con contexto</li>
+                      <li>Tiene significado</li>
+                      <li>Organizada</li>
+                      <li>Útil para tomar decisiones</li>
+                    </ul>
+                    
+                    <h5>📈 Ejemplos:</h5>
+                    <ul>
+                      <li>Temperatura promedio: 28.75°C</li>
+                      <li>Lista de estudiantes del curso</li>
+                      <li>Fecha de nacimiento: 1 de marzo de 2025</li>
+                      <li>Número de identificación estudiantil</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="proceso-transformacion">
+                <h4>🔄 Proceso de Transformación</h4>
+                <div class="pasos-transformacion">
+                  <div class="paso">
+                    <span class="numero">1</span>
+                    <h5>Recolección</h5>
+                    <p>Obtener datos del entorno</p>
+                  </div>
+                  <div class="paso">
+                    <span class="numero">2</span>
+                    <h5>Organización</h5>
+                    <p>Estructurar y clasificar</p>
+                  </div>
+                  <div class="paso">
+                    <span class="numero">3</span>
+                    <h5>Análisis</h5>
+                    <p>Buscar patrones y relaciones</p>
+                  </div>
+                  <div class="paso">
+                    <span class="numero">4</span>
+                    <h5>Interpretación</h5>
+                    <p>Dar significado y contexto</p>
+                  </div>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/datos-vs-informacion.jpg",
+              video: "/videos/teoria/transformacion-datos.mp4"
+            },
+            actividades: [
+              {
+                tipo: "ejemplo",
+                pregunta: "Identifica qué son datos y qué es información en un reporte de calificaciones",
+                ayuda: "Los números solos son datos, el promedio y la evaluación son información"
+              },
+              {
+                tipo: "practica",
+                pregunta: "Convierte estos datos en información: 8, 9, 7, 10, 6",
+                ayuda: "Calcula el promedio y determina si representa buen rendimiento"
+              }
+            ]
+          },
+          {
+            id: 3,
+            titulo: "Sistemas de Información",
+            contenido: `
+              <h3>🏗️ Componentes de un Sistema de Información</h3>
+              <p>Un <strong>sistema de información</strong> es un conjunto de elementos interrelacionados que trabajan juntos para recopilar, procesar, almacenar y distribuir información.</p>
+              
+              <h4>🧩 Los 5 Componentes Fundamentales:</h4>
+              
+              <div class="componentes-sistema">
+                <div class="componente">
+                  <div class="icono-componente">🖥️</div>
+                  <h5>1. HARDWARE</h5>
+                  <div class="descripcion">
+                    <p><strong>Equipos físicos del sistema</strong></p>
+                    <ul>
+                      <li>Computadoras y servidores</li>
+                      <li>Dispositivos de entrada y salida</li>
+                      <li>Equipos de comunicación</li>
+                      <li>Medios de almacenamiento</li>
+                    </ul>
+                    <div class="ejemplo-componente">
+                      <strong>Ejemplo:</strong> CPU, monitor, teclado, router
+                    </div>
+                  </div>
+                </div>
+
+                <div class="componente">
+                  <div class="icono-componente">💾</div>
+                  <h5>2. SOFTWARE</h5>
+                  <div class="descripcion">
+                    <p><strong>Programas y aplicaciones</strong></p>
+                    <ul>
+                      <li>Sistemas operativos</li>
+                      <li>Aplicaciones de usuario</li>
+                      <li>Software de sistema</li>
+                      <li>Programas especializados</li>
+                    </ul>
+                    <div class="ejemplo-componente">
+                      <strong>Ejemplo:</strong> Windows, Microsoft Word, antivirus
+                    </div>
+                  </div>
+                </div>
+
+                <div class="componente">
+                  <div class="icono-componente">📊</div>
+                  <h5>3. DATOS</h5>
+                  <div class="descripcion">
+                    <p><strong>Información a procesar</strong></p>
+                    <ul>
+                      <li>Datos de entrada (input)</li>
+                      <li>Datos almacenados</li>
+                      <li>Información procesada</li>
+                      <li>Reportes y resultados</li>
+                    </ul>
+                    <div class="ejemplo-componente">
+                      <strong>Ejemplo:</strong> Notas estudiantiles, archivos, bases de datos
+                    </div>
+                  </div>
+                </div>
+
+                <div class="componente">
+                  <div class="icono-componente">👥</div>
+                  <h5>4. PERSONAS</h5>
+                  <div class="descripcion">
+                    <p><strong>Usuarios del sistema</strong></p>
+                    <ul>
+                      <li>Usuarios finales</li>
+                      <li>Administradores de sistema</li>
+                      <li>Desarrolladores</li>
+                      <li>Personal de soporte</li>
+                    </ul>
+                    <div class="ejemplo-componente">
+                      <strong>Ejemplo:</strong> Estudiantes, profesores, técnicos
+                    </div>
+                  </div>
+                </div>
+
+                <div class="componente">
+                  <div class="icono-componente">📋</div>
+                  <h5>5. PROCEDIMIENTOS</h5>
+                  <div class="descripcion">
+                    <p><strong>Métodos y normas de trabajo</strong></p>
+                    <ul>
+                      <li>Procesos de operación</li>
+                      <li>Políticas de seguridad</li>
+                      <li>Protocolos de backup</li>
+                      <li>Manuales de usuario</li>
+                    </ul>
+                    <div class="ejemplo-componente">
+                      <strong>Ejemplo:</strong> Proceso de matrícula, backup diario
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="interaccion-componentes">
+                <h4>🔄 Cómo Interactúan los Componentes</h4>
+                <div class="flujo-sistema">
+                  <div class="flujo-paso">
+                    <strong>Personas</strong> utilizan <strong>procedimientos</strong>
+                  </div>
+                  <div class="flecha">→</div>
+                  <div class="flujo-paso">
+                    Para operar <strong>hardware</strong> y <strong>software</strong>
+                  </div>
+                  <div class="flecha">→</div>
+                  <div class="flujo-paso">
+                    Que procesan <strong>datos</strong> para generar información útil
+                  </div>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/componentes-sistema-informacion.jpg",
+              video: "/videos/teoria/sistemas-informacion.mp4"
+            },
+            actividades: [
+              {
+                tipo: "identificacion",
+                pregunta: "Identifica los 5 componentes en el sistema informático de tu escuela",
+                ayuda: "Piensa en las computadoras, programas, estudiantes, reglas y datos"
+              },
+              {
+                tipo: "analisis",
+                pregunta: "¿Qué pasaría si faltara uno de los componentes en un sistema?",
+                ayuda: "Considera cómo cada componente es esencial para el funcionamiento"
+              }
+            ]
+          },
+          {
+            id: 4,
+            titulo: "Ciclo de Procesamiento de Información",
+            contenido: `
+              <h3>🔄 El Ciclo IPO: Input → Process → Output</h3>
+              <p>Todos los sistemas informáticos siguen el mismo <strong>ciclo básico</strong> para transformar datos en información útil.</p>
+              
+              <div class="ciclo-ipo">
+                <div class="fase-ipo entrada">
+                  <div class="icono-fase">📥</div>
+                  <h4>INPUT (ENTRADA)</h4>
+                  <div class="descripcion-fase">
+                    <p><strong>Datos que ingresan al sistema</strong></p>
+                    
+                    <h5>💡 Fuentes de Entrada:</h5>
+                    <ul>
+                      <li><strong>Teclado:</strong> Texto, números, comandos</li>
+                      <li><strong>Ratón:</strong> Clics, movimientos, selecciones</li>
+                      <li><strong>Micrófono:</strong> Audio, comandos de voz</li>
+                      <li><strong>Cámara:</strong> Imágenes, videos, códigos QR</li>
+                      <li><strong>Sensores:</strong> Temperatura, movimiento</li>
+                      <li><strong>Red:</strong> Datos de internet, archivos</li>
+                    </ul>
+                    
+                    <div class="ejemplo-fase">
+                      <h5>🎯 Ejemplo Práctico:</h5>
+                      <p>Un estudiante escribiendo un ensayo en Word</p>
+                      <ul>
+                        <li>Texto escrito con el teclado</li>
+                        <li>Formato aplicado con el ratón</li>
+                        <li>Imágenes insertadas desde archivos</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flecha-grande">⚙️</div>
+
+                <div class="fase-ipo procesamiento">
+                  <div class="icono-fase">⚙️</div>
+                  <h4>PROCESS (PROCESAMIENTO)</h4>
+                  <div class="descripcion-fase">
+                    <p><strong>Transformación de datos en información</strong></p>
+                    
+                    <h5>🧠 Operaciones de Procesamiento:</h5>
+                    <ul>
+                      <li><strong>Cálculos:</strong> Operaciones matemáticas</li>
+                      <li><strong>Ordenamiento:</strong> Organizar datos</li>
+                      <li><strong>Filtrado:</strong> Seleccionar información relevante</li>
+                      <li><strong>Análisis:</strong> Buscar patrones</li>
+                      <li><strong>Validación:</strong> Verificar correctitud</li>
+                      <li><strong>Transformación:</strong> Cambiar formato</li>
+                    </ul>
+                    
+                    <div class="unidades-procesamiento">
+                      <h5>🖥️ Unidades que Procesan:</h5>
+                      <ul>
+                        <li><strong>CPU:</strong> Procesador principal</li>
+                        <li><strong>GPU:</strong> Procesamiento gráfico</li>
+                        <li><strong>RAM:</strong> Memoria de trabajo</li>
+                        <li><strong>Software:</strong> Programas que ejecutan tareas</li>
+                      </ul>
+                    </div>
+                    
+                    <div class="ejemplo-fase">
+                      <h5>🎯 Ejemplo Práctico:</h5>
+                      <p>Word procesando el ensayo:</p>
+                      <ul>
+                        <li>Verificar ortografía y gramática</li>
+                        <li>Aplicar formato al texto</li>
+                        <li>Ajustar diseño de página</li>
+                        <li>Comprimir imágenes</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flecha-grande">📤</div>
+
+                <div class="fase-ipo salida">
+                  <div class="icono-fase">📤</div>
+                  <h4>OUTPUT (SALIDA)</h4>
+                  <div class="descripcion-fase">
+                    <p><strong>Información útil entregada al usuario</strong></p>
+                    
+                    <h5>🖥️ Dispositivos de Salida:</h5>
+                    <ul>
+                      <li><strong>Monitor:</strong> Información visual</li>
+                      <li><strong>Impresora:</strong> Documentos físicos</li>
+                      <li><strong>Altavoces:</strong> Audio, música, alertas</li>
+                      <li><strong>Proyector:</strong> Presentaciones</li>
+                      <li><strong>Red:</strong> Envío de archivos</li>
+                      <li><strong>Almacenamiento:</strong> Guardar en disco</li>
+                    </ul>
+                    
+                    <div class="tipos-salida">
+                      <h5>📊 Tipos de Salida:</h5>
+                      <ul>
+                        <li><strong>Temporal:</strong> Pantalla, audio</li>
+                        <li><strong>Permanente:</strong> Archivos, impresiones</li>
+                        <li><strong>Interactiva:</strong> Interfaces de usuario</li>
+                        <li><strong>Automática:</strong> Reportes programados</li>
+                      </ul>
+                    </div>
+                    
+                    <div class="ejemplo-fase">
+                      <h5>🎯 Ejemplo Práctico:</h5>
+                      <p>Resultado final del ensayo:</p>
+                      <ul>
+                        <li>Documento mostrado en pantalla</li>
+                        <li>Archivo guardado en el disco</li>
+                        <li>Impresión en papel</li>
+                        <li>Envío por correo electrónico</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="retroalimentacion">
+                <h4>🔄 Retroalimentación (Feedback)</h4>
+                <p>La información de salida puede convertirse en nueva entrada para mejorar el proceso:</p>
+                <div class="ciclo-retroalimentacion">
+                  <span>Salida</span> → <span>Evaluación</span> → <span>Nueva Entrada</span> → <span>Procesamiento Mejorado</span>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/ciclo-ipo.jpg",
+              video: "/videos/teoria/procesamiento-informacion.mp4"
+            },
+            actividades: [
+              {
+                tipo: "aplicacion",
+                pregunta: "Identifica las fases IPO cuando juegas un videojuego",
+                ayuda: "Entrada: controles, Procesamiento: motor del juego, Salida: gráficos y sonido"
+              },
+              {
+                tipo: "ejemplo",
+                pregunta: "Describe el ciclo IPO de una calculadora",
+                ayuda: "Piensa en cómo ingresas números, se procesan y se muestra el resultado"
+              }
+            ]
+          }
+        ],
+        recursos: {
+          documentos: [
+            {
+              titulo: "Guía Completa de Fundamentos de Informática",
+              descripcion: "Manual detallado sobre conceptos básicos de informática",
+              url: "/recursos/intro-informatica/fundamentos-informatica.pdf"
+            },
+            {
+              titulo: "Sistemas de Información: Componentes y Funcionamiento",
+              descripcion: "Documento técnico sobre sistemas de información",
+              url: "/recursos/intro-informatica/sistemas-informacion.pdf"
+            },
+            {
+              titulo: "Ciclo IPO: Ejemplos Prácticos",
+              descripcion: "Casos de estudio del procesamiento de información",
+              url: "/recursos/intro-informatica/ciclo-ipo-ejemplos.pdf"
+            }
+          ],
+          videos: [
+            {
+              titulo: "¿Qué es la Informática? - Introducción Completa",
+              duracion: "15 min",
+              url: "/videos/teoria/introduccion-informatica.mp4"
+            },
+            {
+              titulo: "Datos vs Información: Diferencias Clave",
+              duracion: "10 min",
+              url: "/videos/teoria/datos-informacion.mp4"
+            },
+            {
+              titulo: "Componentes de un Sistema de Información",
+              duracion: "18 min",
+              url: "/videos/teoria/componentes-sistema.mp4"
+            },
+            {
+              titulo: "El Ciclo IPO en la Vida Cotidiana",
+              duracion: "12 min",
+              url: "/videos/teoria/ciclo-ipo-cotidiano.mp4"
+            }
+          ],
+          enlaces: [
+            {
+              titulo: "Real Academia Española - Informática",
+              url: "https://dle.rae.es/inform%C3%A1tica"
+            },
+            {
+              titulo: "IEEE Computer Society",
+              url: "https://www.computer.org/"
+            },
+            {
+              titulo: "Historia de los Sistemas de Información",
+              url: "https://www.britannica.com/technology/information-system"
+            },
+            {
+              titulo: "Simulador de Sistema de Información",
+              url: "https://simulator.sistemas-informacion.edu"
+            }
+          ]
+        },
+        evaluacion: {
+          preRequisitos: ["Tema 1: Evolución histórica completado"],
+          criterios: [
+            "Definir correctamente qué es la informática",
+            "Distinguir claramente entre datos e información con ejemplos",
+            "Identificar los 5 componentes de un sistema de información",
+            "Explicar el ciclo IPO con ejemplos prácticos",
+            "Reconocer las áreas principales de la informática",
+            "Aplicar conceptos en situaciones cotidianas"
+          ],
+          tiempoEstimado: "50 minutos"
+        }
+      },
+      '3': {
+        titulo: "Unidades de medida y almacenamiento",
+        duracion: "25-30 minutos",
+        objetivos: [
+          "Comprender el sistema binario y el concepto de bit",
+          "Dominar las conversiones entre unidades de almacenamiento",
+          "Calcular el espacio que ocupan diferentes tipos de archivos",
+          "Aplicar el conocimiento en situaciones prácticas de almacenamiento"
+        ],
+        secciones: [
+          {
+            id: 1,
+            titulo: "El sistema binario y el bit",
+            contenido: `
+              <h3>🔢 Fundamentos del Sistema Binario</h3>
+              <p>Los computadores solo entienden dos estados: <strong>encendido (1)</strong> y <strong>apagado (0)</strong>. Este es el fundamento del <strong>sistema binario</strong>.</p>
+              
+              <h4>💡 ¿Qué es un Bit?</h4>
+              <div class="concepto-bit">
+                <div class="definicion-bit">
+                  <h5>🏷️ Definición</h5>
+                  <p><strong>Bit</strong> = <strong>Bi</strong>nary digi<strong>t</strong> (dígito binario)</p>
+                  <p>Es la <strong>unidad más pequeña</strong> de información en un computador</p>
+                </div>
+                
+                <div class="estados-bit">
+                  <h5>⚡ Estados del Bit</h5>
+                  <div class="estado">
+                    <span class="bit-valor">0</span>
+                    <div class="bit-significado">
+                      <p><strong>Apagado</strong></p>
+                      <ul>
+                        <li>Sin corriente eléctrica</li>
+                        <li>Falso (False)</li>
+                        <li>No</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="estado">
+                    <span class="bit-valor">1</span>
+                    <div class="bit-significado">
+                      <p><strong>Encendido</strong></p>
+                      <ul>
+                        <li>Con corriente eléctrica</li>
+                        <li>Verdadero (True)</li>
+                        <li>Sí</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔤 Sistema Binario vs Sistema Decimal</h4>
+              <div class="comparacion-sistemas">
+                <div class="sistema-decimal">
+                  <h5>🔢 Sistema Decimal (Base 10)</h5>
+                  <p>Usamos 10 dígitos: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9</p>
+                  <div class="ejemplo-decimal">
+                    <p><strong>Ejemplo:</strong> 247</p>
+                    <p>= 2×10² + 4×10¹ + 7×10⁰</p>
+                    <p>= 200 + 40 + 7</p>
+                  </div>
+                </div>
+                
+                <div class="sistema-binario">
+                  <h5>💻 Sistema Binario (Base 2)</h5>
+                  <p>Solo usa 2 dígitos: 0, 1</p>
+                  <div class="ejemplo-binario">
+                    <p><strong>Ejemplo:</strong> 1101</p>
+                    <p>= 1×2³ + 1×2² + 0×2¹ + 1×2⁰</p>
+                    <p>= 8 + 4 + 0 + 1 = 13 (decimal)</p>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🧮 Tabla de Conversión Básica</h4>
+              <div class="tabla-conversion">
+                <table class="conversion-binario-decimal">
+                  <thead>
+                    <tr>
+                      <th>Decimal</th>
+                      <th>Binario</th>
+                      <th>Representación</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>0</td>
+                      <td>0000</td>
+                      <td>⬛⬛⬛⬛</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>0001</td>
+                      <td>⬛⬛⬛🟨</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>0010</td>
+                      <td>⬛⬛🟨⬛</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>0011</td>
+                      <td>⬛⬛🟨🟨</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>0100</td>
+                      <td>⬛🟨⬛⬛</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>0101</td>
+                      <td>⬛🟨⬛🟨</td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td>0110</td>
+                      <td>⬛🟨🟨⬛</td>
+                    </tr>
+                    <tr>
+                      <td>7</td>
+                      <td>0111</td>
+                      <td>⬛🟨🟨🟨</td>
+                    </tr>
+                    <tr>
+                      <td>8</td>
+                      <td>1000</td>
+                      <td>🟨⬛⬛⬛</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/sistema-binario.jpg",
+              video: "/videos/teoria/introduccion-binario.mp4"
+            },
+            actividades: [
+              {
+                tipo: "conversion",
+                pregunta: "Convierte los números decimales 10, 15 y 20 a binario",
+                ayuda: "Usa divisiones sucesivas entre 2 y toma los residuos"
+              },
+              {
+                tipo: "practica",
+                pregunta: "¿Cuántos bits necesitas para representar el número 255?",
+                ayuda: "255 en binario es 11111111 (8 bits)"
+              }
+            ]
+          },
+          {
+            id: 2,
+            titulo: "Del bit al byte",
+            contenido: `
+              <h3>📦 Agrupando bits: El Byte</h3>
+              <p>Un <strong>byte</strong> es un grupo de <strong>8 bits</strong> que representa la unidad básica de almacenamiento en los computadores.</p>
+              
+              <h4>🧱 Construcción del Byte</h4>
+              <div class="construccion-byte">
+                <div class="visual-byte">
+                  <h5>📊 Representación Visual</h5>
+                  <div class="byte-visual">
+                    <div class="bit-positions">
+                      <span>Bit 7</span>
+                      <span>Bit 6</span>
+                      <span>Bit 5</span>
+                      <span>Bit 4</span>
+                      <span>Bit 3</span>
+                      <span>Bit 2</span>
+                      <span>Bit 1</span>
+                      <span>Bit 0</span>
+                    </div>
+                    <div class="byte-example">
+                      <span class="bit">0</span>
+                      <span class="bit">1</span>
+                      <span class="bit">0</span>
+                      <span class="bit">0</span>
+                      <span class="bit">0</span>
+                      <span class="bit">0</span>
+                      <span class="bit">0</span>
+                      <span class="bit">1</span>
+                    </div>
+                    <div class="valores-posicion">
+                      <span>128</span>
+                      <span>64</span>
+                      <span>32</span>
+                      <span>16</span>
+                      <span>8</span>
+                      <span>4</span>
+                      <span>2</span>
+                      <span>1</span>
+                    </div>
+                  </div>
+                  <p class="resultado-byte">Este byte representa: 64 + 1 = <strong>65</strong> (letra 'A' en ASCII)</p>
+                </div>
+                
+                <div class="capacidad-byte">
+                  <h5>🔢 Capacidad del Byte</h5>
+                  <div class="rango-byte">
+                    <p><strong>Rango:</strong> 0 a 255</p>
+                    <p><strong>Total de combinaciones:</strong> 2⁸ = 256</p>
+                  </div>
+                  
+                  <div class="ejemplos-uso">
+                    <h6>💡 ¿Qué puede almacenar 1 byte?</h6>
+                    <ul>
+                      <li><strong>1 carácter</strong> (letra, número, símbolo)</li>
+                      <li><strong>1 color</strong> básico (0-255)</li>
+                      <li><strong>1 edad</strong> de persona (0-255 años)</li>
+                      <li><strong>1 nota</strong> de examen (0-100)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔤 Bytes y Caracteres</h4>
+              <div class="bytes-caracteres">
+                <div class="tabla-ascii">
+                  <h5>📝 Ejemplos de Caracteres (ASCII)</h5>
+                  <table class="ascii-table">
+                    <thead>
+                      <tr>
+                        <th>Carácter</th>
+                        <th>Decimal</th>
+                        <th>Binario (1 byte)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>A</td>
+                        <td>65</td>
+                        <td>01000001</td>
+                      </tr>
+                      <tr>
+                        <td>B</td>
+                        <td>66</td>
+                        <td>01000010</td>
+                      </tr>
+                      <tr>
+                        <td>a</td>
+                        <td>97</td>
+                        <td>01100001</td>
+                      </tr>
+                      <tr>
+                        <td>0</td>
+                        <td>48</td>
+                        <td>00110000</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>49</td>
+                        <td>00110001</td>
+                      </tr>
+                      <tr>
+                        <td>Espacio</td>
+                        <td>32</td>
+                        <td>00100000</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div class="ejemplo-palabra">
+                  <h5>📖 Ejemplo: Palabra "HOLA"</h5>
+                  <div class="palabra-bytes">
+                    <div class="letra-byte">
+                      <span class="letra">H</span>
+                      <span class="valor">72</span>
+                      <span class="binario">01001000</span>
+                    </div>
+                    <div class="letra-byte">
+                      <span class="letra">O</span>
+                      <span class="valor">79</span>
+                      <span class="binario">01001111</span>
+                    </div>
+                    <div class="letra-byte">
+                      <span class="letra">L</span>
+                      <span class="valor">76</span>
+                      <span class="binario">01001100</span>
+                    </div>
+                    <div class="letra-byte">
+                      <span class="letra">A</span>
+                      <span class="valor">65</span>
+                      <span class="binario">01000001</span>
+                    </div>
+                  </div>
+                  <p class="total-palabra"><strong>Total:</strong> 4 caracteres = 4 bytes = 32 bits</p>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/bit-byte-conversion.jpg",
+              video: "/videos/teoria/del-bit-al-byte.mp4"
+            },
+            actividades: [
+              {
+                tipo: "calculo",
+                pregunta: "¿Cuántos bits tiene la palabra 'INFORMÁTICA'? (incluye la tilde)",
+                ayuda: "Cuenta cada letra como 1 byte = 8 bits"
+              },
+              {
+                tipo: "aplicacion",
+                pregunta: "Si tu nombre tiene 8 letras, ¿cuántos bits ocupa en la memoria?",
+                ayuda: "8 letras × 8 bits por letra = 64 bits"
+              }
+            ]
+          },
+          {
+            id: 3,
+            titulo: "Múltiplos del byte: KB, MB, GB, TB",
+            contenido: `
+              <h3>📏 Escalando hacia unidades mayores</h3>
+              <p>Como los archivos y programas son mucho más grandes que unos pocos bytes, necesitamos unidades más grandes para medir el almacenamiento.</p>
+              
+              <h4>🏗️ Sistema de Múltiplos</h4>
+              <div class="piramide-unidades">
+                <div class="nivel-unidad tb">
+                  <div class="unidad-info">
+                    <h5>💾 TERABYTE (TB)</h5>
+                    <div class="equivalencias">
+                      <p><strong>1 TB =</strong></p>
+                      <ul>
+                        <li>1,024 GB</li>
+                        <li>1,048,576 MB</li>
+                        <li>1,073,741,824 KB</li>
+                        <li>1,099,511,627,776 bytes</li>
+                      </ul>
+                    </div>
+                    <div class="ejemplos-capacidad">
+                      <p><strong>¿Qué cabe en 1 TB?</strong></p>
+                      <ul>
+                        <li>🎬 500 películas HD</li>
+                        <li>🎵 250,000 canciones MP3</li>
+                        <li>📸 300,000 fotos</li>
+                        <li>🎮 10-20 videojuegos modernos</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="nivel-unidad gb">
+                  <div class="unidad-info">
+                    <h5>💿 GIGABYTE (GB)</h5>
+                    <div class="equivalencias">
+                      <p><strong>1 GB =</strong></p>
+                      <ul>
+                        <li>1,024 MB</li>
+                        <li>1,048,576 KB</li>
+                        <li>1,073,741,824 bytes</li>
+                      </ul>
+                    </div>
+                    <div class="ejemplos-capacidad">
+                      <p><strong>¿Qué cabe en 1 GB?</strong></p>
+                      <ul>
+                        <li>🎬 1 película estándar</li>
+                        <li>🎵 250 canciones MP3</li>
+                        <li>📸 300 fotos digitales</li>
+                        <li>📱 1 aplicación móvil grande</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="nivel-unidad mb">
+                  <div class="unidad-info">
+                    <h5>💾 MEGABYTE (MB)</h5>
+                    <div class="equivalencias">
+                      <p><strong>1 MB =</strong></p>
+                      <ul>
+                        <li>1,024 KB</li>
+                        <li>1,048,576 bytes</li>
+                      </ul>
+                    </div>
+                    <div class="ejemplos-capacidad">
+                      <p><strong>¿Qué cabe en 1 MB?</strong></p>
+                      <ul>
+                        <li>🎵 1 canción MP3 corta</li>
+                        <li>📸 1 foto digital normal</li>
+                        <li>📄 500 páginas de texto</li>
+                        <li>📧 100 correos de texto</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="nivel-unidad kb">
+                  <div class="unidad-info">
+                    <h5>📄 KILOBYTE (KB)</h5>
+                    <div class="equivalencias">
+                      <p><strong>1 KB =</strong></p>
+                      <ul>
+                        <li>1,024 bytes</li>
+                      </ul>
+                    </div>
+                    <div class="ejemplos-capacidad">
+                      <p><strong>¿Qué cabe en 1 KB?</strong></p>
+                      <ul>
+                        <li>📝 Media página de texto</li>
+                        <li>🏷️ Un párrafo largo</li>
+                        <li>📊 Una hoja de cálculo simple</li>
+                        <li>💌 Un mensaje corto</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="nivel-unidad byte">
+                  <div class="unidad-info">
+                    <h5>🔤 BYTE</h5>
+                    <div class="equivalencias">
+                      <p><strong>1 Byte =</strong></p>
+                      <ul>
+                        <li>8 bits</li>
+                      </ul>
+                    </div>
+                    <div class="ejemplos-capacidad">
+                      <p><strong>¿Qué cabe en 1 Byte?</strong></p>
+                      <ul>
+                        <li>🔤 1 letra o número</li>
+                        <li>⌨️ 1 carácter del teclado</li>
+                        <li>🎨 1 valor de color básico</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h4>📊 Tabla de Conversiones Rápidas</h4>
+              <div class="tabla-conversiones">
+                <table class="conversion-table">
+                  <thead>
+                    <tr>
+                      <th>Unidad</th>
+                      <th>Equivale a</th>
+                      <th>En bytes</th>
+                      <th>Uso típico</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>1 KB</strong></td>
+                      <td>1,024 bytes</td>
+                      <td>1,024</td>
+                      <td>Documentos de texto</td>
+                    </tr>
+                    <tr>
+                      <td><strong>1 MB</strong></td>
+                      <td>1,024 KB</td>
+                      <td>1,048,576</td>
+                      <td>Fotos, canciones MP3</td>
+                    </tr>
+                    <tr>
+                      <td><strong>1 GB</strong></td>
+                      <td>1,024 MB</td>
+                      <td>1,073,741,824</td>
+                      <td>Películas, videojuegos</td>
+                    </tr>
+                    <tr>
+                      <td><strong>1 TB</strong></td>
+                      <td>1,024 GB</td>
+                      <td>1,099,511,627,776</td>
+                      <td>Discos duros, servidores</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="nota-importante">
+                <h4>⚠️ Nota Importante: ¿1000 o 1024?</h4>
+                <div class="sistemas-medida">
+                  <div class="sistema-binario-medida">
+                    <h5>💻 Sistema Binario (Técnico)</h5>
+                    <ul>
+                      <li>1 KB = 1,024 bytes</li>
+                      <li>1 MB = 1,024 KB</li>
+                      <li>Usado en programación</li>
+                      <li>Más preciso técnicamente</li>
+                    </ul>
+                  </div>
+                  <div class="sistema-decimal-medida">
+                    <h5>📦 Sistema Decimal (Comercial)</h5>
+                    <ul>
+                      <li>1 KB = 1,000 bytes</li>
+                      <li>1 MB = 1,000 KB</li>
+                      <li>Usado en marketing</li>
+                      <li>Más fácil de calcular</li>
+                    </ul>
+                  </div>
+                </div>
+                <p class="recomendacion">💡 <strong>En este curso usaremos el sistema binario (1024)</strong> por ser más preciso técnicamente.</p>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/unidades-almacenamiento.jpg",
+              video: "/videos/teoria/kb-mb-gb-tb.mp4"
+            },
+            actividades: [
+              {
+                tipo: "conversion",
+                pregunta: "Convierte 2.5 GB a MB y KB",
+                ayuda: "2.5 GB = 2,560 MB = 2,621,440 KB"
+              },
+              {
+                tipo: "estimacion",
+                pregunta: "¿Cuántas fotos de 3 MB caben en una USB de 16 GB?",
+                ayuda: "16 GB = 16,384 MB ÷ 3 MB = aproximadamente 5,461 fotos"
+              }
+            ]
+          },
+          {
+            id: 4,
+            titulo: "Aplicaciones prácticas en el mundo real",
+            contenido: `
+              <h3>🌍 Unidades de medida en la vida cotidiana</h3>
+              <p>Comprender las unidades de almacenamiento te ayuda a tomar mejores decisiones al comprar dispositivos, gestionar archivos y entender el espacio disponible.</p>
+              
+              <h4>🛒 Dispositivos de Almacenamiento Comunes</h4>
+              <div class="dispositivos-almacenamiento">
+                <div class="dispositivo">
+                  <div class="icono-dispositivo">📱</div>
+                  <h5>Teléfonos Inteligentes</h5>
+                  <div class="capacidades">
+                    <p><strong>Capacidades típicas:</strong></p>
+                    <ul>
+                      <li>64 GB - 128 GB (básico)</li>
+                      <li>256 GB - 512 GB (medio)</li>
+                      <li>1 TB (premium)</li>
+                    </ul>
+                  </div>
+                  <div class="uso-promedio">
+                    <p><strong>¿Qué cabe?</strong></p>
+                    <ul>
+                      <li>📸 Fotos: 3-5 MB cada una</li>
+                      <li>🎵 Música: 3-5 MB por canción</li>
+                      <li>🎬 Videos: 100-500 MB por minuto</li>
+                      <li>📱 Apps: 50-500 MB cada una</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="dispositivo">
+                  <div class="icono-dispositivo">💿</div>
+                  <h5>USB / Memorias Portátiles</h5>
+                  <div class="capacidades">
+                    <p><strong>Capacidades comunes:</strong></p>
+                    <ul>
+                      <li>8 GB - 16 GB (pequeñas)</li>
+                      <li>32 GB - 64 GB (medianas)</li>
+                      <li>128 GB - 256 GB (grandes)</li>
+                    </ul>
+                  </div>
+                  <div class="uso-promedio">
+                    <p><strong>Usos típicos:</strong></p>
+                    <ul>
+                      <li>📄 Documentos escolares</li>
+                      <li>📸 Respaldo de fotos</li>
+                      <li>💾 Instaladores de programas</li>
+                      <li>🎵 Música portátil</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="dispositivo">
+                  <div class="icono-dispositivo">💻</div>
+                  <h5>Computadoras Portátiles</h5>
+                  <div class="capacidades">
+                    <p><strong>Almacenamiento interno:</strong></p>
+                    <ul>
+                      <li>256 GB - 512 GB SSD (rápido)</li>
+                      <li>1 TB - 2 TB HDD (económico)</li>
+                      <li>512 GB - 1 TB SSD (equilibrio)</li>
+                    </ul>
+                  </div>
+                  <div class="uso-promedio">
+                    <p><strong>Distribución típica:</strong></p>
+                    <ul>
+                      <li>🖥️ Sistema operativo: 20-40 GB</li>
+                      <li>📚 Programas: 50-100 GB</li>
+                      <li>👤 Archivos personales: resto</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="dispositivo">
+                  <div class="icono-dispositivo">☁️</div>
+                  <h5>Almacenamiento en la Nube</h5>
+                  <div class="capacidades">
+                    <p><strong>Planes típicos:</strong></p>
+                    <ul>
+                      <li>5-15 GB (gratuito)</li>
+                      <li>100 GB - 1 TB (básico)</li>
+                      <li>2 TB+ (premium)</li>
+                    </ul>
+                  </div>
+                  <div class="uso-promedio">
+                    <p><strong>Ventajas:</strong></p>
+                    <ul>
+                      <li>🔄 Sincronización automática</li>
+                      <li>🌍 Acceso desde cualquier lugar</li>
+                      <li>🛡️ Respaldo automático</li>
+                      <li>👥 Compartir archivos</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>📏 Calculadora de Almacenamiento</h4>
+              <div class="calculadora-almacenamiento">
+                <div class="tipos-archivo">
+                  <h5>📂 Tamaños Promedio por Tipo de Archivo</h5>
+                  <table class="tabla-archivos">
+                    <thead>
+                      <tr>
+                        <th>Tipo de Archivo</th>
+                        <th>Tamaño Promedio</th>
+                        <th>Cantidad en 1 GB</th>
+                        <th>Ejemplo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>📄 Documento de texto</td>
+                        <td>50-200 KB</td>
+                        <td>5,000 - 20,000</td>
+                        <td>Ensayo escolar</td>
+                      </tr>
+                      <tr>
+                        <td>📸 Foto digital</td>
+                        <td>2-5 MB</td>
+                        <td>200 - 500</td>
+                        <td>Foto del celular</td>
+                      </tr>
+                      <tr>
+                        <td>🎵 Canción MP3</td>
+                        <td>3-5 MB</td>
+                        <td>200 - 300</td>
+                        <td>Canción de 3 minutos</td>
+                      </tr>
+                      <tr>
+                        <td>🎬 Video corto (1 min)</td>
+                        <td>50-200 MB</td>
+                        <td>5 - 20</td>
+                        <td>Video de TikTok/Instagram</td>
+                      </tr>
+                      <tr>
+                        <td>🎥 Película HD</td>
+                        <td>1.5-3 GB</td>
+                        <td>0.3 - 0.7</td>
+                        <td>Película de 2 horas</td>
+                      </tr>
+                      <tr>
+                        <td>🎮 Videojuego moderno</td>
+                        <td>50-100 GB</td>
+                        <td>0.01 - 0.02</td>
+                        <td>Call of Duty, FIFA</td>
+                      </tr>
+                      <tr>
+                        <td>📱 Aplicación móvil</td>
+                        <td>50-500 MB</td>
+                        <td>2 - 20</td>
+                        <td>WhatsApp, Instagram</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <h4>🧮 Ejemplos de Cálculos Prácticos</h4>
+              <div class="ejemplos-calculos">
+                <div class="ejemplo-calculo">
+                  <h5>📱 Ejemplo 1: Memoria del Teléfono</h5>
+                  <div class="problema">
+                    <p><strong>Situación:</strong> Tienes un teléfono de 64 GB y quieres saber cuántas fotos puedes guardar.</p>
+                    <div class="solucion">
+                      <p><strong>Datos:</strong></p>
+                      <ul>
+                        <li>Capacidad total: 64 GB</li>
+                        <li>Sistema operativo y apps: 20 GB</li>
+                        <li>Espacio disponible: 44 GB</li>
+                        <li>Tamaño promedio de foto: 4 MB</li>
+                      </ul>
+                      <p><strong>Cálculo:</strong></p>
+                      <div class="calculo-paso">
+                        <p>44 GB = 44 × 1,024 MB = 45,056 MB</p>
+                        <p>45,056 MB ÷ 4 MB = 11,264 fotos</p>
+                      </div>
+                      <p><strong>Respuesta:</strong> Puedes guardar aproximadamente <strong>11,260 fotos</strong></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ejemplo-calculo">
+                  <h5>💿 Ejemplo 2: USB para el Colegio</h5>
+                  <div class="problema">
+                    <p><strong>Situación:</strong> Necesitas una USB para tus proyectos escolares del año.</p>
+                    <div class="solucion">
+                      <p><strong>Estimación de archivos:</strong></p>
+                      <ul>
+                        <li>50 documentos de texto (100 KB cada uno) = 5 MB</li>
+                        <li>100 fotos para proyectos (3 MB cada una) = 300 MB</li>
+                        <li>20 presentaciones (10 MB cada una) = 200 MB</li>
+                        <li>10 videos cortos (50 MB cada uno) = 500 MB</li>
+                      </ul>
+                      <p><strong>Total necesario:</strong> 5 + 300 + 200 + 500 = 1,005 MB ≈ 1 GB</p>
+                      <p><strong>Recomendación:</strong> USB de <strong>8 GB</strong> (te sobra espacio para más archivos)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="consejos-practicos">
+                <h4>💡 Consejos Prácticos</h4>
+                <div class="consejos-grid">
+                  <div class="consejo">
+                    <h5>🔍 Al Comprar Dispositivos</h5>
+                    <ul>
+                      <li>Considera el uso que le darás</li>
+                      <li>Cuenta con margen extra (25-30%)</li>
+                      <li>Revisa si es expandible</li>
+                      <li>Compara precio por GB</li>
+                    </ul>
+                  </div>
+                  <div class="consejo">
+                    <h5>🗂️ Gestión de Archivos</h5>
+                    <ul>
+                      <li>Borra archivos duplicados</li>
+                      <li>Usa compresión para documentos</li>
+                      <li>Organiza en carpetas</li>
+                      <li>Haz respaldos regulares</li>
+                    </ul>
+                  </div>
+                  <div class="consejo">
+                    <h5>⚡ Optimización</h5>
+                    <ul>
+                      <li>Reduce calidad de fotos si es necesario</li>
+                      <li>Usa formatos comprimidos</li>
+                      <li>Elimina archivos temporales</li>
+                      <li>Considera almacenamiento en la nube</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/almacenamiento-practico.jpg",
+              video: "/videos/teoria/calculos-almacenamiento.mp4"
+            },
+            actividades: [
+              {
+                tipo: "planificacion",
+                pregunta: "Planifica el almacenamiento para tu año escolar: 100 documentos, 500 fotos, 50 videos cortos",
+                ayuda: "Calcula el espacio total necesario y añade 30% extra para imprevistos"
+              },
+              {
+                tipo: "decision",
+                pregunta: "¿Qué es mejor para ti: USB de 32 GB a $10 o 64 GB a $15?",
+                ayuda: "Calcula el precio por GB y considera tus necesidades reales"
+              }
+            ]
+          }
+        ],
+        recursos: {
+          documentos: [
+            {
+              titulo: "Guía Completa del Sistema Binario",
+              descripcion: "Manual detallado sobre conversiones binario-decimal",
+              url: "/recursos/intro-informatica/sistema-binario.pdf"
+            },
+            {
+              titulo: "Tabla de Conversiones de Unidades",
+              descripcion: "Referencia rápida para conversiones entre KB, MB, GB, TB",
+              url: "/recursos/intro-informatica/tabla-conversiones.pdf"
+            },
+            {
+              titulo: "Calculadora de Almacenamiento",
+              descripcion: "Herramienta para calcular espacios y capacidades",
+              url: "/recursos/intro-informatica/calculadora-almacenamiento.pdf"
+            },
+            {
+              titulo: "Guía de Compra: Dispositivos de Almacenamiento",
+              descripcion: "Consejos para elegir el dispositivo adecuado",
+              url: "/recursos/intro-informatica/guia-compra-almacenamiento.pdf"
+            }
+          ],
+          videos: [
+            {
+              titulo: "¿Qué es el Sistema Binario? - Explicación Visual",
+              duracion: "12 min",
+              url: "/videos/teoria/sistema-binario-explicado.mp4"
+            },
+            {
+              titulo: "Del Bit al Byte: Construcción Paso a Paso",
+              duracion: "8 min",
+              url: "/videos/teoria/construccion-byte.mp4"
+            },
+            {
+              titulo: "KB, MB, GB, TB: ¿Cuánto es Realmente?",
+              duracion: "15 min",
+              url: "/videos/teoria/unidades-medida-comparacion.mp4"
+            },
+            {
+              titulo: "Cálculos Prácticos de Almacenamiento",
+              duracion: "10 min",
+              url: "/videos/teoria/calculos-practicos.mp4"
+            },
+            {
+              titulo: "Comprando tu Primer Dispositivo de Almacenamiento",
+              duracion: "18 min",
+              url: "/videos/tutorial/guia-compra-dispositivos.mp4"
+            }
+          ],
+          enlaces: [
+            {
+              titulo: "Conversor Binario Online",
+              url: "https://www.rapidtables.com/convert/number/binary-to-decimal.html"
+            },
+            {
+              titulo: "Calculadora de Unidades de Almacenamiento",
+              url: "https://www.unitconverters.net/digital-storage-converter.html"
+            },
+            {
+              titulo: "ASCII Table - Caracteres y Códigos",
+              url: "https://www.asciitable.com/"
+            },
+            {
+              titulo: "Comparador de Precios de Almacenamiento",
+              url: "https://www.storageprices.com"
+            }
+          ]
+        },
+        evaluacion: {
+          preRequisitos: ["Tema 2: Fundamentos y conceptos completado"],
+          criterios: [
+            "Explicar qué es un bit y su relación con el sistema binario",
+            "Convertir números entre sistema decimal y binario",
+            "Calcular conversiones entre bytes, KB, MB, GB y TB",
+            "Estimar el espacio necesario para diferentes tipos de archivos",
+            "Aplicar conocimientos en decisiones de compra de dispositivos",
+            "Resolver problemas prácticos de almacenamiento y capacidad"
+          ],
+          tiempoEstimado: "45 minutos"
+        }
+      },
+      '4': {
+        titulo: "Hardware",
+        duracion: "30-35 minutos",
+        objetivos: [
+          "Identificar y clasificar los dispositivos de hardware por función",
+          "Comprender la función específica de cada tipo de dispositivo",
+          "Distinguir entre dispositivos de entrada, salida, procesamiento y almacenamiento",
+          "Reconocer dispositivos mixtos y su doble funcionalidad"
+        ],
+        secciones: [
+          {
+            id: 1,
+            titulo: "Dispositivos de entrada",
+            contenido: `
+              <h3>⌨️ Dispositivos de Entrada</h3>
+              <p>Los <strong>dispositivos de entrada</strong> permiten al usuario introducir datos e instrucciones al computador.</p>
+              
+              <h4>🎯 Función Principal</h4>
+              <div class="funcion-entrada">
+                <p>Convertir acciones humanas en señales digitales que el computador puede procesar</p>
+                <div class="flujo-entrada">
+                  <span>Usuario</span> → <span>Dispositivo</span> → <span>Computador</span>
+                </div>
+              </div>
+
+              <h4>📋 Clasificación de Dispositivos de Entrada</h4>
+              <div class="dispositivos-entrada">
+                <div class="categoria-dispositivo">
+                  <h5>⌨️ Dispositivos de Texto</h5>
+                  <div class="dispositivo-detalle">
+                    <h6>Teclado</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Introducir texto, números y comandos</li>
+                      <li><strong>Tipos:</strong> Mecánico, membrana, virtual</li>
+                      <li><strong>Teclas especiales:</strong> Ctrl, Alt, Windows, F1-F12</li>
+                      <li><strong>Distribuciones:</strong> QWERTY, AZERTY, Dvorak</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="categoria-dispositivo">
+                  <h5>🖱️ Dispositivos de Señalamiento</h5>
+                  <div class="dispositivo-detalle">
+                    <h6>Ratón (Mouse)</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Controlar cursor y seleccionar objetos</li>
+                      <li><strong>Botones:</strong> Izquierdo, derecho, rueda</li>
+                      <li><strong>Tipos:</strong> Óptico, láser, trackball</li>
+                      <li><strong>Conectividad:</strong> USB, Bluetooth, inalámbrico</li>
+                    </ul>
+                  </div>
+                  <div class="dispositivo-detalle">
+                    <h6>Touchpad</h6>
+                    <ul>
+                      <li><strong>Ubicación:</strong> Integrado en laptops</li>
+                      <li><strong>Gestos:</strong> Toque, deslizar, pellizcar</li>
+                      <li><strong>Ventajas:</strong> Portabilidad, multitáctil</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="categoria-dispositivo">
+                  <h5>🎤 Dispositivos de Audio</h5>
+                  <div class="dispositivo-detalle">
+                    <h6>Micrófono</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Capturar sonido y voz</li>
+                      <li><strong>Tipos:</strong> Dinámico, condensador, USB</li>
+                      <li><strong>Usos:</strong> Grabación, videollamadas, comandos de voz</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="categoria-dispositivo">
+                  <h5>📷 Dispositivos de Imagen</h5>
+                  <div class="dispositivo-detalle">
+                    <h6>Cámara Web</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Capturar video e imágenes</li>
+                      <li><strong>Resoluciones:</strong> 720p, 1080p, 4K</li>
+                      <li><strong>Usos:</strong> Videollamadas, streaming, fotos</li>
+                    </ul>
+                  </div>
+                  <div class="dispositivo-detalle">
+                    <h6>Escáner</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Digitalizar documentos e imágenes</li>
+                      <li><strong>Tipos:</strong> Plano, alimentación automática</li>
+                      <li><strong>Formatos:</strong> PDF, JPEG, PNG</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="categoria-dispositivo">
+                  <h5>🎮 Dispositivos Especializados</h5>
+                  <div class="dispositivos-especiales">
+                    <div class="dispositivo-especial">
+                      <h6>Joystick/Gamepad</h6>
+                      <p>Control para videojuegos</p>
+                    </div>
+                    <div class="dispositivo-especial">
+                      <h6>Tableta Gráfica</h6>
+                      <p>Dibujo digital profesional</p>
+                    </div>
+                    <div class="dispositivo-especial">
+                      <h6>Lector de Códigos</h6>
+                      <p>Escaneo de códigos de barras/QR</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/dispositivos-entrada.jpg",
+              video: "/videos/teoria/hardware-entrada.mp4"
+            },
+            actividades: [
+              {
+                tipo: "identificacion",
+                pregunta: "Identifica todos los dispositivos de entrada en tu aula de informática",
+                ayuda: "Busca: teclados, ratones, micrófonos, cámaras web"
+              },
+              {
+                tipo: "clasificacion",
+                pregunta: "Clasifica estos dispositivos por su tipo de entrada: teclado, micrófono, escáner, gamepad",
+                ayuda: "Agrúpalos por: texto, audio, imagen, control"
+              }
+            ]
+          },
+          {
+            id: 2,
+            titulo: "Dispositivos de salida",
+            contenido: `
+              <h3>🖥️ Dispositivos de Salida</h3>
+              <p>Los <strong>dispositivos de salida</strong> presentan la información procesada por el computador al usuario en forma comprensible.</p>
+              
+              <h4>🎯 Función Principal</h4>
+              <div class="funcion-salida">
+                <p>Convertir señales digitales en información perceptible por los sentidos humanos</p>
+                <div class="flujo-salida">
+                  <span>Computador</span> → <span>Dispositivo</span> → <span>Usuario</span>
+                </div>
+              </div>
+
+              <h4>📋 Clasificación de Dispositivos de Salida</h4>
+              <div class="dispositivos-salida">
+                <div class="categoria-dispositivo">
+                  <h5>👁️ Dispositivos Visuales</h5>
+                  <div class="dispositivo-detalle">
+                    <h6>Monitor/Pantalla</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Mostrar información visual</li>
+                      <li><strong>Tecnologías:</strong> LCD, LED, OLED, CRT</li>
+                      <li><strong>Resoluciones:</strong> HD (1366×768), Full HD (1920×1080), 4K (3840×2160)</li>
+                      <li><strong>Tamaños:</strong> 15", 19", 24", 27", 32"+</li>
+                    </ul>
+                  </div>
+                  <div class="dispositivo-detalle">
+                    <h6>Proyector</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Proyectar imagen en pantalla grande</li>
+                      <li><strong>Tipos:</strong> LCD, DLP, LED</li>
+                      <li><strong>Usos:</strong> Presentaciones, cine, educación</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="categoria-dispositivo">
+                  <h5>🔊 Dispositivos de Audio</h5>
+                  <div class="dispositivo-detalle">
+                    <h6>Altavoces/Bocinas</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Reproducir sonido</li>
+                      <li><strong>Configuraciones:</strong> 2.0, 2.1, 5.1, 7.1</li>
+                      <li><strong>Tipos:</strong> Activos, pasivos, Bluetooth</li>
+                      <li><strong>Potencia:</strong> Watts RMS</li>
+                    </ul>
+                  </div>
+                  <div class="dispositivo-detalle">
+                    <h6>Auriculares</h6>
+                    <ul>
+                      <li><strong>Tipos:</strong> Over-ear, on-ear, in-ear</li>
+                      <li><strong>Conectividad:</strong> Jack 3.5mm, USB, Bluetooth</li>
+                      <li><strong>Características:</strong> Cancelación de ruido, micrófono integrado</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="categoria-dispositivo">
+                  <h5>🖨️ Dispositivos de Impresión</h5>
+                  <div class="dispositivo-detalle">
+                    <h6>Impresora de Tinta</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Imprimir documentos y fotos</li>
+                      <li><strong>Ventajas:</strong> Bajo costo inicial, buena calidad fotográfica</li>
+                      <li><strong>Desventajas:</strong> Costo alto por página, lenta</li>
+                    </ul>
+                  </div>
+                  <div class="dispositivo-detalle">
+                    <h6>Impresora Láser</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Impresión rápida de documentos</li>
+                      <li><strong>Ventajas:</strong> Rápida, bajo costo por página</li>
+                      <li><strong>Desventajas:</strong> Alto costo inicial</li>
+                    </ul>
+                  </div>
+                  <div class="dispositivo-detalle">
+                    <h6>Impresora 3D</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Crear objetos tridimensionales</li>
+                      <li><strong>Materiales:</strong> PLA, ABS, PETG</li>
+                      <li><strong>Aplicaciones:</strong> Prototipos, educación, arte</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="categoria-dispositivo">
+                  <h5>💡 Dispositivos de Indicación</h5>
+                  <div class="dispositivos-indicacion">
+                    <div class="dispositivo-especial">
+                      <h6>LEDs de Estado</h6>
+                      <p>Indicadores luminosos de funcionamiento</p>
+                    </div>
+                    <div class="dispositivo-especial">
+                      <h6>Pantallas LED</h6>
+                      <p>Displays de información básica</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h4>📊 Comparación de Calidades de Salida</h4>
+              <div class="tabla-calidades">
+                <table class="comparacion-calidades">
+                  <thead>
+                    <tr>
+                      <th>Dispositivo</th>
+                      <th>Resolución Típica</th>
+                      <th>Calidad</th>
+                      <th>Uso Recomendado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Monitor HD</td>
+                      <td>1366×768</td>
+                      <td>Básica</td>
+                      <td>Tareas básicas, navegación</td>
+                    </tr>
+                    <tr>
+                      <td>Monitor Full HD</td>
+                      <td>1920×1080</td>
+                      <td>Buena</td>
+                      <td>Trabajo, entretenimiento</td>
+                    </tr>
+                    <tr>
+                      <td>Monitor 4K</td>
+                      <td>3840×2160</td>
+                      <td>Excelente</td>
+                      <td>Diseño, gaming, profesional</td>
+                    </tr>
+                    <tr>
+                      <td>Impresora Tinta</td>
+                      <td>4800×1200 DPI</td>
+                      <td>Alta</td>
+                      <td>Fotos, documentos a color</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/dispositivos-salida.jpg",
+              video: "/videos/teoria/hardware-salida.mp4"
+            },
+            actividades: [
+              {
+                tipo: "comparacion",
+                pregunta: "Compare las ventajas y desventajas de impresoras de tinta vs láser",
+                ayuda: "Considera: costo inicial, costo por página, velocidad, calidad"
+              },
+              {
+                tipo: "decision",
+                pregunta: "¿Qué resolución de monitor recomendarías para un estudiante? ¿Por qué?",
+                ayuda: "Piensa en: presupuesto, usos típicos, durabilidad"
+              }
+            ]
+          },
+          {
+            id: 3,
+            titulo: "Dispositivos de procesamiento y almacenamiento",
+            contenido: `
+              <h3>⚙️ Dispositivos de Procesamiento</h3>
+              <p>Los <strong>dispositivos de procesamiento</strong> son el "cerebro" del computador, ejecutan instrucciones y realizan cálculos.</p>
+              
+              <h4>🧠 Componentes de Procesamiento</h4>
+              <div class="dispositivos-procesamiento">
+                <div class="procesador-principal">
+                  <h5>🖥️ CPU (Unidad Central de Procesamiento)</h5>
+                  <div class="cpu-detalle">
+                    <div class="caracteristicas-cpu">
+                      <h6>📋 Características Principales</h6>
+                      <ul>
+                        <li><strong>Núcleos:</strong> 2, 4, 6, 8, 16+ núcleos</li>
+                        <li><strong>Frecuencia:</strong> 2.0 GHz - 5.0+ GHz</li>
+                        <li><strong>Arquitectura:</strong> x86, x64, ARM</li>
+                        <li><strong>Cache:</strong> L1, L2, L3</li>
+                      </ul>
+                    </div>
+                    <div class="funciones-cpu">
+                      <h6>⚡ Funciones</h6>
+                      <ul>
+                        <li>Ejecutar instrucciones de programas</li>
+                        <li>Realizar cálculos matemáticos</li>
+                        <li>Coordinar otros componentes</li>
+                        <li>Gestionar el flujo de datos</li>
+                      </ul>
+                    </div>
+                    <div class="fabricantes-cpu">
+                      <h6>🏭 Principales Fabricantes</h6>
+                      <ul>
+                        <li><strong>Intel:</strong> Core i3, i5, i7, i9</li>
+                        <li><strong>AMD:</strong> Ryzen 3, 5, 7, 9</li>
+                        <li><strong>Apple:</strong> M1, M2, M3</li>
+                        <li><strong>Qualcomm:</strong> Snapdragon</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="procesador-grafico">
+                  <h5>🎮 GPU (Unidad de Procesamiento Gráfico)</h5>
+                  <div class="gpu-detalle">
+                    <div class="tipos-gpu">
+                      <h6>📊 Tipos de GPU</h6>
+                      <div class="tipo-gpu">
+                        <h6>Integrada</h6>
+                        <ul>
+                          <li>Incluida en el CPU</li>
+                          <li>Comparte memoria RAM</li>
+                          <li>Menor consumo de energía</li>
+                          <li>Básica para tareas cotidianas</li>
+                        </ul>
+                      </div>
+                      <div class="tipo-gpu">
+                        <h6>Dedicada</h6>
+                        <ul>
+                          <li>Tarjeta separada</li>
+                          <li>Memoria propia (VRAM)</li>
+                          <li>Alto rendimiento</li>
+                          <li>Gaming, diseño, IA</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="funciones-gpu">
+                      <h6>🎨 Funciones</h6>
+                      <ul>
+                        <li>Renderización de gráficos 2D/3D</li>
+                        <li>Aceleración de video</li>
+                        <li>Procesamiento paralelo</li>
+                        <li>Machine Learning</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h3>💾 Dispositivos de Almacenamiento</h3>
+              <p>Los <strong>dispositivos de almacenamiento</strong> guardan datos y programas de forma temporal o permanente.</p>
+
+              <h4>📋 Clasificación por Tipo de Acceso</h4>
+              <div class="almacenamiento-clasificacion">
+                <div class="almacenamiento-primario">
+                  <h5>⚡ Almacenamiento Primario (Temporal)</h5>
+                  <div class="dispositivo-detalle">
+                    <h6>RAM (Memoria de Acceso Aleatorio)</h6>
+                    <ul>
+                      <li><strong>Función:</strong> Almacenamiento temporal y rápido</li>
+                      <li><strong>Características:</strong> Volátil, muy rápida</li>
+                      <li><strong>Tipos:</strong> DDR3, DDR4, DDR5</li>
+                      <li><strong>Capacidades:</strong> 4GB, 8GB, 16GB, 32GB+</li>
+                    </ul>
+                  </div>
+                  <div class="dispositivo-detalle">
+                    <h6>Cache</h6>
+                    <ul>
+                      <li><strong>Ubicación:</strong> Dentro del CPU</li>
+                      <li><strong>Velocidad:</strong> Extremadamente rápida</li>
+                      <li><strong>Niveles:</strong> L1, L2, L3</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="almacenamiento-secundario">
+                  <h5>💿 Almacenamiento Secundario (Permanente)</h5>
+                  <div class="tecnologias-almacenamiento">
+                    <div class="tecnologia">
+                      <h6>🔧 HDD (Disco Duro Mecánico)</h6>
+                      <ul>
+                        <li><strong>Tecnología:</strong> Discos magnéticos giratorios</li>
+                        <li><strong>Capacidad:</strong> 500GB - 18TB</li>
+                        <li><strong>Velocidad:</strong> 5400-7200 RPM</li>
+                        <li><strong>Ventajas:</strong> Bajo costo, alta capacidad</li>
+                        <li><strong>Desventajas:</strong> Lento, frágil, ruidoso</li>
+                      </ul>
+                    </div>
+                    <div class="tecnologia">
+                      <h6>⚡ SSD (Disco de Estado Sólido)</h6>
+                      <ul>
+                        <li><strong>Tecnología:</strong> Memoria flash (sin partes móviles)</li>
+                        <li><strong>Capacidad:</strong> 120GB - 8TB</li>
+                        <li><strong>Velocidad:</strong> 10x más rápido que HDD</li>
+                        <li><strong>Ventajas:</strong> Muy rápido, silencioso, resistente</li>
+                        <li><strong>Desventajas:</strong> Mayor costo por GB</li>
+                      </ul>
+                    </div>
+                    <div class="tecnologia">
+                      <h6>💿 Almacenamiento Óptico</h6>
+                      <ul>
+                        <li><strong>CD:</strong> 700 MB</li>
+                        <li><strong>DVD:</strong> 4.7 GB</li>
+                        <li><strong>Blu-ray:</strong> 25-100 GB</li>
+                        <li><strong>Ventajas:</strong> Económico, portátil</li>
+                        <li><strong>Desventajas:</strong> Lento, baja capacidad</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="almacenamiento-portatil">
+                  <h5>🔌 Almacenamiento Portátil</h5>
+                  <div class="dispositivos-portatiles">
+                    <div class="dispositivo-portatil">
+                      <h6>USB Flash Drive</h6>
+                      <ul>
+                        <li><strong>Capacidad:</strong> 4GB - 1TB</li>
+                        <li><strong>Velocidad:</strong> USB 2.0, 3.0, 3.1, 3.2</li>
+                        <li><strong>Usos:</strong> Transferencia, respaldo</li>
+                      </ul>
+                    </div>
+                    <div class="dispositivo-portatil">
+                      <h6>Tarjetas de Memoria</h6>
+                      <ul>
+                        <li><strong>Tipos:</strong> SD, microSD, CF</li>
+                        <li><strong>Usos:</strong> Cámaras, teléfonos, tablets</li>
+                        <li><strong>Clases:</strong> Velocidad de escritura</li>
+                      </ul>
+                    </div>
+                    <div class="dispositivo-portatil">
+                      <h6>Discos Externos</h6>
+                      <ul>
+                        <li><strong>Tipos:</strong> HDD externo, SSD externo</li>
+                        <li><strong>Conectividad:</strong> USB, Thunderbolt</li>
+                        <li><strong>Capacidad:</strong> 500GB - 16TB</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h4>📊 Comparación de Velocidades</h4>
+              <div class="tabla-velocidades">
+                <table class="velocidades-almacenamiento">
+                  <thead>
+                    <tr>
+                      <th>Dispositivo</th>
+                      <th>Velocidad Lectura</th>
+                      <th>Tiempo de Acceso</th>
+                      <th>Uso Típico</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Cache L1</td>
+                      <td>1 TB/s</td>
+                      <td>1 ns</td>
+                      <td>Datos frecuentes del CPU</td>
+                    </tr>
+                    <tr>
+                      <td>RAM DDR4</td>
+                      <td>25 GB/s</td>
+                      <td>10 ns</td>
+                      <td>Programas en ejecución</td>
+                    </tr>
+                    <tr>
+                      <td>SSD NVMe</td>
+                      <td>3.5 GB/s</td>
+                      <td>0.1 ms</td>
+                      <td>Sistema operativo, programas</td>
+                    </tr>
+                    <tr>
+                      <td>SSD SATA</td>
+                      <td>550 MB/s</td>
+                      <td>0.1 ms</td>
+                      <td>Almacenamiento general</td>
+                    </tr>
+                    <tr>
+                      <td>HDD 7200 RPM</td>
+                      <td>150 MB/s</td>
+                      <td>8-12 ms</td>
+                      <td>Archivos grandes, respaldo</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/procesamiento-almacenamiento.jpg",
+              video: "/videos/teoria/cpu-gpu-almacenamiento.mp4"
+            },
+            actividades: [
+              {
+                tipo: "analisis",
+                pregunta: "¿Por qué un SSD hace que tu computadora inicie más rápido que un HDD?",
+                ayuda: "Compara las velocidades de acceso y lectura de datos"
+              },
+              {
+                tipo: "planificacion",
+                pregunta: "Diseña la configuración de almacenamiento ideal para un estudiante",
+                ayuda: "Considera: presupuesto, necesidades, velocidad vs capacidad"
+              }
+            ]
+          },
+          {
+            id: 4,
+            titulo: "Dispositivos mixtos",
+            contenido: `
+              <h3>🔄 Dispositivos Mixtos (Entrada y Salida)</h3>
+              <p>Los <strong>dispositivos mixtos</strong> pueden funcionar tanto como dispositivos de entrada como de salida, ofreciendo funcionalidad bidireccional.</p>
+              
+              <h4>🎯 Características de Dispositivos Mixtos</h4>
+              <div class="caracteristicas-mixtos">
+                <div class="caracteristica">
+                  <h5>🔄 Bidireccionalidad</h5>
+                  <p>Pueden enviar y recibir información</p>
+                </div>
+                <div class="caracteristica">
+                  <h5>⚡ Eficiencia</h5>
+                  <p>Un solo dispositivo para múltiples funciones</p>
+                </div>
+                <div class="caracteristica">
+                  <h5>💰 Economía</h5>
+                  <p>Reduce costos y espacio</p>
+                </div>
+              </div>
+
+              <h4>📱 Principales Dispositivos Mixtos</h4>
+              <div class="dispositivos-mixtos">
+                <div class="dispositivo-mixto">
+                  <h5>📱 Pantalla Táctil</h5>
+                  <div class="funciones-dispositivo">
+                    <div class="funcion-entrada">
+                      <h6>⬇️ Como Entrada</h6>
+                      <ul>
+                        <li>Detecta toques y gestos</li>
+                        <li>Registra posición del dedo</li>
+                        <li>Interpreta gestos multi-táctil</li>
+                        <li>Reconoce presión (en algunos modelos)</li>
+                      </ul>
+                    </div>
+                    <div class="funcion-salida">
+                      <h6>⬆️ Como Salida</h6>
+                      <ul>
+                        <li>Muestra información visual</li>
+                        <li>Presenta interfaces interactivas</li>
+                        <li>Reproduce videos e imágenes</li>
+                        <li>Proporciona retroalimentación visual</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="tipos-pantalla">
+                    <h6>🔧 Tecnologías</h6>
+                    <ul>
+                      <li><strong>Resistiva:</strong> Presión física</li>
+                      <li><strong>Capacitiva:</strong> Conductividad eléctrica</li>
+                      <li><strong>Infrarroja:</strong> Sensores de luz</li>
+                      <li><strong>Óptica:</strong> Cámaras y procesamiento</li>
+                    </ul>
+                  </div>
+                  <div class="aplicaciones-pantalla">
+                    <h6>📲 Aplicaciones</h6>
+                    <ul>
+                      <li>Smartphones y tablets</li>
+                      <li>Laptops convertibles</li>
+                      <li>Kioscos interactivos</li>
+                      <li>Cajeros automáticos</li>
+                      <li>Pizarras inteligentes</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="dispositivo-mixto">
+                  <h5>🌐 Dispositivos de Red</h5>
+                  <div class="funciones-dispositivo">
+                    <div class="funcion-entrada">
+                      <h6>⬇️ Como Entrada</h6>
+                      <ul>
+                        <li>Recibe datos de la red</li>
+                        <li>Descarga archivos e información</li>
+                        <li>Obtiene actualizaciones</li>
+                        <li>Recibe mensajes y correos</li>
+                      </ul>
+                    </div>
+                    <div class="funcion-salida">
+                      <h6>⬆️ Como Salida</h6>
+                      <ul>
+                        <li>Envía datos a la red</li>
+                        <li>Sube archivos a servidores</li>
+                        <li>Transmite información</li>
+                        <li>Comparte recursos</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="tipos-red">
+                    <h6>🔧 Tipos de Dispositivos de Red</h6>
+                    <div class="dispositivo-red">
+                      <h6>📡 Tarjeta de Red (NIC)</h6>
+                      <ul>
+                        <li><strong>Ethernet:</strong> Conexión por cable</li>
+                        <li><strong>Wi-Fi:</strong> Conexión inalámbrica</li>
+                        <li><strong>Bluetooth:</strong> Conexión de corto alcance</li>
+                      </ul>
+                    </div>
+                    <div class="dispositivo-red">
+                      <h6>📞 Módem</h6>
+                      <ul>
+                        <li>Convierte señales digitales a analógicas</li>
+                        <li>Conecta con proveedores de internet</li>
+                        <li>Tipos: DSL, Cable, Fibra óptica</li>
+                      </ul>
+                    </div>
+                    <div class="dispositivo-red">
+                      <h6>🌐 Router</h6>
+                      <ul>
+                        <li>Distribuye conexión a múltiples dispositivos</li>
+                        <li>Crea redes locales (LAN)</li>
+                        <li>Gestiona tráfico de datos</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="dispositivo-mixto">
+                  <h5>💾 Dispositivos de Almacenamiento Externo</h5>
+                  <div class="funciones-dispositivo">
+                    <div class="funcion-entrada">
+                      <h6>⬇️ Como Entrada</h6>
+                      <ul>
+                        <li>Proporciona datos almacenados</li>
+                        <li>Permite leer archivos</li>
+                        <li>Ejecuta programas portátiles</li>
+                        <li>Transfiere información al sistema</li>
+                      </ul>
+                    </div>
+                    <div class="funcion-salida">
+                      <h6>⬆️ Como Salida</h6>
+                      <ul>
+                        <li>Almacena nuevos datos</li>
+                        <li>Guarda archivos del sistema</li>
+                        <li>Crea copias de seguridad</li>
+                        <li>Recibe información procesada</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="ejemplos-almacenamiento">
+                    <h6>📂 Ejemplos</h6>
+                    <ul>
+                      <li><strong>USB Flash Drive:</strong> Portabilidad y versatilidad</li>
+                      <li><strong>Disco Duro Externo:</strong> Gran capacidad</li>
+                      <li><strong>SSD Externo:</strong> Velocidad y resistencia</li>
+                      <li><strong>Tarjetas SD:</strong> Dispositivos móviles</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="dispositivo-mixto">
+                  <h5>🖨️ Dispositivos Multifunción</h5>
+                  <div class="funciones-dispositivo">
+                    <div class="funcion-entrada">
+                      <h6>⬇️ Como Entrada</h6>
+                      <ul>
+                        <li><strong>Escaneo:</strong> Digitaliza documentos</li>
+                        <li><strong>Copia:</strong> Captura información</li>
+                        <li><strong>Fax:</strong> Recibe documentos remotos</li>
+                      </ul>
+                    </div>
+                    <div class="funcion-salida">
+                      <h6>⬆️ Como Salida</h6>
+                      <ul>
+                        <li><strong>Impresión:</strong> Produce documentos físicos</li>
+                        <li><strong>Fax:</strong> Envía documentos remotos</li>
+                        <li><strong>Copia:</strong> Reproduce documentos</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="ventajas-multifuncion">
+                    <h6>✅ Ventajas</h6>
+                    <ul>
+                      <li>Ahorro de espacio</li>
+                      <li>Menor costo que dispositivos separados</li>
+                      <li>Una sola conexión al computador</li>
+                      <li>Mantenimiento simplificado</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="dispositivo-mixto">
+                  <h5>🎧 Auriculares con Micrófono (Headset)</h5>
+                  <div class="funciones-dispositivo">
+                    <div class="funcion-entrada">
+                      <h6>⬇️ Como Entrada</h6>
+                      <ul>
+                        <li>Captura voz del usuario</li>
+                        <li>Permite comunicación oral</li>
+                        <li>Reconocimiento de voz</li>
+                        <li>Grabación de audio</li>
+                      </ul>
+                    </div>
+                    <div class="funcion-salida">
+                      <h6>⬆️ Como Salida</h6>
+                      <ul>
+                        <li>Reproduce audio del sistema</li>
+                        <li>Permite escuchar música</li>
+                        <li>Audio de videollamadas</li>
+                        <li>Sonidos de aplicaciones</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="aplicaciones-headset">
+                    <h6>🎮 Aplicaciones</h6>
+                    <ul>
+                      <li>Gaming online</li>
+                      <li>Videollamadas profesionales</li>
+                      <li>Educación virtual</li>
+                      <li>Call centers</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔄 Flujo de Información en Dispositivos Mixtos</h4>
+              <div class="flujo-informacion">
+                <div class="ejemplo-flujo">
+                  <h5>📱 Ejemplo: Usando una Tablet</h5>
+                  <div class="secuencia-flujo">
+                    <div class="paso-flujo">
+                      <span class="numero">1</span>
+                      <p><strong>Entrada:</strong> Tocas la pantalla para abrir una app</p>
+                    </div>
+                    <div class="flecha">→</div>
+                    <div class="paso-flujo">
+                      <span class="numero">2</span>
+                      <p><strong>Procesamiento:</strong> El sistema interpreta el toque</p>
+                    </div>
+                    <div class="flecha">→</div>
+                    <div class="paso-flujo">
+                      <span class="numero">3</span>
+                      <p><strong>Salida:</strong> La pantalla muestra la aplicación abierta</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ventajas-dispositivos-mixtos">
+                <h4>✅ Ventajas de los Dispositivos Mixtos</h4>
+                <div class="ventajas-grid">
+                  <div class="ventaja">
+                    <h5>💰 Económico</h5>
+                    <p>Un dispositivo para múltiples funciones reduce costos</p>
+                  </div>
+                  <div class="ventaja">
+                    <h5>📏 Espacio</h5>
+                    <p>Menos dispositivos significa menos espacio ocupado</p>
+                  </div>
+                  <div class="ventaja">
+                    <h5>⚡ Eficiencia</h5>
+                    <p>Interacción más rápida y directa</p>
+                  </div>
+                  <div class="ventaja">
+                    <h5>🔌 Simplicidad</h5>
+                    <p>Menos cables y conexiones que gestionar</p>
+                  </div>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/dispositivos-mixtos.jpg",
+              video: "/videos/teoria/hardware-mixto.mp4"
+            },
+            actividades: [
+              {
+                tipo: "identificacion",
+                pregunta: "Identifica 5 dispositivos mixtos que uses en tu día a día",
+                ayuda: "Piensa en dispositivos que tanto reciben como envían información"
+              },
+              {
+                tipo: "analisis",
+                pregunta: "¿Por qué una pantalla táctil es más eficiente que tener un monitor y un mouse separados?",
+                ayuda: "Considera: velocidad de interacción, espacio, portabilidad"
+              }
+            ]
+          }
+        ],
+        recursos: {
+          documentos: [
+            {
+              titulo: "Guía Completa de Hardware",
+              descripcion: "Manual detallado sobre componentes de hardware",
+              url: "/recursos/intro-informatica/guia-hardware.pdf"
+            },
+            {
+              titulo: "Clasificación de Dispositivos por Función",
+              descripcion: "Tabla de referencia para clasificar hardware",
+              url: "/recursos/intro-informatica/clasificacion-dispositivos.pdf"
+            },
+            {
+              titulo: "Comparativa de Dispositivos de Almacenamiento",
+              descripcion: "Análisis técnico de HDD vs SSD vs otros",
+              url: "/recursos/intro-informatica/comparativa-almacenamiento.pdf"
+            }
+          ],
+          videos: [
+            {
+              titulo: "Hardware Básico: Entrada, Salida y Procesamiento",
+              duracion: "20 min",
+              url: "/videos/teoria/hardware-basico.mp4"
+            },
+            {
+              titulo: "Dispositivos de Almacenamiento Explicados",
+              duracion: "15 min",
+              url: "/videos/teoria/almacenamiento-explicado.mp4"
+            },
+            {
+              titulo: "Dispositivos Mixtos en Acción",
+              duracion: "12 min",
+              url: "/videos/teoria/dispositivos-mixtos-demo.mp4"
+            }
+          ],
+          enlaces: [
+            {
+              titulo: "Comparador de Hardware",
+              url: "https://www.cpubenchmark.net/"
+            },
+            {
+              titulo: "Guía de Compra de Componentes",
+              url: "https://www.tomshardware.com/"
+            },
+            {
+              titulo: "Especificaciones Técnicas",
+              url: "https://www.techpowerup.com/"
+            }
+          ]
+        },
+        evaluacion: {
+          preRequisitos: ["Tema 3: Unidades de medida y almacenamiento completado"],
+          criterios: [
+            "Clasificar correctamente dispositivos por su función",
+            "Identificar dispositivos de entrada, salida, procesamiento y almacenamiento",
+            "Explicar las diferencias entre tipos de almacenamiento",
+            "Reconocer dispositivos mixtos y su doble funcionalidad",
+            "Comparar ventajas y desventajas de diferentes tecnologías",
+            "Aplicar conocimientos en decisiones de configuración de hardware"
+          ],
+          tiempoEstimado: "50 minutos"
+        }
+      },
+      '5': {
+        titulo: "Software",
+        duracion: "35-40 minutos",
+        objetivos: [
+          "Comprender qué es el software y sus componentes principales",
+          "Clasificar el software según su función y propósito",
+          "Distinguir entre diferentes tipos de licencias de software",
+          "Conocer los métodos de distribución y modelos de negocio del software"
+        ],
+        secciones: [
+          {
+            id: 1,
+            titulo: "¿Qué es el software?",
+            contenido: `
+              <h3>💾 Definición de Software</h3>
+              <p>El <strong>software</strong> es el conjunto de programas, instrucciones, reglas informáticas y documentación que realiza diferentes tareas en un sistema de computación.</p>
+              
+              <h4>🧩 Componentes del Software</h4>
+              <div class="componentes-software">
+                <div class="componente">
+                  <h5>📜 Programas</h5>
+                  <div class="descripcion-componente">
+                    <p>Secuencias de instrucciones escritas en lenguajes de programación</p>
+                    <ul>
+                      <li>Código ejecutable (.exe, .app)</li>
+                      <li>Scripts y macros</li>
+                      <li>Bibliotecas y librerías</li>
+                      <li>Controladores (drivers)</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente">
+                  <h5>📊 Datos</h5>
+                  <div class="descripcion-componente">
+                    <p>Información que procesa y utiliza el software</p>
+                    <ul>
+                      <li>Bases de datos</li>
+                      <li>Archivos de configuración</li>
+                      <li>Plantillas y recursos</li>
+                      <li>Datos de usuario</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente">
+                  <h5>📖 Documentación</h5>
+                  <div class="descripcion-componente">
+                    <p>Información que explica cómo usar y mantener el software</p>
+                    <ul>
+                      <li>Manuales de usuario</li>
+                      <li>Guías de instalación</li>
+                      <li>Documentación técnica</li>
+                      <li>Tutoriales y ayuda</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente">
+                  <h5>⚙️ Configuración</h5>
+                  <div class="descripcion-componente">
+                    <p>Ajustes y preferencias que definen el comportamiento</p>
+                    <ul>
+                      <li>Archivos de configuración</li>
+                      <li>Registros del sistema</li>
+                      <li>Preferencias de usuario</li>
+                      <li>Variables de entorno</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔄 Software vs Hardware</h4>
+              <div class="comparacion-software-hardware">
+                <div class="lado-software">
+                  <h5>💾 SOFTWARE</h5>
+                  <div class="caracteristicas">
+                    <h6>Características:</h6>
+                    <ul>
+                      <li><strong>Intangible:</strong> No se puede tocar</li>
+                      <li><strong>Lógico:</strong> Conjunto de instrucciones</li>
+                      <li><strong>Modificable:</strong> Se puede actualizar</li>
+                      <li><strong>Copiable:</strong> Se puede duplicar</li>
+                    </ul>
+                    <h6>Ejemplos:</h6>
+                    <ul>
+                      <li>Windows, macOS, Linux</li>
+                      <li>Microsoft Office</li>
+                      <li>Photoshop, navegadores</li>
+                      <li>Videojuegos, apps móviles</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="vs-divider">⚡</div>
+
+                <div class="lado-hardware">
+                  <h5>🖥️ HARDWARE</h5>
+                  <div class="caracteristicas">
+                    <h6>Características:</h6>
+                    <ul>
+                      <li><strong>Tangible:</strong> Se puede tocar</li>
+                      <li><strong>Físico:</strong> Componentes materiales</li>
+                      <li><strong>Fijo:</strong> Difícil de modificar</li>
+                      <li><strong>Único:</strong> Cada componente es individual</li>
+                    </ul>
+                    <h6>Ejemplos:</h6>
+                    <ul>
+                      <li>CPU, RAM, disco duro</li>
+                      <li>Monitor, teclado, ratón</li>
+                      <li>Tarjeta gráfica</li>
+                      <li>Impresora, altavoces</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="relacion-software-hardware">
+                <h4>🤝 Relación Software-Hardware</h4>
+                <div class="interdependencia">
+                  <p>El software y hardware son <strong>interdependientes</strong>:</p>
+                  <ul>
+                    <li><strong>Hardware sin software:</strong> Máquina inútil</li>
+                    <li><strong>Software sin hardware:</strong> Instrucciones sin ejecutor</li>
+                    <li><strong>Juntos:</strong> Sistema informático funcional</li>
+                  </ul>
+                </div>
+                <div class="ejemplo-relacion">
+                  <h5>🎮 Ejemplo: Videojuego</h5>
+                  <p><strong>Software:</strong> El código del juego, gráficos, sonidos</p>
+                  <p><strong>Hardware:</strong> CPU procesa lógica, GPU renderiza gráficos, RAM almacena datos temporales</p>
+                  <p><strong>Resultado:</strong> Experiencia de juego fluida</p>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/que-es-software.jpg",
+              video: "/videos/teoria/software-vs-hardware.mp4"
+            },
+            actividades: [
+              {
+                tipo: "identificacion",
+                pregunta: "Identifica 5 ejemplos de software que uses diariamente y clasifícalos por componente",
+                ayuda: "Piensa en programas, datos, documentación y configuración"
+              },
+              {
+                tipo: "reflexion",
+                pregunta: "¿Qué pasaría si tuvieras una computadora sin sistema operativo?",
+                ayuda: "Considera cómo el hardware necesita software para funcionar"
+              }
+            ]
+          },
+          {
+            id: 2,
+            titulo: "Clasificación del software por función",
+            contenido: `
+              <h3>📂 Tipos de Software según su Función</h3>
+              <p>El software se clasifica según el propósito que cumple en el sistema computacional.</p>
+              
+              <h4>🏗️ Software de Sistema</h4>
+              <div class="software-sistema">
+                <div class="categoria-sistema">
+                  <h5>🖥️ Sistema Operativo (OS)</h5>
+                  <div class="descripcion-categoria">
+                    <p><strong>Función:</strong> Gestiona los recursos del hardware y proporciona una plataforma para otros programas</p>
+                    
+                    <h6>📋 Funciones Principales:</h6>
+                    <ul>
+                      <li><strong>Gestión de memoria:</strong> Asigna RAM a programas</li>
+                      <li><strong>Gestión de procesos:</strong> Ejecuta múltiples programas</li>
+                      <li><strong>Gestión de archivos:</strong> Organiza datos en el disco</li>
+                      <li><strong>Interfaz de usuario:</strong> Permite interacción</li>
+                      <li><strong>Gestión de dispositivos:</strong> Controla hardware</li>
+                    </ul>
+
+                    <h6>💻 Ejemplos de Sistemas Operativos:</h6>
+                    <div class="ejemplos-os">
+                      <div class="os-ejemplo">
+                        <h6>🪟 Windows</h6>
+                        <ul>
+                          <li>Más popular en PCs</li>
+                          <li>Interfaz gráfica amigable</li>
+                          <li>Compatible con muchos programas</li>
+                          <li>Versiones: 10, 11</li>
+                        </ul>
+                      </div>
+                      <div class="os-ejemplo">
+                        <h6>🍎 macOS</h6>
+                        <ul>
+                          <li>Sistema de Apple</li>
+                          <li>Diseño elegante</li>
+                          <li>Optimizado para hardware Mac</li>
+                          <li>Enfoque en creatividad</li>
+                        </ul>
+                      </div>
+                      <div class="os-ejemplo">
+                        <h6>🐧 Linux</h6>
+                        <ul>
+                          <li>Software libre y gratuito</li>
+                          <li>Muy seguro y estable</li>
+                          <li>Múltiples distribuciones</li>
+                          <li>Usado en servidores</li>
+                        </ul>
+                      </div>
+                      <div class="os-ejemplo">
+                        <h6>📱 Móviles</h6>
+                        <ul>
+                          <li><strong>Android:</strong> Google</li>
+                          <li><strong>iOS:</strong> Apple</li>
+                          <li>Optimizados para touch</li>
+                          <li>Tiendas de aplicaciones</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="categoria-sistema">
+                  <h5>🔧 Controladores (Drivers)</h5>
+                  <div class="descripcion-categoria">
+                    <p><strong>Función:</strong> Permiten que el sistema operativo se comunique con dispositivos específicos</p>
+                    
+                    <h6>📡 Ejemplos de Controladores:</h6>
+                    <ul>
+                      <li><strong>Controlador de impresora:</strong> Para imprimir documentos</li>
+                      <li><strong>Controlador de tarjeta gráfica:</strong> Para mostrar video</li>
+                      <li><strong>Controlador de audio:</strong> Para reproducir sonido</li>
+                      <li><strong>Controlador de red:</strong> Para conectarse a internet</li>
+                    </ul>
+
+                    <div class="importancia-drivers">
+                      <h6>⚡ Importancia:</h6>
+                      <p>Sin controladores adecuados, los dispositivos no funcionan correctamente</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="categoria-sistema">
+                  <h5>🛠️ Utilidades del Sistema</h5>
+                  <div class="descripcion-categoria">
+                    <p><strong>Función:</strong> Programas que mantienen y optimizan el sistema</p>
+                    
+                    <h6>🔧 Ejemplos de Utilidades:</h6>
+                    <ul>
+                      <li><strong>Antivirus:</strong> Protege contra malware</li>
+                      <li><strong>Limpiadores de disco:</strong> Liberan espacio</li>
+                      <li><strong>Desfragmentadores:</strong> Optimizan el disco duro</li>
+                      <li><strong>Compresores:</strong> Reducen tamaño de archivos</li>
+                      <li><strong>Monitores del sistema:</strong> Muestran rendimiento</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>📱 Software de Aplicación</h4>
+              <div class="software-aplicacion">
+                <p>Programas diseñados para que los usuarios realicen tareas específicas</p>
+
+                <div class="categorias-aplicacion">
+                  <div class="categoria-app">
+                    <h5>📝 Ofimática y Productividad</h5>
+                    <ul>
+                      <li><strong>Procesadores de texto:</strong> Word, Google Docs</li>
+                      <li><strong>Hojas de cálculo:</strong> Excel, Calc</li>
+                      <li><strong>Presentaciones:</strong> PowerPoint, Prezi</li>
+                      <li><strong>Gestión de proyectos:</strong> Trello, Asana</li>
+                    </ul>
+                  </div>
+
+                  <div class="categoria-app">
+                    <h5>🎨 Multimedia y Creatividad</h5>
+                    <ul>
+                      <li><strong>Edición de imágenes:</strong> Photoshop, GIMP</li>
+                      <li><strong>Edición de video:</strong> Premiere, DaVinci</li>
+                      <li><strong>Audio:</strong> Audacity, Pro Tools</li>
+                      <li><strong>Diseño:</strong> Illustrator, Canva</li>
+                    </ul>
+                  </div>
+
+                  <div class="categoria-app">
+                    <h5>🌐 Internet y Comunicación</h5>
+                    <ul>
+                      <li><strong>Navegadores:</strong> Chrome, Firefox, Safari</li>
+                      <li><strong>Correo electrónico:</strong> Outlook, Gmail</li>
+                      <li><strong>Mensajería:</strong> WhatsApp, Telegram</li>
+                      <li><strong>Videollamadas:</strong> Zoom, Teams</li>
+                    </ul>
+                  </div>
+
+                  <div class="categoria-app">
+                    <h5>🎮 Entretenimiento</h5>
+                    <ul>
+                      <li><strong>Videojuegos:</strong> Steam, juegos móviles</li>
+                      <li><strong>Streaming:</strong> Netflix, YouTube</li>
+                      <li><strong>Música:</strong> Spotify, iTunes</li>
+                      <li><strong>Lectura:</strong> Kindle, PDF readers</li>
+                    </ul>
+                  </div>
+
+                  <div class="categoria-app">
+                    <h5>📚 Educación</h5>
+                    <ul>
+                      <li><strong>Plataformas LMS:</strong> Moodle, Canvas</li>
+                      <li><strong>Idiomas:</strong> Duolingo, Babbel</li>
+                      <li><strong>Matemáticas:</strong> GeoGebra, Wolfram</li>
+                      <li><strong>Simuladores:</strong> Labster, PhET</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>👨‍💻 Software de Programación</h4>
+              <div class="software-programacion">
+                <p>Herramientas para crear otros programas de software</p>
+
+                <div class="herramientas-programacion">
+                  <div class="herramienta">
+                    <h5>📝 Editores de Código</h5>
+                    <ul>
+                      <li><strong>Visual Studio Code:</strong> Editor gratuito de Microsoft</li>
+                      <li><strong>Sublime Text:</strong> Editor rápido y ligero</li>
+                      <li><strong>Atom:</strong> Editor de código abierto</li>
+                      <li><strong>Notepad++:</strong> Editor simple para Windows</li>
+                    </ul>
+                  </div>
+
+                  <div class="herramienta">
+                    <h5>🏗️ IDEs (Entornos de Desarrollo)</h5>
+                    <ul>
+                      <li><strong>Visual Studio:</strong> Para desarrollo .NET</li>
+                      <li><strong>IntelliJ IDEA:</strong> Para Java y otros</li>
+                      <li><strong>PyCharm:</strong> Especializado en Python</li>
+                      <li><strong>Android Studio:</strong> Para apps Android</li>
+                    </ul>
+                  </div>
+
+                  <div class="herramienta">
+                    <h5>⚙️ Compiladores e Intérpretes</h5>
+                    <ul>
+                      <li><strong>GCC:</strong> Compilador de C/C++</li>
+                      <li><strong>Python:</strong> Intérprete de Python</li>
+                      <li><strong>Node.js:</strong> Runtime de JavaScript</li>
+                      <li><strong>JVM:</strong> Máquina virtual de Java</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/clasificacion-software.jpg",
+              video: "/videos/teoria/tipos-software.mp4"
+            },
+            actividades: [
+              {
+                tipo: "clasificacion",
+                pregunta: "Clasifica estos programas: Windows, Chrome, Photoshop, Antivirus, Word, Controlador de impresora",
+                ayuda: "Agrúpalos en: Sistema, Aplicación, Programación"
+              },
+              {
+                tipo: "investigacion",
+                pregunta: "Investiga qué sistema operativo usan en tu escuela y por qué fue elegido",
+                ayuda: "Considera factores como costo, compatibilidad, facilidad de uso"
+              }
+            ]
+          },
+          {
+            id: 3,
+            titulo: "Licencias de software",
+            contenido: `
+              <h3>⚖️ Tipos de Licencias de Software</h3>
+              <p>Las <strong>licencias de software</strong> determinan cómo se puede usar, modificar y distribuir un programa.</p>
+              
+              <h4>🏢 Software Propietario</h4>
+              <div class="software-propietario">
+                <div class="definicion-propietario">
+                  <h5>📋 Características</h5>
+                  <ul>
+                    <li><strong>Código cerrado:</strong> No se puede ver ni modificar</li>
+                    <li><strong>Licencia comercial:</strong> Se debe pagar para usar</li>
+                    <li><strong>Restricciones:</strong> Limitaciones de uso y distribución</li>
+                    <li><strong>Soporte oficial:</strong> Empresa responsable del mantenimiento</li>
+                  </ul>
+                </div>
+
+                <div class="tipos-propietario">
+                  <h5>💰 Modelos de Licencia Propietaria</h5>
+                  
+                  <div class="modelo-licencia">
+                    <h6>💳 Licencia Comercial Tradicional</h6>
+                    <ul>
+                      <li><strong>Pago único:</strong> Compras el software una vez</li>
+                      <li><strong>Ejemplos:</strong> Windows, Microsoft Office (versión perpetua)</li>
+                      <li><strong>Ventaja:</strong> No pagos recurrentes</li>
+                      <li><strong>Desventaja:</strong> Actualizaciones pueden requerir nueva compra</li>
+                    </ul>
+                  </div>
+
+                  <div class="modelo-licencia">
+                    <h6>🔄 Suscripción (SaaS)</h6>
+                    <ul>
+                      <li><strong>Pago mensual/anual:</strong> Alquilas el software</li>
+                      <li><strong>Ejemplos:</strong> Office 365, Adobe Creative Cloud</li>
+                      <li><strong>Ventaja:</strong> Siempre actualizado, menor costo inicial</li>
+                      <li><strong>Desventaja:</strong> Pagos constantes, dependencia de internet</li>
+                    </ul>
+                  </div>
+
+                  <div class="modelo-licencia">
+                    <h6>👥 Licencias por Usuario</h6>
+                    <ul>
+                      <li><strong>Individual:</strong> Una persona puede usar</li>
+                      <li><strong>Familiar:</strong> Varios miembros de la familia</li>
+                      <li><strong>Empresarial:</strong> Múltiples empleados</li>
+                      <li><strong>Educativa:</strong> Descuentos para estudiantes</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="ejemplos-propietario">
+                  <h5>🏭 Ejemplos de Software Propietario</h5>
+                  <div class="ejemplos-grid">
+                    <div class="ejemplo">
+                      <h6>Microsoft Windows</h6>
+                      <p>Sistema operativo más usado en PCs</p>
+                    </div>
+                    <div class="ejemplo">
+                      <h6>Adobe Photoshop</h6>
+                      <p>Editor de imágenes profesional</p>
+                    </div>
+                    <div class="ejemplo">
+                      <h6>AutoCAD</h6>
+                      <p>Software de diseño asistido por computadora</p>
+                    </div>
+                    <div class="ejemplo">
+                      <h6>iOS</h6>
+                      <p>Sistema operativo de iPhone/iPad</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🆓 Software Libre y Gratuito</h4>
+              <div class="software-libre">
+                <div class="definicion-libre">
+                  <h5>🕊️ Software Libre (Free Software)</h5>
+                  <p>Software que respeta la libertad de los usuarios y la comunidad</p>
+                  
+                  <h6>🗽 Las 4 Libertades Fundamentales:</h6>
+                  <div class="libertades">
+                    <div class="libertad">
+                      <span class="numero">0</span>
+                      <h6>Libertad de Usar</h6>
+                      <p>Ejecutar el programa como desees, para cualquier propósito</p>
+                    </div>
+                    <div class="libertad">
+                      <span class="numero">1</span>
+                      <h6>Libertad de Estudiar</h6>
+                      <p>Estudiar cómo funciona el programa y modificarlo</p>
+                    </div>
+                    <div class="libertad">
+                      <span class="numero">2</span>
+                      <h6>Libertad de Distribuir</h6>
+                      <p>Redistribuir copias para ayudar a otros</p>
+                    </div>
+                    <div class="libertad">
+                      <span class="numero">3</span>
+                      <h6>Libertad de Mejorar</h6>
+                      <p>Distribuir copias de tus versiones modificadas</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="diferencias-free">
+                  <h5>🔍 Free vs Freeware vs Open Source</h5>
+                  <div class="comparacion-free">
+                    <div class="tipo-free">
+                      <h6>🆓 Freeware</h6>
+                      <ul>
+                        <li><strong>Gratis</strong> de usar</li>
+                        <li><strong>Código cerrado</strong></li>
+                        <li>No se puede modificar</li>
+                        <li><strong>Ejemplos:</strong> Skype, WinRAR</li>
+                      </ul>
+                    </div>
+                    <div class="tipo-free">
+                      <h6>🔓 Open Source</h6>
+                      <ul>
+                        <li><strong>Código abierto</strong></li>
+                        <li>Se puede ver y modificar</li>
+                        <li>Enfoque en desarrollo colaborativo</li>
+                        <li><strong>Ejemplos:</strong> Linux, Firefox</li>
+                      </ul>
+                    </div>
+                    <div class="tipo-free">
+                      <h6>🕊️ Free Software</h6>
+                      <ul>
+                        <li><strong>Libre</strong> (no solo gratis)</li>
+                        <li>4 libertades fundamentales</li>
+                        <li>Filosofía de libertad del usuario</li>
+                        <li><strong>Ejemplos:</strong> GNU/Linux, GIMP</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ejemplos-libre">
+                  <h5>🌟 Ejemplos de Software Libre</h5>
+                  <div class="ejemplos-libre-grid">
+                    <div class="ejemplo-libre">
+                      <h6>🐧 Linux</h6>
+                      <p>Sistema operativo libre, base de Android</p>
+                    </div>
+                    <div class="ejemplo-libre">
+                      <h6>🦊 Firefox</h6>
+                      <p>Navegador web libre y de código abierto</p>
+                    </div>
+                    <div class="ejemplo-libre">
+                      <h6>📝 LibreOffice</h6>
+                      <p>Suite ofimática gratuita y libre</p>
+                    </div>
+                    <div class="ejemplo-libre">
+                      <h6>🎨 GIMP</h6>
+                      <p>Editor de imágenes libre, alternativa a Photoshop</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔄 Modelos Híbridos</h4>
+              <div class="modelos-hibridos">
+                <div class="modelo-hibrido">
+                  <h5>💰 Freemium</h5>
+                  <div class="descripcion-modelo">
+                    <p><strong>Versión básica gratuita + versión premium de pago</strong></p>
+                    <ul>
+                      <li><strong>Gratis:</strong> Funciones básicas con limitaciones</li>
+                      <li><strong>Premium:</strong> Funciones avanzadas, sin límites</li>
+                      <li><strong>Ejemplos:</strong> Spotify, Dropbox, Canva</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="modelo-hibrido">
+                  <h5>⏰ Shareware</h5>
+                  <div class="descripcion-modelo">
+                    <p><strong>Período de prueba gratuito</strong></p>
+                    <ul>
+                      <li><strong>Prueba:</strong> 30 días gratis típicamente</li>
+                      <li><strong>Después:</strong> Debe comprarse licencia</li>
+                      <li><strong>Ejemplos:</strong> WinRAR, muchos antivirus</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="modelo-hibrido">
+                  <h5>📚 Licencias Académicas</h5>
+                  <div class="descripcion-modelo">
+                    <p><strong>Descuentos especiales para educación</strong></p>
+                    <ul>
+                      <li><strong>Estudiantes:</strong> Precios reducidos</li>
+                      <li><strong>Instituciones:</strong> Licencias por volumen</li>
+                      <li><strong>Ejemplos:</strong> Adobe Student, Microsoft Education</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>⚖️ Aspectos Legales Importantes</h4>
+              <div class="aspectos-legales">
+                <div class="aspecto-legal">
+                  <h5>🚫 Piratería de Software</h5>
+                  <ul>
+                    <li><strong>Definición:</strong> Uso ilegal de software sin licencia</li>
+                    <li><strong>Riesgos:</strong> Multas, problemas legales, malware</li>
+                    <li><strong>Alternativas:</strong> Software libre, versiones educativas</li>
+                  </ul>
+                </div>
+
+                <div class="aspecto-legal">
+                  <h5>📄 EULA (End User License Agreement)</h5>
+                  <ul>
+                    <li><strong>Qué es:</strong> Contrato entre usuario y desarrollador</li>
+                    <li><strong>Importancia:</strong> Define derechos y restricciones</li>
+                    <li><strong>Consejo:</strong> Leer antes de aceptar</li>
+                  </ul>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/licencias-software.jpg",
+              video: "/videos/teoria/software-libre-vs-propietario.mp4"
+            },
+            actividades: [
+              {
+                tipo: "comparacion",
+                pregunta: "Compara las ventajas y desventajas del software propietario vs software libre",
+                ayuda: "Considera: costo, soporte, personalización, seguridad"
+              },
+              {
+                tipo: "decision",
+                pregunta: "¿Qué tipo de licencia recomendarías para el laboratorio de tu escuela? ¿Por qué?",
+                ayuda: "Piensa en presupuesto, necesidades educativas, mantenimiento"
+              }
+            ]
+          },
+          {
+            id: 4,
+            titulo: "Distribución y tendencias del software",
+            contenido: `
+              <h3>📦 Métodos de Distribución de Software</h3>
+              <p>El software puede distribuirse de diversas formas, cada una con sus ventajas y características específicas.</p>
+              
+              <h4>💿 Distribución Física</h4>
+              <div class="distribucion-fisica">
+                <div class="metodo-fisico">
+                  <h5>📀 Medios Ópticos</h5>
+                  <div class="descripcion-metodo">
+                    <ul>
+                      <li><strong>CD-ROM:</strong> 700 MB, software básico</li>
+                      <li><strong>DVD:</strong> 4.7 GB, programas grandes</li>
+                      <li><strong>Blu-ray:</strong> 25+ GB, software complejo</li>
+                    </ul>
+                    <div class="ventajas-desventajas">
+                      <div class="ventajas">
+                        <h6>✅ Ventajas</h6>
+                        <ul>
+                          <li>No requiere internet</li>
+                          <li>Instalación offline</li>
+                          <li>Coleccionable</li>
+                        </ul>
+                      </div>
+                      <div class="desventajas">
+                        <h6>❌ Desventajas</h6>
+                        <ul>
+                          <li>Puede dañarse físicamente</li>
+                          <li>Actualizaciones separadas</li>
+                          <li>Costo de producción</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="metodo-fisico">
+                  <h5>💾 Dispositivos USB</h5>
+                  <div class="descripcion-metodo">
+                    <ul>
+                      <li><strong>USB Flash:</strong> Portabilidad</li>
+                      <li><strong>Instaladores portátiles:</strong> Software que no requiere instalación</li>
+                      <li><strong>Sistemas Live:</strong> Sistemas operativos ejecutables desde USB</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🌐 Distribución Digital</h4>
+              <div class="distribucion-digital">
+                <div class="plataforma-digital">
+                  <h5>🏪 Tiendas de Aplicaciones</h5>
+                  <div class="tiendas-apps">
+                    <div class="tienda">
+                      <h6>📱 Móviles</h6>
+                      <ul>
+                        <li><strong>Google Play Store:</strong> Android</li>
+                        <li><strong>Apple App Store:</strong> iOS</li>
+                        <li><strong>Características:</strong> Instalación fácil, actualizaciones automáticas</li>
+                      </ul>
+                    </div>
+                    <div class="tienda">
+                      <h6>💻 Escritorio</h6>
+                      <ul>
+                        <li><strong>Microsoft Store:</strong> Windows</li>
+                        <li><strong>Mac App Store:</strong> macOS</li>
+                        <li><strong>Snap Store:</strong> Linux</li>
+                      </ul>
+                    </div>
+                    <div class="tienda">
+                      <h6>🎮 Gaming</h6>
+                      <ul>
+                        <li><strong>Steam:</strong> Plataforma líder de juegos</li>
+                        <li><strong>Epic Games Store:</strong> Competidor de Steam</li>
+                        <li><strong>GOG:</strong> Juegos sin DRM</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="plataforma-digital">
+                  <h5>☁️ Software como Servicio (SaaS)</h5>
+                  <div class="caracteristicas-saas">
+                    <h6>📋 Características</h6>
+                    <ul>
+                      <li><strong>Acceso web:</strong> Funciona en navegador</li>
+                      <li><strong>Sin instalación:</strong> No ocupa espacio local</li>
+                      <li><strong>Actualizaciones automáticas:</strong> Siempre la última versión</li>
+                      <li><strong>Acceso multiplataforma:</strong> Cualquier dispositivo</li>
+                    </ul>
+
+                    <h6>🌟 Ejemplos de SaaS</h6>
+                    <div class="ejemplos-saas">
+                      <div class="ejemplo-saas">
+                        <h6>📝 Google Workspace</h6>
+                        <p>Docs, Sheets, Slides en línea</p>
+                      </div>
+                      <div class="ejemplo-saas">
+                        <h6>🎨 Canva</h6>
+                        <p>Diseño gráfico en navegador</p>
+                      </div>
+                      <div class="ejemplo-saas">
+                        <h6>💬 Slack</h6>
+                        <p>Comunicación empresarial</p>
+                      </div>
+                      <div class="ejemplo-saas">
+                        <h6>📊 Salesforce</h6>
+                        <p>Gestión de relaciones con clientes</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="plataforma-digital">
+                  <h5>📥 Descarga Directa</h5>
+                  <div class="descarga-directa">
+                    <ul>
+                      <li><strong>Sitios web oficiales:</strong> Desarrollador distribuye directamente</li>
+                      <li><strong>Repositorios:</strong> Linux usa repositorios centralizados</li>
+                      <li><strong>FTP/HTTP:</strong> Servidores de archivos</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🚀 Tendencias Actuales del Software</h4>
+              <div class="tendencias-software">
+                <div class="tendencia">
+                  <h5>☁️ Computación en la Nube</h5>
+                  <div class="descripcion-tendencia">
+                    <p>El software se ejecuta en servidores remotos, no en el dispositivo local</p>
+                    <ul>
+                      <li><strong>Ventajas:</strong> Acceso desde cualquier lugar, no requiere hardware potente</li>
+                      <li><strong>Ejemplos:</strong> Google Drive, Netflix, Office 365</li>
+                      <li><strong>Futuro:</strong> Más aplicaciones migrarán a la nube</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tendencia">
+                  <h5>📱 Aplicaciones Móviles</h5>
+                  <div class="descripcion-tendencia">
+                    <p>Crecimiento explosivo del software para smartphones y tablets</p>
+                    <ul>
+                      <li><strong>Características:</strong> Touch-friendly, notificaciones push</li>
+                      <li><strong>Tendencias:</strong> Apps híbridas, PWAs (Progressive Web Apps)</li>
+                      <li><strong>Impacto:</strong> Cambiando cómo interactuamos con la tecnología</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tendencia">
+                  <h5>🤖 Inteligencia Artificial</h5>
+                  <div class="descripcion-tendencia">
+                    <p>IA integrada en aplicaciones cotidianas</p>
+                    <ul>
+                      <li><strong>Asistentes virtuales:</strong> Siri, Google Assistant, Alexa</li>
+                      <li><strong>Recomendaciones:</strong> Netflix, Spotify, YouTube</li>
+                      <li><strong>Automatización:</strong> Tareas repetitivas automatizadas</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tendencia">
+                  <h5>🔒 Ciberseguridad</h5>
+                  <div class="descripcion-tendencia">
+                    <p>Mayor enfoque en protección y privacidad</p>
+                    <ul>
+                      <li><strong>Autenticación:</strong> Biometría, 2FA</li>
+                      <li><strong>Encriptación:</strong> Protección de datos</li>
+                      <li><strong>Privacy by design:</strong> Privacidad desde el diseño</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tendencia">
+                  <h5>🌍 Software Colaborativo</h5>
+                  <div class="descripcion-tendencia">
+                    <p>Herramientas para trabajo en equipo remoto</p>
+                    <ul>
+                      <li><strong>Ejemplos:</strong> Zoom, Teams, Miro, Figma</li>
+                      <li><strong>Características:</strong> Edición simultánea, comentarios, versiones</li>
+                      <li><strong>Impacto:</strong> Facilitó trabajo remoto durante pandemia</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tendencia">
+                  <h5>🔄 DevOps y CI/CD</h5>
+                  <div class="descripcion-tendencia">
+                    <p>Desarrollo y entrega continua de software</p>
+                    <ul>
+                      <li><strong>Actualizaciones frecuentes:</strong> Mejoras constantes</li>
+                      <li><strong>Feedback rápido:</strong> Respuesta inmediata a usuarios</li>
+                      <li><strong>Calidad:</strong> Testing automatizado</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔮 El Futuro del Software</h4>
+              <div class="futuro-software">
+                <div class="prediccion">
+                  <h5>🥽 Realidad Virtual y Aumentada</h5>
+                  <p>Software inmersivo para educación, entretenimiento y trabajo</p>
+                </div>
+
+                <div class="prediccion">
+                  <h5>🌐 Web 3.0 y Blockchain</h5>
+                  <p>Aplicaciones descentralizadas y economía digital</p>
+                </div>
+
+                <div class="prediccion">
+                  <h5>🧠 IA Generativa</h5>
+                  <p>Software que crea contenido: texto, imágenes, código</p>
+                </div>
+
+                <div class="prediccion">
+                  <h5>🔌 Internet of Things (IoT)</h5>
+                  <p>Software para dispositivos conectados del hogar inteligente</p>
+                </div>
+              </div>
+
+              <div class="reflexion-futuro">
+                <h4>💭 Reflexión</h4>
+                <p>El software continúa evolucionando rápidamente. Lo que aprendemos hoy es la base para entender las tecnologías del mañana. La clave es desarrollar pensamiento crítico y capacidad de adaptación.</p>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/distribucion-software.jpg",
+              video: "/videos/teoria/futuro-software.mp4"
+            },
+            actividades: [
+              {
+                tipo: "investigacion",
+                pregunta: "Investiga cómo ha cambiado la distribución de software en los últimos 10 años",
+                ayuda: "Compara tiendas físicas vs tiendas digitales vs streaming"
+              },
+              {
+                tipo: "prediccion",
+                pregunta: "¿Cómo crees que será el software en 10 años? Describe 3 cambios importantes",
+                ayuda: "Considera IA, realidad virtual, dispositivos nuevos"
+              }
+            ]
+          }
+        ],
+        recursos: {
+          documentos: [
+            {
+              titulo: "Guía Completa de Tipos de Software",
+              descripcion: "Manual detallado sobre clasificación y características del software",
+              url: "/recursos/intro-informatica/tipos-software.pdf"
+            },
+            {
+              titulo: "Licencias de Software: Guía Legal",
+              descripcion: "Documentos sobre aspectos legales y tipos de licencias",
+              url: "/recursos/intro-informatica/licencias-software.pdf"
+            },
+            {
+              titulo: "Software Libre vs Propietario: Comparativa",
+              descripcion: "Análisis detallado de ventajas y desventajas",
+              url: "/recursos/intro-informatica/libre-vs-propietario.pdf"
+            },
+            {
+              titulo: "Tendencias del Software 2025",
+              descripcion: "Informe sobre el futuro del desarrollo de software",
+              url: "/recursos/intro-informatica/tendencias-software-2025.pdf"
+            }
+          ],
+          videos: [
+            {
+              titulo: "¿Qué es el Software? - Conceptos Fundamentales",
+              duracion: "18 min",
+              url: "/videos/teoria/conceptos-software.mp4"
+            },
+            {
+              titulo: "Tipos de Software: Sistema, Aplicación, Programación",
+              duracion: "22 min",
+              url: "/videos/teoria/clasificacion-software-detallada.mp4"
+            },
+            {
+              titulo: "Software Libre vs Propietario: Debate Completo",
+              duracion: "25 min",
+              url: "/videos/teoria/debate-software-libre.mp4"
+            },
+            {
+              titulo: "El Futuro del Software: Tendencias 2025",
+              duracion: "20 min",
+              url: "/videos/teoria/futuro-software-2025.mp4"
+            },
+            {
+              titulo: "Cómo Elegir el Software Adecuado",
+              duracion: "15 min",
+              url: "/videos/tutorial/elegir-software.mp4"
+            }
+          ],
+          enlaces: [
+            {
+              titulo: "Free Software Foundation",
+              url: "https://www.fsf.org/"
+            },
+            {
+              titulo: "Open Source Initiative",
+              url: "https://opensource.org/"
+            },
+            {
+              titulo: "Licencias Creative Commons",
+              url: "https://creativecommons.org/"
+            },
+            {
+              titulo: "Alternativas de Software Libre",
+              url: "https://alternativeto.net/"
+            },
+            {
+              titulo: "Comparador de Licencias de Software",
+              url: "https://choosealicense.com/"
+            }
+          ]
+        },
+        evaluacion: {
+          preRequisitos: ["Tema 4: Hardware completado"],
+          criterios: [
+            "Definir correctamente qué es el software y sus componentes",
+            "Clasificar software según su función: sistema, aplicación, programación",
+            "Distinguir entre diferentes tipos de licencias de software",
+            "Explicar las diferencias entre software libre, propietario y modelos híbridos",
+            "Identificar métodos de distribución de software y sus características",
+            "Analizar tendencias actuales y futuras del desarrollo de software"
+          ],
+          tiempoEstimado: "55 minutos"
+        }
+      },
+      '6': {
+        titulo: "Placa base y dispositivos de procesamiento",
+        duracion: "35-40 minutos",
+        objetivos: [
+          "Comprender la arquitectura de la placa base y sus componentes",
+          "Conocer el funcionamiento del CPU y sus características",
+          "Entender los tipos y funciones de la memoria RAM",
+          "Explorar el chipset y sistema de buses de comunicación",
+          "Aplicar los principios de la arquitectura de von Neumann"
+        ],
+        secciones: [
+          {
+            id: 1,
+            titulo: "La placa base (motherboard)",
+            contenido: `
+              <h3>🏗️ La Placa Base: Fundamento del Sistema</h3>
+              <p>La <strong>placa base</strong> o <strong>motherboard</strong> es la tarjeta de circuito principal que conecta y comunica todos los componentes del computador.</p>
+              
+              <h4>🧩 Componentes Principales</h4>
+              <div class="componentes-placa">
+                <div class="componente">
+                  <h5>🔌 Socket del CPU</h5>
+                  <div class="descripcion-componente">
+                    <p>Conector donde se instala el procesador</p>
+                    <ul>
+                      <li><strong>Intel:</strong> LGA (Land Grid Array)</li>
+                      <li><strong>AMD:</strong> PGA (Pin Grid Array) / AM4</li>
+                      <li><strong>Función:</strong> Conexión eléctrica y mecánica</li>
+                      <li><strong>Compatibilidad:</strong> Específica por generación</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente">
+                  <h5>📊 Slots de RAM</h5>
+                  <div class="descripcion-componente">
+                    <p>Ranuras para instalar módulos de memoria</p>
+                    <ul>
+                      <li><strong>DIMM:</strong> Dual In-line Memory Module</li>
+                      <li><strong>Cantidad típica:</strong> 2, 4 o 8 slots</li>
+                      <li><strong>Canales:</strong> Dual o Quad channel</li>
+                      <li><strong>Compatibilidad:</strong> DDR4, DDR5</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente">
+                  <h5>🎰 Slots de Expansión</h5>
+                  <div class="descripcion-componente">
+                    <p>Conectores para tarjetas adicionales</p>
+                    <ul>
+                      <li><strong>PCIe x16:</strong> Tarjetas gráficas</li>
+                      <li><strong>PCIe x8:</strong> Tarjetas de alto rendimiento</li>
+                      <li><strong>PCIe x1:</strong> Tarjetas básicas (sonido, red)</li>
+                      <li><strong>M.2:</strong> Almacenamiento SSD compacto</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente">
+                  <h5>🔌 Conectores de Alimentación</h5>
+                  <div class="descripcion-componente">
+                    <p>Reciben energía de la fuente de poder</p>
+                    <ul>
+                      <li><strong>ATX 24 pines:</strong> Alimentación principal</li>
+                      <li><strong>EPS 8 pines:</strong> Alimentación del CPU</li>
+                      <li><strong>SATA:</strong> Para discos duros y SSD</li>
+                      <li><strong>Molex:</strong> Dispositivos auxiliares</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente">
+                  <h5>🔗 Conectores E/S</h5>
+                  <div class="descripcion-componente">
+                    <p>Panel trasero de conexiones externas</p>
+                    <ul>
+                      <li><strong>USB:</strong> 2.0, 3.0, 3.1, USB-C</li>
+                      <li><strong>Audio:</strong> Entrada/salida de sonido</li>
+                      <li><strong>Video:</strong> HDMI, DisplayPort, VGA</li>
+                      <li><strong>Red:</strong> Ethernet RJ45</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>⚡ Chipset</h4>
+              <div class="chipset-info">
+                <p>Conjunto de circuitos que controlan la comunicación entre componentes</p>
+                <div class="tipos-chipset">
+                  <div class="chipset-parte">
+                    <h5>Northbridge (Puente Norte)</h5>
+                    <ul>
+                      <li>Controla CPU, RAM y PCIe</li>
+                      <li>Componentes de alta velocidad</li>
+                      <li>En procesadores modernos está integrado</li>
+                    </ul>
+                  </div>
+                  <div class="chipset-parte">
+                    <h5>Southbridge (Puente Sur)</h5>
+                    <ul>
+                      <li>Controla USB, SATA, audio</li>
+                      <li>Componentes de menor velocidad</li>
+                      <li>También llamado PCH (Platform Controller Hub)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🌐 Buses de Comunicación</h4>
+              <div class="buses-comunicacion">
+                <ul>
+                  <li><strong>Bus de datos:</strong> Transporta información</li>
+                  <li><strong>Bus de direcciones:</strong> Especifica ubicaciones de memoria</li>
+                  <li><strong>Bus de control:</strong> Coordina operaciones</li>
+                  <li><strong>Velocidad:</strong> Medida en MHz o GHz</li>
+                </ul>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/placa-base-componentes.jpg",
+              video: "/videos/teoria/arquitectura-motherboard.mp4"
+            },
+            actividades: [
+              {
+                tipo: "identificacion",
+                pregunta: "Identifica los componentes principales en una imagen de placa base",
+                ayuda: "Busca: socket CPU, slots RAM, conectores de alimentación, chipset"
+              },
+              {
+                tipo: "investigacion",
+                pregunta: "Investiga qué tipo de socket usa tu computador actual",
+                ayuda: "Puedes usar software como CPU-Z o revisar especificaciones del fabricante"
+              }
+            ]
+          },
+          {
+            id: 2,
+            titulo: "El procesador (CPU)",
+            contenido: `
+              <h3>🧠 El CPU: Cerebro del Computador</h3>
+              <p>La <strong>Unidad Central de Procesamiento (CPU)</strong> es el componente que ejecuta las instrucciones de los programas y realiza cálculos.</p>
+              
+              <h4>🏗️ Arquitectura del CPU</h4>
+              <div class="arquitectura-cpu">
+                <div class="unidad-cpu">
+                  <h5>🧮 Unidad Aritmética y Lógica (ALU)</h5>
+                  <div class="descripcion-unidad">
+                    <p>Realiza operaciones matemáticas y lógicas</p>
+                    <ul>
+                      <li><strong>Operaciones aritméticas:</strong> Suma, resta, multiplicación, división</li>
+                      <li><strong>Operaciones lógicas:</strong> AND, OR, NOT, XOR</li>
+                      <li><strong>Comparaciones:</strong> Mayor que, menor que, igual</li>
+                      <li><strong>Desplazamientos:</strong> Movimiento de bits</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="unidad-cpu">
+                  <h5>🎮 Unidad de Control</h5>
+                  <div class="descripcion-unidad">
+                    <p>Coordina y controla las operaciones del CPU</p>
+                    <ul>
+                      <li><strong>Fetch:</strong> Busca instrucciones en memoria</li>
+                      <li><strong>Decode:</strong> Interpreta las instrucciones</li>
+                      <li><strong>Execute:</strong> Ejecuta las operaciones</li>
+                      <li><strong>Store:</strong> Almacena resultados</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="unidad-cpu">
+                  <h5>📦 Registros</h5>
+                  <div class="descripcion-unidad">
+                    <p>Memoria ultrarrápida dentro del CPU</p>
+                    <ul>
+                      <li><strong>Acumulador:</strong> Almacena resultados temporales</li>
+                      <li><strong>Contador de programa:</strong> Dirección de siguiente instrucción</li>
+                      <li><strong>Registro de instrucción:</strong> Instrucción actual</li>
+                      <li><strong>Registros de propósito general:</strong> Datos temporales</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>⚡ Características del CPU</h4>
+              <div class="caracteristicas-cpu">
+                <div class="caracteristica">
+                  <h5>🔄 Frecuencia de Reloj</h5>
+                  <ul>
+                    <li><strong>Medida:</strong> Gigahertz (GHz)</li>
+                    <li><strong>Significado:</strong> Ciclos por segundo</li>
+                    <li><strong>Ejemplo:</strong> 3.2 GHz = 3,200 millones de ciclos/segundo</li>
+                    <li><strong>Impacto:</strong> Mayor frecuencia = mayor velocidad</li>
+                  </ul>
+                </div>
+
+                <div class="caracteristica">
+                  <h5>🏭 Núcleos (Cores)</h5>
+                  <ul>
+                    <li><strong>Definición:</strong> Unidades de procesamiento independientes</li>
+                    <li><strong>Tipos:</strong> Dual-core, Quad-core, Octa-core</li>
+                    <li><strong>Ventaja:</strong> Multitarea y paralelismo</li>
+                    <li><strong>Aplicación:</strong> Mejor rendimiento en programas optimizados</li>
+                  </ul>
+                </div>
+
+                <div class="caracteristica">
+                  <h5>🧵 Hilos (Threads)</h5>
+                  <ul>
+                    <li><strong>Hyperthreading:</strong> Tecnología Intel</li>
+                    <li><strong>SMT:</strong> Simultaneous Multithreading (AMD)</li>
+                    <li><strong>Función:</strong> Cada núcleo procesa 2 hilos</li>
+                    <li><strong>Resultado:</strong> Mejor aprovechamiento de recursos</li>
+                  </ul>
+                </div>
+
+                <div class="caracteristica">
+                  <h5>🗄️ Memoria Caché</h5>
+                  <ul>
+                    <li><strong>L1:</strong> Más rápida, menor capacidad (32-64 KB)</li>
+                    <li><strong>L2:</strong> Velocidad media, capacidad media (256 KB - 1 MB)</li>
+                    <li><strong>L3:</strong> Más lenta, mayor capacidad (8-32 MB)</li>
+                    <li><strong>Función:</strong> Almacena datos frecuentemente usados</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🏢 Fabricantes Principales</h4>
+              <div class="fabricantes-cpu">
+                <div class="fabricante">
+                  <h5>🔷 Intel</h5>
+                  <ul>
+                    <li><strong>Series:</strong> Core i3, i5, i7, i9</li>
+                    <li><strong>Arquitecturas:</strong> Coffee Lake, Ice Lake, Tiger Lake</li>
+                    <li><strong>Características:</strong> Hyperthreading, Turbo Boost</li>
+                    <li><strong>Mercado:</strong> Líder en rendimiento por núcleo</li>
+                  </ul>
+                </div>
+
+                <div class="fabricante">
+                  <h5>🔴 AMD</h5>
+                  <ul>
+                    <li><strong>Series:</strong> Ryzen 3, 5, 7, 9</li>
+                    <li><strong>Arquitecturas:</strong> Zen, Zen 2, Zen 3, Zen 4</li>
+                    <li><strong>Características:</strong> SMT, Precision Boost</li>
+                    <li><strong>Ventaja:</strong> Más núcleos por precio</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>📊 Factores de Rendimiento</h4>
+              <div class="factores-rendimiento">
+                <ul>
+                  <li><strong>IPC:</strong> Instrucciones por ciclo</li>
+                  <li><strong>Arquitectura:</strong> Diseño interno del procesador</li>
+                  <li><strong>Proceso de fabricación:</strong> 7nm, 5nm (menor = mejor eficiencia)</li>
+                  <li><strong>TDP:</strong> Thermal Design Power (consumo energético)</li>
+                  <li><strong>Optimización:</strong> Software debe aprovechar múltiples núcleos</li>
+                </ul>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/arquitectura-cpu.jpg",
+              video: "/videos/teoria/funcionamiento-procesador.mp4"
+            },
+            actividades: [
+              {
+                tipo: "analisis",
+                pregunta: "Compara dos procesadores actuales: uno Intel y uno AMD con precio similar",
+                ayuda: "Considera: núcleos, frecuencia, caché, consumo energético"
+              },
+              {
+                tipo: "calculo",
+                pregunta: "Si un CPU de 3.2 GHz tiene 8 núcleos, ¿cuántos ciclos totales puede ejecutar por segundo?",
+                ayuda: "Multiplica la frecuencia por el número de núcleos"
+              }
+            ]
+          },
+          {
+            id: 3,
+            titulo: "Memoria RAM",
+            contenido: `
+              <h3>⚡ Memoria RAM: Espacio de Trabajo del CPU</h3>
+              <p>La <strong>Memoria RAM (Random Access Memory)</strong> es el almacenamiento temporal donde se cargan programas y datos en uso activo.</p>
+              
+              <h4>🔍 Características de la RAM</h4>
+              <div class="caracteristicas-ram">
+                <div class="caracteristica-ram">
+                  <h5>⚡ Velocidad</h5>
+                  <ul>
+                    <li><strong>Acceso aleatorio:</strong> Cualquier posición en mismo tiempo</li>
+                    <li><strong>Volátil:</strong> Pierde datos al apagar el equipo</li>
+                    <li><strong>Rápida:</strong> Miles de veces más rápida que disco duro</li>
+                    <li><strong>Latencia baja:</strong> Respuesta casi instantánea</li>
+                  </ul>
+                </div>
+
+                <div class="caracteristica-ram">
+                  <h5>📦 Capacidad</h5>
+                  <ul>
+                    <li><strong>Unidades:</strong> GB (Gigabytes)</li>
+                    <li><strong>Típico básico:</strong> 4-8 GB</li>
+                    <li><strong>Recomendado:</strong> 16 GB</li>
+                    <li><strong>Profesional:</strong> 32 GB o más</li>
+                  </ul>
+                </div>
+
+                <div class="caracteristica-ram">
+                  <h5>🔄 Frecuencia</h5>
+                  <ul>
+                    <li><strong>Medida:</strong> MHz (Megahertz)</li>
+                    <li><strong>DDR4:</strong> 2133-3200 MHz típico</li>
+                    <li><strong>DDR5:</strong> 4800+ MHz</li>
+                    <li><strong>Impacto:</strong> Mayor frecuencia = transferencia más rápida</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🏷️ Tipos de Memoria RAM</h4>
+              <div class="tipos-ram">
+                <div class="tipo-ram">
+                  <h5>📀 DDR4 (Double Data Rate 4)</h5>
+                  <div class="info-tipo">
+                    <ul>
+                      <li><strong>Voltaje:</strong> 1.2V (menor consumo)</li>
+                      <li><strong>Frecuencias:</strong> 2133-3200 MHz estándar</li>
+                      <li><strong>Capacidad máxima:</strong> 128 GB por módulo</li>
+                      <li><strong>Estado:</strong> Tecnología madura y estable</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tipo-ram">
+                  <h5>🚀 DDR5 (Double Data Rate 5)</h5>
+                  <div class="info-tipo">
+                    <ul>
+                      <li><strong>Voltaje:</strong> 1.1V (aún más eficiente)</li>
+                      <li><strong>Frecuencias:</strong> 4800-6400+ MHz</li>
+                      <li><strong>Capacidad máxima:</strong> 256 GB por módulo</li>
+                      <li><strong>Ventajas:</strong> Mayor ancho de banda, menor latencia</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tipo-ram">
+                  <h5>💾 Tipos Especializados</h5>
+                  <div class="info-tipo">
+                    <ul>
+                      <li><strong>ECC RAM:</strong> Corrección de errores (servidores)</li>
+                      <li><strong>Gaming RAM:</strong> Frecuencias altas, RGB</li>
+                      <li><strong>Low Profile:</strong> Altura reducida para espacios pequeños</li>
+                      <li><strong>SO-DIMM:</strong> Formato compacto para laptops</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔗 Configuraciones de Memoria</h4>
+              <div class="configuraciones-ram">
+                <div class="config-ram">
+                  <h5>🎯 Canal Simple (Single Channel)</h5>
+                  <ul>
+                    <li><strong>Setup:</strong> Un módulo de RAM</li>
+                    <li><strong>Ancho de banda:</strong> Limitado</li>
+                    <li><strong>Uso:</strong> Configuraciones básicas</li>
+                    <li><strong>Rendimiento:</strong> Menor que configuraciones múltiples</li>
+                  </ul>
+                </div>
+
+                <div class="config-ram">
+                  <h5>⚡ Canal Doble (Dual Channel)</h5>
+                  <ul>
+                    <li><strong>Setup:</strong> Dos módulos idénticos</li>
+                    <li><strong>Instalación:</strong> Slots de color similar</li>
+                    <li><strong>Ancho de banda:</strong> Doble que canal simple</li>
+                    <li><strong>Recomendación:</strong> Configuración más común</li>
+                  </ul>
+                </div>
+
+                <div class="config-ram">
+                  <h5>🚀 Canal Cuádruple (Quad Channel)</h5>
+                  <ul>
+                    <li><strong>Setup:</strong> Cuatro módulos idénticos</li>
+                    <li><strong>Plataforma:</strong> Requerida por motherboard</li>
+                    <li><strong>Uso:</strong> Workstations y servidores</li>
+                    <li><strong>Beneficio:</strong> Máximo ancho de banda</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>📏 Factores de Forma</h4>
+              <div class="factores-forma">
+                <div class="factor-forma">
+                  <h5>🖥️ DIMM (Desktop)</h5>
+                  <ul>
+                    <li><strong>Tamaño:</strong> 133.35 mm de largo</li>
+                    <li><strong>Contactos:</strong> 288 pines (DDR4), 288 pines (DDR5)</li>
+                    <li><strong>Voltaje:</strong> Estándar de la generación</li>
+                    <li><strong>Uso:</strong> Computadoras de escritorio</li>
+                  </ul>
+                </div>
+
+                <div class="factor-forma">
+                  <h5>💻 SO-DIMM (Laptop)</h5>
+                  <ul>
+                    <li><strong>Tamaño:</strong> 67.6 mm de largo (más pequeño)</li>
+                    <li><strong>Contactos:</strong> 260 pines (DDR4), 262 pines (DDR5)</li>
+                    <li><strong>Perfil:</strong> Más bajo para espacios reducidos</li>
+                    <li><strong>Uso:</strong> Laptops y mini PCs</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🎯 Consideraciones de Rendimiento</h4>
+              <div class="rendimiento-ram">
+                <ul>
+                  <li><strong>Suficiencia:</strong> 8 GB mínimo, 16 GB recomendado</li>
+                  <li><strong>Velocidad vs Latencia:</strong> Balance entre frecuencia y timings</li>
+                  <li><strong>Compatibilidad:</strong> Verificar QVL del motherboard</li>
+                  <li><strong>Upgrade path:</strong> Planificar expansiones futuras</li>
+                  <li><strong>Dual rank vs Single rank:</strong> Afecta compatibilidad y rendimiento</li>
+                </ul>
+              </div>
+
+              <h4>💡 Impacto en el Sistema</h4>
+              <div class="impacto-sistema">
+                <div class="impacto">
+                  <h5>🎮 Gaming</h5>
+                  <p>16 GB DDR4-3200 óptimo para juegos actuales</p>
+                </div>
+                <div class="impacto">
+                  <h5>🎨 Creatividad</h5>
+                  <p>32+ GB para edición de video y 3D</p>
+                </div>
+                <div class="impacto">
+                  <h5>💼 Oficina</h5>
+                  <p>8-16 GB suficiente para tareas cotidianas</p>
+                </div>
+                <div class="impacto">
+                  <h5>⚙️ Desarrollo</h5>
+                  <p>32 GB para compilación y virtualización</p>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/tipos-memoria-ram.jpg",
+              video: "/videos/teoria/instalacion-memoria-ram.mp4"
+            },
+            actividades: [
+              {
+                tipo: "calculo",
+                pregunta: "¿Cuántos programas de 500 MB podrías tener abiertos con 16 GB de RAM?",
+                ayuda: "Considera que el sistema operativo usa ~2-4 GB"
+              },
+              {
+                tipo: "comparacion",
+                pregunta: "Compara las ventajas de 32 GB DDR4-3200 vs 16 GB DDR5-5600",
+                ayuda: "Considera capacidad vs velocidad para diferentes usos"
+              }
+            ]
+          },
+          {
+            id: 4,
+            titulo: "Arquitectura de von Neumann",
+            contenido: `
+              <h3>🏛️ Arquitectura de von Neumann</h3>
+              <p>La <strong>arquitectura de von Neumann</strong> es el modelo fundamental que define cómo está organizado un computador moderno.</p>
+              
+              <h4>👨‍🔬 John von Neumann (1903-1957)</h4>
+              <div class="biografia-neumann">
+                <div class="datos-biograficos">
+                  <h5>🧠 El Genio Matemático</h5>
+                  <ul>
+                    <li><strong>Nacionalidad:</strong> Húngaro-estadounidense</li>
+                    <li><strong>Especialidades:</strong> Matemáticas, física, computación</li>
+                    <li><strong>Contribución:</strong> Arquitectura de computadores almacenados</li>
+                    <li><strong>Legado:</strong> Base de todas las computadoras modernas</li>
+                  </ul>
+                </div>
+
+                <div class="contexto-historico">
+                  <h5>📅 Contexto Histórico (1945)</h5>
+                  <ul>
+                    <li><strong>Problema:</strong> ENIAC requería reconfiguración física para cada programa</li>
+                    <li><strong>Solución:</strong> Almacenar programas en memoria junto con datos</li>
+                    <li><strong>Documento:</strong> "First Draft of a Report on the EDVAC"</li>
+                    <li><strong>Revolución:</strong> Programas modificables sin cambios de hardware</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🏗️ Componentes de la Arquitectura</h4>
+              <div class="componentes-von-neumann">
+                <div class="componente-vn">
+                  <h5>🧠 Unidad Central de Procesamiento (CPU)</h5>
+                  <div class="descripcion-componente-vn">
+                    <h6>Subcomponentes:</h6>
+                    <ul>
+                      <li><strong>Unidad de Control:</strong> Dirige operaciones del sistema</li>
+                      <li><strong>Unidad Aritmética-Lógica (ALU):</strong> Realiza cálculos</li>
+                      <li><strong>Registros:</strong> Almacenamiento ultrarrápido</li>
+                    </ul>
+                    <h6>Funciones:</h6>
+                    <ul>
+                      <li>Ejecutar instrucciones secuencialmente</li>
+                      <li>Coordinar todos los componentes</li>
+                      <li>Procesar datos según programas</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente-vn">
+                  <h5>🗄️ Memoria Principal</h5>
+                  <div class="descripcion-componente-vn">
+                    <h6>Características:</h6>
+                    <ul>
+                      <li><strong>Almacena:</strong> Tanto programas como datos</li>
+                      <li><strong>Acceso:</strong> Direcciones únicas para cada posición</li>
+                      <li><strong>Volatilidad:</strong> Se borra al apagar el equipo</li>
+                      <li><strong>Velocidad:</strong> Acceso rápido y uniforme</li>
+                    </ul>
+                    <h6>Contenido:</h6>
+                    <ul>
+                      <li>Instrucciones de programas</li>
+                      <li>Datos de entrada y resultados</li>
+                      <li>Variables y estructuras temporales</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente-vn">
+                  <h5>📥 Dispositivos de Entrada</h5>
+                  <div class="descripcion-componente-vn">
+                    <h6>Función:</h6>
+                    <ul>
+                      <li>Permitir introducir información al sistema</li>
+                      <li>Convertir datos externos a formato interno</li>
+                      <li>Enviar información a la memoria</li>
+                    </ul>
+                    <h6>Ejemplos:</h6>
+                    <ul>
+                      <li><strong>Históricos:</strong> Tarjetas perforadas, cintas</li>
+                      <li><strong>Modernos:</strong> Teclado, ratón, micrófono</li>
+                      <li><strong>Avanzados:</strong> Sensores, cámaras, pantallas táctiles</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente-vn">
+                  <h5>📤 Dispositivos de Salida</h5>
+                  <div class="descripcion-componente-vn">
+                    <h6>Función:</h6>
+                    <ul>
+                      <li>Presentar resultados al usuario</li>
+                      <li>Convertir datos internos a formato externo</li>
+                      <li>Comunicar información procesada</li>
+                    </ul>
+                    <h6>Ejemplos:</h6>
+                    <ul>
+                      <li><strong>Visuales:</strong> Monitor, impresora, proyector</li>
+                      <li><strong>Auditivos:</strong> Altavoces, auriculares</li>
+                      <li><strong>Táctiles:</strong> Vibración, feedback háptico</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente-vn">
+                  <h5>📊 Unidad de Control de Flujo</h5>
+                  <div class="descripcion-componente-vn">
+                    <h6>Responsabilidades:</h6>
+                    <ul>
+                      <li>Coordinar transferencia de datos</li>
+                      <li>Administrar buses de comunicación</li>
+                      <li>Sincronizar operaciones entre componentes</li>
+                      <li>Gestionar interrupciones y excepciones</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔄 Ciclo de Ejecución de Instrucciones</h4>
+              <div class="ciclo-ejecucion">
+                <div class="paso-ciclo">
+                  <h5>1️⃣ FETCH (Buscar)</h5>
+                  <ul>
+                    <li><strong>Acción:</strong> CPU lee instrucción de memoria</li>
+                    <li><strong>Registro:</strong> Program Counter indica dirección</li>
+                    <li><strong>Transferencia:</strong> Instrucción va a registro de instrucción</li>
+                    <li><strong>Incremento:</strong> Program Counter apunta a siguiente instrucción</li>
+                  </ul>
+                </div>
+
+                <div class="paso-ciclo">
+                  <h5>2️⃣ DECODE (Decodificar)</h5>
+                  <ul>
+                    <li><strong>Análisis:</strong> Unidad de control interpreta instrucción</li>
+                    <li><strong>Identificación:</strong> Determina operación a realizar</li>
+                    <li><strong>Operandos:</strong> Localiza datos necesarios</li>
+                    <li><strong>Preparación:</strong> Configura circuitos apropiados</li>
+                  </ul>
+                </div>
+
+                <div class="paso-ciclo">
+                  <h5>3️⃣ EXECUTE (Ejecutar)</h5>
+                  <ul>
+                    <li><strong>Operación:</strong> ALU realiza el cálculo requerido</li>
+                    <li><strong>Acceso:</strong> Se leen datos de memoria si es necesario</li>
+                    <li><strong>Procesamiento:</strong> Se ejecuta la operación específica</li>
+                    <li><strong>Resultado:</strong> Se genera el resultado de la operación</li>
+                  </ul>
+                </div>
+
+                <div class="paso-ciclo">
+                  <h5>4️⃣ STORE (Almacenar)</h5>
+                  <ul>
+                    <li><strong>Escritura:</strong> Resultado se guarda en memoria o registro</li>
+                    <li><strong>Actualización:</strong> Se modifican flags de estado</li>
+                    <li><strong>Retroalimentación:</strong> Sistema se prepara para siguiente instrucción</li>
+                    <li><strong>Repetición:</strong> Ciclo continúa con próxima instrucción</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🌐 Principios Fundamentales</h4>
+              <div class="principios-fundamentales">
+                <div class="principio">
+                  <h5>📚 Programa Almacenado</h5>
+                  <ul>
+                    <li><strong>Concepto:</strong> Programas e instrucciones se almacenan en memoria</li>
+                    <li><strong>Ventaja:</strong> Facilita modificación y actualización de software</li>
+                    <li><strong>Flexibilidad:</strong> Un mismo hardware ejecuta diferentes programas</li>
+                  </ul>
+                </div>
+
+                <div class="principio">
+                  <h5>📍 Direccionamiento de Memoria</h5>
+                  <ul>
+                    <li><strong>Sistema:</strong> Cada posición tiene dirección única</li>
+                    <li><strong>Acceso:</strong> Cualquier posición es accesible directamente</li>
+                    <li><strong>Eficiencia:</strong> Tiempo de acceso constante</li>
+                  </ul>
+                </div>
+
+                <div class="principio">
+                  <h5>🔄 Ejecución Secuencial</h5>
+                  <ul>
+                    <li><strong>Orden:</strong> Instrucciones se ejecutan una tras otra</li>
+                    <li><strong>Control:</strong> Saltos y bifurcaciones alteran secuencia</li>
+                    <li><strong>Predictibilidad:</strong> Comportamiento determinístico</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🚀 Impacto y Legado</h4>
+              <div class="impacto-legado">
+                <div class="impacto-area">
+                  <h5>💻 Computación Moderna</h5>
+                  <ul>
+                    <li>Base de todos los procesadores actuales</li>
+                    <li>Desde microcontroladores hasta supercomputadoras</li>
+                    <li>Arquitectura fundamental enseñada mundialmente</li>
+                  </ul>
+                </div>
+
+                <div class="impacto-area">
+                  <h5>🔬 Desarrollo Tecnológico</h5>
+                  <ul>
+                    <li>Posibilitó la era del software</li>
+                    <li>Facilitó evolución de lenguajes de programación</li>
+                    <li>Permitió sistemas operativos modernos</li>
+                  </ul>
+                </div>
+
+                <div class="impacto-area">
+                  <h5>🌍 Transformación Social</h5>
+                  <ul>
+                    <li>Internet y comunicaciones globales</li>
+                    <li>Revolución de información y conocimiento</li>
+                    <li>Automatización de procesos industriales</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🔮 Limitaciones y Evoluciones</h4>
+              <div class="limitaciones-evoluciones">
+                <div class="limitacion">
+                  <h5>🚧 Cuello de Botella de von Neumann</h5>
+                  <ul>
+                    <li><strong>Problema:</strong> CPU y memoria comparten mismo bus</li>
+                    <li><strong>Efecto:</strong> Limitación en velocidad de transferencia</li>
+                    <li><strong>Soluciones:</strong> Caché, paralelismo, arquitecturas alternativas</li>
+                  </ul>
+                </div>
+
+                <div class="evolucion">
+                  <h5>⚡ Evoluciones Modernas</h5>
+                  <ul>
+                    <li><strong>Arquitecturas paralelas:</strong> Múltiples núcleos</li>
+                    <li><strong>Arquitecturas especializadas:</strong> GPU, TPU</li>
+                    <li><strong>Computación cuántica:</strong> Paradigmas alternativos</li>
+                  </ul>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/arquitectura-von-neumann.jpg",
+              video: "/videos/teoria/ciclo-ejecucion-cpu.mp4"
+            },
+            actividades: [
+              {
+                tipo: "simulacion",
+                pregunta: "Simula el ciclo FETCH-DECODE-EXECUTE-STORE para la instrucción 'sumar 5 + 3'",
+                ayuda: "Describe cada paso del ciclo y qué ocurre en CPU y memoria"
+              },
+              {
+                tipo: "analisis",
+                pregunta: "¿Por qué la arquitectura de von Neumann fue revolucionaria comparada con ENIAC?",
+                ayuda: "Compara flexibilidad, velocidad de cambio de programas, y capacidades"
+              }
+            ]
+          }
+        ],
+        recursos: {
+          documentos: [
+            {
+              titulo: "Arquitectura de la Placa Base",
+              descripcion: "Manual detallado sobre componentes y conectores del motherboard",
+              url: "/recursos/intro-informatica/arquitectura-placa-base.pdf"
+            },
+            {
+              titulo: "Guía de Procesadores: Intel vs AMD",
+              descripcion: "Comparativa técnica de arquitecturas y rendimiento",
+              url: "/recursos/intro-informatica/guia-procesadores.pdf"
+            },
+            {
+              titulo: "Memoria RAM: Tipos y Configuraciones",
+              descripcion: "Manual sobre DDR4, DDR5 y optimización de memoria",
+              url: "/recursos/intro-informatica/memoria-ram-guia.pdf"
+            },
+            {
+              titulo: "Arquitectura de von Neumann: Fundamentos",
+              descripcion: "Documento histórico y análisis de la arquitectura fundamental",
+              url: "/recursos/intro-informatica/von-neumann-arquitectura.pdf"
+            }
+          ],
+          videos: [
+            {
+              titulo: "Componentes de la Placa Base Explicados",
+              duracion: "20 min",
+              url: "/videos/teoria/componentes-motherboard.mp4"
+            },
+            {
+              titulo: "Cómo Funciona un Procesador Moderno",
+              duracion: "25 min",
+              url: "/videos/teoria/funcionamiento-cpu-moderno.mp4"
+            },
+            {
+              titulo: "Instalación y Configuración de Memoria RAM",
+              duracion: "15 min",
+              url: "/videos/tutorial/instalacion-ram.mp4"
+            },
+            {
+              titulo: "Von Neumann: El Nacimiento de la Computación Moderna",
+              duracion: "30 min",
+              url: "/videos/historia/von-neumann-documental.mp4"
+            }
+          ],
+          enlaces: [
+            {
+              titulo: "Intel ARK - Base de Datos de Procesadores",
+              url: "https://ark.intel.com/"
+            },
+            {
+              titulo: "AMD - Especificaciones de Procesadores",
+              url: "https://www.amd.com/en/products/processors"
+            },
+            {
+              titulo: "JEDEC - Estándares de Memoria",
+              url: "https://www.jedec.org/"
+            },
+            {
+              titulo: "Computer History Museum - von Neumann",
+              url: "https://computerhistory.org/profile/john-von-neumann/"
+            }
+          ]
+        },
+        evaluacion: {
+          preRequisitos: ["Tema 4: Hardware completado", "Tema 5: Software completado"],
+          criterios: [
+            "Identificar componentes de la placa base y sus funciones",
+            "Explicar la arquitectura y funcionamiento del CPU",
+            "Distinguir tipos de memoria RAM y sus características",
+            "Comprender la arquitectura de von Neumann y su importancia histórica",
+            "Analizar la comunicación entre componentes mediante buses",
+            "Evaluar especificaciones técnicas de procesadores y memoria"
+          ],
+          tiempoEstimado: "60 minutos"
+        }
+      },
+      '7': {
+        titulo: "Memoria y almacenamiento",
+        duracion: "40-45 minutos",
+        objetivos: [
+          "Comprender la jerarquía de memoria en un sistema de computación",
+          "Distinguir entre diferentes tipos de almacenamiento y sus características",
+          "Conocer las tecnologías de almacenamiento modernas",
+          "Analizar factores de rendimiento en dispositivos de almacenamiento",
+          "Evaluar opciones de almacenamiento según necesidades específicas"
+        ],
+        secciones: [
+          {
+            id: 1,
+            titulo: "Jerarquía de memoria",
+            contenido: `
+              <h3>🏗️ Jerarquía de Memoria del Sistema</h3>
+              <p>Los sistemas de computación organizan la memoria en una <strong>jerarquía</strong> basada en velocidad, capacidad y costo.</p>
+              
+              <h4>📊 Pirámide de Memoria</h4>
+              <div class="piramide-memoria">
+                <div class="nivel-memoria nivel-1">
+                  <h5>🚀 Nivel 1: Registros del CPU</h5>
+                  <div class="caracteristicas-nivel">
+                    <ul>
+                      <li><strong>Velocidad:</strong> Máxima (1 ciclo de reloj)</li>
+                      <li><strong>Capacidad:</strong> Mínima (bytes)</li>
+                      <li><strong>Ubicación:</strong> Dentro del procesador</li>
+                      <li><strong>Función:</strong> Almacenamiento inmediato para operaciones</li>
+                      <li><strong>Ejemplos:</strong> Acumulador, registros de propósito general</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="nivel-memoria nivel-2">
+                  <h5>⚡ Nivel 2: Memoria Caché</h5>
+                  <div class="caracteristicas-nivel">
+                    <div class="cache-niveles">
+                      <div class="cache-l1">
+                        <h6>L1 Cache (Nivel 1)</h6>
+                        <ul>
+                          <li><strong>Velocidad:</strong> 2-4 ciclos de reloj</li>
+                          <li><strong>Capacidad:</strong> 32-64 KB por núcleo</li>
+                          <li><strong>División:</strong> Cache de instrucciones + Cache de datos</li>
+                          <li><strong>Ubicación:</strong> Integrada en cada núcleo del CPU</li>
+                        </ul>
+                      </div>
+                      <div class="cache-l2">
+                        <h6>L2 Cache (Nivel 2)</h6>
+                        <ul>
+                          <li><strong>Velocidad:</strong> 10-20 ciclos de reloj</li>
+                          <li><strong>Capacidad:</strong> 256 KB - 1 MB por núcleo</li>
+                          <li><strong>Función:</strong> Cache unificado (instrucciones + datos)</li>
+                          <li><strong>Ubicación:</strong> Dedicado por núcleo o compartido</li>
+                        </ul>
+                      </div>
+                      <div class="cache-l3">
+                        <h6>L3 Cache (Nivel 3)</h6>
+                        <ul>
+                          <li><strong>Velocidad:</strong> 30-70 ciclos de reloj</li>
+                          <li><strong>Capacidad:</strong> 8-32 MB total</li>
+                          <li><strong>Función:</strong> Cache compartido entre núcleos</li>
+                          <li><strong>Ventaja:</strong> Reduce accesos a memoria principal</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="nivel-memoria nivel-3">
+                  <h5>💾 Nivel 3: Memoria Principal (RAM)</h5>
+                  <div class="caracteristicas-nivel">
+                    <ul>
+                      <li><strong>Velocidad:</strong> 100-300 ciclos de reloj</li>
+                      <li><strong>Capacidad:</strong> 4-128 GB típico</li>
+                      <li><strong>Tipo:</strong> DRAM (Dynamic RAM)</li>
+                      <li><strong>Volatilidad:</strong> Se pierde al apagar el sistema</li>
+                      <li><strong>Función:</strong> Almacena programas y datos en ejecución</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="nivel-memoria nivel-4">
+                  <h5>💿 Nivel 4: Almacenamiento Secundario</h5>
+                  <div class="caracteristicas-nivel">
+                    <ul>
+                      <li><strong>Velocidad:</strong> Miles a millones de ciclos</li>
+                      <li><strong>Capacidad:</strong> 256 GB - varios TB</li>
+                      <li><strong>Persistencia:</strong> Datos permanecen sin electricidad</li>
+                      <li><strong>Ejemplos:</strong> SSD, HDD, almacenamiento óptico</li>
+                      <li><strong>Función:</strong> Almacenamiento permanente de archivos</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="nivel-memoria nivel-5">
+                  <h5>☁️ Nivel 5: Almacenamiento Terciario</h5>
+                  <div class="caracteristicas-nivel">
+                    <ul>
+                      <li><strong>Velocidad:</strong> Variable (depende de red)</li>
+                      <li><strong>Capacidad:</strong> Prácticamente ilimitada</li>
+                      <li><strong>Ejemplos:</strong> Almacenamiento en la nube, cintas magnéticas</li>
+                      <li><strong>Función:</strong> Backup, archivo, acceso remoto</li>
+                      <li><strong>Ventaja:</strong> Accesible desde múltiples dispositivos</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>📈 Principios de la Jerarquía</h4>
+              <div class="principios-jerarquia">
+                <div class="principio">
+                  <h5>🔄 Principio de Localidad</h5>
+                  <ul>
+                    <li><strong>Localidad temporal:</strong> Datos recién usados se reutilizarán pronto</li>
+                    <li><strong>Localidad espacial:</strong> Datos cercanos en memoria se usarán juntos</li>
+                    <li><strong>Aplicación:</strong> Justifica el uso efectivo de caché</li>
+                  </ul>
+                </div>
+
+                <div class="principio">
+                  <h5>⚖️ Compromiso Velocidad-Capacidad-Costo</h5>
+                  <ul>
+                    <li><strong>Velocidad alta = Capacidad baja = Costo alto</strong></li>
+                    <li><strong>Velocidad baja = Capacidad alta = Costo bajo</strong></li>
+                    <li><strong>Objetivo:</strong> Equilibrio óptimo según uso</li>
+                  </ul>
+                </div>
+
+                <div class="principio">
+                  <h5>📊 Gestión Automática</h5>
+                  <ul>
+                    <li><strong>Hardware:</strong> Gestiona cache automáticamente</li>
+                    <li><strong>SO:</strong> Administra memoria virtual</li>
+                    <li><strong>Transparencia:</strong> Usuario no ve la complejidad</li>
+                  </ul>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/jerarquia-memoria.jpg",
+              video: "/videos/teoria/piramide-memoria-sistema.mp4"
+            },
+            actividades: [
+              {
+                tipo: "analisis",
+                pregunta: "¿Por qué no se puede hacer toda la memoria tan rápida como los registros del CPU?",
+                ayuda: "Considera factores de costo, tecnología y espacio físico"
+              },
+              {
+                tipo: "calculo",
+                pregunta: "Si un acceso a L1 cache toma 1 ciclo y a RAM toma 200 ciclos, ¿cuál es la diferencia de velocidad?",
+                ayuda: "Calcula cuántas veces más rápido es L1 que RAM"
+              }
+            ]
+          },
+          {
+            id: 2,
+            titulo: "Almacenamiento magnético (HDD)",
+            contenido: `
+              <h3>💿 Discos Duros: Almacenamiento Magnético</h3>
+              <p>Los <strong>discos duros (HDD)</strong> utilizan tecnología magnética para almacenar datos de forma permanente.</p>
+              
+              <h4>🔧 Componentes Físicos</h4>
+              <div class="componentes-hdd">
+                <div class="componente-hdd">
+                  <h5>💿 Platos (Platters)</h5>
+                  <div class="descripcion-componente">
+                    <ul>
+                      <li><strong>Material:</strong> Aluminio o vidrio con capa magnética</li>
+                      <li><strong>Cantidad:</strong> 1-5 platos por disco</li>
+                      <li><strong>Superficies:</strong> Ambas caras son utilizables</li>
+                      <li><strong>Velocidad:</strong> 5,400 - 15,000 RPM</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente-hdd">
+                  <h5>🔍 Cabezales de Lectura/Escritura</h5>
+                  <div class="descripcion-componente">
+                    <ul>
+                      <li><strong>Función:</strong> Leen y escriben datos magnéticamente</li>
+                      <li><strong>Cantidad:</strong> Uno por superficie de plato</li>
+                      <li><strong>Distancia:</strong> Nanómetros sobre la superficie</li>
+                      <li><strong>Movimiento:</strong> Radial, desde centro hacia borde</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente-hdd">
+                  <h5>🦾 Brazo Actuador</h5>
+                  <div class="descripcion-componente">
+                    <ul>
+                      <li><strong>Función:</strong> Mueve cabezales sobre los platos</li>
+                      <li><strong>Tecnología:</strong> Motor de bobina móvil</li>
+                      <li><strong>Precisión:</strong> Posicionamiento muy exacto</li>
+                      <li><strong>Velocidad:</strong> Milisegundos para moverse</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente-hdd">
+                  <h5>⚙️ Motor de Husillo</h5>
+                  <div class="descripcion-componente">
+                    <ul>
+                      <li><strong>Función:</strong> Hace girar los platos</li>
+                      <li><strong>Velocidad constante:</strong> RPM fijas</li>
+                      <li><strong>Precisión:</strong> Giro muy estable</li>
+                      <li><strong>Eficiencia:</strong> Bajo consumo energético</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente-hdd">
+                  <h5>🧠 Controladora</h5>
+                  <div class="descripcion-componente">
+                    <ul>
+                      <li><strong>PCB:</strong> Placa de circuito integrado</li>
+                      <li><strong>Función:</strong> Controla operaciones del disco</li>
+                      <li><strong>Cache:</strong> Memoria buffer integrada</li>
+                      <li><strong>Interfaz:</strong> SATA, SAS, o conexiones legacy</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>📊 Organización de Datos</h4>
+              <div class="organizacion-datos-hdd">
+                <div class="estructura-datos">
+                  <h5>🎯 Pistas (Tracks)</h5>
+                  <ul>
+                    <li><strong>Definición:</strong> Círculos concéntricos en cada plato</li>
+                    <li><strong>Cantidad:</strong> Miles de pistas por superficie</li>
+                    <li><strong>Numeración:</strong> Desde el borde exterior hacia el centro</li>
+                  </ul>
+                </div>
+
+                <div class="estructura-datos">
+                  <h5>🥧 Sectores</h5>
+                  <ul>
+                    <li><strong>Definición:</strong> Divisiones de cada pista</li>
+                    <li><strong>Tamaño:</strong> 512 bytes tradicionalmente, 4096 bytes modernos</li>
+                    <li><strong>Cantidad:</strong> Variable por pista</li>
+                  </ul>
+                </div>
+
+                <div class="estructura-datos">
+                  <h5>🏢 Cilindros</h5>
+                  <ul>
+                    <li><strong>Definición:</strong> Conjunto de pistas en la misma posición</li>
+                    <li><strong>Ventaja:</strong> Acceso sin mover cabezales</li>
+                    <li><strong>Geometría:</strong> CHS (Cylinder-Head-Sector)</li>
+                  </ul>
+                </div>
+
+                <div class="estructura-datos">
+                  <h5>📦 Clusters</h5>
+                  <ul>
+                    <li><strong>Definición:</strong> Agrupación lógica de sectores</li>
+                    <li><strong>Sistema de archivos:</strong> Unidad mínima de asignación</li>
+                    <li><strong>Tamaño típico:</strong> 4-64 KB</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>⚡ Factores de Rendimiento</h4>
+              <div class="rendimiento-hdd">
+                <div class="factor-rendimiento">
+                  <h5>🔄 Velocidad de Rotación (RPM)</h5>
+                  <div class="detalle-factor">
+                    <ul>
+                      <li><strong>5,400 RPM:</strong> Laptops, bajo consumo</li>
+                      <li><strong>7,200 RPM:</strong> Escritorio estándar</li>
+                      <li><strong>10,000 RPM:</strong> Alto rendimiento</li>
+                      <li><strong>15,000 RPM:</strong> Servidores y aplicaciones críticas</li>
+                    </ul>
+                    <p><strong>Impacto:</strong> Mayor RPM = menor latencia rotacional</p>
+                  </div>
+                </div>
+
+                <div class="factor-rendimiento">
+                  <h5>⏱️ Tiempo de Búsqueda (Seek Time)</h5>
+                  <div class="detalle-factor">
+                    <ul>
+                      <li><strong>Definición:</strong> Tiempo para mover cabezales</li>
+                      <li><strong>Promedio:</strong> 8-15 ms en discos modernos</li>
+                      <li><strong>Factores:</strong> Distancia entre pistas</li>
+                      <li><strong>Optimización:</strong> Algoritmos de scheduling</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="factor-rendimiento">
+                  <h5>🎡 Latencia Rotacional</h5>
+                  <div class="detalle-factor">
+                    <ul>
+                      <li><strong>Definición:</strong> Tiempo hasta que sector pase bajo cabezal</li>
+                      <li><strong>Promedio:</strong> Mitad de una revolución completa</li>
+                      <li><strong>7,200 RPM:</strong> ~4.2 ms promedio</li>
+                      <li><strong>15,000 RPM:</strong> ~2 ms promedio</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="factor-rendimiento">
+                  <h5>📊 Tasa de Transferencia</h5>
+                  <div class="detalle-factor">
+                    <ul>
+                      <li><strong>Interna:</strong> Velocidad de lectura de platos</li>
+                      <li><strong>Externa:</strong> Velocidad de interfaz (SATA)</li>
+                      <li><strong>Sostenida:</strong> 80-200 MB/s típico</li>
+                      <li><strong>Ráfaga:</strong> Limitada por cache del disco</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔌 Interfaces de Conexión</h4>
+              <div class="interfaces-hdd">
+                <div class="interfaz">
+                  <h5>🔗 SATA (Serial ATA)</h5>
+                  <ul>
+                    <li><strong>SATA 1.0:</strong> 1.5 Gbps (150 MB/s)</li>
+                    <li><strong>SATA 2.0:</strong> 3.0 Gbps (300 MB/s)</li>
+                    <li><strong>SATA 3.0:</strong> 6.0 Gbps (600 MB/s)</li>
+                    <li><strong>Ventajas:</strong> Cable delgado, hot-swap</li>
+                  </ul>
+                </div>
+
+                <div class="interfaz">
+                  <h5>🏢 SAS (Serial Attached SCSI)</h5>
+                  <ul>
+                    <li><strong>Velocidad:</strong> 3-12 Gbps</li>
+                    <li><strong>Uso:</strong> Servidores y workstations</li>
+                    <li><strong>Ventajas:</strong> Mayor confiabilidad, dual-port</li>
+                    <li><strong>Compatibilidad:</strong> Puede usar discos SATA</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>✅ Ventajas y Desventajas</h4>
+              <div class="pros-contras-hdd">
+                <div class="ventajas">
+                  <h5>✅ Ventajas</h5>
+                  <ul>
+                    <li><strong>Costo:</strong> Precio por GB muy bajo</li>
+                    <li><strong>Capacidad:</strong> Hasta 20+ TB disponibles</li>
+                    <li><strong>Madurez:</strong> Tecnología probada y confiable</li>
+                    <li><strong>Recuperación:</strong> Datos recuperables ante fallos</li>
+                  </ul>
+                </div>
+
+                <div class="desventajas">
+                  <h5>❌ Desventajas</h5>
+                  <ul>
+                    <li><strong>Velocidad:</strong> Lento comparado con SSD</li>
+                    <li><strong>Mecánico:</strong> Partes móviles susceptibles a daños</li>
+                    <li><strong>Ruido:</strong> Genera ruido audible</li>
+                    <li><strong>Consumo:</strong> Mayor consumo energético</li>
+                    <li><strong>Fragmentación:</strong> Rendimiento degradado con uso</li>
+                  </ul>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/componentes-disco-duro.jpg",
+              video: "/videos/teoria/funcionamiento-hdd.mp4"
+            },
+            actividades: [
+              {
+                tipo: "calculo",
+                pregunta: "Un disco de 7,200 RPM: ¿cuál es su latencia rotacional promedio?",
+                ayuda: "Calcula el tiempo de media revolución: (60 segundos / RPM) / 2"
+              },
+              {
+                tipo: "comparacion",
+                pregunta: "Compara un HDD de 1TB vs un SSD de 500GB para un usuario promedio",
+                ayuda: "Considera precio, velocidad, capacidad y durabilidad"
+              }
+            ]
+          },
+          {
+            id: 3,
+            titulo: "Almacenamiento sólido (SSD)",
+            contenido: `
+              <h3>⚡ SSD: Revolución del Almacenamiento Sólido</h3>
+              <p>Los <strong>discos de estado sólido (SSD)</strong> utilizan memoria flash para almacenar datos sin partes móviles.</p>
+              
+              <h4>🔬 Tecnología de Memoria Flash</h4>
+              <div class="tecnologia-flash">
+                <div class="tipo-flash">
+                  <h5>📱 NAND Flash</h5>
+                  <div class="descripcion-flash">
+                    <p>Tipo de memoria no volátil utilizada en SSD</p>
+                    <ul>
+                      <li><strong>Celdas:</strong> Almacenan bits mediante carga eléctrica</li>
+                      <li><strong>Estructura:</strong> Bloques de páginas organizadas</li>
+                      <li><strong>Escritura:</strong> Por páginas (4-16 KB)</li>
+                      <li><strong>Borrado:</strong> Por bloques completos</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tipos-celdas">
+                  <h5>🏗️ Tipos de Celdas NAND</h5>
+                  
+                  <div class="celda-tipo">
+                    <h6>📄 SLC (Single-Level Cell)</h6>
+                    <ul>
+                      <li><strong>Bits por celda:</strong> 1 bit</li>
+                      <li><strong>Velocidad:</strong> Máxima</li>
+                      <li><strong>Durabilidad:</strong> 100,000+ ciclos P/E</li>
+                      <li><strong>Costo:</strong> Más caro</li>
+                      <li><strong>Uso:</strong> Aplicaciones enterprise críticas</li>
+                    </ul>
+                  </div>
+
+                  <div class="celda-tipo">
+                    <h6>📑 MLC (Multi-Level Cell)</h6>
+                    <ul>
+                      <li><strong>Bits por celda:</strong> 2 bits</li>
+                      <li><strong>Velocidad:</strong> Buena</li>
+                      <li><strong>Durabilidad:</strong> 3,000-10,000 ciclos P/E</li>
+                      <li><strong>Costo:</strong> Equilibrado</li>
+                      <li><strong>Uso:</strong> Consumo premium</li>
+                    </ul>
+                  </div>
+
+                  <div class="celda-tipo">
+                    <h6>📚 TLC (Triple-Level Cell)</h6>
+                    <ul>
+                      <li><strong>Bits por celda:</strong> 3 bits</li>
+                      <li><strong>Velocidad:</strong> Moderada</li>
+                      <li><strong>Durabilidad:</strong> 1,000-3,000 ciclos P/E</li>
+                      <li><strong>Costo:</strong> Económico</li>
+                      <li><strong>Uso:</strong> Consumo masivo</li>
+                    </ul>
+                  </div>
+
+                  <div class="celda-tipo">
+                    <h6>📖 QLC (Quad-Level Cell)</h6>
+                    <ul>
+                      <li><strong>Bits por celda:</strong> 4 bits</li>
+                      <li><strong>Velocidad:</strong> Más lenta</li>
+                      <li><strong>Durabilidad:</strong> 100-1,000 ciclos P/E</li>
+                      <li><strong>Costo:</strong> Muy económico</li>
+                      <li><strong>Uso:</strong> Almacenamiento masivo</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🏗️ Arquitectura del SSD</h4>
+              <div class="arquitectura-ssd">
+                <div class="componente-ssd">
+                  <h5>🧠 Controlador</h5>
+                  <div class="descripcion-componente-ssd">
+                    <p>Cerebro del SSD que gestiona todas las operaciones</p>
+                    <ul>
+                      <li><strong>Procesador:</strong> ARM o microcontrolador especializado</li>
+                      <li><strong>Firmware:</strong> Software de bajo nivel</li>
+                      <li><strong>Funciones:</strong> Wear leveling, ECC, garbage collection</li>
+                      <li><strong>Optimización:</strong> Algoritmos de rendimiento</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente-ssd">
+                  <h5>💾 Memoria DRAM Cache</h5>
+                  <div class="descripcion-componente-ssd">
+                    <p>Cache volátil para metadatos y optimización</p>
+                    <ul>
+                      <li><strong>Función:</strong> Tabla de mapeo (FTL)</li>
+                      <li><strong>Velocidad:</strong> Acceso ultrarrápido</li>
+                      <li><strong>Tamaño:</strong> 256 MB - 4 GB típico</li>
+                      <li><strong>Tipo:</strong> DDR3/DDR4 de bajo consumo</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente-ssd">
+                  <h5>🔌 Interfaz</h5>
+                  <div class="descripcion-componente-ssd">
+                    <p>Conexión con el sistema host</p>
+                    <ul>
+                      <li><strong>SATA 3.0:</strong> 6 Gbps (limitación para SSD rápidos)</li>
+                      <li><strong>PCIe:</strong> 32+ Gbps (rendimiento máximo)</li>
+                      <li><strong>NVMe:</strong> Protocolo optimizado para flash</li>
+                      <li><strong>M.2:</strong> Factor de forma compacto</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="componente-ssd">
+                  <h5>📦 Chips de Memoria NAND</h5>
+                  <div class="descripcion-componente-ssd">
+                    <p>Almacenamiento no volátil principal</p>
+                    <ul>
+                      <li><strong>Organización:</strong> Canales paralelos</li>
+                      <li><strong>Distribución:</strong> Múltiples chips para rendimiento</li>
+                      <li><strong>Capacidad:</strong> 256 GB - 8 TB+</li>
+                      <li><strong>Redundancia:</strong> Spare blocks para desgaste</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>⚙️ Funciones Avanzadas del SSD</h4>
+              <div class="funciones-ssd">
+                <div class="funcion-ssd">
+                  <h5>🔄 Wear Leveling</h5>
+                  <div class="descripcion-funcion">
+                    <p>Distribución uniforme del desgaste</p>
+                    <ul>
+                      <li><strong>Objetivo:</strong> Prolongar vida útil del SSD</li>
+                      <li><strong>Método:</strong> Rotar uso de bloques físicos</li>
+                      <li><strong>Dinámico:</strong> Datos frecuentes en bloques nuevos</li>
+                      <li><strong>Estático:</strong> Mover datos estáticos ocasionalmente</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="funcion-ssd">
+                  <h5>🔧 Garbage Collection</h5>
+                  <div class="descripcion-funcion">
+                    <p>Limpieza automática de bloques</p>
+                    <ul>
+                      <li><strong>Problema:</strong> Páginas no se pueden sobrescribir</li>
+                      <li><strong>Solución:</strong> Consolidar datos válidos</li>
+                      <li><strong>Proceso:</strong> Borrar bloques liberados</li>
+                      <li><strong>Optimización:</strong> Durante períodos de inactividad</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="funcion-ssd">
+                  <h5>🛠️ Error Correction (ECC)</h5>
+                  <div class="descripcion-funcion">
+                    <p>Corrección de errores de datos</p>
+                    <ul>
+                      <li><strong>Detección:</strong> Identifica bits erróneos</li>
+                      <li><strong>Corrección:</strong> Repara errores detectables</li>
+                      <li><strong>Algoritmos:</strong> BCH, LDPC</li>
+                      <li><strong>Niveles:</strong> Múltiples capas de protección</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="funcion-ssd">
+                  <h5>📊 Over-Provisioning</h5>
+                  <div class="descripcion-funcion">
+                    <p>Espacio reservado para optimización</p>
+                    <ul>
+                      <li><strong>Porcentaje:</strong> 7-28% de capacidad total</li>
+                      <li><strong>Funciones:</strong> Wear leveling, garbage collection</li>
+                      <li><strong>Reemplazo:</strong> Bloques defectuosos</li>
+                      <li><strong>Rendimiento:</strong> Mantiene velocidad consistente</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>📊 Factores de Forma</h4>
+              <div class="factores-forma-ssd">
+                <div class="factor-forma-ssd">
+                  <h5>💿 2.5" SATA</h5>
+                  <ul>
+                    <li><strong>Tamaño:</strong> 100 x 70 x 7 mm</li>
+                    <li><strong>Interfaz:</strong> SATA 3.0</li>
+                    <li><strong>Velocidad máxima:</strong> ~560 MB/s</li>
+                    <li><strong>Uso:</strong> Upgrade de laptops y desktops</li>
+                  </ul>
+                </div>
+
+                <div class="factor-forma-ssd">
+                  <h5>🔌 M.2 SATA</h5>
+                  <ul>
+                    <li><strong>Tamaño:</strong> 22 x 80 mm típico</li>
+                    <li><strong>Interfaz:</strong> SATA por conector M.2</li>
+                    <li><strong>Velocidad:</strong> Similar a 2.5" SATA</li>
+                    <li><strong>Ventaja:</strong> Sin cables, más compacto</li>
+                  </ul>
+                </div>
+
+                <div class="factor-forma-ssd">
+                  <h5>⚡ M.2 NVMe</h5>
+                  <ul>
+                    <li><strong>Tamaño:</strong> 22 x 80 mm típico</li>
+                    <li><strong>Interfaz:</strong> PCIe (2-4 lanes)</li>
+                    <li><strong>Velocidad:</strong> 3,500+ MB/s</li>
+                    <li><strong>Protocolo:</strong> NVMe optimizado</li>
+                  </ul>
+                </div>
+
+                <div class="factor-forma-ssd">
+                  <h5>🎮 PCIe Add-in Card</h5>
+                  <ul>
+                    <li><strong>Slot:</strong> PCIe x4 o x8</li>
+                    <li><strong>Velocidad:</strong> Máximo rendimiento</li>
+                    <li><strong>Capacidad:</strong> Múltiples controladores</li>
+                    <li><strong>Uso:</strong> Workstations y servidores</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>⚡ Ventajas del SSD</h4>
+              <div class="ventajas-ssd">
+                <div class="ventaja-categoria">
+                  <h5>🚀 Rendimiento</h5>
+                  <ul>
+                    <li><strong>Velocidad:</strong> 10-100x más rápido que HDD</li>
+                    <li><strong>Latencia:</strong> Acceso casi instantáneo</li>
+                    <li><strong>IOPS:</strong> Miles de operaciones por segundo</li>
+                    <li><strong>Multitasking:</strong> Rendimiento consistente</li>
+                  </ul>
+                </div>
+
+                <div class="ventaja-categoria">
+                  <h5>🔧 Durabilidad</h5>
+                  <ul>
+                    <li><strong>Sin partes móviles:</strong> Resistente a golpes</li>
+                    <li><strong>Temperatura:</strong> Amplio rango operativo</li>
+                    <li><strong>Vibración:</strong> Inmune a vibraciones</li>
+                    <li><strong>Arranque:</strong> Instantáneo, sin spin-up</li>
+                  </ul>
+                </div>
+
+                <div class="ventaja-categoria">
+                  <h5>💚 Eficiencia</h5>
+                  <ul>
+                    <li><strong>Consumo:</strong> 2-3W vs 6-10W del HDD</li>
+                    <li><strong>Silencioso:</strong> Operación completamente silenciosa</li>
+                    <li><strong>Calor:</strong> Genera menos calor</li>
+                    <li><strong>Batería:</strong> Mayor autonomía en portátiles</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>⚠️ Consideraciones del SSD</h4>
+              <div class="consideraciones-ssd">
+                <div class="consideracion">
+                  <h5>💰 Costo</h5>
+                  <ul>
+                    <li><strong>Precio por GB:</strong> Más caro que HDD</li>
+                    <li><strong>Tendencia:</strong> Precios en constante descenso</li>
+                    <li><strong>ROI:</strong> Mejora notable en productividad</li>
+                  </ul>
+                </div>
+
+                <div class="consideracion">
+                  <h5>📉 Degradación</h5>
+                  <ul>
+                    <li><strong>Escrituras limitadas:</strong> Ciclos P/E finitos</li>
+                    <li><strong>Monitoreo:</strong> TBW (Total Bytes Written)</li>
+                    <li><strong>Vida útil:</strong> 5-10 años uso normal</li>
+                  </ul>
+                </div>
+
+                <div class="consideracion">
+                  <h5>🔄 Recuperación</h5>
+                  <ul>
+                    <li><strong>Fallo súbito:</strong> Puede fallar sin avisos</li>
+                    <li><strong>Recuperación:</strong> Más compleja que HDD</li>
+                    <li><strong>Prevención:</strong> Backups regulares esenciales</li>
+                  </ul>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/arquitectura-ssd.jpg",
+              video: "/videos/teoria/tecnologia-ssd-nand.mp4"
+            },
+            actividades: [
+              {
+                tipo: "comparacion",
+                pregunta: "Compara TLC vs QLC: ¿cuándo elegir cada tipo?",
+                ayuda: "Considera precio, rendimiento, durabilidad y uso previsto"
+              },
+              {
+                tipo: "decision",
+                pregunta: "Para un editor de video: ¿SSD NVMe de 1TB o HDD de 4TB + SSD de 256GB?",
+                ayuda: "Piensa en workflow, velocidad de acceso y almacenamiento de proyectos"
+              }
+            ]
+          },
+          {
+            id: 4,
+            titulo: "Almacenamiento óptico y portátil",
+            contenido: `
+              <h3>💿 Almacenamiento Óptico: CD, DVD, Blu-ray</h3>
+              <p>Los <strong>medios ópticos</strong> utilizan tecnología láser para leer y escribir datos en discos reflectantes.</p>
+              
+              <h4>🔬 Principio de Funcionamiento</h4>
+              <div class="funcionamiento-optico">
+                <div class="principio-base">
+                  <h5>💡 Tecnología Láser</h5>
+                  <ul>
+                    <li><strong>Lectura:</strong> Láser lee diferencias en reflectividad</li>
+                    <li><strong>Pits y Lands:</strong> Representan datos binarios</li>
+                    <li><strong>Espiral:</strong> Datos organizados en espiral continua</li>
+                    <li><strong>Velocidad:</strong> CLV (Constant Linear Velocity)</li>
+                  </ul>
+                </div>
+
+                <div class="proceso-lectura">
+                  <h5>👁️ Proceso de Lectura</h5>
+                  <ol>
+                    <li><strong>Emisión láser:</strong> Diodo láser envía haz de luz</li>
+                    <li><strong>Reflexión:</strong> Superficie del disco refleja luz</li>
+                    <li><strong>Detección:</strong> Fotodiodo detecta variaciones</li>
+                    <li><strong>Conversión:</strong> Cambios de luz → datos digitales</li>
+                  </ol>
+                </div>
+              </div>
+
+              <h4>💿 Evolución de Formatos Ópticos</h4>
+              <div class="formatos-opticos">
+                <div class="formato-cd">
+                  <h5>💿 CD (Compact Disc) - 1982</h5>
+                  <div class="specs-formato">
+                    <ul>
+                      <li><strong>Capacidad:</strong> 650-700 MB</li>
+                      <li><strong>Láser:</strong> Infrarrojo (780 nm)</li>
+                      <li><strong>Tamaño de pit:</strong> 0.83 μm mínimo</li>
+                      <li><strong>Velocidad base:</strong> 150 KB/s (1x)</li>
+                      <li><strong>Diámetro:</strong> 120 mm</li>
+                    </ul>
+                    
+                    <h6>Variantes de CD:</h6>
+                    <ul>
+                      <li><strong>CD-ROM:</strong> Solo lectura</li>
+                      <li><strong>CD-R:</strong> Grabable una vez</li>
+                      <li><strong>CD-RW:</strong> Regrabable</li>
+                      <li><strong>Audio CD:</strong> 74-80 minutos de música</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="formato-dvd">
+                  <h5>📀 DVD (Digital Versatile Disc) - 1995</h5>
+                  <div class="specs-formato">
+                    <ul>
+                      <li><strong>Capacidad:</strong> 4.7 GB (capa simple)</li>
+                      <li><strong>Láser:</strong> Rojo (650 nm)</li>
+                      <li><strong>Tamaño de pit:</strong> 0.4 μm mínimo</li>
+                      <li><strong>Velocidad base:</strong> 1.35 MB/s (1x)</li>
+                      <li><strong>Mejoras:</strong> Pits más pequeños, tracking más preciso</li>
+                    </ul>
+                    
+                    <h6>Configuraciones DVD:</h6>
+                    <ul>
+                      <li><strong>DVD-5:</strong> 4.7 GB (single-layer, single-side)</li>
+                      <li><strong>DVD-9:</strong> 8.5 GB (dual-layer, single-side)</li>
+                      <li><strong>DVD-10:</strong> 9.4 GB (single-layer, dual-side)</li>
+                      <li><strong>DVD-18:</strong> 17 GB (dual-layer, dual-side)</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="formato-bluray">
+                  <h5>🔵 Blu-ray Disc - 2006</h5>
+                  <div class="specs-formato">
+                    <ul>
+                      <li><strong>Capacidad:</strong> 25 GB (capa simple)</li>
+                      <li><strong>Láser:</strong> Azul-violeta (405 nm)</li>
+                      <li><strong>Tamaño de pit:</strong> 0.15 μm mínimo</li>
+                      <li><strong>Velocidad base:</strong> 4.5 MB/s (1x)</li>
+                      <li><strong>Protección:</strong> Capa protectora de 0.1 mm</li>
+                    </ul>
+                    
+                    <h6>Capacidades Blu-ray:</h6>
+                    <ul>
+                      <li><strong>BD-25:</strong> 25 GB (single-layer)</li>
+                      <li><strong>BD-50:</strong> 50 GB (dual-layer)</li>
+                      <li><strong>BD-100:</strong> 100 GB (triple-layer)</li>
+                      <li><strong>BD-128:</strong> 128 GB (quad-layer)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>📦 Almacenamiento Portátil</h4>
+              <div class="almacenamiento-portatil">
+                <div class="usb-flash">
+                  <h5>📱 Memorias USB Flash</h5>
+                  <div class="caracteristicas-usb">
+                    <h6>🔧 Tecnología:</h6>
+                    <ul>
+                      <li><strong>Memoria:</strong> NAND Flash (similar a SSD)</li>
+                      <li><strong>Controlador:</strong> Chip controlador integrado</li>
+                      <li><strong>Interfaz:</strong> USB 2.0, 3.0, 3.1, USB-C</li>
+                      <li><strong>Tamaños:</strong> 4 GB - 2 TB</li>
+                    </ul>
+
+                    <h6>⚡ Velocidades por USB:</h6>
+                    <ul>
+                      <li><strong>USB 2.0:</strong> 480 Mbps (~60 MB/s)</li>
+                      <li><strong>USB 3.0:</strong> 5 Gbps (~625 MB/s)</li>
+                      <li><strong>USB 3.1 Gen 1:</strong> 5 Gbps</li>
+                      <li><strong>USB 3.1 Gen 2:</strong> 10 Gbps (~1.25 GB/s)</li>
+                      <li><strong>USB 3.2:</strong> 10-20 Gbps</li>
+                    </ul>
+
+                    <h6>💡 Ventajas USB Flash:</h6>
+                    <ul>
+                      <li><strong>Portabilidad:</strong> Pequeño y liviano</li>
+                      <li><strong>Durabilidad:</strong> Sin partes móviles</li>
+                      <li><strong>Compatibilidad:</strong> Funciona en cualquier PC</li>
+                      <li><strong>Plug and Play:</strong> Reconocimiento automático</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tarjetas-memoria">
+                  <h5>💳 Tarjetas de Memoria</h5>
+                  <div class="tipos-tarjetas">
+                    <div class="tarjeta-tipo">
+                      <h6>📷 SD (Secure Digital)</h6>
+                      <ul>
+                        <li><strong>SD estándar:</strong> Hasta 2 GB</li>
+                        <li><strong>SDHC:</strong> 4 GB - 32 GB</li>
+                        <li><strong>SDXC:</strong> 64 GB - 2 TB</li>
+                        <li><strong>Velocidades:</strong> Clase 2, 4, 6, 10, U1, U3</li>
+                      </ul>
+                    </div>
+
+                    <div class="tarjeta-tipo">
+                      <h6>📱 microSD</h6>
+                      <ul>
+                        <li><strong>Tamaño:</strong> 15 x 11 x 1 mm</li>
+                        <li><strong>Uso:</strong> Smartphones, tablets, cámaras</li>
+                        <li><strong>Adaptador:</strong> Compatible con slot SD</li>
+                        <li><strong>Capacidad:</strong> Hasta 1 TB disponible</li>
+                      </ul>
+                    </div>
+
+                    <div class="tarjeta-tipo">
+                      <h6>📸 CompactFlash (CF)</h6>
+                      <ul>
+                        <li><strong>Uso profesional:</strong> Cámaras DSLR</li>
+                        <li><strong>Velocidad:</strong> Muy alta</li>
+                        <li><strong>Durabilidad:</strong> Construcción robusta</li>
+                        <li><strong>Capacidad:</strong> Hasta 512 GB</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h6>📊 Clases de Velocidad SD:</h6>
+                  <div class="clases-velocidad">
+                    <ul>
+                      <li><strong>Clase 2:</strong> 2 MB/s mínimo</li>
+                      <li><strong>Clase 4:</strong> 4 MB/s mínimo</li>
+                      <li><strong>Clase 6:</strong> 6 MB/s mínimo</li>
+                      <li><strong>Clase 10:</strong> 10 MB/s mínimo</li>
+                      <li><strong>U1:</strong> 10 MB/s (video 4K)</li>
+                      <li><strong>U3:</strong> 30 MB/s (video 4K profesional)</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="discos-externos">
+                  <h5>🔌 Discos Duros Externos</h5>
+                  <div class="tipos-externos">
+                    <div class="externo-tipo">
+                      <h6>💿 HDD Externos</h6>
+                      <ul>
+                        <li><strong>Capacidad:</strong> 1-14 TB comúnmente</li>
+                        <li><strong>Interfaz:</strong> USB 3.0/3.1, USB-C</li>
+                        <li><strong>Alimentación:</strong> Bus-powered o adaptador externo</li>
+                        <li><strong>Uso:</strong> Backup, almacenamiento masivo</li>
+                      </ul>
+                    </div>
+
+                    <div class="externo-tipo">
+                      <h6>⚡ SSD Externos</h6>
+                      <ul>
+                        <li><strong>Capacidad:</strong> 250 GB - 8 TB</li>
+                        <li><strong>Velocidad:</strong> Hasta 1000+ MB/s</li>
+                        <li><strong>Portabilidad:</strong> Muy compacto</li>
+                        <li><strong>Durabilidad:</strong> Resistente a golpes</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🎯 Casos de Uso por Tecnología</h4>
+              <div class="casos-uso-almacenamiento">
+                <div class="caso-uso">
+                  <h5>💿 Medios Ópticos</h5>
+                  <ul>
+                    <li><strong>Distribución:</strong> Software, películas, música</li>
+                    <li><strong>Archivo:</strong> Almacenamiento a largo plazo</li>
+                    <li><strong>Backup:</strong> Copias de seguridad permanentes</li>
+                    <li><strong>Compatibilidad:</strong> Reproducible en muchos dispositivos</li>
+                  </ul>
+                </div>
+
+                <div class="caso-uso">
+                  <h5>📱 USB Flash</h5>
+                  <ul>
+                    <li><strong>Transferencia:</strong> Mover archivos entre PCs</li>
+                    <li><strong>Instalación:</strong> OS portables, herramientas</li>
+                    <li><strong>Presentaciones:</strong> Documentos para reuniones</li>
+                    <li><strong>Backup personal:</strong> Documentos importantes</li>
+                  </ul>
+                </div>
+
+                <div class="caso-uso">
+                  <h5>💳 Tarjetas de Memoria</h5>
+                  <ul>
+                    <li><strong>Fotografía:</strong> Almacenamiento en cámaras</li>
+                    <li><strong>Smartphones:</strong> Expansión de almacenamiento</li>
+                    <li><strong>Gaming:</strong> Juegos portátiles (Nintendo Switch)</li>
+                    <li><strong>IoT:</strong> Dispositivos embebidos</li>
+                  </ul>
+                </div>
+
+                <div class="caso-uso">
+                  <h5>🔌 Discos Externos</h5>
+                  <ul>
+                    <li><strong>Backup masivo:</strong> Copias completas del sistema</li>
+                    <li><strong>Edición multimedia:</strong> Proyectos de video</li>
+                    <li><strong>Archivo profesional:</strong> Bibliotecas de contenido</li>
+                    <li><strong>Intercambio:</strong> Grandes volúmenes de datos</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🔮 Tendencias Futuras</h4>
+              <div class="tendencias-almacenamiento">
+                <div class="tendencia">
+                  <h5>☁️ Almacenamiento en la Nube</h5>
+                  <ul>
+                    <li><strong>Acceso universal:</strong> Desde cualquier dispositivo</li>
+                    <li><strong>Sincronización:</strong> Archivos siempre actualizados</li>
+                    <li><strong>Escalabilidad:</strong> Capacidad bajo demanda</li>
+                    <li><strong>Colaboración:</strong> Trabajo en equipo facilitado</li>
+                  </ul>
+                </div>
+
+                <div class="tendencia">
+                  <h5>📡 Almacenamiento Distribuido</h5>
+                  <ul>
+                    <li><strong>Blockchain:</strong> Almacenamiento descentralizado</li>
+                    <li><strong>Edge computing:</strong> Datos cerca del usuario</li>
+                    <li><strong>P2P storage:</strong> Redes peer-to-peer</li>
+                  </ul>
+                </div>
+
+                <div class="tendencia">
+                  <h5>🧬 Nuevas Tecnologías</h5>
+                  <ul>
+                    <li><strong>DNA storage:</strong> Almacenamiento en ADN</li>
+                    <li><strong>Holographic storage:</strong> Almacenamiento holográfico</li>
+                    <li><strong>Crystal storage:</strong> Cristales de cuarzo</li>
+                  </ul>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/medios-almacenamiento-portatil.jpg",
+              video: "/videos/teoria/evolucion-almacenamiento-optico.mp4"
+            },
+            actividades: [
+              {
+                tipo: "comparacion",
+                pregunta: "Compara CD vs DVD vs Blu-ray: ¿por qué cada uno fue revolucionario en su época?",
+                ayuda: "Considera capacidad, calidad de contenido y necesidades tecnológicas"
+              },
+              {
+                tipo: "seleccion",
+                pregunta: "Para un fotógrafo profesional: ¿qué tipos de almacenamiento portátil recomendarías y por qué?",
+                ayuda: "Piensa en workflow, velocidad, capacidad y confiabilidad"
+              }
+            ]
+          }
+        ],
+        recursos: {
+          documentos: [
+            {
+              titulo: "Jerarquía de Memoria: Fundamentos y Optimización",
+              descripcion: "Manual sobre organización de memoria en sistemas de computación",
+              url: "/recursos/intro-informatica/jerarquia-memoria.pdf"
+            },
+            {
+              titulo: "Tecnología HDD: Mecánica y Rendimiento",
+              descripcion: "Guía técnica sobre funcionamiento de discos duros magnéticos",
+              url: "/recursos/intro-informatica/tecnologia-hdd.pdf"
+            },
+            {
+              titulo: "SSD y Memoria Flash: Guía Completa",
+              descripcion: "Manual sobre tipos de NAND, controladores y optimización",
+              url: "/recursos/intro-informatica/ssd-memoria-flash.pdf"
+            },
+            {
+              titulo: "Medios Ópticos y Almacenamiento Portátil",
+              descripcion: "Historia y especificaciones de CD, DVD, Blu-ray y medios portátiles",
+              url: "/recursos/intro-informatica/medios-opticos-portatiles.pdf"
+            }
+          ],
+          videos: [
+            {
+              titulo: "La Jerarquía de Memoria Explicada",
+              duracion: "18 min",
+              url: "/videos/teoria/jerarquia-memoria-explicada.mp4"
+            },
+            {
+              titulo: "Anatomía de un Disco Duro: Funcionamiento Interno",
+              duracion: "22 min",
+              url: "/videos/teoria/anatomia-disco-duro.mp4"
+            },
+            {
+              titulo: "Tecnología SSD: De NAND a NVMe",
+              duracion: "25 min",
+              url: "/videos/teoria/tecnologia-ssd-completa.mp4"
+            },
+            {
+              titulo: "Evolución del Almacenamiento: Del CD al Cloud",
+              duracion: "30 min",
+              url: "/videos/historia/evolucion-almacenamiento.mp4"
+            },
+            {
+              titulo: "Guía de Compra: HDD vs SSD en 2025",
+              duracion: "15 min",
+              url: "/videos/tutorial/guia-compra-almacenamiento.mp4"
+            }
+          ],
+          enlaces: [
+            {
+              titulo: "JEDEC - Estándares de Memoria y Almacenamiento",
+              url: "https://www.jedec.org/"
+            },
+            {
+              titulo: "SNIA - Storage Networking Industry Association",
+              url: "https://www.snia.org/"
+            },
+            {
+              titulo: "AnandTech - Reviews Técnicos de Almacenamiento",
+              url: "https://www.anandtech.com/storage"
+            },
+            {
+              titulo: "Crystal Disk Info - Herramienta de Monitoreo SSD/HDD",
+              url: "https://crystalmark.info/"
+            }
+          ]
+        },
+        evaluacion: {
+          preRequisitos: ["Tema 5: Software completado", "Tema 6: Placa base y dispositivos de procesamiento completado"],
+          criterios: [
+            "Explicar la jerarquía de memoria y principios de localidad",
+            "Describir el funcionamiento de discos duros magnéticos",
+            "Comparar tecnologías SSD y tipos de memoria NAND",
+            "Distinguir entre diferentes medios ópticos y sus capacidades",
+            "Evaluar opciones de almacenamiento portátil según necesidades",
+            "Analizar factores de rendimiento en dispositivos de almacenamiento"
+          ],
+          tiempoEstimado: "65 minutos"
+        }
+      }
+    },
+    'intro-windows': {
+      '1': {
+        titulo: "Elementos y funciones básicas",
+        duracion: "30-35 minutos",
+        objetivos: [
+          "Dominar el uso correcto del ratón y teclado",
+          "Aprender a manejar ventanas de manera eficiente",
+          "Conocer los elementos básicos del escritorio",
+          "Utilizar la barra de tareas y menú Inicio correctamente"
+        ],
+        secciones: [
+          {
+            id: 1,
+            titulo: "Ratón, Teclado y Teclado en Pantalla",
+            contenido: `
+              <h3>🖱️ El Ratón: Tu Herramienta Principal</h3>
+              <p>El <strong>ratón</strong> es el dispositivo más importante para navegar en Windows. Dominar su uso te hará más eficiente.</p>
+              
+              <h4>Tipos de clic y sus funciones:</h4>
+              <div class="tipos-clic">
+                <div class="clic-tipo">
+                  <h5>👆 Clic Izquierdo</h5>
+                  <ul>
+                    <li><strong>Un clic:</strong> Seleccionar elementos</li>
+                    <li><strong>Doble clic:</strong> Abrir programas y archivos</li>
+                    <li><strong>Arrastrar:</strong> Mover elementos</li>
+                  </ul>
+                </div>
+                <div class="clic-tipo">
+                  <h5>👆 Clic Derecho</h5>
+                  <ul>
+                    <li>Abre menú contextual</li>
+                    <li>Muestra opciones disponibles</li>
+                    <li>Funciones específicas por elemento</li>
+                  </ul>
+                </div>
+                <div class="clic-tipo">
+                  <h5>🖲️ Rueda del Ratón</h5>
+                  <ul>
+                    <li>Desplazarse hacia arriba/abajo</li>
+                    <li>Zoom en algunos programas</li>
+                    <li>Clic en la rueda: función especial</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h3>⌨️ El Teclado: Escribir y Comandos</h3>
+              <p>El <strong>teclado</strong> no solo sirve para escribir, también tiene teclas especiales para controlar Windows.</p>
+              
+              <h4>Zonas del teclado:</h4>
+              <div class="zonas-teclado">
+                <div class="zona">
+                  <h5>🔤 Teclas Alfabéticas</h5>
+                  <p>A-Z para escribir texto normal</p>
+                </div>
+                <div class="zona">
+                  <h5>🔢 Teclas Numéricas</h5>
+                  <p>0-9 en la fila superior y teclado numérico</p>
+                </div>
+                <div class="zona">
+                  <h5>⚙️ Teclas Especiales</h5>
+                  <ul>
+                    <li><strong>Windows (⊞):</strong> Abre menú Inicio</li>
+                    <li><strong>Alt:</strong> Acceso a menús</li>
+                    <li><strong>Ctrl:</strong> Comandos y atajos</li>
+                    <li><strong>Shift:</strong> Mayúsculas y funciones alternas</li>
+                    <li><strong>Enter:</strong> Confirmar acciones</li>
+                    <li><strong>Esc:</strong> Cancelar acciones</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🎯 Atajos básicos esenciales:</h4>
+              <div class="atajos-basicos">
+                <div class="atajo">
+                  <kbd>Windows</kbd>
+                  <p>Abrir/cerrar menú Inicio</p>
+                </div>
+                <div class="atajo">
+                  <kbd>Alt</kbd> + <kbd>Tab</kbd>
+                  <p>Cambiar entre programas abiertos</p>
+                </div>
+                <div class="atajo">
+                  <kbd>Windows</kbd> + <kbd>E</kbd>
+                  <p>Abrir Explorador de archivos</p>
+                </div>
+                <div class="atajo">
+                  <kbd>Ctrl</kbd> + <kbd>C</kbd>
+                  <p>Copiar elemento seleccionado</p>
+                </div>
+                <div class="atajo">
+                  <kbd>Ctrl</kbd> + <kbd>V</kbd>
+                  <p>Pegar elemento copiado</p>
+                </div>
+              </div>
+
+              <h3>📱 Teclado en Pantalla</h3>
+              <p>Windows incluye un <strong>teclado virtual</strong> para cuando no tienes teclado físico o para dispositivos táctiles.</p>
+              
+              <h4>🚀 Cómo activar el teclado en pantalla:</h4>
+              <ol>
+                <li>Clic en <strong>Inicio</strong></li>
+                <li>Ir a <strong>Configuración</strong> (⚙️)</li>
+                <li>Seleccionar <strong>Accesibilidad</strong></li>
+                <li>Activar <strong>"Teclado en pantalla"</strong></li>
+              </ol>
+              
+              <div class="metodo-rapido">
+                <h5>⚡ Método rápido:</h5>
+                <p>Presiona <kbd>Windows</kbd> + <kbd>R</kbd>, escribe <code>osk</code> y presiona Enter</p>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/mouse-teclado-basico.jpg",
+              video: "/videos/teoria/usar-mouse-teclado-windows.mp4",
+              infografia: "/images/teoria/atajos-teclado-esenciales.png"
+            },
+            actividades: [
+              {
+                tipo: "practica",
+                pregunta: "Practica los 5 atajos básicos hasta memorizarlos",
+                ayuda: "Repite cada atajo 5 veces: Windows, Alt+Tab, Windows+E, Ctrl+C, Ctrl+V"
+              },
+              {
+                tipo: "exploracion",
+                pregunta: "Activa el teclado en pantalla y escribe tu nombre",
+                ayuda: "Usa el método rápido: Windows+R, escribir 'osk', Enter"
+              }
+            ]
+          },
+          {
+            id: 2,
+            titulo: "Ventanas: Maximizar, Minimizar, Cerrar y Organizar",
+            contenido: `
+              <h3>🪟 Dominando las Ventanas de Windows</h3>
+              <p>Las <strong>ventanas</strong> son contenedores donde se ejecutan los programas. Saber manejarlas es fundamental.</p>
+              
+              <h4>🔧 Partes de una ventana:</h4>
+              <div class="partes-ventana">
+                <div class="parte">
+                  <h5>📋 Barra de Título</h5>
+                  <p>Muestra el nombre del programa y documento actual</p>
+                </div>
+                <div class="parte">
+                  <h5>🎛️ Controles de Ventana</h5>
+                  <ul>
+                    <li><strong>─ Minimizar:</strong> Oculta la ventana en la barra de tareas</li>
+                    <li><strong>▢ Maximizar:</strong> Agranda la ventana a pantalla completa</li>
+                    <li><strong>⧉ Restaurar:</strong> Vuelve al tamaño anterior</li>
+                    <li><strong>✕ Cerrar:</strong> Cierra completamente el programa</li>
+                  </ul>
+                </div>
+                <div class="parte">
+                  <h5>📏 Bordes</h5>
+                  <p>Permiten redimensionar la ventana arrastrando</p>
+                </div>
+                <div class="parte">
+                  <h5>📄 Área de Contenido</h5>
+                  <p>Donde aparece la información del programa</p>
+                </div>
+              </div>
+
+              <h4>⚡ Acciones rápidas con ventanas:</h4>
+              <div class="acciones-ventanas">
+                <div class="accion">
+                  <h5>🖱️ Con el Ratón</h5>
+                  <ul>
+                    <li><strong>Doble clic en barra de título:</strong> Maximizar/restaurar</li>
+                    <li><strong>Arrastrar barra de título:</strong> Mover ventana</li>
+                    <li><strong>Arrastrar bordes:</strong> Redimensionar</li>
+                    <li><strong>Arrastrar esquinas:</strong> Redimensionar proporcionalmente</li>
+                  </ul>
+                </div>
+                <div class="accion">
+                  <h5>⌨️ Con el Teclado</h5>
+                  <ul>
+                    <li><kbd>Alt</kbd> + <kbd>F4</kbd>: Cerrar ventana actual</li>
+                    <li><kbd>Windows</kbd> + <kbd>↑</kbd>: Maximizar ventana</li>
+                    <li><kbd>Windows</kbd> + <kbd>↓</kbd>: Minimizar/restaurar</li>
+                    <li><kbd>Windows</kbd> + <kbd>←/→</kbd>: Ajustar a mitad de pantalla</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>📐 Organizando Múltiples Ventanas</h4>
+              <p>Windows tiene funciones especiales para organizar varias ventanas a la vez.</p>
+              
+              <h5>🪟 Snap (Ajuste Automático):</h5>
+              <div class="snap-funciones">
+                <div class="snap-accion">
+                  <h6>Mitad izquierda/derecha</h6>
+                  <p>Arrastra ventana al borde izquierdo o derecho</p>
+                  <p><strong>Atajo:</strong> <kbd>Windows</kbd> + <kbd>←/→</kbd></p>
+                </div>
+                <div class="snap-accion">
+                  <h6>Cuatro esquinas</h6>
+                  <p>Arrastra ventana a cualquier esquina de la pantalla</p>
+                  <p>Cada ventana ocupa 1/4 de la pantalla</p>
+                </div>
+                <div class="snap-accion">
+                  <h6>Maximizar rápido</h6>
+                  <p>Arrastra ventana al borde superior</p>
+                  <p><strong>Atajo:</strong> <kbd>Windows</kbd> + <kbd>↑</kbd></p>
+                </div>
+              </div>
+
+              <h5>🎛️ Vista de Tareas:</h5>
+              <p>Presiona <kbd>Windows</kbd> + <kbd>Tab</kbd> para ver todas las ventanas abiertas y organizarlas visualmente.</p>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/manejo-ventanas-windows.jpg",
+              video: "/videos/teoria/organizar-ventanas-windows.mp4",
+              infografia: "/images/teoria/atajos-ventanas.png"
+            },
+            actividades: [
+              {
+                tipo: "practica",
+                pregunta: "Abre 3 programas y practica organizar las ventanas usando Snap",
+                ayuda: "Arrastra cada ventana a una posición diferente: izquierda, derecha, esquina"
+              },
+              {
+                tipo: "memorizacion",
+                pregunta: "Memoriza los atajos de ventanas: Windows+↑↓←→",
+                ayuda: "Practica cada atajo con una ventana abierta hasta que sea automático"
+              }
+            ]
+          },
+          {
+            id: 3,
+            titulo: "Escritorio: Personalización y Accesos Directos",
+            contenido: `
+              <h3>🎨 Personalizando tu Escritorio</h3>
+              <p>El <strong>escritorio</strong> es tu espacio de trabajo principal. Personalizarlo mejora tu experiencia y productividad.</p>
+              
+              <h4>🖼️ Cambiar fondo de pantalla:</h4>
+              <div class="pasos-personalizacion">
+                <h5>Método 1: Clic derecho</h5>
+                <ol>
+                  <li>Clic derecho en un área vacía del escritorio</li>
+                  <li>Seleccionar <strong>"Personalizar"</strong></li>
+                  <li>Elegir <strong>"Fondo"</strong></li>
+                  <li>Seleccionar imagen o color sólido</li>
+                </ol>
+                
+                <h5>Método 2: Configuración</h5>
+                <ol>
+                  <li>Presionar <kbd>Windows</kbd> + <kbd>I</kbd></li>
+                  <li>Ir a <strong>"Personalización"</strong></li>
+                  <li>Seleccionar <strong>"Fondo"</strong></li>
+                  <li>Configurar imagen, presentación o color</li>
+                </ol>
+              </div>
+
+              <h4>🎭 Opciones de personalización:</h4>
+              <div class="opciones-personalizacion">
+                <div class="opcion">
+                  <h5>🖼️ Imagen</h5>
+                  <p>Una sola imagen como fondo</p>
+                  <ul>
+                    <li>Rellenar, ajustar, extender, mosaico, centrar</li>
+                    <li>Soporta JPG, PNG, BMP</li>
+                  </ul>
+                </div>
+                <div class="opcion">
+                  <h5>🎞️ Presentación</h5>
+                  <p>Cambia automáticamente entre varias imágenes</p>
+                  <ul>
+                    <li>Intervalo: cada 1 min a 1 día</li>
+                    <li>Orden aleatorio disponible</li>
+                  </ul>
+                </div>
+                <div class="opcion">
+                  <h5>🎨 Color Sólido</h5>
+                  <p>Fondo de un solo color</p>
+                  <ul>
+                    <li>Colores predefinidos o personalizados</li>
+                    <li>Menos distracción para trabajar</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h3>🔗 Accesos Directos en el Escritorio</h3>
+              <p>Los <strong>accesos directos</strong> permiten abrir programas, archivos o carpetas rápidamente desde el escritorio.</p>
+              
+              <h4>📌 Crear accesos directos:</h4>
+              <div class="metodos-accesos">
+                <div class="metodo">
+                  <h5>Método 1: Arrastrar con Ctrl</h5>
+                  <ol>
+                    <li>Abrir el Explorador de archivos</li>
+                    <li>Buscar el programa o archivo</li>
+                    <li>Mantener <kbd>Ctrl</kbd> y arrastrar al escritorio</li>
+                    <li>Se crea automáticamente el acceso directo</li>
+                  </ol>
+                </div>
+                <div class="metodo">
+                  <h5>Método 2: Clic derecho</h5>
+                  <ol>
+                    <li>Clic derecho en área vacía del escritorio</li>
+                    <li>Seleccionar <strong>"Nuevo"</strong> → <strong>"Acceso directo"</strong></li>
+                    <li>Escribir la ruta o usar <strong>"Examinar"</strong></li>
+                    <li>Escribir nombre para el acceso directo</li>
+                    <li>Hacer clic en <strong>"Finalizar"</strong></li>
+                  </ol>
+                </div>
+                <div class="metodo">
+                  <h5>Método 3: Desde menú Inicio</h5>
+                  <ol>
+                    <li>Abrir menú Inicio</li>
+                    <li>Buscar el programa deseado</li>
+                    <li>Clic derecho en el programa</li>
+                    <li>Seleccionar <strong>"Más"</strong> → <strong>"Abrir ubicación del archivo"</strong></li>
+                    <li>Clic derecho en el archivo → <strong>"Enviar a"</strong> → <strong>"Escritorio"</strong></li>
+                  </ol>
+                </div>
+              </div>
+
+              <h4>🗂️ Organizando el escritorio:</h4>
+              <div class="organizacion-escritorio">
+                <h5>⚡ Funciones útiles:</h5>
+                <ul>
+                  <li><strong>Clic derecho → "Organizar iconos por":</strong> Nombre, tamaño, tipo, fecha</li>
+                  <li><strong>Clic derecho → "Ver":</strong> Cambiar tamaño de iconos</li>
+                  <li><strong>F5:</strong> Actualizar escritorio</li>
+                  <li><strong>Ctrl + A:</strong> Seleccionar todos los elementos</li>
+                  <li><strong>Supr:</strong> Enviar elemento seleccionado a papelera</li>
+                </ul>
+                
+                <h5>💡 Consejos de organización:</h5>
+                <ul>
+                  <li>Mantén solo accesos directos esenciales</li>
+                  <li>Agrupa elementos similares en una zona</li>
+                  <li>Usa nombres descriptivos y cortos</li>
+                  <li>Limpia periódicamente accesos directos no utilizados</li>
+                </ul>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/personalizar-escritorio-windows.jpg",
+              video: "/videos/teoria/accesos-directos-escritorio.mp4",
+              infografia: "/images/teoria/organizacion-escritorio.png"
+            },
+            actividades: [
+              {
+                tipo: "personalizacion",
+                pregunta: "Cambia el fondo de pantalla por una imagen personal",
+                ayuda: "Clic derecho en escritorio → Personalizar → Fondo → Examinar"
+              },
+              {
+                tipo: "practica",
+                pregunta: "Crea 3 accesos directos usando métodos diferentes",
+                ayuda: "Intenta: arrastrar con Ctrl, clic derecho → Nuevo, desde menú Inicio"
+              }
+            ]
+          },
+          {
+            id: 4,
+            titulo: "Barra de Tareas y Menú Inicio",
+            contenido: `
+              <h3>📊 La Barra de Tareas: Tu Centro de Control</h3>
+              <p>La <strong>barra de tareas</strong> es la franja inferior de Windows que te permite acceder rápidamente a programas y ver información del sistema.</p>
+              
+              <h4>🧩 Partes de la barra de tareas:</h4>
+              <div class="partes-barra-tareas">
+                <div class="parte-barra">
+                  <h5>🪟 Botón de Inicio</h5>
+                  <p>Icono de Windows que abre el menú principal</p>
+                  <ul>
+                    <li>Acceso a todos los programas</li>
+                    <li>Configuración del sistema</li>
+                    <li>Opciones de energía</li>
+                  </ul>
+                </div>
+                <div class="parte-barra">
+                  <h5>🔍 Cuadro de Búsqueda</h5>
+                  <p>Buscar programas, archivos y configuraciones</p>
+                  <ul>
+                    <li>Buscar por nombre</li>
+                    <li>Búsqueda web integrada</li>
+                    <li>Acceso rápido: <kbd>Windows</kbd> + <kbd>S</kbd></li>
+                  </ul>
+                </div>
+                <div class="parte-barra">
+                  <h5>📌 Programas Anclados</h5>
+                  <p>Accesos directos a tus programas favoritos</p>
+                  <ul>
+                    <li>Siempre visibles</li>
+                    <li>Un clic para abrir</li>
+                    <li>Indicador de programas abiertos</li>
+                  </ul>
+                </div>
+                <div class="parte-barra">
+                  <h5>📋 Programas Abiertos</h5>
+                  <p>Muestra todas las ventanas actualmente abiertas</p>
+                  <ul>
+                    <li>Cambiar entre programas</li>
+                    <li>Ver previsualizaciones</li>
+                    <li>Cerrar desde la barra</li>
+                  </ul>
+                </div>
+                <div class="parte-barra">
+                  <h5>🔔 Área de Notificaciones</h5>
+                  <p>Información del sistema y notificaciones</p>
+                  <ul>
+                    <li>Hora y fecha</li>
+                    <li>Estado de internet, volumen, batería</li>
+                    <li>Iconos de programas en segundo plano</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>📌 Anclar y desanclar programas:</h4>
+              <div class="gestión-anclados">
+                <div class="accion-anclar">
+                  <h5>➕ Anclar programa</h5>
+                  <ul>
+                    <li><strong>Método 1:</strong> Clic derecho en programa abierto → "Anclar a la barra de tareas"</li>
+                    <li><strong>Método 2:</strong> Arrastrar desde menú Inicio a la barra</li>
+                    <li><strong>Método 3:</strong> Clic derecho en archivo .exe → "Anclar a la barra de tareas"</li>
+                  </ul>
+                </div>
+                <div class="accion-anclar">
+                  <h5>➖ Desanclar programa</h5>
+                  <ul>
+                    <li>Clic derecho en programa anclado</li>
+                    <li>Seleccionar <strong>"Desanclar de la barra de tareas"</strong></li>
+                  </ul>
+                </div>
+              </div>
+
+              <h3>🚀 El Menú Inicio: Portal de Windows</h3>
+              <p>El <strong>menú Inicio</strong> es el centro de navegación principal de Windows.</p>
+              
+              <h4>🏗️ Estructura del menú Inicio:</h4>
+              <div class="estructura-menu">
+                <div class="seccion-menu">
+                  <h5>📱 Panel Izquierdo</h5>
+                  <ul>
+                    <li><strong>Más usados:</strong> Programas frecuentes</li>
+                    <li><strong>Agregados recientemente:</strong> Programas nuevos</li>
+                    <li><strong>Lista alfabética:</strong> Todos los programas instalados</li>
+                    <li><strong>Opciones de usuario:</strong> Configuración, archivos, energía</li>
+                  </ul>
+                </div>
+                <div class="seccion-menu">
+                  <h5>🔲 Panel Derecho (Mosaicos)</h5>
+                  <ul>
+                    <li><strong>Mosaicos dinámicos:</strong> Información en tiempo real</li>
+                    <li><strong>Grupos personalizables:</strong> Organizar por categorías</li>
+                    <li><strong>Tamaños variables:</strong> Pequeño, mediano, ancho, grande</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🔍 Búsqueda desde el menú Inicio:</h4>
+              <div class="busqueda-inicio">
+                <h5>⚡ Búsqueda rápida:</h5>
+                <ol>
+                  <li>Presionar tecla <kbd>Windows</kbd></li>
+                  <li>Empezar a escribir inmediatamente</li>
+                  <li>Windows busca automáticamente</li>
+                  <li>Presionar <kbd>Enter</kbd> para abrir el primer resultado</li>
+                </ol>
+                
+                <h5>🎯 Tipos de búsqueda:</h5>
+                <ul>
+                  <li><strong>Programas:</strong> "notepad", "calc", "word"</li>
+                  <li><strong>Configuraciones:</strong> "wifi", "volumen", "pantalla"</li>
+                  <li><strong>Archivos:</strong> "documento.docx", "foto.jpg"</li>
+                  <li><strong>Web:</strong> Cualquier término no encontrado localmente</li>
+                </ul>
+              </div>
+
+              <h4>⚙️ Personalizar menú Inicio:</h4>
+              <div class="personalizar-menu">
+                <div class="opcion-personalizar">
+                  <h5>🔲 Gestionar mosaicos</h5>
+                  <ul>
+                    <li><strong>Anclar:</strong> Clic derecho → "Anclar al inicio"</li>
+                    <li><strong>Desanclar:</strong> Clic derecho → "Desanclar del inicio"</li>
+                    <li><strong>Redimensionar:</strong> Clic derecho → "Cambiar tamaño"</li>
+                    <li><strong>Mover:</strong> Arrastrar a nueva posición</li>
+                  </ul>
+                </div>
+                <div class="opcion-personalizar">
+                  <h5>📁 Crear grupos</h5>
+                  <ul>
+                    <li>Arrastrar mosaicos para separarlos</li>
+                    <li>Clic en área vacía arriba del grupo</li>
+                    <li>Escribir nombre del grupo</li>
+                    <li>Presionar <kbd>Enter</kbd></li>
+                  </ul>
+                </div>
+                <div class="opcion-personalizar">
+                  <h5>⚙️ Configuración avanzada</h5>
+                  <ul>
+                    <li>Configuración → Personalización → Inicio</li>
+                    <li>Mostrar más mosaicos</li>
+                    <li>Mostrar lista de aplicaciones</li>
+                    <li>Mostrar aplicaciones agregadas recientemente</li>
+                  </ul>
+                </div>
+              </div>
+            `,
+            multimedia: {
+              imagen: "/images/teoria/barra-tareas-menu-inicio.jpg",
+              video: "/videos/teoria/usar-barra-tareas-menu-inicio.mp4",
+              infografia: "/images/teoria/personalizar-menu-inicio.png"
+            },
+            actividades: [
+              {
+                tipo: "practica",
+                pregunta: "Ancla 5 programas frecuentes a la barra de tareas",
+                ayuda: "Clic derecho en programas abiertos → Anclar a la barra de tareas"
+              },
+              {
+                tipo: "personalizacion",
+                pregunta: "Organiza el menú Inicio creando 2 grupos de mosaicos",
+                ayuda: "Arrastra mosaicos para crear grupos, luego nómbralos: 'Trabajo', 'Entretenimiento'"
+              },
+              {
+                tipo: "memorizacion",
+                pregunta: "Practica abrir 5 programas usando solo búsqueda desde menú Inicio",
+                ayuda: "Windows → escribir nombre → Enter (calc, notepad, paint, etc.)"
+              }
+            ]
+          }
+        ],
+        recursos: {
+          documentos: [
+            {
+              titulo: "Guía Completa de Elementos Básicos de Windows",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/elementos-basicos-windows.pdf"
+            },
+            {
+              titulo: "Manual de Atajos de Teclado Esenciales",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/atajos-teclado-esenciales.pdf"
+            },
+            {
+              titulo: "Guía de Personalización del Escritorio",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/personalizacion-escritorio.pdf"
+            }
+          ],
+          videos: [
+            {
+              titulo: "Dominando Ratón y Teclado en Windows",
+              duracion: "12 min",
+              url: "/videos/dominando-mouse-teclado.mp4"
+            },
+            {
+              titulo: "Organización Eficiente de Ventanas",
+              duracion: "8 min",
+              url: "/videos/organizacion-ventanas.mp4"
+            },
+            {
+              titulo: "Personalización Completa del Escritorio",
+              duracion: "15 min",
+              url: "/videos/personalizacion-escritorio.mp4"
+            },
+            {
+              titulo: "Maestría de la Barra de Tareas y Menú Inicio",
+              duracion: "10 min",
+              url: "/videos/barra-tareas-menu-inicio.mp4"
+            }
+          ],
+          enlaces: [
+            {
+              titulo: "Soporte Microsoft - Atajos de Teclado Windows",
+              url: "https://support.microsoft.com/es-es/windows/atajos-de-teclado-de-windows"
+            },
+            {
+              titulo: "Personalización de Windows - Guía Oficial",
+              url: "https://support.microsoft.com/es-es/windows/personalizar-windows"
+            },
+            {
+              titulo: "Accesibilidad en Windows",
+              url: "https://support.microsoft.com/es-es/windows/accesibilidad-windows"
+            }
+          ]
+        },
+        actividadesPracticas: [
+          {
+            id: 1,
+            titulo: "Configuración Personal del Espacio de Trabajo",
+            tipo: "individual",
+            descripcion: "Personaliza completamente tu entorno de Windows para optimizar tu productividad",
+            objetivos: [
+              "Dominar el uso del ratón y teclado con todos los tipos de clic",
+              "Configurar el escritorio según tus preferencias personales",
+              "Optimizar la barra de tareas y menú Inicio para acceso rápido",
+              "Crear un espacio de trabajo eficiente y organizado"
+            ],
+            instrucciones: [
+              "Cambiar el fondo de pantalla por una imagen personal o de inspiración",
+              "Crear accesos directos en el escritorio para 5 programas que uses frecuentemente",
+              "Anclar 6 aplicaciones importantes en la barra de tareas",
+              "Personalizar el menú Inicio con mosaicos útiles organizados en grupos",
+              "Practicar y memorizar 10 atajos de teclado diferentes",
+              "Organizar todos los iconos del escritorio en grupos lógicos",
+              "Configurar la fecha y hora según tu zona horaria",
+              "Ajustar la resolución de pantalla para comodidad visual"
+            ],
+            tiempoEstimado: "30 minutos",
+            evaluacion: "Escritorio personalizado funcional y demostración fluida de atajos de teclado",
+            recursosNecesarios: ["Computador con Windows", "Imágenes personales (opcional)", "Lista de programas favoritos"]
+          },
+          {
+            id: 2,
+            titulo: "Maestría en Navegación y Gestión de Ventanas",
+            tipo: "practica",
+            descripcion: "Demuestra dominio completo en la navegación básica y gestión eficiente de ventanas en Windows",
+            objetivos: [
+              "Usar todos los tipos de clic del ratón correctamente y con propósito",
+              "Manejar múltiples ventanas de manera eficiente usando técnicas avanzadas",
+              "Navegar el sistema usando únicamente el teclado cuando sea necesario",
+              "Acceder rápidamente a programas y archivos usando diferentes métodos"
+            ],
+            instrucciones: [
+              "Abrir 4 programas diferentes usando métodos distintos: doble clic, menú Inicio, atajo de teclado, barra de tareas",
+              "Organizar las 4 ventanas en la pantalla usando la función Snap de Windows",
+              "Cambiar entre programas usando solo atajos de teclado (Alt+Tab, Windows+Tab)",
+              "Minimizar todas las ventanas y restaurarlas una por una",
+              "Buscar y abrir una aplicación específica desde el menú Inicio usando solo búsqueda",
+              "Demostrar el uso del teclado en pantalla escribiendo una frase completa",
+              "Crear un acceso directo nuevo arrastrando desde el menú Inicio",
+              "Personalizar la vista del escritorio (tamaño de iconos, organización)"
+            ],
+            tiempoEstimado: "25 minutos",
+            evaluacion: "Velocidad y precisión en todas las tareas de navegación sin errores",
+            criteriosEvaluacion: [
+              "Fluidez en el uso del ratón (todos los tipos de clic)",
+              "Eficiencia en organización de ventanas",
+              "Dominio de atajos de teclado esenciales",
+              "Capacidad de navegación solo con teclado",
+              "Velocidad en acceso a programas y archivos"
+            ]
+          },
+          {
+            id: 3,
+            titulo: "Taller de Optimización del Sistema",
+            tipo: "exploracion",
+            descripcion: "Explora y configura opciones avanzadas de personalización para crear un entorno de trabajo óptimo",
+            objetivos: [
+              "Explorar opciones avanzadas de personalización de Windows",
+              "Configurar el sistema para maximum eficiencia personal",
+              "Entender la relación entre diferentes elementos del sistema",
+              "Aplicar principios de organización digital"
+            ],
+            instrucciones: [
+              "Explorar todas las opciones de personalización: Configuración > Personalización",
+              "Cambiar el tema de Windows y analizar los cambios visuales",
+              "Configurar el protector de pantalla con tiempo personalizado",
+              "Organizar el menú Inicio creando grupos temáticos de aplicaciones",
+              "Personalizar la barra de tareas: posición, tamaño, opciones de combinación",
+              "Configurar notificaciones del sistema según preferencias",
+              "Crear una estructura lógica de carpetas en el escritorio",
+              "Documentar tu configuración personal ideal"
+            ],
+            tiempoEstimado: "40 minutos",
+            evaluacion: "Sistema personalizado que refleje eficiencia y organización personal",
+            entregables: [
+              "Captura de pantalla del escritorio final",
+              "Lista de atajos de teclado personalizados memorizado",
+              "Documento breve explicando la lógica de organización elegida"
+            ]
+          },
+          {
+            id: 4,
+            titulo: "Prueba de Eficiencia: Reto de Velocidad",
+            tipo: "evaluacion",
+            descripcion: "Prueba cronometrada para demostrar dominio completo de elementos básicos de Windows",
+            objetivos: [
+              "Demostrar velocidad y precisión en tareas básicas",
+              "Aplicar conocimientos bajo presión de tiempo",
+              "Mostrar automatización de procesos básicos",
+              "Validar retención de atajos y técnicas aprendidas"
+            ],
+            instrucciones: [
+              "TIEMPO LÍMITE: 15 minutos para completar todas las tareas",
+              "Tarea 1 (3 min): Abrir 5 programas específicos y organizarlos en pantalla",
+              "Tarea 2 (2 min): Cambiar fondo de pantalla y crear 3 accesos directos",
+              "Tarea 3 (3 min): Personalizar barra de tareas y anclar 4 aplicaciones nuevas",
+              "Tarea 4 (2 min): Usar solo teclado para navegar y abrir el Panel de Control",
+              "Tarea 5 (3 min): Demostrar 8 atajos diferentes y explicar su función",
+              "Tarea 6 (2 min): Organizar escritorio y crear una carpeta con archivos específicos"
+            ],
+            tiempoEstimado: "15 minutos",
+            evaluacion: "Completar todas las tareas dentro del tiempo límite sin errores",
+            criteriosCalificacion: {
+              "Excelente": "Todas las tareas completadas en menos de 12 minutos",
+              "Bueno": "Todas las tareas completadas entre 12-15 minutos",
+              "Satisfactorio": "Al menos 80% de tareas completadas en tiempo límite",
+              "Necesita mejora": "Menos del 80% completado o exceso de tiempo"
+            }
+          }
+        ],
+        evaluacion: {
+          preRequisitos: ["Conocimiento básico de encendido de computador"],
+          criterios: [
+            "Usar eficientemente ratón y teclado con atajos básicos",
+            "Manejar ventanas: maximizar, minimizar, cerrar y organizar",
+            "Personalizar escritorio y crear accesos directos",
+            "Navegar y personalizar barra de tareas y menú Inicio",
+            "Aplicar técnicas de organización y productividad básicas"
+          ],
+          tiempoEstimado: "35 minutos"
+        }
+      },
+      '2': {
+        titulo: "Explorador de Windows",
+        duracion: "35-40 minutos",
+        objetivos: [
+          "Dominar la interfaz del Explorador de Windows",
+          "Gestionar eficientemente archivos y carpetas",
+          "Utilizar las diferentes vistas y opciones de organización",
+          "Realizar operaciones avanzadas de búsqueda y filtrado"
+        ],
+        secciones: [
+          {
+            id: 1,
+            titulo: "Interfaz del Explorador de Windows",
+            contenido: `
+              <h3>📂 El Explorador de Windows: Tu Administrador de Archivos</h3>
+              <p>El <strong>Explorador de Windows</strong> es la herramienta principal para navegar, organizar y gestionar todos tus archivos y carpetas.</p>
+              
+              <h4>🚀 Cómo abrir el Explorador:</h4>
+              <div class="metodos-apertura">
+                <div class="metodo">
+                  <h5>⌨️ Atajo de teclado</h5>
+                  <p><kbd>Windows</kbd> + <kbd>E</kbd> - La forma más rápida</p>
+                </div>
+                <div class="metodo">
+                  <h5>🖱️ Desde la barra de tareas</h5>
+                  <p>Clic en el icono de carpeta en la barra de tareas</p>
+                </div>
+                <div class="metodo">
+                  <h5>📱 Desde el menú Inicio</h5>
+                  <p>Buscar "Explorador de archivos" o "This PC"</p>
+                </div>
+                <div class="metodo">
+                  <h5>🖥️ Desde el escritorio</h5>
+                  <p>Doble clic en "Este equipo" o cualquier carpeta</p>
+                </div>
+              </div>
+
+              <h4>🧭 Partes del Explorador de Windows:</h4>
+              <div class="partes-explorador">
+                <div class="parte">
+                  <h5>🎀 Cinta de opciones (Ribbon)</h5>
+                  <p>Barra superior con herramientas organizadas por pestañas</p>
+                  <ul>
+                    <li><strong>Archivo:</strong> Operaciones con ventanas y propiedades</li>
+                    <li><strong>Inicio:</strong> Copiar, mover, eliminar, propiedades</li>
+                    <li><strong>Compartir:</strong> Enviar, comprimir, imprimir</li>
+                    <li><strong>Ver:</strong> Cambiar vistas, mostrar/ocultar elementos</li>
+                  </ul>
+                </div>
+                <div class="parte">
+                  <h5>🧭 Panel de navegación</h5>
+                  <p>Lado izquierdo - Árbol de carpetas para navegación rápida</p>
+                  <ul>
+                    <li><strong>Acceso rápido:</strong> Carpetas y archivos frecuentes</li>
+                    <li><strong>Este equipo:</strong> Unidades de disco</li>
+                    <li><strong>Red:</strong> Recursos compartidos</li>
+                    <li><strong>Papelera:</strong> Archivos eliminados</li>
+                  </ul>
+                </div>
+                <div class="parte">
+                  <h5>📍 Barra de direcciones</h5>
+                  <p>Muestra la ubicación actual y permite navegación directa</p>
+                  <ul>
+                    <li>Clic en cualquier parte de la ruta para editarla</li>
+                    <li>Escribir rutas directamente</li>
+                    <li>Botones de navegación: Atrás, Adelante, Arriba</li>
+                  </ul>
+                </div>
+                <div class="parte">
+                  <h5>🔍 Cuadro de búsqueda</h5>
+                  <p>Buscar archivos y carpetas en la ubicación actual</p>
+                  <ul>
+                    <li>Búsqueda por nombre, tipo, fecha</li>
+                    <li>Filtros automáticos mientras escribes</li>
+                    <li>Búsqueda en subcarpetas incluida</li>
+                  </ul>
+                </div>
+                <div class="parte">
+                  <h5>📄 Área principal</h5>
+                  <p>Zona central donde se muestran archivos y carpetas</p>
+                  <ul>
+                    <li>Diferentes vistas disponibles</li>
+                    <li>Selección múltiple con Ctrl y Shift</li>
+                    <li>Ordenamiento por columnas</li>
+                  </ul>
+                </div>
+                <div class="parte">
+                  <h5>ℹ️ Panel de detalles</h5>
+                  <p>Información del elemento seleccionado</p>
+                  <ul>
+                    <li>Propiedades del archivo/carpeta</li>
+                    <li>Vista previa de imágenes</li>
+                    <li>Metadatos y etiquetas</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🎯 Navegación eficiente:</h4>
+              <div class="tips-navegacion">
+                <div class="tip">
+                  <h5>⚡ Acceso rápido</h5>
+                  <p>Ancla carpetas frecuentes arrastrándolas a "Acceso rápido"</p>
+                </div>
+                <div class="tip">
+                  <h5>🔙 Historial</h5>
+                  <p>Usa los botones Atrás/Adelante o Alt + ←/→</p>
+                </div>
+                <div class="tip">
+                  <h5>⬆️ Subir nivel</h5>
+                  <p>Alt + ↑ para ir a la carpeta padre</p>
+                </div>
+                <div class="tip">
+                  <h5>🔄 Actualizar</h5>
+                  <p>F5 para actualizar el contenido actual</p>
+                </div>
+              </div>
+            `,
+            actividades: [
+              {
+                tipo: "exploracion",
+                titulo: "Recorrido completo del Explorador",
+                descripcion: "Familiarízate con todas las partes del Explorador de Windows",
+                pasos: [
+                  "Abrir el Explorador con Windows + E",
+                  "Identificar cada parte de la interfaz",
+                  "Explorar las pestañas de la cinta de opciones",
+                  "Navegar usando el panel izquierdo",
+                  "Practicar con la barra de direcciones"
+                ]
+              }
+            ]
+          },
+          {
+            id: 2,
+            titulo: "Vistas y Organización de Archivos",
+            contenido: `
+              <h3>👁️ Dominio de las Vistas del Explorador</h3>
+              <p>El Explorador ofrece múltiples formas de visualizar tus archivos para adaptarse a diferentes necesidades.</p>
+
+              <h4>🖼️ Tipos de vista disponibles:</h4>
+              <div class="tipos-vista">
+                <div class="vista">
+                  <h5>🔳 Iconos extra grandes</h5>
+                  <p><strong>Ideal para:</strong> Imágenes, videos, identificación visual rápida</p>
+                  <ul>
+                    <li>Miniaturas de imágenes visibles</li>
+                    <li>Fácil identificación de tipos de archivo</li>
+                    <li>Perfecto para carpetas multimedia</li>
+                  </ul>
+                </div>
+                <div class="vista">
+                  <h5>🔲 Iconos grandes/medianos/pequeños</h5>
+                  <p><strong>Ideal para:</strong> Balance entre visibilidad y cantidad</p>
+                  <ul>
+                    <li>Buen balance espacio/información</li>
+                    <li>Navegación general de carpetas</li>
+                    <li>Vista estándar más utilizada</li>
+                  </ul>
+                </div>
+                <div class="vista">
+                  <h5>📋 Lista</h5>
+                  <p><strong>Ideal para:</strong> Ver muchos archivos en poco espacio</p>
+                  <ul>
+                    <li>Vista compacta vertical</li>
+                    <li>Solo nombres de archivo</li>
+                    <li>Navegación rápida por listas largas</li>
+                  </ul>
+                </div>
+                <div class="vista">
+                  <h5>📊 Detalles</h5>
+                  <p><strong>Ideal para:</strong> Información completa de archivos</p>
+                  <ul>
+                    <li>Columnas con metadatos completos</li>
+                    <li>Fecha, tamaño, tipo, fecha de modificación</li>
+                    <li>Ordenamiento por cualquier columna</li>
+                    <li>Perfecto para gestión profesional</li>
+                  </ul>
+                </div>
+                <div class="vista">
+                  <h5>🏗️ Mosaicos</h5>
+                  <p><strong>Ideal para:</strong> Información básica con iconos medianos</p>
+                  <ul>
+                    <li>Combina icono con información básica</li>
+                    <li>Muestra tipo y tamaño de archivo</li>
+                    <li>Buena para organización general</li>
+                  </ul>
+                </div>
+                <div class="vista">
+                  <h5>📑 Contenido</h5>
+                  <p><strong>Ideal para:</strong> Vista previa de documentos</p>
+                  <ul>
+                    <li>Muestra preview del contenido</li>
+                    <li>Especial para documentos de texto</li>
+                    <li>Información detallada visible</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🔧 Personalización de vistas:</h4>
+              <div class="personalizacion-vista">
+                <div class="opcion">
+                  <h5>📏 Ajustar tamaño de iconos</h5>
+                  <p>Arrastra el control deslizante en la pestaña "Ver"</p>
+                </div>
+                <div class="opcion">
+                  <h5>📋 Personalizar columnas (Vista Detalles)</h5>
+                  <ul>
+                    <li>Clic derecho en encabezados de columna</li>
+                    <li>Agregar/quitar columnas específicas</li>
+                    <li>Redimensionar arrastrando bordes</li>
+                    <li>Reordenar arrastrando encabezados</li>
+                  </ul>
+                </div>
+                <div class="opcion">
+                  <h5>🎯 Agrupar archivos</h5>
+                  <ul>
+                    <li>Clic derecho → "Agrupar por"</li>
+                    <li>Opciones: Nombre, Fecha, Tamaño, Tipo</li>
+                    <li>Crear grupos organizados visualmente</li>
+                  </ul>
+                </div>
+                <div class="opcion">
+                  <h5>📊 Ordenar archivos</h5>
+                  <ul>
+                    <li>Clic en encabezados de columna</li>
+                    <li>Segundo clic para orden inverso</li>
+                    <li>Menú contextual → "Ordenar por"</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🎨 Opciones de vista avanzadas:</h4>
+              <div class="opciones-avanzadas">
+                <div class="opcion">
+                  <h5>👁️ Mostrar elementos ocultos</h5>
+                  <p>Pestaña Ver → Activar "Elementos ocultos"</p>
+                </div>
+                <div class="opcion">
+                  <h5>📄 Extensiones de archivo</h5>
+                  <p>Pestaña Ver → Activar "Extensiones de nombre de archivo"</p>
+                </div>
+                <div class="opcion">
+                  <h5>ℹ️ Panel de vista previa</h5>
+                  <p>Pestaña Ver → Activar "Panel de vista previa"</p>
+                </div>
+                <div class="opcion">
+                  <h5>📋 Panel de detalles</h5>
+                  <p>Pestaña Ver → Activar "Panel de detalles"</p>
+                </div>
+              </div>
+
+              <div class="tip-profesional">
+                <h4>💡 Tip Profesional:</h4>
+                <p>Configura la vista óptima para cada tipo de carpeta (documentos, fotos, música) y Windows recordará tu preferencia para carpetas similares.</p>
+              </div>
+            `,
+            actividades: [
+              {
+                tipo: "practica",
+                titulo: "Maestría de Vistas",
+                descripcion: "Domina todas las vistas del Explorador",
+                pasos: [
+                  "Crear una carpeta de prueba con diferentes tipos de archivos",
+                  "Probar cada vista disponible",
+                  "Personalizar la vista de detalles agregando columnas",
+                  "Agrupar archivos por tipo y fecha",
+                  "Configurar opciones avanzadas de visualización"
+                ]
+              }
+            ]
+          },
+          {
+            id: 3,
+            titulo: "Gestión de Archivos y Carpetas",
+            contenido: `
+              <h3>📁 Operaciones Fundamentales con Archivos y Carpetas</h3>
+              <p>Domina las operaciones esenciales para organizar eficientemente tu información digital.</p>
+
+              <h4>📂 Creación de carpetas:</h4>
+              <div class="crear-carpetas">
+                <div class="metodo">
+                  <h5>🖱️ Método con ratón</h5>
+                  <ol>
+                    <li>Clic derecho en espacio vacío</li>
+                    <li>Nuevo → Carpeta</li>
+                    <li>Escribir nombre y presionar Enter</li>
+                  </ol>
+                </div>
+                <div class="metodo">
+                  <h5>⌨️ Método con teclado</h5>
+                  <ol>
+                    <li><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd></li>
+                    <li>Escribir nombre inmediatamente</li>
+                    <li>Presionar Enter para confirmar</li>
+                  </ol>
+                </div>
+                <div class="metodo">
+                  <h5>🎀 Desde la cinta</h5>
+                  <ol>
+                    <li>Pestaña "Inicio"</li>
+                    <li>Clic en "Nueva carpeta"</li>
+                    <li>Nombrar la carpeta</li>
+                  </ol>
+                </div>
+              </div>
+
+              <h4>📄 Propiedades de archivos y carpetas:</h4>
+              <div class="propiedades-archivos">
+                <div class="propiedad">
+                  <h5>ℹ️ Información básica</h5>
+                  <ul>
+                    <li><strong>Nombre:</strong> Identificación del archivo</li>
+                    <li><strong>Tipo:</strong> Extensión y programa asociado</li>
+                    <li><strong>Ubicación:</strong> Ruta completa en el disco</li>
+                    <li><strong>Tamaño:</strong> Espacio ocupado en disco</li>
+                  </ul>
+                </div>
+                <div class="propiedad">
+                  <h5>📅 Fechas importantes</h5>
+                  <ul>
+                    <li><strong>Creado:</strong> Cuándo se creó originalmente</li>
+                    <li><strong>Modificado:</strong> Última vez que se cambió</li>
+                    <li><strong>Accedido:</strong> Última vez que se abrió</li>
+                  </ul>
+                </div>
+                <div class="propiedad">
+                  <h5>🔒 Atributos y permisos</h5>
+                  <ul>
+                    <li><strong>Solo lectura:</strong> No se puede modificar</li>
+                    <li><strong>Oculto:</strong> No visible normalmente</li>
+                    <li><strong>Sistema:</strong> Archivo crítico de Windows</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🎯 Selección de archivos:</h4>
+              <div class="seleccion-archivos">
+                <div class="metodo-seleccion">
+                  <h5>👆 Selección individual</h5>
+                  <p>Un clic para seleccionar un archivo</p>
+                </div>
+                <div class="metodo-seleccion">
+                  <h5>🔄 Selección múltiple</h5>
+                  <ul>
+                    <li><kbd>Ctrl</kbd> + clic: Seleccionar archivos específicos</li>
+                    <li><kbd>Shift</kbd> + clic: Seleccionar rango de archivos</li>
+                    <li><kbd>Ctrl</kbd> + <kbd>A</kbd>: Seleccionar todo</li>
+                  </ul>
+                </div>
+                <div class="metodo-seleccion">
+                  <h5>🖱️ Selección por arrastre</h5>
+                  <p>Arrastrar para crear un rectángulo de selección</p>
+                </div>
+                <div class="metodo-seleccion">
+                  <h5>✅ Casillas de verificación</h5>
+                  <p>Activar en Ver → Opciones → Casillas de verificación</p>
+                </div>
+              </div>
+
+              <h4>📋 Operaciones básicas:</h4>
+              <div class="operaciones-basicas">
+                <div class="operacion">
+                  <h5>📁 Copiar</h5>
+                  <ul>
+                    <li><kbd>Ctrl</kbd> + <kbd>C</kbd></li>
+                    <li>Clic derecho → Copiar</li>
+                    <li>Mantiene el original</li>
+                  </ul>
+                </div>
+                <div class="operacion">
+                  <h5>✂️ Cortar</h5>
+                  <ul>
+                    <li><kbd>Ctrl</kbd> + <kbd>X</kbd></li>
+                    <li>Clic derecho → Cortar</li>
+                    <li>Mueve el archivo</li>
+                  </ul>
+                </div>
+                <div class="operacion">
+                  <h5>📄 Pegar</h5>
+                  <ul>
+                    <li><kbd>Ctrl</kbd> + <kbd>V</kbd></li>
+                    <li>Clic derecho → Pegar</li>
+                    <li>Completa la operación</li>
+                  </ul>
+                </div>
+                <div class="operacion">
+                  <h5>🏷️ Renombrar</h5>
+                  <ul>
+                    <li><kbd>F2</kbd> (más rápido)</li>
+                    <li>Clic derecho → Cambiar nombre</li>
+                    <li>Clic lento doble en el nombre</li>
+                  </ul>
+                </div>
+                <div class="operacion">
+                  <h5>🗑️ Eliminar</h5>
+                  <ul>
+                    <li><kbd>Delete</kbd>: A la papelera</li>
+                    <li><kbd>Shift</kbd> + <kbd>Delete</kbd>: Eliminación permanente</li>
+                    <li>Clic derecho → Eliminar</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🎨 Organización eficiente:</h4>
+              <div class="organizacion-eficiente">
+                <div class="principio">
+                  <h5>📁 Estructura jerárquica</h5>
+                  <ul>
+                    <li>Crear carpetas temáticas principales</li>
+                    <li>Subcarpetas por subtemas o fechas</li>
+                    <li>No más de 3-4 niveles de profundidad</li>
+                  </ul>
+                </div>
+                <div class="principio">
+                  <h5>🏷️ Convenciones de nombres</h5>
+                  <ul>
+                    <li>Nombres descriptivos y concisos</li>
+                    <li>Usar fechas: YYYY-MM-DD</li>
+                    <li>Evitar caracteres especiales: / \\ : * ? " < > |</li>
+                  </ul>
+                </div>
+                <div class="principio">
+                  <h5>🎯 Categorización lógica</h5>
+                  <ul>
+                    <li>Por proyecto, fecha, tipo, importancia</li>
+                    <li>Mantener consistencia en toda la estructura</li>
+                    <li>Revisar y limpiar periódicamente</li>
+                  </ul>
+                </div>
+              </div>
+            `,
+            actividades: [
+              {
+                tipo: "practica",
+                titulo: "Laboratorio de Gestión de Archivos",
+                descripcion: "Practica todas las operaciones de gestión",
+                pasos: [
+                  "Crear una estructura de carpetas temática",
+                  "Crear archivos de prueba de diferentes tipos",
+                  "Practicar copiar, mover y renombrar",
+                  "Explorar propiedades de archivos",
+                  "Organizar archivos por diferentes criterios"
+                ]
+              }
+            ]
+          },
+          {
+            id: 4,
+            titulo: "Búsqueda Avanzada y Herramientas",
+            contenido: `
+              <h3>🔍 Dominio de la Búsqueda en Windows</h3>
+              <p>Encuentra cualquier archivo o información rápidamente usando las potentes herramientas de búsqueda de Windows.</p>
+
+              <h4>🎯 Búsqueda básica:</h4>
+              <div class="busqueda-basica">
+                <div class="metodo-busqueda">
+                  <h5>📍 Búsqueda local</h5>
+                  <ul>
+                    <li>Cuadro de búsqueda en el Explorador</li>
+                    <li>Busca solo en la carpeta actual</li>
+                    <li>Incluye subcarpetas automáticamente</li>
+                    <li>Resultados en tiempo real</li>
+                  </ul>
+                </div>
+                <div class="metodo-busqueda">
+                  <h5>🌐 Búsqueda global</h5>
+                  <ul>
+                    <li>Cuadro de búsqueda del menú Inicio</li>
+                    <li>Busca en todo el sistema</li>
+                    <li>Incluye configuraciones y aplicaciones</li>
+                    <li><kbd>Windows</kbd> + <kbd>S</kbd> para acceso rápido</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🔧 Técnicas de búsqueda avanzada:</h4>
+              <div class="busqueda-avanzada">
+                <div class="tecnica">
+                  <h5>📅 Búsqueda por fecha</h5>
+                  <ul>
+                    <li><code>fechamodificación:hoy</code></li>
+                    <li><code>fechamodificación:esta semana</code></li>
+                    <li><code>fechamodificación:>01/01/2024</code></li>
+                    <li><code>fecha:enero</code></li>
+                  </ul>
+                </div>
+                <div class="tecnica">
+                  <h5>📊 Búsqueda por tamaño</h5>
+                  <ul>
+                    <li><code>tamaño:>1GB</code></li>
+                    <li><code>tamaño:vacío</code></li>
+                    <li><code>tamaño:pequeño</code> (< 100 KB)</li>
+                    <li><code>tamaño:grande</code> (> 1 MB)</li>
+                  </ul>
+                </div>
+                <div class="tecnica">
+                  <h5>📄 Búsqueda por tipo</h5>
+                  <ul>
+                    <li><code>tipo:documento</code></li>
+                    <li><code>tipo:imagen</code></li>
+                    <li><code>tipo:música</code></li>
+                    <li><code>ext:.pdf</code></li>
+                  </ul>
+                </div>
+                <div class="tecnica">
+                  <h5>✨ Operadores especiales</h5>
+                  <ul>
+                    <li><code>"texto exacto"</code> - Buscar frase exacta</li>
+                    <li><code>archivo OR documento</code> - Cualquiera de los términos</li>
+                    <li><code>-palabra</code> - Excluir término</li>
+                    <li><code>arch*</code> - Comodín al final</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🎛️ Filtros de búsqueda:</h4>
+              <div class="filtros-busqueda">
+                <div class="categoria-filtro">
+                  <h5>📁 Por ubicación</h5>
+                  <ul>
+                    <li>Seleccionar carpetas específicas</li>
+                    <li>Incluir/excluir unidades</li>
+                    <li>Bibliotecas y ubicaciones de red</li>
+                  </ul>
+                </div>
+                <div class="categoria-filtro">
+                  <h5>🏷️ Por propiedades</h5>
+                  <ul>
+                    <li>Autor, título, etiquetas</li>
+                    <li>Calificación de archivos multimedia</li>
+                    <li>Comentarios y metadatos</li>
+                  </ul>
+                </div>
+                <div class="categoria-filtro">
+                  <h5>🎭 Por contenido</h5>
+                  <ul>
+                    <li>Texto dentro de documentos</li>
+                    <li>Metadatos de fotos</li>
+                    <li>Información de archivos multimedia</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🛠️ Herramientas útiles del Explorador:</h4>
+              <div class="herramientas-utiles">
+                <div class="herramienta">
+                  <h5>📋 Historial de archivos recientes</h5>
+                  <ul>
+                    <li>Acceso rápido → Reciente</li>
+                    <li>Archivos usados recientemente</li>
+                    <li>Organizado por fecha</li>
+                  </ul>
+                </div>
+                <div class="herramienta">
+                  <h5>📌 Anclar a acceso rápido</h5>
+                  <ul>
+                    <li>Arrastrar carpetas al panel izquierdo</li>
+                    <li>Clic derecho → "Anclar a acceso rápido"</li>
+                    <li>Acceso instantáneo a ubicaciones frecuentes</li>
+                  </ul>
+                </div>
+                <div class="herramienta">
+                  <h5>🗂️ Bibliotecas</h5>
+                  <ul>
+                    <li>Agrupan carpetas relacionadas</li>
+                    <li>Documentos, Música, Imágenes, Videos</li>
+                    <li>Búsqueda unificada en múltiples ubicaciones</li>
+                  </ul>
+                </div>
+                <div class="herramienta">
+                  <h5>🎯 Vista previa</h5>
+                  <ul>
+                    <li>Panel de vista previa para archivos</li>
+                    <li>Ver contenido sin abrir el archivo</li>
+                    <li>Ideal para documentos e imágenes</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>⚡ Atajos de teclado esenciales:</h4>
+              <div class="atajos-explorador">
+                <div class="categoria-atajos">
+                  <h5>🧭 Navegación</h5>
+                  <ul>
+                    <li><kbd>Alt</kbd> + <kbd>←</kbd> - Atrás</li>
+                    <li><kbd>Alt</kbd> + <kbd>→</kbd> - Adelante</li>
+                    <li><kbd>Alt</kbd> + <kbd>↑</kbd> - Subir nivel</li>
+                    <li><kbd>F5</kbd> - Actualizar</li>
+                  </ul>
+                </div>
+                <div class="categoria-atajos">
+                  <h5>👁️ Vista</h5>
+                  <ul>
+                    <li><kbd>Ctrl</kbd> + <kbd>1-8</kbd> - Cambiar vista</li>
+                    <li><kbd>Alt</kbd> + <kbd>Enter</kbd> - Propiedades</li>
+                    <li><kbd>F11</kbd> - Pantalla completa</li>
+                  </ul>
+                </div>
+                <div class="categoria-atajos">
+                  <h5>🔍 Búsqueda</h5>
+                  <ul>
+                    <li><kbd>Ctrl</kbd> + <kbd>F</kbd> - Buscar</li>
+                    <li><kbd>F3</kbd> - Cuadro de búsqueda</li>
+                    <li><kbd>Ctrl</kbd> + <kbd>E</kbd> - Buscar</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="consejo-experto">
+                <h4>🎓 Consejo de Experto:</h4>
+                <p>Combina múltiples criterios de búsqueda para encontrar exactamente lo que necesitas. Por ejemplo: <code>tipo:imagen fechamodificación:esta semana tamaño:>5MB</code> encuentra fotos grandes tomadas recientemente.</p>
+              </div>
+            `,
+            actividades: [
+              {
+                tipo: "practica",
+                titulo: "Maestría en Búsqueda",
+                descripcion: "Domina todas las técnicas de búsqueda",
+                pasos: [
+                  "Crear archivos de prueba con diferentes propiedades",
+                  "Practicar búsquedas por fecha, tamaño y tipo",
+                  "Usar operadores avanzados de búsqueda",
+                  "Configurar filtros personalizados",
+                  "Crear consultas de búsqueda complejas"
+                ]
+              }
+            ]
+          }
+        ],
+        multimedia: [
+          {
+            tipo: "video",
+            titulo: "Tour completo del Explorador de Windows",
+            url: "/videos/intro-windows/explorador-tour-completo.mp4",
+            duracion: "12:30 min"
+          },
+          {
+            tipo: "video",
+            titulo: "Gestión profesional de archivos y carpetas",
+            url: "/videos/intro-windows/gestion-archivos-profesional.mp4",
+            duracion: "15:45 min"
+          },
+          {
+            tipo: "video",
+            titulo: "Búsqueda avanzada y filtros",
+            url: "/videos/intro-windows/busqueda-avanzada.mp4",
+            duracion: "10:20 min"
+          },
+          {
+            tipo: "interactivo",
+            titulo: "Simulador: Organización de archivos",
+            url: "/simuladores/intro-windows/organizacion-archivos.html",
+            descripcion: "Practica organizando una estructura de archivos compleja"
+          }
+        ],
+        recursos: [
+          {
+            tipo: "documento",
+            titulo: "Guía Completa del Explorador de Windows",
+            descripcion: "Manual ilustrado con todas las funciones del Explorador",
+            url: "/recursos/intro-windows/guia-explorador-completa.pdf"
+          },
+          {
+            tipo: "documento",
+            titulo: "Atajos de Teclado del Explorador",
+            descripcion: "Referencia rápida de todos los atajos útiles",
+            url: "/recursos/intro-windows/atajos-explorador.pdf"
+          },
+          {
+            tipo: "documento",
+            titulo: "Plantillas de Organización de Archivos",
+            descripcion: "Estructuras recomendadas para diferentes tipos de usuarios",
+            url: "/recursos/intro-windows/plantillas-organizacion.pdf"
+          },
+          {
+            tipo: "documento",
+            titulo: "Guía de Búsqueda Avanzada",
+            descripcion: "Operadores y técnicas de búsqueda profesional",
+            url: "/recursos/intro-windows/busqueda-avanzada-guia.pdf"
+          }
+        ],
+        actividadesPracticas: [
+          {
+            id: 1,
+            titulo: "Configuración Personalizada del Explorador",
+            tipo: "individual",
+            descripcion: "Configura el Explorador de Windows para maximum eficiencia personal",
+            objetivos: [
+              "Personalizar la interfaz del Explorador según preferencias",
+              "Configurar vistas óptimas para diferentes tipos de carpetas",
+              "Establecer un sistema de organización personal",
+              "Dominar la navegación rápida entre ubicaciones"
+            ],
+            instrucciones: [
+              "Personalizar la barra de herramientas de acceso rápido",
+              "Configurar el panel de navegación con carpetas frecuentes",
+              "Establecer vistas predeterminadas para Documentos, Fotos, etc.",
+              "Crear una estructura de carpetas personal organizada",
+              "Configurar opciones de visualización avanzadas",
+              "Practicar navegación con atajos de teclado",
+              "Configurar bibliotecas personalizadas"
+            ],
+            tiempoEstimado: "35 minutos",
+            evaluacion: "Explorador personalizado y demostración de navegación eficiente",
+            recursosNecesarios: ["Computador con Windows", "Archivos de prueba variados"]
+          },
+          {
+            id: 2,
+            titulo: "Proyecto de Organización Digital",
+            tipo: "proyecto",
+            descripcion: "Crear y mantener un sistema completo de organización de archivos digitales",
+            objetivos: [
+              "Diseñar una estructura de carpetas lógica y escalable",
+              "Implementar convenciones de nomenclatura consistentes",
+              "Utilizar metadatos y propiedades para mejor organización",
+              "Demostrar competencia en gestión de archivos masiva"
+            ],
+            instrucciones: [
+              "Analizar y documentar el estado actual de archivos",
+              "Diseñar una estructura de carpetas jerárquica optimizada",
+              "Establecer convenciones de nombres claras y consistentes",
+              "Migrar archivos existentes a la nueva estructura",
+              "Etiquetar archivos con metadatos relevantes",
+              "Crear un sistema de backup y mantenimiento",
+              "Documentar el sistema para uso futuro"
+            ],
+            tiempoEstimado: "60 minutos",
+            evaluacion: "Estructura de archivos organizada, documentación del sistema y presentación",
+            entregables: [
+              "Estructura de carpetas implementada",
+              "Documento de convenciones de nomenclatura",
+              "Plan de mantenimiento periódico"
+            ]
+          },
+          {
+            id: 3,
+            titulo: "Competencia de Búsqueda Rápida",
+            tipo: "evaluacion",
+            descripcion: "Prueba cronometrada de habilidades de búsqueda y localización de archivos",
+            objetivos: [
+              "Demostrar velocidad en localización de archivos específicos",
+              "Utilizar búsquedas avanzadas con múltiples criterios",
+              "Mostrar dominio de operadores de búsqueda",
+              "Aplicar filtros complejos eficientemente"
+            ],
+            instrucciones: [
+              "TIEMPO LÍMITE: 20 minutos para 10 tareas de búsqueda",
+              "Tarea 1: Encontrar todos los archivos PDF creados la semana pasada",
+              "Tarea 2: Localizar imágenes de más de 5MB con palabra específica",
+              "Tarea 3: Buscar documentos que contengan texto específico",
+              "Tarea 4: Encontrar archivos modificados por autor específico",
+              "Tarea 5: Localizar archivos duplicados por nombre",
+              "Tarea 6: Buscar archivos vacíos en el sistema",
+              "Tarea 7: Encontrar música de artista específico",
+              "Tarea 8: Localizar archivos sin extensión",
+              "Tarea 9: Buscar carpetas con más de 100 archivos",
+              "Tarea 10: Combinar 3 criterios en una búsqueda compleja"
+            ],
+            tiempoEstimado: "20 minutos",
+            evaluacion: "Completar mínimo 8/10 tareas dentro del tiempo límite",
+            criteriosCalificacion: {
+              "Excelente": "10/10 tareas completadas en menos de 15 minutos",
+              "Bueno": "9/10 tareas completadas en 15-18 minutos",
+              "Satisfactorio": "8/10 tareas completadas en 18-20 minutos",
+              "Necesita mejora": "Menos de 8 tareas o exceso de tiempo"
+            }
+          },
+          {
+            id: 4,
+            titulo: "Simulacro de Gestión de Archivos Empresarial",
+            tipo: "simulacro",
+            descripcion: "Simula tareas reales de gestión de archivos en un entorno empresarial",
+            objetivos: [
+              "Aplicar buenas prácticas de gestión documental",
+              "Demostrar eficiencia en tareas repetitivas",
+              "Utilizar herramientas avanzadas del Explorador",
+              "Mantener organización bajo presión de tiempo"
+            ],
+            instrucciones: [
+              "Escenario: Eres asistente administrativo de una empresa",
+              "Recibir 50 documentos diversos sin organizar",
+              "Clasificar por departamento, fecha y tipo",
+              "Renombrar siguiendo convenciones empresariales",
+              "Crear estructura de carpetas por proyecto",
+              "Generar resumen de archivos procesados",
+              "Configurar accesos rápidos para equipos",
+              "Documentar procedimiento para otros usuarios"
+            ],
+            tiempoEstimado: "45 minutos",
+            evaluacion: "Organización completa, eficiencia y documentación del proceso",
+            escenarioReal: "Gestión documental en oficina corporativa"
+          }
+        ],
+        evaluacion: {
+          preRequisitos: ["Conocimientos básicos de Windows", "Completar Tema 1 del curso"],
+          criterios: [
+            "Navegar eficientemente por la interfaz del Explorador de Windows",
+            "Utilizar apropiadamente las diferentes vistas y opciones de organización",
+            "Realizar operaciones de gestión de archivos con precisión y velocidad",
+            "Aplicar técnicas de búsqueda avanzada para localizar información específica",
+            "Organizar archivos siguiendo principios de gestión documental profesional"
+          ],
+          tiempoEstimado: "40 minutos"
+        }
+      },
+      '3': {
+        titulo: "Escritorio de Windows",
+        duracion: "25-30 minutos",
+        objetivos: [
+          "Conocer todos los elementos del escritorio de Windows",
+          "Personalizar la apariencia del escritorio",
+          "Organizar iconos y accesos directos eficientemente",
+          "Configurar opciones de visualización"
+        ],
+        secciones: [
+          {
+            id: 1,
+            titulo: "Elementos del Escritorio",
+            contenido: `
+              <h3>🖥️ Conociendo el Escritorio de Windows</h3>
+              <p>El <strong>escritorio</strong> es tu espacio de trabajo principal en Windows, donde puedes acceder rápidamente a programas y archivos.</p>
+              
+              <h4>🧩 Partes principales del escritorio:</h4>
               <div class="elementos-escritorio">
                 <div class="elemento">
-                  <h5>🖼️ Fondo de Pantalla</h5>
+                  <h5>🎨 Fondo de pantalla</h5>
                   <ul>
-                    <li>Imagen decorativa de fondo</li>
-                    <li>Se puede personalizar</li>
-                    <li>No afecta el funcionamiento</li>
+                    <li>Imagen o color que cubre toda la pantalla</li>
+                    <li>Se puede personalizar según tus gustos</li>
+                    <li>No interfiere con el funcionamiento</li>
                   </ul>
                 </div>
                 <div class="elemento">
-                  <h5>📁 Iconos del Escritorio</h5>
+                  <h5>� Iconos del escritorio</h5>
                   <ul>
-                    <li><strong>Este equipo:</strong> Acceso a discos y carpetas</li>
+                    <li><strong>Este equipo:</strong> Acceso a unidades de disco</li>
                     <li><strong>Papelera:</strong> Archivos eliminados</li>
-                    <li><strong>Accesos directos:</strong> Links a programas</li>
+                    <li><strong>Accesos directos:</strong> Enlaces a programas</li>
+                    <li><strong>Archivos y carpetas:</strong> Contenido guardado</li>
                   </ul>
                 </div>
                 <div class="elemento">
-                  <h5>📊 Barra de Tareas</h5>
+                  <h5>� Barra de tareas</h5>
                   <ul>
-                    <li>Ubicada en la parte inferior</li>
-                    <li>Contiene el botón Inicio</li>
-                    <li>Muestra programas abiertos</li>
-                    <li>Área de notificaciones a la derecha</li>
+                    <li>Franja inferior con programas y notificaciones</li>
+                    <li>Siempre visible y accesible</li>
+                    <li>Centro de control de aplicaciones</li>
                   </ul>
                 </div>
               </div>
@@ -819,10 +7949,6 @@ export const ContenidoProvider = ({ children }) => {
                 </div>
               </div>
             `,
-            multimedia: {
-              imagen: "/images/teoria/escritorio-windows.jpg",
-              video: "/videos/teoria/navegar-escritorio.mp4"
-            },
             actividades: [
               {
                 tipo: "exploracion",
@@ -1163,1337 +8289,3158 @@ export const ContenidoProvider = ({ children }) => {
           tiempoEstimado: "25 minutos"
         }
       },
-      '3': {
-        titulo: "Configuración Básica de Windows",
-        duracion: "30-35 minutos",
+      '4': {
+        titulo: "Barra de tareas",
+        duracion: "25-30 minutos",
         objetivos: [
-          "Personalizar la apariencia de Windows",
-          "Configurar opciones básicas de sistema",
-          "Gestionar la configuración de usuario",
-          "Aplicar configuraciones de seguridad y privacidad básicas"
+          "Conocer todas las partes de la barra de tareas de Windows",
+          "Dominar el acceso rápido a programas y aplicaciones",
+          "Aprender a controlar aplicaciones en ejecución",
+          "Personalizar la barra de tareas según necesidades"
         ],
         secciones: [
           {
             id: 1,
-            titulo: "Personalización Visual",
+            titulo: "Partes de la barra de tareas",
             contenido: `
-              <h3>🎨 Personalizando Windows</h3>
-              <p>Haz que Windows se vea y se sienta como tú quieres.</p>
-              
-              <h4>🖼️ Cambiar fondo de pantalla:</h4>
-              <div class="pasos-configuracion">
-                <ol>
-                  <li>Clic derecho en el escritorio</li>
-                  <li>Seleccionar <strong>"Personalizar"</strong></li>
-                  <li>Elegir <strong>"Fondo"</strong></li>
-                  <li>Seleccionar imagen o color sólido</li>
-                  <li>Ajustar posición si es necesario</li>
-                </ol>
-              </div>
-
-              <h4>🌈 Opciones de fondo:</h4>
-              <div class="opciones-fondo">
-                <div class="opcion">
-                  <h5>📷 Imagen</h5>
-                  <ul>
-                    <li>Fotos personales</li>
-                    <li>Imágenes predeterminadas</li>
-                    <li>Descargas de internet</li>
-                  </ul>
-                </div>
-                <div class="opcion">
-                  <h5>🎨 Color sólido</h5>
-                  <ul>
-                    <li>Colores predefinidos</li>
-                    <li>Colores personalizados</li>
-                    <li>Menos distracción</li>
-                  </ul>
-                </div>
-                <div class="opcion">
-                  <h5>🔄 Presentación</h5>
-                  <ul>
-                    <li>Cambia automáticamente</li>
-                    <li>Múltiples imágenes</li>
-                    <li>Intervalo configurable</li>
-                  </ul>
-                </div>
-              </div>
-
-              <h4>🎪 Temas de Windows:</h4>
-              <div class="temas-windows">
-                <p>Los <strong>temas</strong> cambian múltiples elementos de una vez:</p>
-                <ul>
-                  <li><strong>Fondo de pantalla</strong></li>
-                  <li><strong>Colores de acento</strong></li>
-                  <li><strong>Sonidos del sistema</strong></li>
-                  <li><strong>Cursor del mouse</strong></li>
-                </ul>
+              <div class="seccion-contenido">
+                <h3>� Conociendo la barra de tareas de Windows</h3>
                 
-                <h5>🌟 Temas populares:</h5>
-                <div class="temas-grid">
-                  <div class="tema-item">
-                    <h6>🌙 Modo Oscuro</h6>
-                    <p>Reduce fatiga visual</p>
+                <div class="intro-barra">
+                  <p>La <strong>barra de tareas</strong> es una de las partes más importantes de Windows. Se encuentra ubicada en la parte inferior de la pantalla (aunque se puede mover) y actúa como el centro de control para acceder a programas, ver notificaciones y gestionar aplicaciones abiertas.</p>
+                </div>
+
+                <h4>🧩 Componentes principales</h4>
+                
+                <div class="componente">
+                  <h5>🚀 Botón de Inicio</h5>
+                  <ul>
+                    <li><strong>Ubicación:</strong> Extremo izquierdo de la barra</li>
+                    <li><strong>Función:</strong> Abre el menú de Inicio para acceder a programas y configuraciones</li>
+                    <li><strong>Acceso rápido:</strong> Presionar la tecla <kbd>Windows</kbd></li>
+                    <li><strong>Clic derecho:</strong> Menú contextual con opciones avanzadas</li>
+                  </ul>
+                </div>
+
+                <div class="componente">
+                  <h5>🔍 Cuadro de búsqueda</h5>
+                  <ul>
+                    <li><strong>Función:</strong> Buscar archivos, programas, configuraciones y contenido web</li>
+                    <li><strong>Acceso rápido:</strong> <kbd>Windows + S</kbd></li>
+                    <li><strong>Búsqueda inteligente:</strong> Sugiere resultados mientras escribes</li>
+                    <li><strong>Personalización:</strong> Se puede ocultar, minimizar o mostrar como ícono</li>
+                  </ul>
+                </div>
+
+                <div class="componente">
+                  <h5>💼 Área de programas anclados</h5>
+                  <ul>
+                    <li><strong>Propósito:</strong> Acceso rápido a aplicaciones favoritas</li>
+                    <li><strong>Iconos fijos:</strong> Programas que permanecen visibles siempre</li>
+                    <li><strong>Atajos de teclado:</strong> <kbd>Windows + [número]</kbd> (ej: Windows + 1)</li>
+                    <li><strong>Personalización:</strong> Arrastrar iconos para reorganizar</li>
+                  </ul>
+                </div>
+
+                <div class="componente">
+                  <h5>📱 Área de aplicaciones abiertas</h5>
+                  <ul>
+                    <li><strong>Función:</strong> Muestra programas actualmente en ejecución</li>
+                    <li><strong>Cambio rápido:</strong> Clic para cambiar entre ventanas</li>
+                    <li><strong>Vista previa:</strong> Hover sobre el icono para ver miniatura</li>
+                    <li><strong>Indicadores:</strong> Subrayado indica aplicación activa</li>
+                  </ul>
+                </div>
+
+                <div class="componente">
+                  <h5>🔔 Área de notificaciones</h5>
+                  <ul>
+                    <li><strong>Iconos del sistema:</strong> Hora, volumen, red, batería</li>
+                    <li><strong>Bandeja del sistema:</strong> Programas en segundo plano</li>
+                    <li><strong>Centro de actividades:</strong> <kbd>Windows + A</kbd></li>
+                    <li><strong>Notificaciones emergentes:</strong> Alertas del sistema y aplicaciones</li>
+                  </ul>
+                </div>
+
+                <div class="caracteristicas-especiales">
+                  <h4>⚡ Características especiales</h4>
+                  
+                  <div class="caracteristica">
+                    <h5>📌 Escritorios virtuales</h5>
+                    <p>Botón "Vista de tareas" (<kbd>Windows + Tab</kbd>) para gestionar múltiples escritorios</p>
                   </div>
-                  <div class="tema-item">
-                    <h6>☀️ Modo Claro</h6>
-                    <p>Mayor claridad diurna</p>
+                  
+                  <div class="caracteristica">
+                    <h5>📱 Integración con dispositivos</h5>
+                    <p>Iconos para Bluetooth, Wi-Fi, sincronización con teléfono</p>
                   </div>
-                  <div class="tema-item">
-                    <h6>🌈 Colores de Acento</h6>
-                    <p>Personaliza barras y botones</p>
+                  
+                  <div class="caracteristica">
+                    <h5>📅 Información contextual</h5>
+                    <p>Fecha, hora, clima (en algunas versiones)</p>
                   </div>
                 </div>
-              </div>
 
-              <h4>🔧 Personalización de la barra de tareas:</h4>
-              <div class="config-barra-tareas">
-                <p>Clic derecho en la barra de tareas → <strong>"Configuración de la barra de tareas"</strong></p>
-                <ul>
-                  <li><strong>Posición:</strong> Inferior, superior, laterales</li>
-                  <li><strong>Tamaño:</strong> Pequeña, mediana, grande</li>
-                  <li><strong>Ocultar automáticamente:</strong> Más espacio en pantalla</li>
-                  <li><strong>Iconos del área de notificación:</strong> Mostrar/ocultar</li>
-                </ul>
+                <div class="tip-personalizacion">
+                  <h4>🎨 Personalización básica</h4>
+                  <p>Haz clic derecho en cualquier espacio vacío de la barra de tareas para acceder a opciones de personalización como:</p>
+                  <ul>
+                    <li>Bloquear/desbloquear la barra de tareas</li>
+                    <li>Configuración de la barra de tareas</li>
+                    <li>Mostrar/ocultar elementos específicos</li>
+                  </ul>
+                </div>
               </div>
             `,
             multimedia: {
-              imagen: "/images/teoria/personalizacion-windows.jpg",
-              video: "/videos/teoria/personalizar-escritorio.mp4"
+              imagen: '/images/teoria/partes-barra-tareas.png',
+              video: '/videos/teoria/tour-barra-tareas.mp4'
             },
             actividades: [
-              {
-                tipo: "personalizacion",
-                pregunta: "Cambia el fondo de pantalla por una imagen personal",
-                ayuda: "Clic derecho en escritorio → Personalizar → Fondo"
-              },
-              {
-                tipo: "exploracion",
-                pregunta: "Prueba cambiar entre modo claro y oscuro",
-                ayuda: "Configuración → Personalización → Colores"
-              }
+              'Identificar cada componente de la barra de tareas',
+              'Practicar el acceso a programas usando atajos numéricos',
+              'Explorar el área de notificaciones y sus opciones'
             ]
           },
           {
             id: 2,
-            titulo: "Configuración de Sistema",
+            titulo: "Acceso rápido y anclado de aplicaciones",
             contenido: `
-              <h3>⚙️ Configuraciones Esenciales del Sistema</h3>
-              <p>Ajusta Windows para que funcione mejor según tus necesidades.</p>
-              
-              <h4>🔍 Accediendo a Configuración:</h4>
-              <div class="acceso-configuracion">
-                <div class="metodo">
-                  <h5>⌨️ Atajo rápido</h5>
-                  <p><strong>Windows + I</strong></p>
-                </div>
-                <div class="metodo">
-                  <h5>🖱️ Menú Inicio</h5>
-                  <p>Botón Inicio → ⚙️ Configuración</p>
-                </div>
-                <div class="metodo">
-                  <h5>🔍 Búsqueda</h5>
-                  <p>Windows → escribir "configuración"</p>
-                </div>
-              </div>
-
-              <h4>📊 Categorías principales:</h4>
-              <div class="categorias-config">
-                <div class="categoria">
-                  <h5>🖥️ Sistema</h5>
-                  <ul>
-                    <li><strong>Pantalla:</strong> Resolución, brillo, escalado</li>
-                    <li><strong>Sonido:</strong> Volumen, dispositivos de audio</li>
-                    <li><strong>Notificaciones:</strong> Qué mostrar y cuándo</li>
-                    <li><strong>Energía:</strong> Ahorro de batería, suspensión</li>
-                  </ul>
-                </div>
-                <div class="categoria">
-                  <h5>🌐 Red e Internet</h5>
-                  <ul>
-                    <li><strong>Wi-Fi:</strong> Conectar y gestionar redes</li>
-                    <li><strong>Ethernet:</strong> Conexiones por cable</li>
-                    <li><strong>Datos:</strong> Uso de internet</li>
-                    <li><strong>Zona con cobertura:</strong> Compartir internet</li>
-                  </ul>
-                </div>
-                <div class="categoria">
-                  <h5>🎮 Dispositivos</h5>
-                  <ul>
-                    <li><strong>Bluetooth:</strong> Emparejar dispositivos</li>
-                    <li><strong>Impresoras:</strong> Agregar y configurar</li>
-                    <li><strong>Mouse:</strong> Velocidad y botones</li>
-                    <li><strong>Teclado:</strong> Idioma y distribución</li>
-                  </ul>
-                </div>
-              </div>
-
-              <h4>🔧 Configuraciones importantes:</h4>
-              <div class="config-importantes">
-                <div class="config-item">
-                  <h5>🖥️ Resolución de pantalla</h5>
-                  <p><strong>Ruta:</strong> Sistema → Pantalla → Resolución</p>
-                  <ul>
-                    <li>Usa la resolución recomendada</li>
-                    <li>Ajusta escalado si el texto es muy pequeño</li>
-                    <li>Configura múltiples monitores si los tienes</li>
-                  </ul>
-                </div>
+              <div class="seccion-contenido">
+                <h3>⚡ Acceso rápido a aplicaciones</h3>
                 
-                <div class="config-item">
-                  <h5>🔊 Audio del sistema</h5>
-                  <p><strong>Ruta:</strong> Sistema → Sonido</p>
-                  <ul>
-                    <li>Selecciona dispositivo de salida correcto</li>
-                    <li>Ajusta volumen principal</li>
-                    <li>Configura micrófono si usas videollamadas</li>
-                  </ul>
+                <div class="intro-acceso">
+                  <p>La barra de tareas te permite tener acceso inmediato a tus aplicaciones más utilizadas mediante el <strong>anclado</strong> y diversos métodos de acceso rápido.</p>
                 </div>
-                
-                <div class="config-item">
-                  <h5>🔋 Administración de energía</h5>
-                  <p><strong>Ruta:</strong> Sistema → Energía y suspensión</p>
-                  <ul>
-                    <li><strong>Apagar pantalla:</strong> 10-15 minutos</li>
-                    <li><strong>Suspender PC:</strong> 30 minutos</li>
-                    <li><strong>Modo de energía:</strong> Equilibrado</li>
-                  </ul>
-                </div>
-              </div>
 
-              <h4>📱 Configuración de notificaciones:</h4>
-              <div class="config-notificaciones">
-                <p><strong>Ruta:</strong> Sistema → Notificaciones y acciones</p>
-                <div class="notif-opciones">
-                  <h5>🔔 Controla qué notificaciones recibes:</h5>
+                <h4>📌 Anclar aplicaciones</h4>
+                
+                <div class="metodos-anclar">
+                  <h5>Métodos para anclar:</h5>
                   <ul>
-                    <li>Desactiva apps que no necesitas</li>
-                    <li>Configura horario de silencio</li>
-                    <li>Personaliza sonidos de notificación</li>
-                    <li>Elige dónde aparecen (pantalla de bloqueo, centro de actividades)</li>
+                    <li><strong>Desde aplicación abierta:</strong> Clic derecho en el icono → "Anclar a la barra de tareas"</li>
+                    <li><strong>Desde menú Inicio:</strong> Clic derecho en aplicación → "Anclar a la barra de tareas"</li>
+                    <li><strong>Arrastrando:</strong> Arrastrar desde el escritorio o menú Inicio</li>
+                    <li><strong>Desde Explorador:</strong> Clic derecho en archivo .exe → "Anclar a la barra de tareas"</li>
+                  </ul>
+                </div>
+
+                <div class="organizacion-iconos">
+                  <h4>🎯 Organización de iconos anclados</h4>
+                  <ul>
+                    <li><strong>Reordenar:</strong> Arrastrar iconos para cambiar posición</li>
+                    <li><strong>Agrupar:</strong> Colocar aplicaciones relacionadas juntas</li>
+                    <li><strong>Priorizar:</strong> Aplicaciones más usadas hacia la izquierda</li>
+                    <li><strong>Desanclar:</strong> Clic derecho → "Desanclar de la barra de tareas"</li>
+                  </ul>
+                </div>
+
+                <h4>⌨️ Atajos de teclado para acceso rápido</h4>
+                
+                <div class="atajos-numericos">
+                  <h5>Acceso numérico:</h5>
+                  <div class="atajos-grid">
+                    <div class="atajo-item">
+                      <kbd>Windows + 1</kbd>
+                      <p>Primera aplicación anclada</p>
+                    </div>
+                    <div class="atajo-item">
+                      <kbd>Windows + 2</kbd>
+                      <p>Segunda aplicación anclada</p>
+                    </div>
+                    <div class="atajo-item">
+                      <kbd>Windows + 3</kbd>
+                      <p>Tercera aplicación anclada</p>
+                    </div>
+                    <div class="atajo-item">
+                      <kbd>Windows + [1-0]</kbd>
+                      <p>Aplicaciones ancladas 1-10</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="funciones-avanzadas">
+                  <h4>🔧 Funciones avanzadas</h4>
+                  <ul>
+                    <li><strong>Mayús + clic:</strong> Abrir nueva instancia de la aplicación</li>
+                    <li><strong>Ctrl + Mayús + clic:</strong> Abrir como administrador</li>
+                    <li><strong>Rueda del ratón:</strong> Recorrer ventanas de la misma aplicación</li>
+                    <li><strong>Clic medio:</strong> Abrir nueva instancia</li>
+                  </ul>
+                </div>
+
+                <div class="mejores-practicas">
+                  <h4>💡 Mejores prácticas</h4>
+                  <ul>
+                    <li>Mantener máximo 8-10 aplicaciones ancladas</li>
+                    <li>Organizar por frecuencia de uso</li>
+                    <li>Agrupar aplicaciones similares</li>
+                    <li>Usar atajos numéricos para máxima eficiencia</li>
+                    <li>Revisar y actualizar aplicaciones ancladas periódicamente</li>
                   </ul>
                 </div>
               </div>
             `,
             multimedia: {
-              imagen: "/images/teoria/configuracion-sistema.jpg",
-              video: "/videos/teoria/configurar-windows-basico.mp4"
+              imagen: '/images/teoria/anclar-aplicaciones.png',
+              video: '/videos/teoria/acceso-rapido-aplicaciones.mp4'
             },
             actividades: [
-              {
-                tipo: "configuracion",
-                pregunta: "Ajusta la resolución de pantalla a la recomendada",
-                ayuda: "Windows + I → Sistema → Pantalla → Resolución"
-              },
-              {
-                tipo: "personalizacion",
-                pregunta: "Configura las notificaciones para no molestar en horario nocturno",
-                ayuda: "Sistema → Notificaciones → Asistente de concentración"
-              }
+              'Anclar 5 aplicaciones más utilizadas',
+              'Organizar iconos por orden de prioridad',
+              'Practicar atajos numéricos Windows + 1, 2, 3...',
+              'Probar funciones avanzadas con Mayús y Ctrl'
             ]
           },
           {
             id: 3,
-            titulo: "Configuración de Usuario",
+            titulo: "Control de aplicaciones en ejecución",
             contenido: `
-              <h3>👤 Gestión de Cuentas de Usuario</h3>
-              <p>Configura tu perfil y gestiona múltiples usuarios en el mismo PC.</p>
-              
-              <h4>🏠 Cuenta local vs Cuenta Microsoft:</h4>
-              <div class="tipos-cuenta">
-                <div class="tipo-cuenta">
-                  <h5>🏠 Cuenta Local</h5>
-                  <div class="ventajas-desventajas">
-                    <h6>✅ Ventajas:</h6>
-                    <ul>
-                      <li>No requiere internet</li>
-                      <li>Más privacidad</li>
-                      <li>Control total local</li>
-                    </ul>
-                    <h6>❌ Desventajas:</h6>
-                    <ul>
-                      <li>Sin sincronización</li>
-                      <li>Sin OneDrive automático</li>
-                      <li>Sin Microsoft Store completa</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="tipo-cuenta">
-                  <h5>☁️ Cuenta Microsoft</h5>
-                  <div class="ventajas-desventajas">
-                    <h6>✅ Ventajas:</h6>
-                    <ul>
-                      <li>Sincronización entre dispositivos</li>
-                      <li>OneDrive incluido</li>
-                      <li>Microsoft Store completa</li>
-                      <li>Office 365 integrado</li>
-                    </ul>
-                    <h6>❌ Desventajas:</h6>
-                    <ul>
-                      <li>Requiere internet</li>
-                      <li>Más recopilación de datos</li>
-                      <li>Dependencia de servicios Microsoft</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <h4>👥 Gestión de múltiples usuarios:</h4>
-              <div class="gestion-usuarios">
-                <p><strong>Ruta:</strong> Configuración → Cuentas → Familia y otros usuarios</p>
+              <div class="seccion-contenido">
+                <h3>🎮 Control de aplicaciones activas</h3>
                 
-                <h5>👨‍👩‍👧‍👦 Tipos de cuentas:</h5>
-                <div class="tipos-usuario">
-                  <div class="tipo-usuario">
-                    <h6>👑 Administrador</h6>
-                    <ul>
-                      <li>Control total del sistema</li>
-                      <li>Instalar/desinstalar programas</li>
-                      <li>Cambiar configuraciones del sistema</li>
-                      <li>Gestionar otros usuarios</li>
-                    </ul>
-                  </div>
-                  <div class="tipo-usuario">
-                    <h6>👤 Usuario estándar</h6>
-                    <ul>
-                      <li>Uso normal de aplicaciones</li>
-                      <li>Cambios limitados al sistema</li>
-                      <li>No puede instalar software</li>
-                      <li>Perfil personal protegido</li>
-                    </ul>
-                  </div>
-                  <div class="tipo-usuario">
-                    <h6>👶 Cuenta familiar (niños)</h6>
-                    <ul>
-                      <li>Control parental automático</li>
-                      <li>Límites de tiempo de pantalla</li>
-                      <li>Filtros de contenido</li>
-                      <li>Reportes de actividad</li>
-                    </ul>
-                  </div>
+                <div class="intro-control">
+                  <p>La barra de tareas te permite controlar y gestionar eficientemente todas las aplicaciones que están <strong>actualmente en ejecución</strong> en tu sistema.</p>
                 </div>
-              </div>
 
-              <h4>🔐 Cambiar información de usuario:</h4>
-              <div class="cambiar-info-usuario">
-                <p><strong>Ruta:</strong> Configuración → Cuentas → Tu información</p>
+                <h4>👁️ Identificar aplicaciones activas</h4>
                 
-                <h5>📝 Qué puedes cambiar:</h5>
-                <ul>
-                  <li><strong>Foto de perfil:</strong> Imagen personal o avatar</li>
-                  <li><strong>Nombre de usuario:</strong> Como apareces en el sistema</li>
-                  <li><strong>Contraseña:</strong> Para seguridad de la cuenta</li>
-                  <li><strong>PIN:</strong> Acceso rápido con números</li>
-                  <li><strong>Windows Hello:</strong> Reconocimiento facial o huella</li>
-                </ul>
+                <div class="indicadores-visuales">
+                  <h5>Indicadores visuales:</h5>
+                  <ul>
+                    <li><strong>Subrayado:</strong> Línea debajo del icono indica aplicación abierta</li>
+                    <li><strong>Múltiples líneas:</strong> Varias instancias de la misma aplicación</li>
+                    <li><strong>Resaltado:</strong> Aplicación actualmente enfocada</li>
+                    <li><strong>Vista previa:</strong> Miniatura al pasar el cursor sobre el icono</li>
+                  </ul>
+                </div>
 
-                <div class="metodos-acceso">
-                  <h5>🚪 Métodos de inicio de sesión:</h5>
-                  <div class="metodos-grid">
-                    <div class="metodo-acceso">
-                      <h6>🔑 Contraseña tradicional</h6>
-                      <p>Segura pero puede ser lenta de escribir</p>
+                <h4>🔄 Cambio entre aplicaciones</h4>
+                
+                <div class="metodos-cambio">
+                  <h5>Métodos de cambio:</h5>
+                  <ul>
+                    <li><strong>Clic simple:</strong> Cambiar a aplicación específica</li>
+                    <li><strong>Alt + Tab:</strong> Navegación secuencial entre aplicaciones</li>
+                    <li><strong>Windows + Tab:</strong> Vista de tareas con miniaturas</li>
+                    <li><strong>Windows + [número]:</strong> Cambiar a aplicación anclada específica</li>
+                  </ul>
+                </div>
+
+                <div class="gestion-ventanas">
+                  <h4>🪟 Gestión de ventanas</h4>
+                  
+                  <div class="acciones-ventana">
+                    <h5>Acciones desde la barra de tareas:</h5>
+                    <ul>
+                      <li><strong>Minimizar:</strong> Clic en aplicación activa la oculta</li>
+                      <li><strong>Restaurar:</strong> Clic en aplicación minimizada la muestra</li>
+                      <li><strong>Cerrar:</strong> Clic derecho → "Cerrar ventana" o X en vista previa</li>
+                      <li><strong>Maximizar:</strong> Doble clic en vista previa</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <h4>📱 Múltiples instancias</h4>
+                
+                <div class="instancias-multiples">
+                  <h5>Gestionar varias ventanas de la misma aplicación:</h5>
+                  <ul>
+                    <li><strong>Vista previa agrupada:</strong> Hover muestra todas las ventanas</li>
+                    <li><strong>Clic en miniatura:</strong> Cambiar a ventana específica</li>
+                    <li><strong>Rueda del ratón:</strong> Recorrer ventanas de la aplicación</li>
+                    <li><strong>Mayús + clic:</strong> Abrir nueva instancia</li>
+                  </ul>
+                </div>
+
+                <div class="atajos-control">
+                  <h4>⌨️ Atajos avanzados para control</h4>
+                  <div class="atajos-grid">
+                    <div class="atajo-item">
+                      <kbd>Alt + Tab</kbd>
+                      <p>Cambiar entre aplicaciones</p>
                     </div>
-                    <div class="metodo-acceso">
-                      <h6>🔢 PIN</h6>
-                      <p>Rápido, solo números, específico del dispositivo</p>
+                    <div class="atajo-item">
+                      <kbd>Alt + Shift + Tab</kbd>
+                      <p>Cambiar en orden inverso</p>
                     </div>
-                    <div class="metodo-acceso">
-                      <h6>👁️ Windows Hello</h6>
-                      <p>Reconocimiento facial o huella dactilar</p>
+                    <div class="atajo-item">
+                      <kbd>Windows + T</kbd>
+                      <p>Recorrer aplicaciones en barra</p>
                     </div>
-                    <div class="metodo-acceso">
-                      <h6>🔐 Clave de imagen</h6>
-                      <p>Gestos sobre una imagen personal</p>
+                    <div class="atajo-item">
+                      <kbd>Windows + D</kbd>
+                      <p>Mostrar/ocultar escritorio</p>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <h4>🔄 Cambiar entre usuarios:</h4>
-              <div class="cambio-usuarios">
-                <h5>⚡ Métodos rápidos:</h5>
-                <ul>
-                  <li><strong>Windows + L:</strong> Bloquear y cambiar usuario</li>
-                  <li><strong>Ctrl + Alt + Delete:</strong> Pantalla de seguridad → Cambiar usuario</li>
-                  <li><strong>Menú Inicio:</strong> Clic en icono de usuario</li>
-                  <li><strong>Alt + F4</strong> en escritorio → Cerrar sesión</li>
-                </ul>
+                <div class="rendimiento-tips">
+                  <h4>⚡ Tips para mejor rendimiento</h4>
+                  <ul>
+                    <li>Cerrar aplicaciones no utilizadas para liberar memoria</li>
+                    <li>Usar múltiples escritorios virtuales para organización</li>
+                    <li>Configurar aplicaciones para que se minimicen en lugar de cerrarse</li>
+                    <li>Supervisar aplicaciones en segundo plano desde área de notificaciones</li>
+                  </ul>
+                </div>
               </div>
             `,
             multimedia: {
-              imagen: "/images/teoria/configuracion-usuario.jpg",
-              video: "/videos/teoria/gestionar-cuentas-usuario.mp4"
+              imagen: '/images/teoria/control-aplicaciones.png',
+              video: '/videos/teoria/gestionar-ventanas-activas.mp4'
             },
             actividades: [
-              {
-                tipo: "configuracion",
-                pregunta: "Cambia tu foto de perfil por una imagen personal",
-                ayuda: "Configuración → Cuentas → Tu información → Crear tu imagen"
-              },
-              {
-                tipo: "seguridad",
-                pregunta: "Configura un PIN para acceso rápido",
-                ayuda: "Configuración → Cuentas → Opciones de inicio de sesión → PIN"
-              }
+              'Abrir 4 aplicaciones y practicar cambio entre ellas',
+              'Usar Alt+Tab y Windows+Tab para navegación',
+              'Practicar minimizar/restaurar ventanas',
+              'Gestionar múltiples instancias de la misma aplicación'
             ]
           },
           {
             id: 4,
-            titulo: "Seguridad y Privacidad Básica",
+            titulo: "Personalización de la barra de tareas",
             contenido: `
-              <h3>🛡️ Protegiendo tu PC y Privacidad</h3>
-              <p>Configuraciones esenciales para mantener tu información segura.</p>
-              
-              <h4>🔒 Windows Defender (Antivirus integrado):</h4>
-              <div class="windows-defender">
-                <p><strong>Ruta:</strong> Configuración → Actualización y seguridad → Seguridad de Windows</p>
+              <div class="seccion-contenido">
+                <h3>🎨 Personalización completa de la barra de tareas</h3>
                 
-                <h5>⚡ Características principales:</h5>
-                <div class="defender-features">
-                  <div class="feature">
-                    <h6>🦠 Protección antivirus</h6>
-                    <ul>
-                      <li>Escaneo en tiempo real</li>
-                      <li>Detección de malware</li>
-                      <li>Actualizaciones automáticas</li>
-                    </ul>
-                  </div>
-                  <div class="feature">
-                    <h6>🔥 Firewall</h6>
-                    <ul>
-                      <li>Bloquea conexiones no deseadas</li>
-                      <li>Protege red doméstica</li>
-                      <li>Configuración automática</li>
-                    </ul>
-                  </div>
-                  <div class="feature">
-                    <h6>🌐 Protección web</h6>
-                    <ul>
-                      <li>Bloquea sitios maliciosos</li>
-                      <li>Descarga segura</li>
-                      <li>Protección de phishing</li>
-                    </ul>
-                  </div>
+                <div class="intro-personalizacion">
+                  <p>Windows te permite personalizar extensamente la <strong>barra de tareas</strong> para adaptarla a tu flujo de trabajo y preferencias personales.</p>
                 </div>
 
-                <div class="defender-acciones">
-                  <h5>🎯 Acciones importantes:</h5>
+                <h4>⚙️ Acceso a configuración</h4>
+                
+                <div class="acceder-configuracion">
+                  <h5>Formas de acceder a la configuración:</h5>
                   <ul>
-                    <li><strong>Examen rápido:</strong> Verificación rutinaria (5-10 min)</li>
-                    <li><strong>Examen completo:</strong> Análisis profundo (30-60 min)</li>
-                    <li><strong>Examen personalizado:</strong> Carpetas específicas</li>
-                    <li><strong>Actualizaciones:</strong> Se hace automáticamente</li>
+                    <li><strong>Clic derecho:</strong> En espacio vacío de barra → "Configuración de la barra de tareas"</li>
+                    <li><strong>Configuración Windows:</strong> Inicio → Configuración → Personalización → Barra de tareas</li>
+                    <li><strong>Atajo directo:</strong> <kbd>Windows + I</kbd> → Personalización → Barra de tareas</li>
                   </ul>
                 </div>
-              </div>
 
-              <h4>🔐 Configuración de privacidad:</h4>
-              <div class="config-privacidad">
-                <p><strong>Ruta:</strong> Configuración → Privacidad y seguridad</p>
+                <h4>📍 Posición y comportamiento</h4>
                 
-                <h5>📊 Categorías de privacidad:</h5>
-                <div class="categorias-privacidad">
-                  <div class="categoria-privacidad">
-                    <h6>📍 Ubicación</h6>
-                    <ul>
-                      <li>Activar/desactivar servicios de ubicación</li>
-                      <li>Controlar qué apps pueden usar ubicación</li>
-                      <li>Borrar historial de ubicaciones</li>
-                    </ul>
-                  </div>
-                  <div class="categoria-privacidad">
-                    <h6>📷 Cámara</h6>
-                    <ul>
-                      <li>Permitir acceso a aplicaciones</li>
-                      <li>Lista de apps con permiso</li>
-                      <li>Indicador cuando está en uso</li>
-                    </ul>
-                  </div>
-                  <div class="categoria-privacidad">
-                    <h6>🎤 Micrófono</h6>
-                    <ul>
-                      <li>Control de acceso por aplicación</li>
-                      <li>Notificaciones de uso</li>
-                      <li>Bloqueo total si es necesario</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <h4>🔄 Windows Update (Actualizaciones):</h4>
-              <div class="windows-update">
-                <p><strong>Ruta:</strong> Configuración → Actualización y seguridad → Windows Update</p>
-                
-                <h5>🎯 Importancia de las actualizaciones:</h5>
-                <ul>
-                  <li><strong>Seguridad:</strong> Parches para vulnerabilidades</li>
-                  <li><strong>Estabilidad:</strong> Corrección de errores</li>
-                  <li><strong>Funciones:</strong> Nuevas características</li>
-                  <li><strong>Compatibilidad:</strong> Soporte para nuevo hardware</li>
-                </ul>
-
-                <div class="tipos-actualizacion">
-                  <h5>📦 Tipos de actualizaciones:</h5>
-                  <div class="tipos-update">
-                    <div class="tipo-update">
-                      <h6>🚨 Críticas</h6>
-                      <p>Seguridad urgente - Se instalan automáticamente</p>
-                    </div>
-                    <div class="tipo-update">
-                      <h6>🔧 Importantes</h6>
-                      <p>Mejoras y correcciones - Recomendadas</p>
-                    </div>
-                    <div class="tipo-update">
-                      <h6>⭐ Opcionales</h6>
-                      <p>Controladores y funciones - A elección</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="control-updates">
-                  <h5>⚙️ Configurar actualizaciones:</h5>
+                <div class="posicion-barra">
+                  <h5>Opciones de posición:</h5>
                   <ul>
-                    <li><strong>Horario activo:</strong> Evita reinicios durante trabajo</li>
-                    <li><strong>Pausar actualizaciones:</strong> Hasta 7 días (emergencias)</li>
-                    <li><strong>Conexión de uso medido:</strong> Limita descargas en datos móviles</li>
-                    <li><strong>Programar reinicio:</strong> Elige cuándo aplicar cambios</li>
+                    <li><strong>Inferior (predeterminado):</strong> Posición tradicional</li>
+                    <li><strong>Superior:</strong> Estilo macOS</li>
+                    <li><strong>Izquierda/Derecha:</strong> Para pantallas ultrawide</li>
+                    <li><strong>Ocultar automáticamente:</strong> Más espacio de pantalla</li>
+                    <li><strong>Bloquear barra:</strong> Evitar cambios accidentales</li>
                   </ul>
                 </div>
-              </div>
 
-              <h4>🏠 Configuración de red:</h4>
-              <div class="config-red">
-                <h5>🌐 Perfiles de red:</h5>
-                <div class="perfiles-red">
-                  <div class="perfil-red">
-                    <h6>🏠 Red privada</h6>
-                    <ul>
-                      <li>Casa o trabajo de confianza</li>
-                      <li>Permite compartir archivos</li>
-                      <li>Detectable por otros dispositivos</li>
-                    </ul>
-                  </div>
-                  <div class="perfil-red">
-                    <h6>🌍 Red pública</h6>
-                    <ul>
-                      <li>Cafeterías, aeropuertos, hoteles</li>
-                      <li>Mayor seguridad</li>
-                      <li>No permite descubrimiento</li>
-                    </ul>
-                  </div>
+                <div class="elementos-visibles">
+                  <h4>👁️ Elementos visibles</h4>
+                  
+                  <h5>Configurar qué mostrar:</h5>
+                  <ul>
+                    <li><strong>Cuadro de búsqueda:</strong> Ocultar, mostrar icono, o barra completa</li>
+                    <li><strong>Vista de tareas:</strong> Mostrar/ocultar botón de escritorios virtuales</li>
+                    <li><strong>Widgets:</strong> Panel de noticias y clima (Windows 11)</li>
+                    <li><strong>Chat:</strong> Integración con Microsoft Teams</li>
+                  </ul>
                 </div>
 
-                <h5>🔐 Consejos de seguridad en redes:</h5>
-                <ul>
-                  <li>Siempre usa "Red pública" en lugares desconocidos</li>
-                  <li>Evita operaciones bancarias en Wi-Fi público</li>
-                  <li>Desconéctate de redes cuando no las uses</li>
-                  <li>Usa VPN si necesitas máxima seguridad</li>
-                </ul>
+                <h4>🔔 Área de notificaciones</h4>
+                
+                <div class="personalizar-notificaciones">
+                  <h5>Configuración del área de notificaciones:</h5>
+                  <ul>
+                    <li><strong>Iconos de esquina:</strong> Seleccionar cuáles mostrar siempre</li>
+                    <li><strong>Iconos ocultos:</strong> Gestionar aplicaciones en segundo plano</li>
+                    <li><strong>Notificaciones:</strong> Activar/desactivar por aplicación</li>
+                    <li><strong>Hora y fecha:</strong> Formato y información adicional</li>
+                  </ul>
+                </div>
+
+                <div class="combinacion-botones">
+                  <h4>🔗 Combinación de botones</h4>
+                  
+                  <h5>Opciones de agrupación:</h5>
+                  <ul>
+                    <li><strong>Siempre combinar:</strong> Iconos agrupados sin etiquetas</li>
+                    <li><strong>Combinar cuando esté llena:</strong> Etiquetas hasta que falta espacio</li>
+                    <li><strong>Nunca combinar:</strong> Cada ventana como botón separado</li>
+                  </ul>
+                </div>
+
+                <h4>🎨 Apariencia visual</h4>
+                
+                <div class="apariencia-visual">
+                  <h5>Personalización estética:</h5>
+                  <ul>
+                    <li><strong>Tema:</strong> Claro, oscuro, o automático</li>
+                    <li><strong>Color de acento:</strong> Personalizar color de resaltado</li>
+                    <li><strong>Transparencia:</strong> Efectos de desenfoque y transparencia</li>
+                    <li><strong>Tamaño:</strong> Pequeño o grande (versiones anteriores)</li>
+                  </ul>
+                </div>
+
+                <div class="configuraciones-avanzadas">
+                  <h4>🔧 Configuraciones avanzadas</h4>
+                  
+                  <h5>Opciones para usuarios avanzados:</h5>
+                  <ul>
+                    <li><strong>Usar barra de tareas pequeña:</strong> Más espacio vertical</li>
+                    <li><strong>Mostrar insignias:</strong> Notificaciones en iconos de aplicaciones</li>
+                    <li><strong>Reemplazar Símbolo del sistema:</strong> PowerShell como predeterminado</li>
+                    <li><strong>Mostrar en todas las pantallas:</strong> Para configuraciones multi-monitor</li>
+                  </ul>
+                </div>
+
+                <div class="consejos-personalizacion">
+                  <h4>💡 Consejos de personalización</h4>
+                  <ul>
+                    <li><strong>Productividad:</strong> Ocultar elementos no utilizados para más espacio</li>
+                    <li><strong>Accesibilidad:</strong> Usar barra más grande si tienes dificultades visuales</li>
+                    <li><strong>Multi-monitor:</strong> Configurar barra en monitor principal únicamente</li>
+                    <li><strong>Rendimiento:</strong> Desactivar efectos visuales en equipos lentos</li>
+                  </ul>
+                </div>
               </div>
             `,
             multimedia: {
-              imagen: "/images/teoria/seguridad-windows.jpg",
-              video: "/videos/teoria/configurar-seguridad-basica.mp4",
-              infografia: "/images/teoria/privacidad-windows.png"
+              imagen: '/images/teoria/personalizar-barra-tareas.png',
+              video: '/videos/teoria/configuracion-barra-tareas.mp4'
             },
             actividades: [
-              {
-                tipo: "seguridad",
-                pregunta: "Ejecuta un examen rápido con Windows Defender",
-                ayuda: "Configuración → Actualización y seguridad → Seguridad de Windows → Examen rápido"
-              },
-              {
-                tipo: "privacidad",
-                pregunta: "Revisa qué aplicaciones tienen acceso a tu cámara",
-                ayuda: "Configuración → Privacidad → Cámara"
-              },
-              {
-                tipo: "actualizacion",
-                pregunta: "Verifica si hay actualizaciones pendientes",
-                ayuda: "Configuración → Actualización y seguridad → Windows Update → Buscar actualizaciones"
-              }
+              'Explorar todas las opciones de configuración',
+              'Personalizar posición y comportamiento de la barra',
+              'Configurar área de notificaciones según preferencias',
+              'Aplicar tema y colores personalizados'
             ]
           }
         ],
+        multimedia: {
+          videos: [
+            {
+              titulo: "Tour completo de la barra de tareas",
+              descripcion: "Explora cada componente y sus funciones",
+              duracion: "8 min",
+              url: "/videos/intro-windows/tour-barra-tareas.mp4"
+            },
+            {
+              titulo: "Técnicas de acceso rápido",
+              descripcion: "Domina atajos y métodos eficientes",
+              duracion: "6 min",
+              url: "/videos/intro-windows/acceso-rapido.mp4"
+            }
+          ],
+          simuladores: [
+            {
+              titulo: "Simulador de barra de tareas",
+              descripcion: "Practica en entorno virtual",
+              url: "/simuladores/barra-tareas-interactiva"
+            }
+          ]
+        },
         recursos: {
           documentos: [
             {
-              titulo: "Guía de Configuración de Windows",
+              titulo: "Guía de atajos de barra de tareas",
               tipo: "PDF",
-              url: "/recursos/intro-windows/configuracion-completa.pdf"
+              url: "/recursos/intro-windows/atajos-barra-tareas.pdf"
             },
             {
-              titulo: "Manual de Seguridad Básica",
-              tipo: "PDF",
-              url: "/recursos/intro-windows/seguridad-basica.pdf"
-            },
-            {
-              titulo: "Personalización Avanzada",
-              tipo: "PDF",
-              url: "/recursos/intro-windows/personalizacion-avanzada.pdf"
-            }
-          ],
-          videos: [
-            {
-              titulo: "Configurar Windows desde Cero",
-              duracion: "20 min",
-              url: "/videos/configurar-windows-completo.mp4"
-            },
-            {
-              titulo: "Seguridad y Privacidad en Windows",
-              duracion: "15 min",
-              url: "/videos/seguridad-privacidad-windows.mp4"
+              titulo: "Manual de personalización",
+              tipo: "PDF", 
+              url: "/recursos/intro-windows/manual-personalizacion.pdf"
             }
           ],
           enlaces: [
             {
-              titulo: "Centro de Seguridad de Microsoft",
-              url: "https://www.microsoft.com/security"
-            },
-            {
-              titulo: "Guía de Privacidad de Windows",
-              url: "https://privacy.microsoft.com/windows-10-microsoft-privacy-guide"
-            },
-            {
-              titulo: "Soporte de Windows Update",
-              url: "https://support.microsoft.com/windows/windows-update"
+              titulo: "Documentación oficial - Barra de tareas",
+              url: "https://support.microsoft.com/es-es/windows/personalizaci%C3%B3n-de-la-barra-de-tareas"
             }
           ]
         },
+        actividadesPracticas: [
+          {
+            id: 1,
+            titulo: "Configuración Personal de Barra de Tareas",
+            tipo: "configuracion",
+            duracion: "20 minutos",
+            objetivos: [
+              "Personalizar apariencia de la barra",
+              "Configurar elementos visibles",
+              "Optimizar para uso personal"
+            ],
+            instrucciones: [
+              "Acceder a configuración de barra de tareas",
+              "Personalizar posición y elementos",
+              "Aplicar tema y colores preferidos"
+            ]
+          },
+          {
+            id: 2,
+            titulo: "Maestría en Acceso Rápido",
+            tipo: "practica",
+            duracion: "25 minutos",
+            objetivos: [
+              "Dominar métodos de acceso rápido",
+              "Optimizar programas anclados",
+              "Automatizar atajos de teclado"
+            ]
+          }
+        ],
         evaluacion: {
-          preRequisitos: ["Tema 1: Dispositivos Básicos", "Tema 2: Uso Básico"],
+          prerequisitos: [
+            "Tema 1: Elementos y funciones básicas",
+            "Tema 2: Explorador de Windows",
+            "Tema 3: Escritorio de Windows"
+          ],
           criterios: [
-            "Personalizar la apariencia de Windows (fondo, temas, barra de tareas)",
-            "Configurar opciones básicas del sistema (pantalla, sonido, energía)",
-            "Gestionar cuentas de usuario y métodos de acceso",
-            "Aplicar configuraciones básicas de seguridad y privacidad",
-            "Entender y gestionar actualizaciones de Windows"
+            "Identificar componentes de la barra de tareas",
+            "Anclar y organizar programas eficientemente",
+            "Controlar aplicaciones en ejecución",
+            "Personalizar según necesidades",
+            "Usar atajos de teclado para acceso rápido"
           ],
           tiempoEstimado: "30 minutos"
         }
       },
-      '4': {
-        titulo: 'Administración de archivos',
-        duracion: '60 minutos',
+      '5': {
+        titulo: "Menú de Inicio",
+        duracion: "35-40 minutos",
         objetivos: [
-          'Dominar el uso del Explorador de archivos de Windows',
-          'Realizar operaciones básicas con archivos y carpetas',
-          'Organizar y estructurar información de manera eficiente',
-          'Aplicar configuraciones de seguridad básica a archivos'
+          "Dominar la navegación por las secciones del menú de Inicio",
+          "Gestionar eficientemente la lista de aplicaciones y programas",
+          "Personalizar mosaicos y grupos de aplicaciones según necesidades",
+          "Utilizar búsqueda avanzada de programas y archivos"
         ],
         secciones: [
           {
             id: 1,
-            titulo: 'Explorador de archivos de Windows',
+            titulo: "Navegación por las secciones del menú",
             contenido: `
-              <div class="seccion-contenido">
-                <h3>🗂️ Conociendo el Explorador de archivos</h3>
-                
-                <div class="info-box">
-                  <h4>¿Qué es el Explorador de archivos?</h4>
-                  <p>El Explorador de archivos es la herramienta principal de Windows para navegar, organizar y gestionar todos los archivos y carpetas de tu computadora. Es como un mapa que te permite encontrar y manejar toda tu información.</p>
+              <h3>🏠 El Menú de Inicio: Centro de Control de Windows</h3>
+              <p>El <strong>menú de Inicio</strong> es el punto central de navegación en Windows, donde puedes acceder a programas, archivos, configuraciones y opciones del sistema.</p>
+              
+              <h4>🚀 Formas de abrir el menú de Inicio:</h4>
+              <div class="metodos-apertura">
+                <div class="metodo">
+                  <h5>⌨️ Tecla Windows</h5>
+                  <p>Presiona la tecla <kbd>⊞ Windows</kbd> - La forma más rápida</p>
                 </div>
-
-                <h4>📍 Cómo abrir el Explorador de archivos</h4>
-                <ul class="lista-metodos">
-                  <li><strong>Método 1:</strong> Hacer clic en el ícono de carpeta en la barra de tareas</li>
-                  <li><strong>Método 2:</strong> Presionar las teclas <kbd>Windows + E</kbd></li>
-                  <li><strong>Método 3:</strong> Desde el menú Inicio, buscar "Explorador de archivos"</li>
-                  <li><strong>Método 4:</strong> Hacer clic derecho en el botón de Inicio y seleccionar "Explorador de archivos"</li>
-                </ul>
-
-                <h4>🎯 Partes principales del Explorador</h4>
-                <div class="partes-explorador">
-                  <div class="parte">
-                    <h5>Panel de navegación (izquierda)</h5>
-                    <p>Muestra accesos rápidos a ubicaciones importantes como:</p>
-                    <ul>
-                      <li><strong>Acceso rápido:</strong> Carpetas usadas frecuentemente</li>
-                      <li><strong>Este equipo:</strong> Unidades de disco y dispositivos</li>
-                      <li><strong>Red:</strong> Recursos compartidos en red</li>
-                      <li><strong>Bibliotecas:</strong> Colecciones organizadas de archivos</li>
-                    </ul>
-                  </div>
-                  
-                  <div class="parte">
-                    <h5>Área principal (centro)</h5>
-                    <p>Muestra el contenido de la carpeta seleccionada con diferentes vistas:</p>
-                    <ul>
-                      <li><strong>Iconos extra grandes:</strong> Vista previa de imágenes</li>
-                      <li><strong>Lista:</strong> Vista compacta con nombres</li>
-                      <li><strong>Detalles:</strong> Información completa (tamaño, fecha, etc.)</li>
-                      <li><strong>Mosaicos:</strong> Iconos medianos con información básica</li>
-                    </ul>
-                  </div>
-
-                  <div class="parte">
-                    <h5>Cinta de opciones (arriba)</h5>
-                    <p>Contiene herramientas organizadas en pestañas:</p>
-                    <ul>
-                      <li><strong>Archivo:</strong> Operaciones generales</li>
-                      <li><strong>Inicio:</strong> Operaciones básicas (copiar, pegar, eliminar)</li>
-                      <li><strong>Compartir:</strong> Opciones para compartir archivos</li>
-                      <li><strong>Ver:</strong> Cambiar la apariencia y vista</li>
-                    </ul>
-                  </div>
+                <div class="metodo">
+                  <h5>🖱️ Clic en botón Inicio</h5>
+                  <p>Clic en el botón de Windows en la esquina inferior izquierda</p>
                 </div>
-
-                <div class="tip-box">
-                  <h4>💡 Consejo práctico</h4>
-                  <p>Puedes personalizar la barra de herramientas de acceso rápido agregando las funciones que más uses. Haz clic derecho en cualquier comando y selecciona "Agregar a la barra de herramientas de acceso rápido".</p>
+                <div class="metodo">
+                  <h5>⌨️ Ctrl + Esc</h5>
+                  <p>Atajo alternativo <kbd>Ctrl</kbd> + <kbd>Esc</kbd></p>
                 </div>
               </div>
-            `,
-            multimedia: {
-              imagen: '/images/teoria/explorador-archivos-interfaz.png',
-              video: '/videos/teoria/navegacion-explorador.mp4'
+
+              <h4>🗂️ Secciones principales del menú:</h4>
+              <div class="secciones-menu">
+                <div class="seccion">
+                  <h5>👤 Perfil de Usuario</h5>
+                  <ul>
+                    <li><strong>Foto de perfil:</strong> Acceso rápido a configuración de cuenta</li>
+                    <li><strong>Nombre de usuario:</strong> Información de la sesión activa</li>
+                    <li><strong>Opciones de cuenta:</strong> Cambiar configuraciones, cerrar sesión</li>
+                  </ul>
+                </div>
+                <div class="seccion">
+                  <h5>📋 Lista de Aplicaciones</h5>
+                  <ul>
+                    <li><strong>Todas las apps:</strong> Lista alfabética completa</li>
+                    <li><strong>Más usadas:</strong> Programas de uso frecuente</li>
+                    <li><strong>Agregadas recientemente:</strong> Apps instaladas recientemente</li>
+                  </ul>
+                </div>
+                <div class="seccion">
+                  <h5>🔢 Mosaicos (Live Tiles)</h5>
+                  <ul>
+                    <li><strong>Acceso rápido:</strong> Programas favoritos como mosaicos</li>
+                    <li><strong>Información dinámica:</strong> Actualizaciones en tiempo real</li>
+                    <li><strong>Personalizable:</strong> Tamaños y posiciones modificables</li>
+                  </ul>
+                </div>
+                <div class="seccion">
+                  <h5>⚙️ Accesos del Sistema</h5>
+                  <ul>
+                    <li><strong>Configuración:</strong> Acceso directo a ajustes del sistema</li>
+                    <li><strong>Explorador de archivos:</strong> Navegación por carpetas</li>
+                    <li><strong>Apagar:</strong> Opciones de energía del equipo</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🎯 Navegación eficiente:</h4>
+              <div class="tips-navegacion">
+                <div class="tip">
+                  <h5>⌨️ Con teclado</h5>
+                  <ul>
+                    <li><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> para navegar</li>
+                    <li><kbd>Enter</kbd> para abrir elemento seleccionado</li>
+                    <li><kbd>Esc</kbd> para cerrar el menú</li>
+                  </ul>
+                </div>
+                <div class="tip">
+                  <h5>🖱️ Con ratón</h5>
+                  <ul>
+                    <li>Clic para seleccionar y abrir</li>
+                    <li>Clic derecho para opciones contextuales</li>
+                    <li>Arrastrar para reorganizar mosaicos</li>
+                  </ul>
+                </div>
+              </div>
+            `
+          },
+          {
+            id: 2,
+            titulo: "Lista de aplicaciones y programas",
+            contenido: `
+              <h3>📱 Gestión de Aplicaciones en el Menú de Inicio</h3>
+              <p>La <strong>lista de aplicaciones</strong> es donde encontrarás todos los programas instalados en tu sistema, organizados de forma clara y accesible.</p>
+              
+              <h4>📂 Organización de la lista:</h4>
+              <div class="organizacion-apps">
+                <div class="categoria">
+                  <h5>🔤 Orden Alfabético</h5>
+                  <p>Todas las aplicaciones están ordenadas de A-Z para encontrarlas fácilmente</p>
+                  <ul>
+                    <li>Scroll para navegar por toda la lista</li>
+                    <li>Clic en letra para saltar a esa sección</li>
+                    <li>Búsqueda rápida escribiendo el nombre</li>
+                  </ul>
+                </div>
+                <div class="categoria">
+                  <h5>⭐ Más Usadas</h5>
+                  <p>Windows detecta automáticamente tus programas más utilizados</p>
+                  <ul>
+                    <li>Aparecen en la parte superior</li>
+                    <li>Se actualizan según tu uso</li>
+                    <li>Acceso rápido a lo más importante</li>
+                  </ul>
+                </div>
+                <div class="categoria">
+                  <h5>🆕 Agregadas Recientemente</h5>
+                  <p>Programas instalados en los últimos días</p>
+                  <ul>
+                    <li>Marcadas con indicador "Nuevo"</li>
+                    <li>Fácil acceso a instalaciones recientes</li>
+                    <li>Se mantienen visibles por una semana</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🛠️ Acciones con aplicaciones:</h4>
+              <div class="acciones-apps">
+                <div class="accion">
+                  <h5>🖱️ Clic Izquierdo</h5>
+                  <p><strong>Abrir aplicación</strong> - Ejecuta el programa normalmente</p>
+                </div>
+                <div class="accion">
+                  <h5>🖱️ Clic Derecho</h5>
+                  <p><strong>Menú contextual</strong> con opciones avanzadas:</p>
+                  <ul>
+                    <li><strong>Anclar al inicio:</strong> Añadir a mosaicos</li>
+                    <li><strong>Anclar a la barra de tareas:</strong> Acceso permanente</li>
+                    <li><strong>Más ></strong> Ejecutar como administrador, abrir ubicación</li>
+                    <li><strong>Desinstalar:</strong> Eliminar programa del sistema</li>
+                  </ul>
+                </div>
+                <div class="accion">
+                  <h5>⌨️ Arrastrar</h5>
+                  <p><strong>Mover a mosaicos</strong> - Arrastra app al área de mosaicos para acceso rápido</p>
+                </div>
+              </div>
+
+              <h4>🔍 Encontrar aplicaciones rápidamente:</h4>
+              <div class="busqueda-apps">
+                <div class="metodo-busqueda">
+                  <h5>⌨️ Escritura directa</h5>
+                  <p>Con el menú abierto, simplemente empieza a escribir el nombre del programa</p>
+                </div>
+                <div class="metodo-busqueda">
+                  <h5>🔤 Navegación por letras</h5>
+                  <p>Clic en las letras del alfabeto para saltar a esa sección</p>
+                </div>
+                <div class="metodo-busqueda">
+                  <h5>📁 Por categorías</h5>
+                  <p>Algunas apps se agrupan en carpetas (ej: Microsoft Office, Adobe)</p>
+                </div>
+              </div>
+            `
+          },
+          {
+            id: 3,
+            titulo: "Mosaicos y grupos de aplicaciones",
+            contenido: `
+              <h3>🎨 Personalización con Mosaicos (Live Tiles)</h3>
+              <p>Los <strong>mosaicos</strong> son la característica más visual del menú de Inicio, permitiendo acceso rápido y información dinámica de tus aplicaciones favoritas.</p>
+              
+              <h4>🔢 Tipos y tamaños de mosaicos:</h4>
+              <div class="tipos-mosaicos">
+                <div class="tipo-mosaico">
+                  <h5>▪️ Pequeño (1x1)</h5>
+                  <ul>
+                    <li>Solo icono de la aplicación</li>
+                    <li>Ocupa mínimo espacio</li>
+                    <li>Ideal para apps de uso ocasional</li>
+                  </ul>
+                </div>
+                <div class="tipo-mosaico">
+                  <h5>▬ Mediano (2x2)</h5>
+                  <ul>
+                    <li>Icono + nombre de la aplicación</li>
+                    <li>Tamaño estándar más común</li>
+                    <li>Puede mostrar información básica</li>
+                  </ul>
+                </div>
+                <div class="tipo-mosaico">
+                  <h5>▬▬ Ancho (4x2)</h5>
+                  <ul>
+                    <li>Formato rectangular horizontal</li>
+                    <li>Muestra más información dinámica</li>
+                    <li>Ideal para apps con notificaciones</li>
+                  </ul>
+                </div>
+                <div class="tipo-mosaico">
+                  <h5>⬛ Grande (4x4)</h5>
+                  <ul>
+                    <li>Máximo tamaño disponible</li>
+                    <li>Rica información visual</li>
+                    <li>Para apps más importantes</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🎯 Gestión de mosaicos:</h4>
+              <div class="gestion-mosaicos">
+                <div class="accion-mosaico">
+                  <h5>➕ Añadir mosaico</h5>
+                  <p><strong>Desde lista de apps:</strong></p>
+                  <ul>
+                    <li>Clic derecho en aplicación</li>
+                    <li>Seleccionar "Anclar al inicio"</li>
+                    <li>El mosaico aparece al final</li>
+                  </ul>
+                </div>
+                <div class="accion-mosaico">
+                  <h5>📏 Cambiar tamaño</h5>
+                  <p><strong>Redimensionar mosaico:</strong></p>
+                  <ul>
+                    <li>Clic derecho en mosaico</li>
+                    <li>Seleccionar "Cambiar tamaño"</li>
+                    <li>Elegir: Pequeño, Mediano, Ancho, Grande</li>
+                  </ul>
+                </div>
+                <div class="accion-mosaico">
+                  <h5>🔄 Reorganizar</h5>
+                  <p><strong>Mover mosaicos:</strong></p>
+                  <ul>
+                    <li>Arrastrar y soltar en nueva posición</li>
+                    <li>Los demás se reordenan automáticamente</li>
+                    <li>Crear espacios para mejor organización</li>
+                  </ul>
+                </div>
+                <div class="accion-mosaico">
+                  <h5>❌ Eliminar mosaico</h5>
+                  <p><strong>Desanclar del inicio:</strong></p>
+                  <ul>
+                    <li>Clic derecho en mosaico</li>
+                    <li>Seleccionar "Desanclar del inicio"</li>
+                    <li>La app sigue instalada en el sistema</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>📁 Grupos de aplicaciones:</h4>
+              <div class="grupos-apps">
+                <h5>🏷️ Crear grupos temáticos</h5>
+                <p>Organiza mosaicos por categorías para mejor productividad:</p>
+                <ul>
+                  <li><strong>Trabajo:</strong> Office, correo, calendario</li>
+                  <li><strong>Multimedia:</strong> Fotos, música, videos</li>
+                  <li><strong>Juegos:</strong> Todos los juegos juntos</li>
+                  <li><strong>Herramientas:</strong> Calculadora, notas, utilidades</li>
+                </ul>
+                
+                <h5>📝 Nombrar grupos</h5>
+                <p>Añade títulos descriptivos a cada grupo:</p>
+                <ul>
+                  <li>Arrastra mosaicos cerca unos de otros</li>
+                  <li>Aparece espacio para título del grupo</li>
+                  <li>Escribe nombre descriptivo</li>
+                  <li>Facilita navegación visual</li>
+                </ul>
+              </div>
+
+              <h4>📊 Información dinámica (Live Tiles):</h4>
+              <div class="live-tiles">
+                <p>Algunos mosaicos muestran información actualizada automáticamente:</p>
+                <ul>
+                  <li><strong>Correo:</strong> Número de mensajes sin leer</li>
+                  <li><strong>Calendario:</strong> Próxima cita o evento</li>
+                  <li><strong>Clima:</strong> Temperatura y condiciones actuales</li>
+                  <li><strong>Noticias:</strong> Titulares más recientes</li>
+                  <li><strong>Fotos:</strong> Imágenes de tu biblioteca rotando</li>
+                </ul>
+                
+                <div class="control-live-tiles">
+                  <h5>⚙️ Controlar información dinámica:</h5>
+                  <ul>
+                    <li>Clic derecho en mosaico</li>
+                    <li>"Activar/Desactivar Live Tile"</li>
+                    <li>Reduce uso de recursos si no necesitas</li>
+                  </ul>
+                </div>
+              </div>
+            `
+          },
+          {
+            id: 4,
+            titulo: "Búsqueda de programas y archivos",
+            contenido: `
+              <h3>🔍 Búsqueda Integrada en el Menú de Inicio</h3>
+              <p>La <strong>búsqueda del menú de Inicio</strong> es una de las herramientas más poderosas de Windows para encontrar rápidamente programas, archivos, configuraciones y hasta contenido web.</p>
+              
+              <h4>⚡ Formas de iniciar búsqueda:</h4>
+              <div class="iniciar-busqueda">
+                <div class="metodo-busqueda">
+                  <h5>⌨️ Escritura directa</h5>
+                  <p>Con el menú abierto, simplemente empieza a escribir</p>
+                  <ul>
+                    <li>No necesitas clic en cuadro de búsqueda</li>
+                    <li>Aparecen resultados instantáneamente</li>
+                    <li>Más rápido que navegar por listas</li>
+                  </ul>
+                </div>
+                <div class="metodo-busqueda">
+                  <h5>⊞ + S</h5>
+                  <p>Atajo directo <kbd>Windows</kbd> + <kbd>S</kbd></p>
+                  <ul>
+                    <li>Abre búsqueda sin abrir menú completo</li>
+                    <li>Enfoque directo en búsqueda</li>
+                    <li>Ideal para búsquedas rápidas</li>
+                  </ul>
+                </div>
+                <div class="metodo-busqueda">
+                  <h5>🔍 Cuadro de búsqueda</h5>
+                  <p>Clic en la barra de búsqueda de la barra de tareas</p>
+                  <ul>
+                    <li>Búsqueda expandida con más opciones</li>
+                    <li>Interfaz más amplia para resultados</li>
+                    <li>Acceso a filtros avanzados</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>📂 Tipos de resultados de búsqueda:</h4>
+              <div class="tipos-resultados">
+                <div class="categoria-resultado">
+                  <h5>🚀 Aplicaciones</h5>
+                  <ul>
+                    <li>Programas instalados en el sistema</li>
+                    <li>Aplicaciones de la Microsoft Store</li>
+                    <li>Aparecen primero en resultados</li>
+                    <li>Clic para ejecutar directamente</li>
+                  </ul>
+                </div>
+                <div class="categoria-resultado">
+                  <h5>📄 Archivos y Carpetas</h5>
+                  <ul>
+                    <li>Documentos, imágenes, videos</li>
+                    <li>Búsqueda por nombre y contenido</li>
+                    <li>Ubicación mostrada en resultados</li>
+                    <li>Clic derecho para más opciones</li>
+                  </ul>
+                </div>
+                <div class="categoria-resultado">
+                  <h5>⚙️ Configuraciones</h5>
+                  <ul>
+                    <li>Acceso directo a ajustes del sistema</li>
+                    <li>Panel de control clásico</li>
+                    <li>Configuraciones de Windows 10/11</li>
+                    <li>Más rápido que navegar por menús</li>
+                  </ul>
+                </div>
+                <div class="categoria-resultado">
+                  <h5>🌐 Web</h5>
+                  <ul>
+                    <li>Resultados de búsqueda Bing</li>
+                    <li>Información rápida (clima, noticias)</li>
+                    <li>Definiciones y conversiones</li>
+                    <li>Se puede desactivar si no se desea</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🎯 Técnicas de búsqueda efectiva:</h4>
+              <div class="tecnicas-busqueda">
+                <div class="tecnica">
+                  <h5>📝 Búsqueda parcial</h5>
+                  <p>No necesitas escribir el nombre completo:</p>
+                  <ul>
+                    <li>"calc" encuentra Calculadora</li>
+                    <li>"word" encuentra Microsoft Word</li>
+                    <li>"config" encuentra Configuración</li>
+                  </ul>
+                </div>
+                <div class="tecnica">
+                  <h5>🔤 Sin importar mayúsculas</h5>
+                  <p>La búsqueda no distingue entre mayúsculas y minúsculas:</p>
+                  <ul>
+                    <li>"NOTEPAD" = "notepad" = "Notepad"</li>
+                    <li>Escribe como te sea más cómodo</li>
+                  </ul>
+                </div>
+                <div class="tecnica">
+                  <h5>📂 Búsqueda por tipo de archivo</h5>
+                  <p>Usa extensiones para encontrar archivos específicos:</p>
+                  <ul>
+                    <li>".pdf" encuentra todos los PDF</li>
+                    <li>".jpg" encuentra todas las imágenes JPG</li>
+                    <li>".docx" encuentra documentos Word</li>
+                  </ul>
+                </div>
+                <div class="tecnica">
+                  <h5>⭐ Palabras clave</h5>
+                  <p>Términos útiles para encontrar configuraciones:</p>
+                  <ul>
+                    <li>"audio" o "sonido" → configuración de audio</li>
+                    <li>"red" o "wifi" → configuración de red</li>
+                    <li>"pantalla" → configuración de display</li>
+                    <li>"usuario" → cuentas y configuración</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>⚡ Atajos y tips avanzados:</h4>
+              <div class="tips-avanzados">
+                <div class="tip">
+                  <h5>⌨️ Navegación con teclado</h5>
+                  <ul>
+                    <li><kbd>↑</kbd><kbd>↓</kbd> para moverse entre resultados</li>
+                    <li><kbd>Enter</kbd> para abrir resultado seleccionado</li>
+                    <li><kbd>Ctrl + Enter</kbd> para ejecutar como administrador</li>
+                    <li><kbd>Ctrl + Shift + Enter</kbd> para abrir ubicación del archivo</li>
+                  </ul>
+                </div>
+                <div class="tip">
+                  <h5>🖱️ Opciones con clic derecho</h5>
+                  <ul>
+                    <li>Ejecutar como administrador</li>
+                    <li>Abrir ubicación del archivo</li>
+                    <li>Anclar al inicio o barra de tareas</li>
+                    <li>Propiedades del elemento</li>
+                  </ul>
+                </div>
+                <div class="tip">
+                  <h5>🔧 Configurar búsqueda</h5>
+                  <ul>
+                    <li>Configuración > Búsqueda > Búsqueda de Windows</li>
+                    <li>Activar/desactivar búsqueda web</li>
+                    <li>Configurar indexación de archivos</li>
+                    <li>Personalizar experiencia de búsqueda</li>
+                  </ul>
+                </div>
+              </div>
+            `
+          }
+        ],
+        multimedia: {
+          videos: [
+            {
+              titulo: "Tour completo del Menú de Inicio",
+              descripcion: "Exploración detallada de todas las secciones y funcionalidades del menú de Inicio de Windows",
+              duracion: "8:30",
+              url: "/videos/intro-windows/menu-inicio-tour-completo.mp4",
+              thumbnail: "/images/intro-windows/video-menu-inicio-thumb.jpg"
             },
-            actividades: [
-              'Abrir el Explorador de archivos usando tres métodos diferentes',
-              'Explorar las diferentes secciones del panel de navegación',
-              'Cambiar entre las diferentes vistas del área principal',
-              'Personalizar la barra de herramientas de acceso rápido'
+            {
+              titulo: "Personalización avanzada de mosaicos",
+              descripcion: "Cómo crear grupos, cambiar tamaños y organizar mosaicos para máxima productividad",
+              duracion: "6:45",
+              url: "/videos/intro-windows/personalizacion-mosaicos.mp4",
+              thumbnail: "/images/intro-windows/video-mosaicos-thumb.jpg"
+            },
+            {
+              titulo: "Maestría en búsqueda de Windows",
+              descripcion: "Técnicas avanzadas para encontrar rápidamente programas, archivos y configuraciones",
+              duracion: "7:20",
+              url: "/videos/intro-windows/busqueda-avanzada-menu.mp4",
+              thumbnail: "/images/intro-windows/video-busqueda-thumb.jpg"
+            }
+          ],
+          imagenes: [
+            {
+              titulo: "Anatomía del Menú de Inicio",
+              descripcion: "Diagrama completo de todas las secciones del menú de Inicio",
+              url: "/images/intro-windows/anatomia-menu-inicio.png",
+              alt: "Diagrama explicativo del menú de Inicio con todas sus partes etiquetadas"
+            },
+            {
+              titulo: "Tipos de mosaicos disponibles",
+              descripcion: "Comparación visual de todos los tamaños de mosaicos y sus usos",
+              url: "/images/intro-windows/tipos-mosaicos.png",
+              alt: "Ejemplos de mosaicos pequeños, medianos, anchos y grandes"
+            },
+            {
+              titulo: "Interfaz de búsqueda expandida",
+              descripcion: "Captura de la interfaz de búsqueda con filtros y opciones avanzadas",
+              url: "/images/intro-windows/interfaz-busqueda.png",
+              alt: "Pantalla de búsqueda de Windows mostrando resultados categorizados"
+            }
+          ],
+          simuladores: [
+            {
+              titulo: "Simulador de personalización del menú",
+              descripcion: "Práctica interactiva para personalizar mosaicos y grupos",
+              url: "/simuladores/intro-windows/personalizacion-menu.html",
+              duracion: "15 minutos"
+            }
+          ],
+          recursos: [
+            {
+              titulo: "Guía de atajos del menú de Inicio",
+              descripcion: "Lista completa de atajos de teclado para el menú de Inicio",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/atajos-menu-inicio.pdf"
+            },
+            {
+              titulo: "Plantillas de organización de mosaicos",
+              descripcion: "Ideas y plantillas para organizar mosaicos por temas",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/plantillas-mosaicos.pdf"
+            },
+            {
+              titulo: "Guía de búsqueda avanzada",
+              descripcion: "Manual completo de técnicas de búsqueda en Windows",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/busqueda-avanzada-guia.pdf"
+            }
+          ]
+        },
+        actividades: [
+          {
+            id: 1,
+            titulo: "Exploración guiada del Menú de Inicio",
+            tipo: "exploracion",
+            descripcion: "Familiarízate con todas las secciones del menú de Inicio",
+            instrucciones: [
+              "Abre el menú de Inicio con la tecla Windows",
+              "Identifica el área de mosaicos y el área de aplicaciones",
+              "Navega por la lista de aplicaciones usando scroll",
+              "Observa las aplicaciones más usadas en la parte superior",
+              "Localiza las opciones de usuario y sistema en la parte inferior"
+            ],
+            duracion: "10 minutos"
+          },
+          {
+            id: 2,
+            titulo: "Personalización de mosaicos",
+            tipo: "configuracion",
+            descripcion: "Crea tu configuración personalizada de mosaicos",
+            instrucciones: [
+              "Añade 5 aplicaciones favoritas como mosaicos",
+              "Prueba diferentes tamaños: pequeño, mediano y ancho",
+              "Organiza los mosaicos en 2 grupos temáticos",
+              "Nombra los grupos con títulos descriptivos",
+              "Reordena los mosaicos arrastrando y soltando"
+            ],
+            duracion: "15 minutos"
+          },
+          {
+            id: 3,
+            titulo: "Maestría en búsqueda",
+            tipo: "practica",
+            descripcion: "Domina las técnicas de búsqueda del menú de Inicio",
+            instrucciones: [
+              "Busca la Calculadora escribiendo solo 'calc'",
+              "Encuentra configuración de red escribiendo 'wifi'",
+              "Busca un archivo PDF específico usando '.pdf'",
+              "Practica búsqueda de configuraciones del sistema",
+              "Usa atajos de teclado para navegar resultados"
+            ],
+            duracion: "12 minutos"
+          }
+        ],
+        actividadesPracticas: [
+          {
+            id: 1,
+            titulo: "Configuración personalizada completa",
+            tipo: "proyecto",
+            duracion: "25 minutos",
+            objetivos: [
+              "Crear entorno de trabajo personalizado",
+              "Optimizar acceso a herramientas frecuentes",
+              "Dominar técnicas de organización"
+            ],
+            instrucciones: [
+              "Crear grupos de mosaicos por categorías (Trabajo, Entretenimiento, Herramientas)",
+              "Configurar tamaños apropiados para cada tipo de aplicación",
+              "Practicar búsquedas complejas y usar filtros",
+              "Personalizar opciones de privacidad de búsqueda",
+              "Probar todas las formas de acceso rápido"
             ]
           },
           {
             id: 2,
-            titulo: 'Operaciones básicas con archivos y carpetas',
-            contenido: `
-              <div class="seccion-contenido">
-                <h3>⚡ Operaciones fundamentales</h3>
-                
-                <div class="operacion-grupo">
-                  <h4>📂 Creación de carpetas</h4>
-                  <div class="metodos">
-                    <div class="metodo">
-                      <h5>Método 1: Menú contextual</h5>
-                      <ol>
-                        <li>Haz clic derecho en un espacio vacío</li>
-                        <li>Selecciona "Nuevo" → "Carpeta"</li>
-                        <li>Escribe el nombre de la carpeta</li>
-                        <li>Presiona Enter</li>
-                      </ol>
-                    </div>
-                    
-                    <div class="metodo">
-                      <h5>Método 2: Cinta de opciones</h5>
-                      <ol>
-                        <li>Ve a la pestaña "Inicio"</li>
-                        <li>Haz clic en "Nueva carpeta"</li>
-                        <li>Escribe el nombre</li>
-                        <li>Presiona Enter</li>
-                      </ol>
-                    </div>
-
-                    <div class="metodo">
-                      <h5>Método 3: Atajo de teclado</h5>
-                      <ol>
-                        <li>Presiona <kbd>Ctrl + Shift + N</kbd></li>
-                        <li>Escribe el nombre de la carpeta</li>
-                        <li>Presiona Enter</li>
-                      </ol>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="operacion-grupo">
-                  <h4>📄 Operaciones de selección</h4>
-                  <ul class="tecnicas-seleccion">
-                    <li><strong>Selección simple:</strong> Clic en un archivo o carpeta</li>
-                    <li><strong>Selección múltiple:</strong> Mantén <kbd>Ctrl</kbd> y haz clic en varios elementos</li>
-                    <li><strong>Selección en rango:</strong> Clic en el primero, luego <kbd>Shift + clic</kbd> en el último</li>
-                    <li><strong>Seleccionar todo:</strong> <kbd>Ctrl + A</kbd> para seleccionar todo el contenido</li>
-                    <li><strong>Invertir selección:</strong> En el menú Edición → "Invertir selección"</li>
-                  </ul>
-                </div>
-
-                <div class="operacion-grupo">
-                  <h4>🔄 Copiar y mover archivos</h4>
-                  
-                  <div class="operacion-detalle">
-                    <h5>Copiar archivos (crear duplicados)</h5>
-                    <ul>
-                      <li><strong>Método 1:</strong> <kbd>Ctrl + C</kbd> (copiar) → navegar → <kbd>Ctrl + V</kbd> (pegar)</li>
-                      <li><strong>Método 2:</strong> Clic derecho → "Copiar" → navegar → clic derecho → "Pegar"</li>
-                      <li><strong>Método 3:</strong> Arrastrar mientras mantienes <kbd>Ctrl</kbd> presionado</li>
-                    </ul>
-                  </div>
-
-                  <div class="operacion-detalle">
-                    <h5>Mover archivos (cambiar ubicación)</h5>
-                    <ul>
-                      <li><strong>Método 1:</strong> <kbd>Ctrl + X</kbd> (cortar) → navegar → <kbd>Ctrl + V</kbd> (pegar)</li>
-                      <li><strong>Método 2:</strong> Clic derecho → "Cortar" → navegar → clic derecho → "Pegar"</li>
-                      <li><strong>Método 3:</strong> Arrastrar directamente (dentro de la misma unidad)</li>
-                      <li><strong>Método 4:</strong> Arrastrar mientras mantienes <kbd>Shift</kbd> (entre unidades)</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="operacion-grupo">
-                  <h4>🗑️ Eliminar archivos y carpetas</h4>
-                  <div class="tipos-eliminacion">
-                    <div class="eliminacion-tipo">
-                      <h5>Eliminación temporal (Papelera de reciclaje)</h5>
-                      <ul>
-                        <li>Seleccionar y presionar <kbd>Delete</kbd></li>
-                        <li>Clic derecho → "Eliminar"</li>
-                        <li>Arrastrar a la Papelera de reciclaje</li>
-                      </ul>
-                      <p class="nota">Los archivos se pueden recuperar desde la Papelera</p>
-                    </div>
-
-                    <div class="eliminacion-tipo">
-                      <h5>Eliminación permanente</h5>
-                      <ul>
-                        <li>Seleccionar y presionar <kbd>Shift + Delete</kbd></li>
-                        <li>Eliminar desde la Papelera de reciclaje</li>
-                      </ul>
-                      <p class="nota-advertencia">⚠️ Esta acción no se puede deshacer fácilmente</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="operacion-grupo">
-                  <h4>🏷️ Renombrar archivos y carpetas</h4>
-                  <ul class="metodos-renombrar">
-                    <li><strong>Método 1:</strong> Seleccionar y presionar <kbd>F2</kbd></li>
-                    <li><strong>Método 2:</strong> Clic derecho → "Cambiar nombre"</li>
-                    <li><strong>Método 3:</strong> Clic lento dos veces en el nombre</li>
-                  </ul>
-                  
-                  <div class="consejos-nombres">
-                    <h5>Consejos para nombres de archivos:</h5>
-                    <ul>
-                      <li>Usa nombres descriptivos y claros</li>
-                      <li>Evita caracteres especiales: < > : " | ? * \\ /</li>
-                      <li>Considera usar fechas en formato YYYY-MM-DD</li>
-                      <li>Mantén una convención consistente</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            `,
-            multimedia: {
-              imagen: '/images/teoria/operaciones-archivos.png',
-              video: '/videos/teoria/operaciones-basicas.mp4'
-            },
-            actividades: [
-              'Crear una estructura de carpetas para organizar documentos personales',
-              'Practicar las diferentes formas de seleccionar múltiples archivos',
-              'Copiar y mover archivos entre diferentes ubicaciones',
-              'Renombrar archivos siguiendo una convención consistente'
-            ]
-          },
-          {
-            id: 3,
-            titulo: 'Organización y estructura de archivos',
-            contenido: `
-              <div class="seccion-contenido">
-                <h3>📚 Principios de organización eficiente</h3>
-                
-                <div class="principio-organizacion">
-                  <h4>🎯 Estructura jerárquica recomendada</h4>
-                  <div class="estructura-ejemplo">
-                    <pre class="estructura-arbol">
-📁 Documentos
-├── 📁 Personal
-│   ├── 📁 Finanzas
-│   │   ├── 📁 2024
-│   │   ├── 📁 2025
-│   │   └── 📁 Impuestos
-│   ├── 📁 Salud
-│   │   ├── 📁 Análisis
-│   │   ├── 📁 Recetas
-│   │   └── 📁 Citas
-│   └── 📁 Hogar
-│       ├── 📁 Facturas
-│       ├── 📁 Garantías
-│       └── 📁 Manuales
-├── 📁 Trabajo
-│   ├── 📁 Proyectos
-│   │   ├── 📁 Proyecto A
-│   │   ├── 📁 Proyecto B
-│   │   └── 📁 Archivo
-│   ├── 📁 Reuniones
-│   └── 📁 Reportes
-└── 📁 Educación
-    ├── 📁 Cursos actuales
-    ├── 📁 Certificados
-    └── 📁 Recursos
-                    </pre>
-                  </div>
-                </div>
-
-                <div class="sistema-carpetas">
-                  <h4>📂 Sistemas de carpetas especiales de Windows</h4>
-                  
-                  <div class="carpeta-especial">
-                    <h5>🏠 Carpetas del usuario</h5>
-                    <ul>
-                      <li><strong>Escritorio:</strong> Archivos visibles en el escritorio</li>
-                      <li><strong>Documentos:</strong> Ubicación predeterminada para documentos</li>
-                      <li><strong>Descargas:</strong> Archivos descargados de internet</li>
-                      <li><strong>Imágenes:</strong> Fotos y gráficos</li>
-                      <li><strong>Música:</strong> Archivos de audio</li>
-                      <li><strong>Vídeos:</strong> Archivos de video</li>
-                    </ul>
-                  </div>
-
-                  <div class="carpeta-especial">
-                    <h5>📚 Bibliotecas de Windows</h5>
-                    <p>Las bibliotecas agrupan contenido de múltiples ubicaciones:</p>
-                    <ul>
-                      <li><strong>Documentos:</strong> Incluye Mis documentos y Documentos públicos</li>
-                      <li><strong>Imágenes:</strong> Combina Mis imágenes e Imágenes públicas</li>
-                      <li><strong>Música:</strong> Agrupa colecciones de música</li>
-                      <li><strong>Videos:</strong> Organiza archivos de video</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="busqueda-archivos">
-                  <h4>🔍 Técnicas de búsqueda avanzada</h4>
-                  
-                  <div class="metodo-busqueda">
-                    <h5>Búsqueda básica</h5>
-                    <ul>
-                      <li>Usar el cuadro de búsqueda en la esquina superior derecha</li>
-                      <li>Escribir el nombre del archivo o parte de él</li>
-                      <li>Los resultados aparecen automáticamente</li>
-                    </ul>
-                  </div>
-
-                  <div class="metodo-busqueda">
-                    <h5>Filtros de búsqueda</h5>
-                    <ul>
-                      <li><strong>Por tipo:</strong> "tipo:imagen", "tipo:documento", "tipo:música"</li>
-                      <li><strong>Por fecha:</strong> "fechamodificación:hoy", "fechamodificación:estaasemana"</li>
-                      <li><strong>Por tamaño:</strong> "tamaño:grande", "tamaño:>100MB"</li>
-                      <li><strong>Por etiquetas:</strong> Usar etiquetas personalizadas</li>
-                    </ul>
-                  </div>
-
-                  <div class="metodo-busqueda">
-                    <h5>Búsqueda desde el menú Inicio</h5>
-                    <ul>
-                      <li>Presionar la tecla Windows</li>
-                      <li>Escribir directamente el nombre del archivo</li>
-                      <li>Windows buscará en todo el sistema</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="propiedades-archivos">
-                  <h4>📋 Propiedades y metadatos</h4>
-                  
-                  <div class="acceso-propiedades">
-                    <h5>Cómo acceder a las propiedades</h5>
-                    <ul>
-                      <li>Clic derecho en un archivo → "Propiedades"</li>
-                      <li>Seleccionar archivo y presionar <kbd>Alt + Enter</kbd></li>
-                      <li>Desde la pestaña "Ver" → "Panel de detalles"</li>
-                    </ul>
-                  </div>
-
-                  <div class="tipos-propiedades">
-                    <h5>Información disponible</h5>
-                    <ul>
-                      <li><strong>General:</strong> Nombre, tipo, ubicación, tamaño, fechas</li>
-                      <li><strong>Seguridad:</strong> Permisos y acceso</li>
-                      <li><strong>Detalles:</strong> Metadatos específicos del tipo de archivo</li>
-                      <li><strong>Versiones anteriores:</strong> Copias de seguridad automáticas</li>
-                    </ul>
-                  </div>
-
-                  <div class="uso-metadatos">
-                    <h5>Usar metadatos para organización</h5>
-                    <ul>
-                      <li><strong>Etiquetas:</strong> Palabras clave personalizadas</li>
-                      <li><strong>Calificaciones:</strong> Sistema de estrellas</li>
-                      <li><strong>Comentarios:</strong> Notas descriptivas</li>
-                      <li><strong>Categorías:</strong> Clasificación temática</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="consejos-organizacion">
-                  <h4>💡 Mejores prácticas de organización</h4>
-                  <div class="practica">
-                    <h5>Regla del 7±2</h5>
-                    <p>No tengas más de 5-9 elementos en una carpeta antes de crear subcarpetas</p>
-                  </div>
-                  
-                  <div class="practica">
-                    <h5>Convenciones de nomenclatura</h5>
-                    <ul>
-                      <li>Usa fechas en formato ISO (YYYY-MM-DD)</li>
-                      <li>Incluye versiones (v1.0, v2.1)</li>
-                      <li>Usa prefijos para ordenar: 01_, 02_, 03_</li>
-                      <li>Mantén consistencia en todo el sistema</li>
-                    </ul>
-                  </div>
-
-                  <div class="practica">
-                    <h5>Limpieza regular</h5>
-                    <ul>
-                      <li>Revisa y limpia la carpeta Descargas semanalmente</li>
-                      <li>Archiva documentos antiguos en carpetas por año</li>
-                      <li>Elimina archivos duplicados periódicamente</li>
-                      <li>Mantén el escritorio limpio y organizado</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            `,
-            multimedia: {
-              imagen: '/images/teoria/organizacion-archivos.png',
-              video: '/videos/teoria/organizacion-eficiente.mp4'
-            },
-            actividades: [
-              'Crear una estructura de carpetas personal siguiendo las mejores prácticas',
-              'Practicar técnicas de búsqueda avanzada con diferentes filtros',
-              'Explorar y modificar propiedades y metadatos de archivos',
-              'Organizar la carpeta Descargas usando las técnicas aprendidas'
-            ]
-          },
-          {
-            id: 4,
-            titulo: 'Seguridad básica de archivos',
-            contenido: `
-              <div class="seccion-contenido">
-                <h3>🔒 Protección y seguridad de archivos</h3>
-                
-                <div class="seguridad-grupo">
-                  <h4>👤 Control de permisos básicos</h4>
-                  
-                  <div class="permisos-windows">
-                    <h5>Tipos de permisos en Windows</h5>
-                    <ul class="lista-permisos">
-                      <li><strong>Control total:</strong> Todos los permisos, incluido cambiar permisos</li>
-                      <li><strong>Modificar:</strong> Leer, escribir, ejecutar y eliminar</li>
-                      <li><strong>Leer y ejecutar:</strong> Ver contenido y ejecutar archivos</li>
-                      <li><strong>Mostrar el contenido de la carpeta:</strong> Ver archivos en carpetas</li>
-                      <li><strong>Leer:</strong> Solo visualizar el contenido</li>
-                      <li><strong>Escribir:</strong> Crear y modificar archivos</li>
-                    </ul>
-                  </div>
-
-                  <div class="cambiar-permisos">
-                    <h5>Cómo cambiar permisos</h5>
-                    <ol>
-                      <li>Clic derecho en el archivo o carpeta</li>
-                      <li>Seleccionar "Propiedades"</li>
-                      <li>Ir a la pestaña "Seguridad"</li>
-                      <li>Hacer clic en "Editar" (requiere permisos de administrador)</li>
-                      <li>Seleccionar usuario o grupo</li>
-                      <li>Marcar o desmarcar permisos según necesidad</li>
-                      <li>Hacer clic en "Aplicar" y "Aceptar"</li>
-                    </ol>
-                  </div>
-                </div>
-
-                <div class="seguridad-grupo">
-                  <h4>🛡️ Protección con contraseñas</h4>
-                  
-                  <div class="metodos-proteccion">
-                    <h5>Carpetas comprimidas con contraseña</h5>
-                    <ol>
-                      <li>Seleccionar archivos a proteger</li>
-                      <li>Clic derecho → "Enviar a" → "Carpeta comprimida (en zip)"</li>
-                      <li>Abrir el archivo ZIP creado</li>
-                      <li>En el explorador ZIP: "Archivo" → "Agregar contraseña"</li>
-                      <li>Introducir contraseña segura</li>
-                      <li>Confirmar y guardar</li>
-                    </ol>
-                  </div>
-
-                  <div class="metodos-proteccion">
-                    <h5>BitLocker para unidades (Windows Pro)</h5>
-                    <ul>
-                      <li>Cifrado completo de unidades de disco</li>
-                      <li>Protección automática de todos los archivos</li>
-                      <li>Requiere contraseña o PIN para acceder</li>
-                      <li>Disponible en versiones Professional de Windows</li>
-                    </ul>
-                  </div>
-
-                  <div class="metodos-proteccion">
-                    <h5>Herramientas de terceros</h5>
-                    <ul>
-                      <li><strong>7-Zip:</strong> Compresión gratuita con cifrado AES-256</li>
-                      <li><strong>AxCrypt:</strong> Cifrado individual de archivos</li>
-                      <li><strong>VeraCrypt:</strong> Crear contenedores cifrados</li>
-                      <li><strong>WinRAR:</strong> Compresión comercial con protección</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="seguridad-grupo">
-                  <h4>💾 Copias de seguridad</h4>
-                  
-                  <div class="estrategia-backup">
-                    <h5>Regla 3-2-1 de copias de seguridad</h5>
-                    <ul>
-                      <li><strong>3 copias:</strong> Original + 2 copias de seguridad</li>
-                      <li><strong>2 medios diferentes:</strong> Disco duro + nube/USB</li>
-                      <li><strong>1 fuera del sitio:</strong> Nube o ubicación física diferente</li>
-                    </ul>
-                  </div>
-
-                  <div class="herramientas-backup">
-                    <h5>Herramientas de Windows</h5>
-                    <ul>
-                      <li><strong>Historial de archivos:</strong> 
-                        <ul>
-                          <li>Panel de control → Sistema y seguridad → Historial de archivos</li>
-                          <li>Conectar unidad externa</li>
-                          <li>Activar y configurar frecuencia</li>
-                        </ul>
-                      </li>
-                      <li><strong>Copia de seguridad y restauración:</strong>
-                        <ul>
-                          <li>Panel de control → Sistema y seguridad</li>
-                          <li>Crear imagen del sistema completo</li>
-                          <li>Programar copias automáticas</li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div class="servicios-nube">
-                    <h5>Servicios en la nube populares</h5>
-                    <ul>
-                      <li><strong>OneDrive:</strong> Integrado con Windows, 5GB gratuitos</li>
-                      <li><strong>Google Drive:</strong> 15GB gratuitos, sincronización automática</li>
-                      <li><strong>Dropbox:</strong> 2GB gratuitos, excelente sincronización</li>
-                      <li><strong>iCloud:</strong> 5GB gratuitos, ideal para usuarios Apple</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="seguridad-grupo">
-                  <h4>🦠 Protección contra malware</h4>
-                  
-                  <div class="practicas-seguras">
-                    <h5>Hábitos seguros con archivos</h5>
-                    <ul>
-                      <li><strong>No abrir archivos sospechosos:</strong> Especialmente ejecutables (.exe, .bat, .com)</li>
-                      <li><strong>Verificar remitentes:</strong> Confirmar origen de archivos adjuntos</li>
-                      <li><strong>Usar antivirus actualizado:</strong> Windows Defender o terceros</li>
-                      <li><strong>Mantener Windows actualizado:</strong> Instalar parches de seguridad</li>
-                      <li><strong>Cuidado con descargas:</strong> Solo de sitios confiables</li>
-                    </ul>
-                  </div>
-
-                  <div class="escaneo-seguridad">
-                    <h5>Windows Defender</h5>
-                    <ul>
-                      <li>Protección en tiempo real activada por defecto</li>
-                      <li>Escaneos programados automáticos</li>
-                      <li>Análisis rápido vs. completo</li>
-                      <li>Cuarentena automática de amenazas</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="seguridad-grupo">
-                  <h4>🗂️ Recuperación de archivos</h4>
-                  
-                  <div class="recuperacion-metodos">
-                    <h5>Papelera de reciclaje</h5>
-                    <ul>
-                      <li>Doble clic en el icono del escritorio</li>
-                      <li>Seleccionar archivos a recuperar</li>
-                      <li>Clic derecho → "Restaurar"</li>
-                      <li>O arrastrar a la ubicación deseada</li>
-                    </ul>
-                  </div>
-
-                  <div class="recuperacion-metodos">
-                    <h5>Versiones anteriores (Shadow Copies)</h5>
-                    <ol>
-                      <li>Clic derecho en archivo o carpeta</li>
-                      <li>Seleccionar "Propiedades"</li>
-                      <li>Ir a pestaña "Versiones anteriores"</li>
-                      <li>Seleccionar versión deseada</li>
-                      <li>Hacer clic en "Restaurar" o "Abrir"</li>
-                    </ol>
-                  </div>
-
-                  <div class="recuperacion-metodos">
-                    <h5>Herramientas de recuperación profesionales</h5>
-                    <ul>
-                      <li><strong>Recuva:</strong> Gratuita, fácil de usar</li>
-                      <li><strong>PhotoRec:</strong> Especializada en imágenes</li>
-                      <li><strong>TestDisk:</strong> Recuperación de particiones</li>
-                      <li><strong>Disk Drill:</strong> Versión gratuita limitada</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="alertas-seguridad">
-                  <h4>⚠️ Señales de alerta de seguridad</h4>
-                  <ul class="lista-alertas">
-                    <li>Archivos que aparecen y desaparecen misteriosamente</li>
-                    <li>Cambios inesperados en nombres de archivos</li>
-                    <li>Archivos con extensiones dobles (.txt.exe)</li>
-                    <li>Rendimiento lento del sistema al acceder archivos</li>
-                    <li>Mensajes de error al abrir archivos conocidos</li>
-                    <li>Archivos con tamaños inusuales (muy grandes o pequeños)</li>
-                  </ul>
-                </div>
-              </div>
-            `,
-            multimedia: {
-              imagen: '/images/teoria/seguridad-archivos.png',
-              video: '/videos/teoria/proteccion-datos.mp4'
-            },
-            actividades: [
-              'Configurar permisos básicos en una carpeta personal',
-              'Crear un archivo comprimido protegido con contraseña',
-              'Configurar el Historial de archivos de Windows',
-              'Practicar la recuperación de archivos desde la Papelera'
+            titulo: "Optimización de productividad",
+            tipo: "optimizacion",
+            duracion: "20 minutos",
+            objetivos: [
+              "Maximizar eficiencia en el acceso a programas",
+              "Reducir clics y tiempo de navegación",
+              "Personalizar según flujo de trabajo"
             ]
           }
         ],
-        recursos: {
-          documentos: [
-            {
-              titulo: 'Guía de referencia rápida del Explorador de archivos',
-              tipo: 'PDF',
-              url: '/recursos/intro-windows/guia-explorador-archivos.pdf'
-            },
-            {
-              titulo: 'Plantilla de estructura de carpetas recomendada',
-              tipo: 'PDF',
-              url: '/recursos/intro-windows/plantilla-organizacion.pdf'
-            },
-            {
-              titulo: 'Lista de atajos de teclado para gestión de archivos',
-              tipo: 'PDF',
-              url: '/recursos/intro-windows/atajos-archivos.pdf'
-            },
-            {
-              titulo: 'Checklist de seguridad para archivos personales',
-              tipo: 'PDF',
-              url: '/recursos/intro-windows/checklist-seguridad.pdf'
-            }
+        evaluacion: {
+          prerequisitos: [
+            "Tema 1: Elementos y funciones básicas",
+            "Tema 2: Explorador de Windows",
+            "Tema 3: Escritorio de Windows",
+            "Tema 4: Barra de tareas"
           ],
+          criterios: [
+            "Navegar eficientemente por todas las secciones del menú",
+            "Personalizar mosaicos según necesidades específicas",
+            "Utilizar búsqueda avanzada para encontrar elementos rápidamente",
+            "Organizar grupos de aplicaciones de forma lógica",
+            "Configurar opciones del menú para optimizar productividad"
+          ],
+          tiempoEstimado: "35 minutos"
+        }
+      },
+      '6': {
+        titulo: "Papelera de reciclaje",
+        duracion: "25-30 minutos",
+        objetivos: [
+          "Comprender el funcionamiento y propósito de la papelera de reciclaje",
+          "Gestionar eficientemente archivos y carpetas eliminados",
+          "Dominar las opciones de restauración y eliminación permanente",
+          "Configurar propiedades y optimizar el uso de la papelera"
+        ],
+        secciones: [
+          {
+            id: 1,
+            titulo: "Ubicación y acceso a la papelera",
+            contenido: `
+              <h3>🗑️ La Papelera de Reciclaje: Tu Red de Seguridad</h3>
+              <p>La <strong>Papelera de reciclaje</strong> es una característica fundamental de Windows que actúa como zona de seguridad temporal para archivos eliminados, permitiendo recuperarlos antes de su eliminación definitiva.</p>
+              
+              <h4>📍 Ubicación de la papelera:</h4>
+              <div class="ubicaciones-papelera">
+                <div class="ubicacion">
+                  <h5>🖥️ En el Escritorio</h5>
+                  <ul>
+                    <li><strong>Icono principal:</strong> Siempre visible en el escritorio</li>
+                    <li><strong>Estados visuales:</strong> Vacía (🗑️) o con contenido (🗑️📄)</li>
+                    <li><strong>Acceso directo:</strong> Doble clic para abrir</li>
+                    <li><strong>Menú contextual:</strong> Clic derecho para opciones</li>
+                  </ul>
+                </div>
+                <div class="ubicacion">
+                  <h5>📂 En el Explorador de Windows</h5>
+                  <ul>
+                    <li><strong>Panel izquierdo:</strong> Acceso rápido en navegación</li>
+                    <li><strong>Dirección:</strong> Se puede escribir "shell:RecycleBinFolder"</li>
+                    <li><strong>Integración:</strong> Parte del sistema de archivos</li>
+                  </ul>
+                </div>
+                <div class="ubicacion">
+                  <h5>⌨️ Con atajos de teclado</h5>
+                  <ul>
+                    <li><strong>Windows + R:</strong> Escribir "shell:RecycleBinFolder" y Enter</li>
+                    <li><strong>Explorador + Ctrl + Shift + 3:</strong> Navegación rápida</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🔍 Identificar estado de la papelera:</h4>
+              <div class="estados-papelera">
+                <div class="estado">
+                  <h5>🗑️ Papelera Vacía</h5>
+                  <p>Icono con papelera limpia - No hay elementos para recuperar</p>
+                </div>
+                <div class="estado">
+                  <h5>🗑️📄 Papelera con Contenido</h5>
+                  <p>Icono con papeles - Contiene elementos recuperables</p>
+                </div>
+              </div>
+
+              <h4>⚡ Acceso rápido y eficiente:</h4>
+              <div class="acceso-rapido">
+                <div class="metodo">
+                  <h5>🖱️ Doble clic</h5>
+                  <p>La forma más común y directa desde el escritorio</p>
+                </div>
+                <div class="metodo">
+                  <h5>🖱️ Clic derecho</h5>
+                  <p>Acceso a menú contextual con opciones avanzadas:</p>
+                  <ul>
+                    <li><strong>Abrir:</strong> Ver contenido de la papelera</li>
+                    <li><strong>Vaciar papelera:</strong> Eliminación definitiva</li>
+                    <li><strong>Propiedades:</strong> Configuración avanzada</li>
+                  </ul>
+                </div>
+                <div class="metodo">
+                  <h5>📂 Desde explorador</h5>
+                  <p>Integración completa con el sistema de archivos</p>
+                </div>
+              </div>
+
+              <div class="funciones-principales">
+                <h4>🎯 Funciones principales de la papelera:</h4>
+                <ul>
+                  <li><strong>Almacenamiento temporal:</strong> Mantiene archivos eliminados por seguridad</li>
+                  <li><strong>Recuperación fácil:</strong> Permite restaurar elementos por error</li>
+                  <li><strong>Vista previa:</strong> Examinar contenido antes de decisiones finales</li>
+                  <li><strong>Gestión de espacio:</strong> Control del espacio utilizado en disco</li>
+                  <li><strong>Eliminación definitiva:</strong> Liberación permanente de espacio</li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            id: 2,
+            titulo: "Enviar archivos y carpetas a la papelera",
+            contenido: `
+              <h3>📤 Métodos para Enviar Elementos a la Papelera</h3>
+              <p>Existen múltiples formas de enviar archivos y carpetas a la papelera, cada una apropiada para diferentes situaciones y preferencias de usuario.</p>
+              
+              <h4>🖱️ Métodos con ratón:</h4>
+              <div class="metodos-raton">
+                <div class="metodo">
+                  <h5>🗑️ Arrastrar y soltar</h5>
+                  <p><strong>Proceso:</strong></p>
+                  <ul>
+                    <li>Seleccionar archivo(s) o carpeta(s)</li>
+                    <li>Arrastrar hasta el icono de la papelera</li>
+                    <li>Soltar cuando aparezca indicador visual</li>
+                    <li>Confirmación automática del envío</li>
+                  </ul>
+                  <p><strong>Ventajas:</strong> Visual, intuitivo, confirmación inmediata</p>
+                </div>
+                <div class="metodo">
+                  <h5>🖱️ Clic derecho</h5>
+                  <p><strong>Proceso:</strong></p>
+                  <ul>
+                    <li>Clic derecho en archivo o carpeta</li>
+                    <li>Seleccionar "Eliminar" del menú contextual</li>
+                    <li>Confirmar acción si se solicita</li>
+                  </ul>
+                  <p><strong>Ventajas:</strong> Preciso, control total, sin arrastrar</p>
+                </div>
+              </div>
+
+              <h4>⌨️ Métodos con teclado:</h4>
+              <div class="metodos-teclado">
+                <div class="atajo">
+                  <h5>🔗 Tecla Supr (Delete)</h5>
+                  <ul>
+                    <li>Seleccionar elemento(s)</li>
+                    <li>Presionar <kbd>Supr</kbd> o <kbd>Delete</kbd></li>
+                    <li>Confirmar en cuadro de diálogo</li>
+                    <li><strong>Resultado:</strong> Envío a papelera</li>
+                  </ul>
+                </div>
+                <div class="atajo">
+                  <h5>🔗 Shift + Supr</h5>
+                  <ul>
+                    <li>Seleccionar elemento(s)</li>
+                    <li>Presionar <kbd>Shift</kbd> + <kbd>Supr</kbd></li>
+                    <li>⚠️ <strong>CUIDADO:</strong> Eliminación PERMANENTE</li>
+                    <li><strong>Resultado:</strong> NO va a papelera</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>📁 Consideraciones especiales:</h4>
+              <div class="consideraciones">
+                <div class="tipo-archivo">
+                  <h5>📄 Archivos individuales</h5>
+                  <ul>
+                    <li>Se envían directamente a la papelera</li>
+                    <li>Mantienen nombre y ubicación original</li>
+                    <li>Información de fecha de eliminación</li>
+                  </ul>
+                </div>
+                <div class="tipo-archivo">
+                  <h5>📁 Carpetas completas</h5>
+                  <ul>
+                    <li>Todo el contenido va junto a la papelera</li>
+                    <li>Estructura interna se mantiene</li>
+                    <li>Subcarpetas y archivos incluidos</li>
+                    <li>Restauración completa disponible</li>
+                  </ul>
+                </div>
+                <div class="tipo-archivo">
+                  <h5>📚 Múltiples elementos</h5>
+                  <ul>
+                    <li>Selección múltiple con <kbd>Ctrl</kbd> + clic</li>
+                    <li>Selección de rango con <kbd>Shift</kbd> + clic</li>
+                    <li>Todos van juntos a la papelera</li>
+                    <li>Confirmación única para todo el conjunto</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>⚠️ Casos especiales:</h4>
+              <div class="casos-especiales">
+                <div class="caso">
+                  <h5>💾 Archivos en unidades externas</h5>
+                  <p><strong>USB, tarjetas SD:</strong> Eliminación permanente directa (no van a papelera)</p>
+                </div>
+                <div class="caso">
+                  <h5>🌐 Archivos de red</h5>
+                  <p><strong>Carpetas compartidas:</strong> Eliminación permanente inmediata</p>
+                </div>
+                <div class="caso">
+                  <h5>🔒 Archivos en uso</h5>
+                  <p><strong>Archivos abiertos:</strong> Error o solicitud de cerrar aplicación primero</p>
+                </div>
+                <div class="caso">
+                  <h5>📦 Archivos muy grandes</h5>
+                  <p><strong>Confirmación especial:</strong> Windows pregunta por eliminación permanente</p>
+                </div>
+              </div>
+
+              <div class="cuadro-confirmacion">
+                <h4>💬 Entendiendo los cuadros de confirmación:</h4>
+                <div class="confirmacion">
+                  <h5>📋 Confirmación estándar</h5>
+                  <p>"¿Está seguro de que desea mover este elemento a la Papelera de reciclaje?"</p>
+                  <ul>
+                    <li><strong>Sí:</strong> Envía a papelera (recuperable)</li>
+                    <li><strong>No:</strong> Cancela la operación</li>
+                  </ul>
+                </div>
+                <div class="confirmacion">
+                  <h5>⚠️ Confirmación de eliminación permanente</h5>
+                  <p>"¿Está seguro de que desea eliminar permanentemente este elemento?"</p>
+                  <ul>
+                    <li><strong>Sí:</strong> Eliminación definitiva (NO recuperable)</li>
+                    <li><strong>No:</strong> Cancela la operación</li>
+                  </ul>
+                </div>
+              </div>
+            `
+          },
+          {
+            id: 3,
+            titulo: "Visualizar contenido de la papelera",
+            contenido: `
+              <h3>👀 Navegación y Visualización del Contenido</h3>
+              <p>La <strong>interfaz de la papelera</strong> proporciona herramientas completas para examinar, organizar y gestionar los elementos eliminados antes de tomar decisiones finales.</p>
+              
+              <h4>🖼️ Vistas disponibles:</h4>
+              <div class="vistas-papelera">
+                <div class="vista">
+                  <h5>📋 Vista de detalles (Recomendada)</h5>
+                  <p><strong>Información mostrada:</strong></p>
+                  <ul>
+                    <li><strong>Nombre:</strong> Nombre original del archivo/carpeta</li>
+                    <li><strong>Ubicación original:</strong> Dónde estaba antes de eliminarse</li>
+                    <li><strong>Fecha de eliminación:</strong> Cuándo se envió a papelera</li>
+                    <li><strong>Tamaño:</strong> Espacio que ocupa</li>
+                    <li><strong>Tipo:</strong> Formato del archivo</li>
+                  </ul>
+                  <p><strong>Acceso:</strong> Menú Ver > Detalles</p>
+                </div>
+                <div class="vista">
+                  <h5>🎯 Vista de iconos</h5>
+                  <ul>
+                    <li>Iconos grandes para identificación visual</li>
+                    <li>Ideal para archivos multimedia</li>
+                    <li>Vista previa de imágenes</li>
+                    <li>Menos información detallada</li>
+                  </ul>
+                </div>
+                <div class="vista">
+                  <h5>📄 Vista de lista</h5>
+                  <ul>
+                    <li>Formato compacto con nombres</li>
+                    <li>Información básica visible</li>
+                    <li>Navegación rápida por muchos elementos</li>
+                    <li>Ordenación fácil por columnas</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🔍 Herramientas de organización:</h4>
+              <div class="herramientas-organizacion">
+                <div class="herramienta">
+                  <h5>📊 Ordenar elementos</h5>
+                  <p><strong>Criterios de ordenación:</strong></p>
+                  <ul>
+                    <li><strong>Por nombre:</strong> Alfabético A-Z o Z-A</li>
+                    <li><strong>Por fecha eliminación:</strong> Más reciente o más antiguo</li>
+                    <li><strong>Por tamaño:</strong> Mayor a menor o menor a mayor</li>
+                    <li><strong>Por ubicación original:</strong> Agrupados por carpeta origen</li>
+                    <li><strong>Por tipo:</strong> Agrupados por extensión</li>
+                  </ul>
+                  <p><strong>Acceso:</strong> Clic en encabezados de columna</p>
+                </div>
+                <div class="herramienta">
+                  <h5>🔍 Búsqueda en papelera</h5>
+                  <ul>
+                    <li>Cuadro de búsqueda en esquina superior derecha</li>
+                    <li>Búsqueda por nombre de archivo</li>
+                    <li>Filtrado en tiempo real</li>
+                    <li>Útil para papeleras con muchos elementos</li>
+                  </ul>
+                </div>
+                <div class="herramienta">
+                  <h5>📋 Selección de elementos</h5>
+                  <ul>
+                    <li><strong>Un elemento:</strong> Clic simple</li>
+                    <li><strong>Múltiples no consecutivos:</strong> <kbd>Ctrl</kbd> + clic</li>
+                    <li><strong>Rango consecutivo:</strong> <kbd>Shift</kbd> + clic</li>
+                    <li><strong>Todos:</strong> <kbd>Ctrl</kbd> + <kbd>A</kbd></li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>ℹ️ Información detallada de elementos:</h4>
+              <div class="informacion-elementos">
+                <div class="columna-info">
+                  <h5>📝 Nombre original</h5>
+                  <p>Exactamente como se llamaba antes de eliminarse, incluyendo extensión</p>
+                </div>
+                <div class="columna-info">
+                  <h5>📍 Ubicación original</h5>
+                  <p>Ruta completa donde estaba ubicado (ej: C:\\Users\\Usuario\\Documents)</p>
+                </div>
+                <div class="columna-info">
+                  <h5>📅 Fecha de eliminación</h5>
+                  <p>Momento exacto cuando se envió a la papelera</p>
+                </div>
+                <div class="columna-info">
+                  <h5>📏 Tamaño</h5>
+                  <p>Espacio en disco que ocupa (bytes, KB, MB, GB)</p>
+                </div>
+              </div>
+
+              <h4>🎛️ Barra de herramientas de la papelera:</h4>
+              <div class="barra-herramientas">
+                <div class="boton-herramienta">
+                  <h5>↩️ Restaurar elementos seleccionados</h5>
+                  <p>Devuelve elementos a su ubicación original</p>
+                </div>
+                <div class="boton-herramienta">
+                  <h5>🗑️ Vaciar papelera de reciclaje</h5>
+                  <p>Elimina permanentemente TODO el contenido</p>
+                </div>
+                <div class="boton-herramienta">
+                  <h5>⚙️ Propiedades de papelera</h5>
+                  <p>Configuración avanzada y límites de tamaño</p>
+                </div>
+              </div>
+
+              <div class="navegacion-eficiente">
+                <h4>⚡ Tips para navegación eficiente:</h4>
+                <ul>
+                  <li><strong>Vista detalles + ordenar por fecha:</strong> Encuentra elementos recientes rápido</li>
+                  <li><strong>Búsqueda + palabras clave:</strong> Localiza archivos específicos</li>
+                  <li><strong>Selección múltiple:</strong> Operaciones en lote más eficientes</li>
+                  <li><strong>Verificar ubicación original:</strong> Confirma dónde se restaurará</li>
+                  <li><strong>Revisar antes de vaciar:</strong> Última oportunidad de recuperar</li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            id: 4,
+            titulo: "Restaurar elementos eliminados",
+            contenido: `
+              <h3>↩️ Restauración de Elementos: Recuperando lo Eliminado</h3>
+              <p>La <strong>restauración</strong> es el proceso de devolver archivos y carpetas desde la papelera a su ubicación original, recuperando completamente su funcionalidad.</p>
+              
+              <h4>🔄 Métodos de restauración:</h4>
+              <div class="metodos-restauracion">
+                <div class="metodo">
+                  <h5>🖱️ Restauración individual</h5>
+                  <p><strong>Proceso paso a paso:</strong></p>
+                  <ol>
+                    <li>Abrir la papelera de reciclaje</li>
+                    <li>Localizar el archivo o carpeta deseada</li>
+                    <li>Clic derecho en el elemento</li>
+                    <li>Seleccionar "Restaurar"</li>
+                    <li>Confirmación automática de restauración</li>
+                  </ol>
+                  <p><strong>Resultado:</strong> Elemento vuelve a su ubicación original exacta</p>
+                </div>
+                <div class="metodo">
+                  <h5>📚 Restauración múltiple</h5>
+                  <p><strong>Para varios elementos:</strong></p>
+                  <ol>
+                    <li>Seleccionar múltiples elementos (Ctrl + clic)</li>
+                    <li>Clic derecho en la selección</li>
+                    <li>Seleccionar "Restaurar"</li>
+                    <li>Todos vuelven a sus ubicaciones originales</li>
+                  </ol>
+                  <p><strong>Ventaja:</strong> Eficiencia en operaciones masivas</p>
+                </div>
+                <div class="metodo">
+                  <h5>🎛️ Desde barra de herramientas</h5>
+                  <ol>
+                    <li>Seleccionar elemento(s) deseado(s)</li>
+                    <li>Clic en "Restaurar elementos seleccionados"</li>
+                    <li>Confirmación automática</li>
+                  </ol>
+                  <p><strong>Acceso:</strong> Botón en la barra superior de la papelera</p>
+                </div>
+                <div class="metodo">
+                  <h5>⌨️ Con atajos de teclado</h5>
+                  <ul>
+                    <li>Seleccionar elemento(s)</li>
+                    <li>Presionar <kbd>Ctrl</kbd> + <kbd>Z</kbd> (deshacer eliminación)</li>
+                    <li>Alternativa rápida para elementos recientes</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>📍 Comprensión de ubicaciones originales:</h4>
+              <div class="ubicaciones-originales">
+                <div class="concepto">
+                  <h5>🎯 ¿Qué es la ubicación original?</h5>
+                  <p>Es la carpeta exacta donde estaba el archivo antes de eliminarse.</p>
+                  <ul>
+                    <li><strong>Ruta completa:</strong> C:\\Users\\Usuario\\Documents\\Archivo.docx</li>
+                    <li><strong>Memoria del sistema:</strong> Windows recuerda automáticamente</li>
+                    <li><strong>Restauración exacta:</strong> Vuelve al mismo lugar</li>
+                  </ul>
+                </div>
+                <div class="concepto">
+                  <h5>📋 Verificar antes de restaurar</h5>
+                  <p><strong>En vista detalles:</strong> Columna "Ubicación original" muestra la ruta</p>
+                  <ul>
+                    <li>Confirma dónde aparecerá el archivo</li>
+                    <li>Evita sorpresas después de restaurar</li>
+                    <li>Permite planificar organización</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>⚠️ Situaciones especiales en restauración:</h4>
+              <div class="situaciones-especiales">
+                <div class="situacion">
+                  <h5>📁 Carpeta original no existe</h5>
+                  <p><strong>Problema:</strong> La carpeta donde estaba el archivo fue eliminada</p>
+                  <p><strong>Solución de Windows:</strong></p>
+                  <ul>
+                    <li>Recrea automáticamente la estructura de carpetas</li>
+                    <li>Restaura el archivo en la nueva carpeta recreada</li>
+                    <li>Mantiene la organización original</li>
+                  </ul>
+                </div>
+                <div class="situacion">
+                  <h5>📄 Archivo con mismo nombre existe</h5>
+                  <p><strong>Conflicto:</strong> Ya hay un archivo con el mismo nombre en la ubicación</p>
+                  <p><strong>Opciones disponibles:</strong></p>
+                  <ul>
+                    <li><strong>Reemplazar:</strong> Sobrescribe el archivo existente</li>
+                    <li><strong>Conservar ambos:</strong> Añade número al nombre (ej: archivo(1).txt)</li>
+                    <li><strong>Cancelar:</strong> No restaura y mantiene en papelera</li>
+                  </ul>
+                </div>
+                <div class="situacion">
+                  <h5>💾 Unidad original no disponible</h5>
+                  <p><strong>Problema:</strong> USB o disco externo desconectado</p>
+                  <p><strong>Resultado:</strong> Error de restauración hasta reconectar unidad</p>
+                </div>
+                <div class="situacion">
+                  <h5>🔒 Sin permisos en ubicación original</h5>
+                  <p><strong>Problema:</strong> Cambios de permisos después de eliminación</p>
+                  <p><strong>Solución:</strong> Ejecutar como administrador o cambiar permisos</p>
+                </div>
+              </div>
+
+              <h4>✅ Verificación post-restauración:</h4>
+              <div class="verificacion-restauracion">
+                <div class="verificacion">
+                  <h5>🔍 Confirmar ubicación</h5>
+                  <ul>
+                    <li>Navegar a la carpeta original</li>
+                    <li>Verificar que el archivo está presente</li>
+                    <li>Confirmar fecha de modificación original</li>
+                  </ul>
+                </div>
+                <div class="verificacion">
+                  <h5>🧪 Probar funcionalidad</h5>
+                  <ul>
+                    <li>Abrir archivo para verificar integridad</li>
+                    <li>Confirmar que no hay corrupción</li>
+                    <li>Verificar que todos los datos están completos</li>
+                  </ul>
+                </div>
+                <div class="verificacion">
+                  <h5>🗑️ Limpieza de papelera</h5>
+                  <ul>
+                    <li>Elemento desaparece automáticamente de papelera</li>
+                    <li>Espacio liberado en papelera</li>
+                    <li>Contador de elementos actualizado</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="buenas-practicas">
+                <h4>💡 Mejores prácticas para restauración:</h4>
+                <ul>
+                  <li><strong>Revisar fecha eliminación:</strong> Priorizar elementos más recientes</li>
+                  <li><strong>Verificar ubicación original:</strong> Asegurar que es donde quieres el archivo</li>
+                  <li><strong>Restaurar por grupos:</strong> Elementos relacionados juntos</li>
+                  <li><strong>Verificar espacio disponible:</strong> En la unidad de destino</li>
+                  <li><strong>Tener cuidado con conflictos:</strong> Revisar opciones antes de confirmar</li>
+                  <li><strong>Backup importante:</strong> Considerar copias de seguridad antes de restaurar elementos críticos</li>
+                </ul>
+              </div>
+            `
+          }
+        ],
+        multimedia: {
           videos: [
             {
-              titulo: 'Masterclass: Organización eficiente de archivos',
-              duracion: '25 min',
-              url: '/videos/masterclass-organizacion-archivos.mp4'
+              titulo: "Guía completa de la Papelera de reciclaje",
+              descripcion: "Tutorial paso a paso sobre todas las funciones de la papelera de reciclaje",
+              duracion: "9:15",
+              url: "/videos/intro-windows/papelera-guia-completa.mp4",
+              thumbnail: "/images/intro-windows/video-papelera-thumb.jpg"
             },
             {
-              titulo: 'Técnicas avanzadas de búsqueda en Windows',
-              duracion: '12 min',
-              url: '/videos/busqueda-avanzada-windows.mp4'
+              titulo: "Técnicas avanzadas de restauración",
+              descripcion: "Métodos profesionales para recuperar archivos y gestionar conflictos",
+              duracion: "6:40",
+              url: "/videos/intro-windows/restauracion-avanzada.mp4",
+              thumbnail: "/images/intro-windows/video-restauracion-thumb.jpg"
             },
             {
-              titulo: 'Configuración de copias de seguridad automáticas',
-              duracion: '18 min',
-              url: '/videos/backup-automatico-windows.mp4'
+              titulo: "Configuración y optimización de la papelera",
+              descripcion: "Cómo configurar la papelera para máxima eficiencia y seguridad",
+              duracion: "5:30",
+              url: "/videos/intro-windows/configuracion-papelera.mp4",
+              thumbnail: "/images/intro-windows/video-config-papelera-thumb.jpg"
             }
           ],
-          enlaces: [
+          imagenes: [
             {
-              titulo: 'Documentación oficial de Microsoft sobre gestión de archivos',
-              url: 'https://support.microsoft.com/es-es/windows/buscar-archivos-en-windows-fe9ac6c5-2457-9c95-e08c-87b1e6639a42'
+              titulo: "Interfaz de la papelera de reciclaje",
+              descripcion: "Captura completa de la interfaz con todas las opciones etiquetadas",
+              url: "/images/intro-windows/interfaz-papelera.png",
+              alt: "Ventana de la papelera mostrando lista de archivos y opciones de restauración"
             },
             {
-              titulo: 'Mejores prácticas de organización digital',
-              url: 'https://support.microsoft.com/es-es/office/organizar-archivos-y-carpetas-de-manera-eficaz'
+              titulo: "Estados visuales de la papelera",
+              descripcion: "Comparación de iconos de papelera vacía vs con contenido",
+              url: "/images/intro-windows/estados-papelera.png",
+              alt: "Iconos de papelera vacía y llena en el escritorio"
             },
             {
-              titulo: 'Guías de seguridad informática básica',
-              url: 'https://www.microsoft.com/es-es/security/tips'
+              titulo: "Proceso de restauración paso a paso",
+              descripcion: "Diagrama visual del proceso completo de restauración",
+              url: "/images/intro-windows/proceso-restauracion.png",
+              alt: "Secuencia visual mostrando los pasos para restaurar archivos"
+            }
+          ],
+          simuladores: [
+            {
+              titulo: "Simulador de gestión de papelera",
+              descripcion: "Práctica interactiva con eliminación y restauración de archivos",
+              url: "/simuladores/intro-windows/gestion-papelera.html",
+              duracion: "20 minutos"
+            }
+          ],
+          recursos: [
+            {
+              titulo: "Guía de configuración de papelera",
+              descripcion: "Manual completo de todas las opciones de configuración",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/configuracion-papelera.pdf"
+            },
+            {
+              titulo: "Atajos de teclado para papelera",
+              descripcion: "Lista de todos los atajos relacionados con la papelera",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/atajos-papelera.pdf"
+            },
+            {
+              titulo: "Solución de problemas comunes",
+              descripcion: "Guía para resolver problemas típicos con la papelera",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/troubleshooting-papelera.pdf"
             }
           ]
         },
+        actividades: [
+          {
+            id: 1,
+            titulo: "Exploración de la papelera",
+            tipo: "exploracion",
+            descripcion: "Familiarízate con la interfaz y opciones de la papelera",
+            instrucciones: [
+              "Localiza y abre la papelera desde el escritorio",
+              "Cambia entre diferentes vistas (iconos, lista, detalles)",
+              "Identifica las columnas de información disponibles",
+              "Explora las opciones del menú contextual",
+              "Observa la barra de herramientas y sus funciones"
+            ],
+            duracion: "8 minutos"
+          },
+          {
+            id: 2,
+            titulo: "Práctica de eliminación controlada",
+            tipo: "practica",
+            descripcion: "Practica diferentes métodos para enviar archivos a la papelera",
+            instrucciones: [
+              "Crea archivos de prueba en el escritorio",
+              "Elimina usando arrastrar y soltar",
+              "Elimina usando clic derecho + eliminar",
+              "Elimina usando la tecla Supr",
+              "Verifica que aparecen en la papelera con información correcta"
+            ],
+            duracion: "10 minutos"
+          },
+          {
+            id: 3,
+            titulo: "Maestría en restauración",
+            tipo: "aplicacion",
+            descripcion: "Domina las técnicas de restauración de elementos",
+            instrucciones: [
+              "Restaura elementos individuales usando diferentes métodos",
+              "Practica restauración múltiple de varios archivos",
+              "Simula conflictos de nombres y resuelve apropiadamente",
+              "Verifica que los archivos vuelven a ubicaciones correctas",
+              "Practica la búsqueda de elementos específicos en papelera grande"
+            ],
+            duracion: "12 minutos"
+          }
+        ],
+        actividadesPracticas: [
+          {
+            id: 1,
+            titulo: "Gestión completa de la papelera",
+            tipo: "proyecto",
+            duracion: "20 minutos",
+            objetivos: [
+              "Dominar todas las funciones de la papelera",
+              "Gestionar eficientemente archivos eliminados",
+              "Configurar la papelera según necesidades"
+            ],
+            instrucciones: [
+              "Configurar propiedades de papelera para optimizar espacio",
+              "Crear escenario de eliminación masiva y organizarla",
+              "Practicar restauración selectiva y masiva",
+              "Resolver conflictos de nombres durante restauración",
+              "Implementar flujo de trabajo eficiente para gestión diaria"
+            ]
+          },
+          {
+            id: 2,
+            titulo: "Recuperación de archivos críticos",
+            tipo: "escenario",
+            duracion: "15 minutos",
+            objetivos: [
+              "Desarrollar habilidades de recuperación de emergencia",
+              "Manejar situaciones de eliminación accidental",
+              "Optimizar procesos de verificación y restauración"
+            ]
+          }
+        ],
         evaluacion: {
-          preRequisitos: ['Tema 1: Dispositivos Básicos', 'Tema 2: Uso Básico', 'Tema 3: Configuración Básica'],
-          criterios: [
-            'Navegar eficientemente por el sistema de archivos usando el Explorador',
-            'Realizar operaciones básicas: crear, copiar, mover, eliminar y renombrar archivos',
-            'Implementar una organización lógica y eficiente de archivos y carpetas',
-            'Aplicar técnicas de búsqueda avanzada para localizar información',
-            'Configurar y usar propiedades y metadatos para mejorar la organización',
-            'Aplicar medidas básicas de seguridad: permisos, copias de seguridad, protección'
+          prerequisitos: [
+            "Tema 1: Elementos y funciones básicas",
+            "Tema 2: Explorador de Windows",
+            "Tema 3: Escritorio de Windows",
+            "Tema 4: Barra de tareas",
+            "Tema 5: Menú de Inicio"
           ],
-          tiempoEstimado: '60 minutos'
+          criterios: [
+            "Localizar y acceder eficientemente a la papelera de reciclaje",
+            "Enviar archivos y carpetas usando múltiples métodos",
+            "Navegar y organizar el contenido de la papelera",
+            "Restaurar elementos a sus ubicaciones originales correctamente",
+            "Configurar propiedades de la papelera según necesidades específicas"
+          ],
+          tiempoEstimado: "25 minutos"
+        }
+      },
+      '7': {
+        titulo: "Gestión de usuarios y seguridad",
+        duracion: "35-40 minutos",
+        objetivos: [
+          "Comprender los tipos de cuentas de usuario en Windows",
+          "Gestionar cuentas de usuario: crear, modificar y eliminar",
+          "Configurar control parental y restricciones de tiempo",
+          "Establecer permisos de archivos y carpetas",
+          "Implementar configuraciones básicas de seguridad"
+        ],
+        secciones: [
+          {
+            id: 1,
+            titulo: "Tipos de cuentas de usuario",
+            contenido: `
+              <h3>👥 Sistema de Cuentas de Usuario en Windows</h3>
+              <p>Windows utiliza un <strong>sistema de cuentas de usuario</strong> para controlar el acceso a recursos del sistema, garantizar la seguridad y personalizar la experiencia de cada usuario.</p>
+              
+              <h4>🏷️ Tipos principales de cuentas:</h4>
+              <div class="tipos-cuentas">
+                <div class="tipo-cuenta">
+                  <h5>👑 Cuenta de Administrador</h5>
+                  <div class="caracteristicas-cuenta">
+                    <p><strong>Privilegios máximos:</strong></p>
+                    <ul>
+                      <li><strong>Instalación de software:</strong> Programas y controladores sin restricciones</li>
+                      <li><strong>Modificación del sistema:</strong> Configuraciones críticas y registro</li>
+                      <li><strong>Gestión de usuarios:</strong> Crear, modificar y eliminar otras cuentas</li>
+                      <li><strong>Acceso completo:</strong> Todos los archivos y carpetas del sistema</li>
+                      <li><strong>Control de seguridad:</strong> Configurar políticas y permisos</li>
+                    </ul>
+                    <p><strong>⚠️ Responsabilidad:</strong> Usar solo cuando sea necesario para tareas administrativas</p>
+                  </div>
+                </div>
+                
+                <div class="tipo-cuenta">
+                  <h5>👤 Cuenta Estándar</h5>
+                  <div class="caracteristicas-cuenta">
+                    <p><strong>Uso diario recomendado:</strong></p>
+                    <ul>
+                      <li><strong>Aplicaciones básicas:</strong> Ejecutar programas ya instalados</li>
+                      <li><strong>Archivos personales:</strong> Crear, modificar y eliminar en carpetas propias</li>
+                      <li><strong>Configuraciones personales:</strong> Cambiar fondo, temas, preferencias</li>
+                      <li><strong>Navegación web:</strong> Usar internet de forma segura</li>
+                      <li><strong>Solicitud de permisos:</strong> Pedir autorización para cambios del sistema</li>
+                    </ul>
+                    <p><strong>✅ Seguridad:</strong> Protege el sistema de cambios accidentales o maliciosos</p>
+                  </div>
+                </div>
+                
+                <div class="tipo-cuenta">
+                  <h5>👨‍👩‍👧‍👦 Cuenta Invitado</h5>
+                  <div class="caracteristicas-cuenta">
+                    <p><strong>Acceso temporal limitado:</strong></p>
+                    <ul>
+                      <li><strong>Sin contraseña:</strong> Acceso rápido para visitantes</li>
+                      <li><strong>Permisos mínimos:</strong> Solo aplicaciones básicas</li>
+                      <li><strong>Sin persistencia:</strong> Cambios se pierden al cerrar sesión</li>
+                      <li><strong>Navegación básica:</strong> Internet y documentos temporales</li>
+                      <li><strong>Sin instalaciones:</strong> No puede instalar software</li>
+                    </ul>
+                    <p><strong>🔒 Nota:</strong> Deshabilitada por defecto en versiones recientes de Windows</p>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🎭 Control de Cuentas de Usuario (UAC):</h4>
+              <div class="uac-explicacion">
+                <p>El <strong>Control de Cuentas de Usuario</strong> es una característica de seguridad que solicita confirmación cuando se intentan realizar cambios importantes al sistema.</p>
+                
+                <div class="uac-funcionamiento">
+                  <h5>⚙️ Cómo funciona UAC:</h5>
+                  <ul>
+                    <li><strong>Detección automática:</strong> Identifica acciones que requieren privilegios elevados</li>
+                    <li><strong>Solicitud de confirmación:</strong> Muestra cuadro de diálogo de autorización</li>
+                    <li><strong>Cambio temporal:</strong> Eleva privilegios solo para esa acción específica</li>
+                    <li><strong>Registro de actividad:</strong> Documenta cambios realizados con privilegios</li>
+                  </ul>
+                </div>
+                
+                <div class="uac-niveles">
+                  <h5>🎚️ Niveles de UAC:</h5>
+                  <ul>
+                    <li><strong>Siempre notificar:</strong> Confirmación para todos los cambios (máxima seguridad)</li>
+                    <li><strong>Solo cambios de aplicaciones:</strong> Notifica solo para software de terceros</li>
+                    <li><strong>Como anterior sin atenuar:</strong> Sin oscurecer escritorio</li>
+                    <li><strong>Nunca notificar:</strong> Sin confirmaciones (no recomendado)</li>
+                  </ul>
+                </div>
+              </div>
+            `
+          },
+          {
+            id: 2,
+            titulo: "Crear y eliminar cuentas de usuario",
+            contenido: `
+              <h3>➕ Gestión de Cuentas de Usuario</h3>
+              <p>La <strong>gestión de cuentas</strong> permite crear un entorno personalizado y seguro para cada persona que usa el computador.</p>
+              
+              <h4>🆕 Crear nueva cuenta de usuario:</h4>
+              <div class="proceso-crear-cuenta">
+                <div class="metodo-configuracion">
+                  <h5>🔧 Método 1: Configuración de Windows</h5>
+                  <ol class="pasos-detallados">
+                    <li><strong>Abrir Configuración:</strong> <kbd>Windows + I</kbd></li>
+                    <li><strong>Navegar:</strong> Cuentas → Familia y otros usuarios</li>
+                    <li><strong>Agregar usuario:</strong> "Agregar otra persona a este equipo"</li>
+                    <li><strong>Opción sin cuenta Microsoft:</strong> "No tengo información de inicio de sesión de esta persona"</li>
+                    <li><strong>Cuenta local:</strong> "Agregar un usuario sin cuenta de Microsoft"</li>
+                    <li><strong>Completar datos:</strong>
+                      <ul>
+                        <li>Nombre de usuario (sin espacios, único)</li>
+                        <li>Contraseña (opcional pero recomendada)</li>
+                        <li>Confirmación de contraseña</li>
+                        <li>Pregunta de seguridad (recuperación)</li>
+                      </ul>
+                    </li>
+                    <li><strong>Finalizar:</strong> "Siguiente" para crear la cuenta</li>
+                  </ol>
+                </div>
+                
+                <div class="metodo-panel-control">
+                  <h5>🎛️ Método 2: Panel de Control</h5>
+                  <ol class="pasos-detallados">
+                    <li><strong>Acceder:</strong> Panel de Control → Cuentas de usuario</li>
+                    <li><strong>Administrar:</strong> "Administrar otra cuenta"</li>
+                    <li><strong>Crear:</strong> "Agregar una nueva cuenta de usuario"</li>
+                    <li><strong>Configurar:</strong> Nombre y tipo de cuenta</li>
+                    <li><strong>Crear cuenta:</strong> Confirmar creación</li>
+                  </ol>
+                </div>
+                
+                <div class="configuracion-inicial">
+                  <h5>⚙️ Configuración inicial recomendada:</h5>
+                  <ul>
+                    <li><strong>Tipo de cuenta:</strong> Estándar (por defecto, más seguro)</li>
+                    <li><strong>Contraseña:</strong> Combinación de letras, números y símbolos</li>
+                    <li><strong>Imagen de perfil:</strong> Foto personalizada para identificación</li>
+                    <li><strong>Pregunta de seguridad:</strong> Respuesta memorable para recuperación</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🔄 Modificar cuentas existentes:</h4>
+              <div class="modificaciones-cuenta">
+                <div class="cambio-tipo">
+                  <h5>👑 Cambiar tipo de cuenta:</h5>
+                  <ul>
+                    <li><strong>Acceso:</strong> Configuración → Cuentas → Familia y otros usuarios</li>
+                    <li><strong>Seleccionar usuario:</strong> Clic en la cuenta a modificar</li>
+                    <li><strong>Cambiar tipo:</strong> "Cambiar tipo de cuenta"</li>
+                    <li><strong>Elegir:</strong> Administrador o Usuario estándar</li>
+                    <li><strong>Confirmar:</strong> "Aceptar" para aplicar cambios</li>
+                  </ul>
+                </div>
+                
+                <div class="cambio-contrasena">
+                  <h5>🔐 Cambiar contraseña:</h5>
+                  <ul>
+                    <li><strong>Cuenta propia:</strong> Configuración → Cuentas → Opciones de inicio de sesión</li>
+                    <li><strong>Otras cuentas:</strong> Panel de Control → Cuentas de usuario → Administrar otra cuenta</li>
+                    <li><strong>Nueva contraseña:</strong> Escribir y confirmar nueva contraseña</li>
+                    <li><strong>Pista:</strong> Ayuda memoria para recordar (opcional)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🗑️ Eliminar cuentas de usuario:</h4>
+              <div class="proceso-eliminar">
+                <div class="pasos-eliminacion">
+                  <h5>⚠️ Proceso de eliminación:</h5>
+                  <ol>
+                    <li><strong>Configuración:</strong> Cuentas → Familia y otros usuarios</li>
+                    <li><strong>Seleccionar cuenta:</strong> Usuario a eliminar</li>
+                    <li><strong>Quitar:</strong> "Quitar" de este equipo</li>
+                    <li><strong>Decidir sobre archivos:</strong>
+                      <ul>
+                        <li><strong>"Eliminar cuenta y datos":</strong> Borra todo permanentemente</li>
+                        <li><strong>"Mantener archivos":</strong> Preserva documentos en el escritorio</li>
+                      </ul>
+                    </li>
+                    <li><strong>Confirmar:</strong> "Eliminar cuenta y datos" o "Mantener archivos"</li>
+                  </ol>
+                </div>
+                
+                <div class="consideraciones-eliminacion">
+                  <h5>💡 Consideraciones importantes:</h5>
+                  <ul>
+                    <li><strong>Backup previo:</strong> Respaldar datos importantes antes de eliminar</li>
+                    <li><strong>Cuenta activa:</strong> No se puede eliminar la cuenta actualmente en uso</li>
+                    <li><strong>Última cuenta admin:</strong> Windows protege la última cuenta de administrador</li>
+                    <li><strong>Proceso irreversible:</strong> La eliminación completa no se puede deshacer</li>
+                  </ul>
+                </div>
+              </div>
+            `
+          },
+          {
+            id: 3,
+            titulo: "Configuración de control parental",
+            contenido: `
+              <h3>👨‍👩‍👧‍👦 Control Parental y Cuentas Familiares</h3>
+              <p>Windows ofrece herramientas robustas de <strong>control parental</strong> para proteger a menores y gestionar el tiempo de pantalla de forma efectiva.</p>
+              
+              <h4>👨‍👩‍👧 Configuración de familia Microsoft:</h4>
+              <div class="familia-microsoft">
+                <div class="configuracion-inicial">
+                  <h5>🔧 Configuración inicial:</h5>
+                  <ol class="pasos-familia">
+                    <li><strong>Cuenta Microsoft:</strong> Tanto padres como hijos necesitan cuenta Microsoft</li>
+                    <li><strong>Configuración:</strong> Ir a Configuración → Cuentas → Familia y otros usuarios</li>
+                    <li><strong>Agregar familiar:</strong> "Agregar un miembro de la familia"</li>
+                    <li><strong>Tipo de cuenta:</strong> Seleccionar "Agregar hijo"</li>
+                    <li><strong>Cuenta existente:</strong> Email del menor o crear nueva cuenta</li>
+                    <li><strong>Confirmación:</strong> El menor debe aceptar invitación por email</li>
+                    <li><strong>Configuración online:</strong> Gestionar desde account.microsoft.com/family</li>
+                  </ol>
+                </div>
+                
+                <div class="funciones-control">
+                  <h5>🛡️ Funciones de control disponibles:</h5>
+                  <div class="funcion-control">
+                    <h6>⏰ Límites de tiempo de pantalla</h6>
+                    <ul>
+                      <li><strong>Tiempo diario:</strong> Establecer horas máximas por día</li>
+                      <li><strong>Horarios permitidos:</strong> Definir ventanas de tiempo específicas</li>
+                      <li><strong>Diferente por día:</strong> Configuración distinta entre semana y fin de semana</li>
+                      <li><strong>Tiempo adicional:</strong> Solicitudes automáticas para extensión</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="funcion-control">
+                    <h6>🌐 Filtros de contenido web</h6>
+                    <ul>
+                      <li><strong>Filtro automático:</strong> Bloqueo por edad y contenido apropiado</li>
+                      <li><strong>Lista blanca:</strong> Sitios web específicamente permitidos</li>
+                      <li><strong>Lista negra:</strong> Sitios web específicamente bloqueados</li>
+                      <li><strong>Búsqueda segura:</strong> Filtros en motores de búsqueda</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="funcion-control">
+                    <h6>🎮 Control de aplicaciones y juegos</h6>
+                    <ul>
+                      <li><strong>Clasificación por edad:</strong> Restricciones según sistema ESRB</li>
+                      <li><strong>Lista de aplicaciones:</strong> Permitir o bloquear aplicaciones específicas</li>
+                      <li><strong>Compras online:</strong> Control de gastos y autorización parental</li>
+                      <li><strong>Tiempo por aplicación:</strong> Límites específicos por programa</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>📍 Restricciones de ubicación y dispositivos:</h4>
+              <div class="restricciones-avanzadas">
+                <div class="ubicacion-dispositivos">
+                  <h5>📱 Gestión de dispositivos:</h5>
+                  <ul>
+                    <li><strong>Localización:</strong> Seguimiento de ubicación de dispositivos</li>
+                    <li><strong>Dispositivos vinculados:</strong> Control sobre múltiples equipos</li>
+                    <li><strong>Notificaciones:</strong> Alertas de actividad y ubicación</li>
+                    <li><strong>Acceso remoto:</strong> Configuración desde cualquier dispositivo</li>
+                  </ul>
+                </div>
+                
+                <div class="reportes-actividad">
+                  <h5>📊 Informes de actividad:</h5>
+                  <ul>
+                    <li><strong>Tiempo de pantalla:</strong> Desglose detallado de uso diario</li>
+                    <li><strong>Aplicaciones usadas:</strong> Lista de programas y duración</li>
+                    <li><strong>Sitios web visitados:</strong> Historial de navegación</li>
+                    <li><strong>Búsquedas realizadas:</strong> Términos de búsqueda registrados</li>
+                    <li><strong>Intentos bloqueados:</strong> Contenido que se intentó acceder</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>⚙️ Configuración alternativa sin cuenta Microsoft:</h4>
+              <div class="alternativas-control">
+                <p>Para familias que prefieren no usar cuentas Microsoft, existen opciones locales limitadas:</p>
+                
+                <div class="control-local">
+                  <h5>🏠 Control local básico:</h5>
+                  <ul>
+                    <li><strong>Cuenta estándar:</strong> Crear cuenta sin privilegios administrativos</li>
+                    <li><strong>Software terceros:</strong> Programas especializados de control parental</li>
+                    <li><strong>Router familiar:</strong> Configuración de filtros a nivel de red</li>
+                    <li><strong>Supervisión directa:</strong> Monitoreo manual de actividades</li>
+                  </ul>
+                </div>
+                
+                <div class="mejores-practicas">
+                  <h5>💡 Mejores prácticas de control parental:</h5>
+                  <ul>
+                    <li><strong>Comunicación abierta:</strong> Explicar reglas y razones a los menores</li>
+                    <li><strong>Gradual independencia:</strong> Aflojar controles según edad y madurez</li>
+                    <li><strong>Revisiones regulares:</strong> Ajustar configuraciones periódicamente</li>
+                    <li><strong>Educación digital:</strong> Enseñar seguridad online y ciudadanía digital</li>
+                  </ul>
+                </div>
+              </div>
+            `
+          },
+          {
+            id: 4,
+            titulo: "Permisos de archivos y carpetas",
+            contenido: `
+              <h3>🔐 Sistema de Permisos de Windows</h3>
+              <p>Windows utiliza un <strong>sistema de permisos</strong> sofisticado para controlar quién puede ver, modificar o ejecutar archivos y carpetas, garantizando la seguridad y privacidad de los datos.</p>
+              
+              <h4>🏷️ Tipos de permisos fundamentales:</h4>
+              <div class="tipos-permisos">
+                <div class="permiso-basico">
+                  <h5>👁️ Lectura (Read)</h5>
+                  <div class="descripcion-permiso">
+                    <p><strong>Permite:</strong></p>
+                    <ul>
+                      <li><strong>Ver contenido:</strong> Abrir y leer archivos</li>
+                      <li><strong>Listar carpetas:</strong> Ver nombres de archivos y subcarpetas</li>
+                      <li><strong>Ejecutar básico:</strong> Correr aplicaciones (con permisos de ejecución)</li>
+                      <li><strong>Copiar:</strong> Duplicar archivos a otra ubicación</li>
+                    </ul>
+                    <p><strong>No permite:</strong> Modificar, eliminar o cambiar propiedades</p>
+                  </div>
+                </div>
+                
+                <div class="permiso-basico">
+                  <h5>✏️ Escritura (Write)</h5>
+                  <div class="descripcion-permiso">
+                    <p><strong>Permite:</strong></p>
+                    <ul>
+                      <li><strong>Modificar contenido:</strong> Editar archivos existentes</li>
+                      <li><strong>Crear archivos:</strong> Nuevos documentos en carpetas</li>
+                      <li><strong>Eliminar archivos:</strong> Borrar contenido propio</li>
+                      <li><strong>Cambiar atributos:</strong> Modificar propiedades básicas</li>
+                    </ul>
+                    <p><strong>Nota:</strong> Generalmente incluye permisos de lectura</p>
+                  </div>
+                </div>
+                
+                <div class="permiso-basico">
+                  <h5>⚙️ Ejecución (Execute)</h5>
+                  <div class="descripcion-permiso">
+                    <p><strong>Para archivos:</strong></p>
+                    <ul>
+                      <li><strong>Ejecutar programas:</strong> Correr aplicaciones (.exe, .com, .bat)</li>
+                      <li><strong>Scripts:</strong> Ejecutar archivos de comandos</li>
+                    </ul>
+                    <p><strong>Para carpetas:</strong></p>
+                    <ul>
+                      <li><strong>Acceso:</strong> Entrar y navegar por la carpeta</li>
+                      <li><strong>Búsqueda:</strong> Buscar archivos dentro</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="permiso-basico">
+                  <h5>👑 Control Total (Full Control)</h5>
+                  <div class="descripcion-permiso">
+                    <p><strong>Incluye todos los permisos anteriores más:</strong></p>
+                    <ul>
+                      <li><strong>Cambiar permisos:</strong> Modificar quién tiene acceso</li>
+                      <li><strong>Tomar posesión:</strong> Convertirse en propietario</li>
+                      <li><strong>Eliminar carpetas:</strong> Borrar directorios completos</li>
+                      <li><strong>Configuración avanzada:</strong> Todas las opciones de seguridad</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔧 Configurar permisos de archivos:</h4>
+              <div class="configuracion-permisos">
+                <div class="acceso-permisos">
+                  <h5>📋 Acceder a configuración de permisos:</h5>
+                  <ol class="pasos-configuracion">
+                    <li><strong>Seleccionar elemento:</strong> Clic derecho en archivo o carpeta</li>
+                    <li><strong>Propiedades:</strong> Seleccionar "Propiedades" del menú</li>
+                    <li><strong>Pestaña Seguridad:</strong> Hacer clic en la pestaña "Seguridad"</li>
+                    <li><strong>Lista de usuarios:</strong> Ver usuarios y grupos con acceso</li>
+                    <li><strong>Permisos actuales:</strong> Revisar permisos para cada usuario</li>
+                  </ol>
+                </div>
+                
+                <div class="modificar-permisos">
+                  <h5>✏️ Modificar permisos existentes:</h5>
+                  <ol class="pasos-modificacion">
+                    <li><strong>Seleccionar usuario:</strong> Clic en usuario de la lista</li>
+                    <li><strong>Editar:</strong> Botón "Editar" para modificar permisos</li>
+                    <li><strong>Marcar casillas:</strong> Permitir o denegar permisos específicos</li>
+                    <li><strong>Aplicar cambios:</strong> "Aceptar" para guardar</li>
+                  </ol>
+                </div>
+                
+                <div class="agregar-usuarios">
+                  <h5>➕ Agregar nuevos usuarios o grupos:</h5>
+                  <ol class="pasos-agregar">
+                    <li><strong>Botón Editar:</strong> En pestaña Seguridad</li>
+                    <li><strong>Agregar:</strong> Botón "Agregar" en ventana de permisos</li>
+                    <li><strong>Seleccionar usuarios:</strong> "Usuarios o grupos"</li>
+                    <li><strong>Escribir nombres:</strong> Nombre de usuario o grupo</li>
+                    <li><strong>Comprobar nombres:</strong> Verificar que existan</li>
+                    <li><strong>Configurar permisos:</strong> Asignar permisos específicos</li>
+                    <li><strong>Aplicar:</strong> Guardar configuración</li>
+                  </ol>
+                </div>
+              </div>
+
+              <h4>📁 Herencia de permisos:</h4>
+              <div class="herencia-sistema">
+                <div class="concepto-herencia">
+                  <h5>🔄 Cómo funciona la herencia:</h5>
+                  <ul>
+                    <li><strong>Carpetas padre:</strong> Sus permisos se heredan automáticamente</li>
+                    <li><strong>Subcarpetas y archivos:</strong> Reciben permisos de carpeta contenedora</li>
+                    <li><strong>Propagación:</strong> Cambios en carpeta principal afectan todo el contenido</li>
+                    <li><strong>Eficiencia:</strong> No es necesario configurar cada elemento individualmente</li>
+                  </ul>
+                </div>
+                
+                <div class="romper-herencia">
+                  <h5>🔓 Romper herencia:</h5>
+                  <ul>
+                    <li><strong>Configuraciones avanzadas:</strong> Botón "Opciones avanzadas"</li>
+                    <li><strong>Deshabilitar herencia:</strong> "Deshabilitar herencia"</li>
+                    <li><strong>Opciones:</strong> Convertir o quitar permisos heredados</li>
+                    <li><strong>Control manual:</strong> Configuración específica sin herencia</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🛡️ Mejores prácticas de seguridad:</h4>
+              <div class="mejores-practicas-permisos">
+                <div class="practica">
+                  <h5>✅ Principio de menor privilegio:</h5>
+                  <ul>
+                    <li><strong>Mínimo necesario:</strong> Dar solo los permisos indispensables</li>
+                    <li><strong>Revisión regular:</strong> Auditar permisos periódicamente</li>
+                    <li><strong>Eliminar accesos:</strong> Revocar permisos innecesarios</li>
+                  </ul>
+                </div>
+                
+                <div class="practica">
+                  <h5>👥 Usar grupos en lugar de usuarios individuales:</h5>
+                  <ul>
+                    <li><strong>Eficiencia:</strong> Gestión más fácil y escalable</li>
+                    <li><strong>Consistencia:</strong> Permisos uniformes por rol</li>
+                    <li><strong>Mantenimiento:</strong> Cambios centralizados</li>
+                  </ul>
+                </div>
+                
+                <div class="practica">
+                  <h5>📋 Documentar cambios:</h5>
+                  <ul>
+                    <li><strong>Registro:</strong> Anotar qué, cuándo y por qué se cambió</li>
+                    <li><strong>Responsabilidad:</strong> Saber quién hizo modificaciones</li>
+                    <li><strong>Auditoría:</strong> Facilitar revisiones de seguridad</li>
+                  </ul>
+                </div>
+              </div>
+            `
+          },
+          {
+            id: 5,
+            titulo: "Seguridad básica del sistema",
+            contenido: `
+              <h3>🛡️ Fundamentos de Seguridad en Windows</h3>
+              <p>La <strong>seguridad del sistema</strong> es fundamental para proteger datos personales, prevenir ataques maliciosos y mantener un funcionamiento óptimo del computador.</p>
+              
+              <h4>🦠 Windows Defender y protección antivirus:</h4>
+              <div class="windows-defender">
+                <div class="caracteristicas-defender">
+                  <h5>🛡️ Windows Defender Antivirus:</h5>
+                  <ul>
+                    <li><strong>Integrado:</strong> Incluido por defecto en Windows 10/11</li>
+                    <li><strong>Protección en tiempo real:</strong> Monitoreo continuo de amenazas</li>
+                    <li><strong>Actualizaciones automáticas:</strong> Definiciones de virus actualizadas</li>
+                    <li><strong>Análisis programados:</strong> Escaneos automáticos del sistema</li>
+                    <li><strong>Protección cloud:</strong> Detección mejorada basada en la nube</li>
+                  </ul>
+                </div>
+                
+                <div class="configuracion-defender">
+                  <h5>⚙️ Configurar Windows Defender:</h5>
+                  <ol class="pasos-configuracion">
+                    <li><strong>Acceso:</strong> Configuración → Actualización y seguridad → Seguridad de Windows</li>
+                    <li><strong>Panel principal:</strong> Ver estado de protección</li>
+                    <li><strong>Configuraciones:</strong>
+                      <ul>
+                        <li><strong>Protección contra virus:</strong> Activar/desactivar análisis en tiempo real</li>
+                        <li><strong>Protección contra ransomware:</strong> Acceso controlado a carpetas</li>
+                        <li><strong>Protección de red:</strong> Filtros de contenido malicioso</li>
+                        <li><strong>Control de aplicaciones:</strong> SmartScreen y protección basada en reputación</li>
+                      </ul>
+                    </li>
+                    <li><strong>Análisis manual:</strong> "Análisis rápido" o "Opciones de análisis"</li>
+                    <li><strong>Exclusiones:</strong> Agregar archivos/carpetas de confianza</li>
+                  </ol>
+                </div>
+                
+                <div class="tipos-analisis">
+                  <h5>🔍 Tipos de análisis disponibles:</h5>
+                  <div class="analisis-tipo">
+                    <h6>⚡ Análisis rápido</h6>
+                    <ul>
+                      <li><strong>Duración:</strong> 5-15 minutos típicamente</li>
+                      <li><strong>Cobertura:</strong> Áreas más vulnerables del sistema</li>
+                      <li><strong>Frecuencia:</strong> Diario recomendado</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="analisis-tipo">
+                    <h6>🔍 Análisis completo</h6>
+                    <ul>
+                      <li><strong>Duración:</strong> 1-3 horas dependiendo del sistema</li>
+                      <li><strong>Cobertura:</strong> Todo el disco duro y archivos</li>
+                      <li><strong>Frecuencia:</strong> Semanal recomendado</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="analisis-tipo">
+                    <h6>🎯 Análisis personalizado</h6>
+                    <ul>
+                      <li><strong>Flexibilidad:</strong> Seleccionar carpetas específicas</li>
+                      <li><strong>Eficiencia:</strong> Enfocar en áreas sospechosas</li>
+                      <li><strong>Uso:</strong> Para investigaciones específicas</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>🔥 Firewall de Windows:</h4>
+              <div class="firewall-windows">
+                <div class="funciones-firewall">
+                  <h5>🚧 Funciones del Firewall:</h5>
+                  <ul>
+                    <li><strong>Filtrado de tráfico:</strong> Control de conexiones entrantes y salientes</li>
+                    <li><strong>Bloqueo automático:</strong> Prevenir accesos no autorizados</li>
+                    <li><strong>Perfiles de red:</strong> Configuraciones específicas por tipo de red</li>
+                    <li><strong>Registro de actividad:</strong> Documentar intentos de conexión</li>
+                  </ul>
+                </div>
+                
+                <div class="configuracion-firewall">
+                  <h5>⚙️ Configuración básica del Firewall:</h5>
+                  <ol class="pasos-firewall">
+                    <li><strong>Acceso:</strong> Panel de Control → Sistema y seguridad → Firewall de Windows Defender</li>
+                    <li><strong>Estado:</strong> Verificar que esté activado</li>
+                    <li><strong>Perfiles de red:</strong>
+                      <ul>
+                        <li><strong>Red de dominio:</strong> Para redes corporativas</li>
+                        <li><strong>Red privada:</strong> Para redes domésticas confiables</li>
+                        <li><strong>Red pública:</strong> Para WiFi públicas (más restrictivo)</li>
+                      </ul>
+                    </li>
+                    <li><strong>Permitir aplicaciones:</strong> "Permitir una aplicación" para excepciones</li>
+                    <li><strong>Reglas avanzadas:</strong> "Configuración avanzada" para control detallado</li>
+                  </ol>
+                </div>
+                
+                <div class="reglas-firewall">
+                  <h5>📋 Gestión de reglas:</h5>
+                  <ul>
+                    <li><strong>Reglas predefinidas:</strong> Windows incluye reglas para aplicaciones comunes</li>
+                    <li><strong>Crear reglas:</strong> Para aplicaciones específicas que el firewall bloquea</li>
+                    <li><strong>Reglas entrantes:</strong> Controlan conexiones que llegan al PC</li>
+                    <li><strong>Reglas salientes:</strong> Controlan conexiones que salen del PC</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>🔄 Actualizaciones de Windows:</h4>
+              <div class="actualizaciones-sistema">
+                <div class="importancia-actualizaciones">
+                  <h5>⚡ Importancia de las actualizaciones:</h5>
+                  <ul>
+                    <li><strong>Parches de seguridad:</strong> Corrección de vulnerabilidades descubiertas</li>
+                    <li><strong>Nuevas funciones:</strong> Mejoras y características adicionales</li>
+                    <li><strong>Estabilidad:</strong> Corrección de errores y mejoras de rendimiento</li>
+                    <li><strong>Compatibilidad:</strong> Soporte para nuevo hardware y software</li>
+                  </ul>
+                </div>
+                
+                <div class="configurar-actualizaciones">
+                  <h5>⚙️ Configurar Windows Update:</h5>
+                  <ol class="pasos-update">
+                    <li><strong>Acceso:</strong> Configuración → Actualización y seguridad → Windows Update</li>
+                    <li><strong>Buscar actualizaciones:</strong> "Buscar actualizaciones" manualmente</li>
+                    <li><strong>Configurar horario:</strong> "Cambiar horas activas" para evitar reinicios inoportunos</li>
+                    <li><strong>Opciones avanzadas:</strong>
+                      <ul>
+                        <li><strong>Actualizaciones automáticas:</strong> Programar instalación</li>
+                        <li><strong>Pausar actualizaciones:</strong> Retrasar hasta 35 días</li>
+                        <li><strong>Actualizaciones opcionales:</strong> Controladores y características adicionales</li>
+                      </ul>
+                    </li>
+                    <li><strong>Historial:</strong> Ver actualizaciones instaladas y problemas</li>
+                  </ol>
+                </div>
+              </div>
+
+              <h4>🔐 Mejores prácticas de seguridad:</h4>
+              <div class="mejores-practicas-seguridad">
+                <div class="practica-seguridad">
+                  <h5>🛡️ Protección básica diaria:</h5>
+                  <ul>
+                    <li><strong>Usar cuenta estándar:</strong> Para actividades cotidianas, no administrador</li>
+                    <li><strong>Contraseñas fuertes:</strong> Combinación de letras, números y símbolos</li>
+                    <li><strong>Autenticación doble factor:</strong> Cuando esté disponible</li>
+                    <li><strong>Mantener software actualizado:</strong> Sistema operativo y aplicaciones</li>
+                  </ul>
+                </div>
+                
+                <div class="practica-seguridad">
+                  <h5>📧 Seguridad en navegación:</h5>
+                  <ul>
+                    <li><strong>Evitar enlaces sospechosos:</strong> No hacer clic en URLs desconocidas</li>
+                    <li><strong>Verificar certificados:</strong> Buscar "https://" en sitios sensibles</li>
+                    <li><strong>Descargas seguras:</strong> Solo de fuentes confiables</li>
+                    <li><strong>Email prudente:</strong> No abrir adjuntos de remitentes desconocidos</li>
+                  </ul>
+                </div>
+                
+                <div class="practica-seguridad">
+                  <h5>💾 Respaldos y recuperación:</h5>
+                  <ul>
+                    <li><strong>Backup regular:</strong> Copias de seguridad automáticas</li>
+                    <li><strong>Múltiples ubicaciones:</strong> Local, nube y externa</li>
+                    <li><strong>Probar restauración:</strong> Verificar que los backups funcionen</li>
+                    <li><strong>Documentos importantes:</strong> Especial atención a archivos críticos</li>
+                  </ul>
+                </div>
+                
+                <div class="practica-seguridad">
+                  <h5>👁️ Monitoreo y vigilancia:</h5>
+                  <ul>
+                    <li><strong>Revisar actividad:</strong> Programas en ejecución y procesos</li>
+                    <li><strong>Monitor de recursos:</strong> Uso inusual de CPU o red</li>
+                    <li><strong>Logs del sistema:</strong> Revisar eventos de seguridad</li>
+                    <li><strong>Comportamiento extraño:</strong> Lentitud, pop-ups, cambios no autorizados</li>
+                  </ul>
+                </div>
+              </div>
+            `
+          }
+        ],
+        multimedia: {
+          videos: [
+            {
+              titulo: "Gestión completa de usuarios en Windows",
+              descripcion: "Guía paso a paso para crear, modificar y eliminar cuentas de usuario",
+              duracion: "12:30",
+              url: "/videos/intro-windows/gestion-usuarios-completa.mp4",
+              thumbnail: "/images/intro-windows/video-usuarios-thumb.jpg"
+            },
+            {
+              titulo: "Control parental y seguridad familiar",
+              descripcion: "Configuración avanzada de control parental con Microsoft Family",
+              duracion: "10:45",
+              url: "/videos/intro-windows/control-parental-avanzado.mp4",
+              thumbnail: "/images/intro-windows/video-control-parental-thumb.jpg"
+            },
+            {
+              titulo: "Permisos de archivos y carpetas",
+              descripcion: "Domina el sistema de permisos de Windows para máxima seguridad",
+              duracion: "15:20",
+              url: "/videos/intro-windows/permisos-archivos-carpetas.mp4",
+              thumbnail: "/images/intro-windows/video-permisos-thumb.jpg"
+            },
+            {
+              titulo: "Windows Defender y Firewall",
+              descripcion: "Configuración completa de las herramientas de seguridad de Windows",
+              duracion: "11:15",
+              url: "/videos/intro-windows/defender-firewall-configuracion.mp4",
+              thumbnail: "/images/intro-windows/video-defender-thumb.jpg"
+            }
+          ],
+          imagenes: [
+            {
+              titulo: "Tipos de cuentas de usuario",
+              descripcion: "Comparación visual de cuentas administrador, estándar e invitado",
+              url: "/images/intro-windows/tipos-cuentas-usuario.png",
+              alt: "Diagrama comparativo de los tres tipos de cuentas de usuario en Windows"
+            },
+            {
+              titulo: "Interfaz de control parental",
+              descripcion: "Captura de pantalla del panel de Microsoft Family",
+              url: "/images/intro-windows/interfaz-control-parental.png",
+              alt: "Panel de control de Microsoft Family mostrando opciones de configuración"
+            },
+            {
+              titulo: "Sistema de permisos de Windows",
+              descripcion: "Ventana de propiedades mostrando configuración de permisos",
+              url: "/images/intro-windows/sistema-permisos-windows.png",
+              alt: "Cuadro de diálogo de permisos de seguridad en Windows"
+            },
+            {
+              titulo: "Windows Defender en acción",
+              descripcion: "Interfaz principal de Windows Defender con análisis en curso",
+              url: "/images/intro-windows/windows-defender-interfaz.png",
+              alt: "Panel principal de Windows Defender mostrando estado de protección"
+            }
+          ],
+          simuladores: [
+            {
+              titulo: "Simulador de gestión de usuarios",
+              descripcion: "Práctica interactiva para crear y gestionar cuentas de usuario",
+              url: "/simuladores/intro-windows/gestion-usuarios.html",
+              duracion: "25 minutos"
+            },
+            {
+              titulo: "Configurador de permisos",
+              descripcion: "Herramienta práctica para entender y configurar permisos de archivos",
+              url: "/simuladores/intro-windows/configurador-permisos.html",
+              duracion: "20 minutos"
+            }
+          ],
+          recursos: [
+            {
+              titulo: "Guía completa de seguridad en Windows",
+              descripcion: "Manual exhaustivo de todas las herramientas de seguridad",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/guia-seguridad-windows.pdf"
+            },
+            {
+              titulo: "Plantilla de políticas de usuario",
+              descripcion: "Documento modelo para establecer reglas de uso del sistema",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/plantilla-politicas-usuario.pdf"
+            },
+            {
+              titulo: "Lista de verificación de seguridad",
+              descripcion: "Checklist para auditoría regular de seguridad del sistema",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/checklist-seguridad.pdf"
+            },
+            {
+              titulo: "Configuraciones recomendadas de Firewall",
+              descripcion: "Archivo con reglas de firewall optimizadas para diferentes escenarios",
+              tipo: "XML",
+              url: "/recursos/intro-windows/configuraciones-firewall.xml"
+            }
+          ]
+        },
+        actividades: [
+          {
+            id: 1,
+            titulo: "Configuración de cuentas familiares",
+            tipo: "configuracion",
+            descripcion: "Práctica completa de gestión de usuarios y configuración familiar",
+            instrucciones: [
+              "Crear una cuenta de usuario estándar para un miembro de la familia",
+              "Configurar una contraseña segura y pregunta de recuperación",
+              "Establecer una imagen de perfil personalizada",
+              "Configurar control parental básico (si aplicable)",
+              "Probar el cambio entre cuentas de usuario",
+              "Verificar que las restricciones funcionen correctamente"
+            ],
+            duracion: "20 minutos"
+          },
+          {
+            id: 2,
+            titulo: "Auditoría de permisos de carpetas",
+            tipo: "investigacion",
+            descripcion: "Analizar y optimizar permisos de carpetas importantes",
+            instrucciones: [
+              "Crear una carpeta de prueba en el escritorio",
+              "Examinar los permisos predeterminados de la carpeta",
+              "Modificar permisos para permitir solo lectura a usuarios estándar",
+              "Agregar un usuario específico con permisos de escritura",
+              "Probar acceso desde cuenta estándar",
+              "Documentar qué funciona y qué está restringido",
+              "Restaurar permisos originales"
+            ],
+            duracion: "25 minutos"
+          },
+          {
+            id: 3,
+            titulo: "Configuración de seguridad del sistema",
+            tipo: "configuracion",
+            descripcion: "Optimización completa de las herramientas de seguridad de Windows",
+            instrucciones: [
+              "Realizar un análisis completo con Windows Defender",
+              "Configurar análisis programados automáticos",
+              "Revisar y ajustar configuraciones del Firewall",
+              "Verificar configuración de Windows Update",
+              "Configurar horas activas para actualizaciones",
+              "Activar protección en tiempo real y opciones avanzadas",
+              "Crear un plan de backup básico para documentos importantes"
+            ],
+            duracion: "30 minutos"
+          },
+          {
+            id: 4,
+            titulo: "Simulacro de incidente de seguridad",
+            tipo: "escenario",
+            descripcion: "Práctica de respuesta ante una situación de seguridad simulada",
+            instrucciones: [
+              "Scenario: Se detecta comportamiento sospechoso en el sistema",
+              "Revisar el historial de Windows Defender",
+              "Verificar programas en ejecución en el Administrador de tareas",
+              "Comprobar actualizaciones pendientes del sistema",
+              "Revisar configuraciones de firewall para cambios no autorizados",
+              "Cambiar contraseñas de cuentas de usuario por precaución",
+              "Documentar hallazgos y acciones tomadas",
+              "Crear un plan de prevención para el futuro"
+            ],
+            duracion: "35 minutos"
+          },
+          {
+            id: 5,
+            titulo: "Implementación de políticas de seguridad",
+            tipo: "proyecto",
+            descripcion: "Diseñar e implementar un sistema de seguridad integral",
+            instrucciones: [
+              "Evaluar necesidades de seguridad del hogar/oficina",
+              "Crear cuentas de usuario apropiadas para cada persona",
+              "Configurar estructura de carpetas con permisos específicos",
+              "Establecer control parental donde sea necesario",
+              "Configurar backup automático para datos críticos",
+              "Documentar políticas de uso y seguridad",
+              "Crear cronograma de mantenimiento de seguridad",
+              "Capacitar a otros usuarios sobre las medidas implementadas"
+            ],
+            duracion: "45 minutos"
+          }
+        ],
+        actividadesPracticas: [
+          {
+            id: 1,
+            titulo: "Centro de administración familiar",
+            tipo: "proyecto",
+            duracion: "40 minutos",
+            objetivos: [
+              "Establecer un sistema completo de gestión familiar",
+              "Configurar controles parentales efectivos",
+              "Implementar medidas de seguridad personalizadas"
+            ],
+            instrucciones: [
+              "Crear cuentas personalizadas para cada miembro de la familia",
+              "Establecer niveles de acceso apropiados según edad y necesidades",
+              "Configurar control parental con Microsoft Family",
+              "Implementar horarios de uso y límites de tiempo de pantalla",
+              "Configurar filtros de contenido web apropiados",
+              "Establecer sistema de permisos para carpetas compartidas",
+              "Crear protocolo de respaldo para documentos familiares importantes",
+              "Documentar configuraciones y crear guía de uso familiar"
+            ]
+          },
+          {
+            id: 2,
+            titulo: "Fortaleza digital personal",
+            tipo: "configuracion",
+            duracion: "35 minutos",
+            objetivos: [
+              "Maximizar la seguridad personal del sistema",
+              "Implementar mejores prácticas de protección",
+              "Crear rutinas de mantenimiento de seguridad"
+            ],
+            instrucciones: [
+              "Realizar auditoría completa de seguridad actual",
+              "Optimizar configuraciones de Windows Defender",
+              "Configurar firewall con reglas personalizadas",
+              "Establecer rutina de actualizaciones y análisis",
+              "Implementar sistema de contraseñas seguras",
+              "Configurar backup automático en múltiples ubicaciones",
+              "Crear plan de respuesta ante incidentes",
+              "Establecer calendario de revisiones de seguridad mensuales"
+            ]
+          }
+        ],
+        evaluacion: {
+          prerequisitos: [
+            "Tema 1: Elementos y funciones básicas",
+            "Tema 2: Explorador de Windows",
+            "Tema 3: Escritorio de Windows",
+            "Tema 4: Barra de tareas",
+            "Tema 5: Menú de Inicio",
+            "Tema 6: Papelera de reciclaje"
+          ],
+          criterios: [
+            "Identificar y explicar los tipos de cuentas de usuario en Windows",
+            "Crear, modificar y eliminar cuentas de usuario correctamente",
+            "Configurar control parental y restricciones familiares efectivas",
+            "Gestionar permisos de archivos y carpetas apropiadamente",
+            "Implementar y mantener configuraciones básicas de seguridad del sistema",
+            "Aplicar mejores prácticas de seguridad en el uso diario",
+            "Responder adecuadamente ante situaciones de seguridad básicas"
+          ],
+          tiempoEstimado: "35 minutos"
+        }
+      },
+      '8': {
+        titulo: "Herramientas y utilidades",
+        duracion: "40-45 minutos",
+        objetivos: [
+          "Dominar Windows Defender para protección antivirus",
+          "Configurar y usar el Firewall de Windows",
+          "Gestionar archivos comprimidos (ZIP)",
+          "Instalar y desinstalar programas correctamente",
+          "Utilizar el Panel de Control eficientemente"
+        ],
+        secciones: [
+          {
+            id: 1,
+            titulo: "Windows Defender - Protección antivirus",
+            contenido: `
+              <h3>🛡️ Windows Defender: Tu Guardián Digital</h3>
+              <p><strong>Windows Defender</strong> es el antivirus integrado de Windows que protege tu equipo contra virus, malware y otras amenazas de seguridad.</p>
+              
+              <h4>🔍 Funciones principales:</h4>
+              <div class="defender-funciones">
+                <div class="funcion-item">
+                  <h5>🦠 Protección en tiempo real</h5>
+                  <p>Escanea archivos automáticamente mientras trabajas</p>
+                </div>
+                <div class="funcion-item">
+                  <h5>🔍 Análisis programados</h5>
+                  <p>Examina todo el sistema según horarios configurados</p>
+                </div>
+                <div class="funcion-item">
+                  <h5>⚡ Análisis rápidos</h5>
+                  <p>Revisa áreas críticas en pocos minutos</p>
+                </div>
+              </div>
+
+              <h4>⚙️ Configuración de Windows Defender:</h4>
+              <ol class="pasos-configuracion">
+                <li><strong>Acceso:</strong> Configuración → Actualización y seguridad → Seguridad de Windows</li>
+                <li><strong>Protección antivirus:</strong> Activar protección en tiempo real</li>
+                <li><strong>Análisis:</strong> Configurar análisis automáticos</li>
+                <li><strong>Exclusiones:</strong> Agregar carpetas de confianza si es necesario</li>
+              </ol>
+            `
+          },
+          {
+            id: 2,
+            titulo: "Firewall de Windows - Protección de red",
+            contenido: `
+              <h3>🔥 Firewall: Tu Barrera de Seguridad</h3>
+              <p>El <strong>Firewall de Windows</strong> controla el tráfico de red, bloqueando conexiones no autorizadas.</p>
+              
+              <h4>🎯 Funciones del Firewall:</h4>
+              <ul class="firewall-list">
+                <li><strong>Filtrado de entrada:</strong> Bloquea conexiones maliciosas</li>
+                <li><strong>Control de salida:</strong> Supervisa programas que acceden a internet</li>
+                <li><strong>Redes públicas/privadas:</strong> Diferentes niveles de protección</li>
+                <li><strong>Reglas personalizadas:</strong> Configuración avanzada por programa</li>
+              </ul>
+
+              <h4>⚙️ Configuración básica:</h4>
+              <ol class="pasos-firewall">
+                <li><strong>Acceso:</strong> Panel de Control → Sistema y seguridad → Firewall de Windows</li>
+                <li><strong>Activar/Desactivar:</strong> Por tipo de red (privada/pública)</li>
+                <li><strong>Permitir aplicaciones:</strong> Configurar excepciones</li>
+                <li><strong>Configuración avanzada:</strong> Reglas detalladas (usuarios avanzados)</li>
+              </ol>
+            `
+          },
+          {
+            id: 3,
+            titulo: "Compresión de archivos - Gestión de ZIP",
+            contenido: `
+              <h3>📦 Archivos Comprimidos: Ahorra Espacio</h3>
+              <p>La <strong>compresión de archivos</strong> reduce el tamaño de archivos y carpetas, facilitando su almacenamiento y transferencia.</p>
+              
+              <h4>✅ Ventajas de la compresión:</h4>
+              <ul class="ventajas-zip">
+                <li><strong>Menor tamaño:</strong> Archivos hasta 90% más pequeños</li>
+                <li><strong>Organización:</strong> Múltiples archivos en uno solo</li>
+                <li><strong>Transferencia:</strong> Envío más rápido por email</li>
+                <li><strong>Almacenamiento:</strong> Más eficiente en el disco</li>
+              </ul>
+
+              <h4>📦 Crear archivo ZIP:</h4>
+              <ol class="pasos-zip">
+                <li><strong>Seleccionar:</strong> Archivos o carpetas a comprimir</li>
+                <li><strong>Clic derecho:</strong> "Enviar a" → "Carpeta comprimida"</li>
+                <li><strong>Nombrar:</strong> Asignar nombre al archivo ZIP</li>
+                <li><strong>Verificar:</strong> Comprobar que se creó correctamente</li>
+              </ol>
+
+              <h4>📂 Extraer archivos ZIP:</h4>
+              <ol class="pasos-extraer">
+                <li><strong>Clic derecho:</strong> Sobre el archivo ZIP</li>
+                <li><strong>Opción:</strong> "Extraer todo..." o "Extraer aquí"</li>
+                <li><strong>Destino:</strong> Elegir carpeta de destino</li>
+                <li><strong>Confirmar:</strong> Hacer clic en "Extraer"</li>
+              </ol>
+            `
+          },
+          {
+            id: 4,
+            titulo: "Gestión de programas - Instalar y desinstalar",
+            contenido: `
+              <h3>💿 Gestión de Programas: Instalar y Mantener</h3>
+              <p>Aprende a <strong>instalar y desinstalar programas</strong> de manera segura y eficiente.</p>
+              
+              <h4>📥 Instalación de programas:</h4>
+              <ol class="pasos-instalacion">
+                <li><strong>Descargar:</strong> Desde sitios web oficiales únicamente</li>
+                <li><strong>Ejecutar:</strong> Archivo de instalación (.exe o .msi)</li>
+                <li><strong>Permisos:</strong> Confirmar cuando UAC lo solicite</li>
+                <li><strong>Configurar:</strong> Seguir asistente de instalación</li>
+                <li><strong>Verificar:</strong> Comprobar que el programa funciona</li>
+              </ol>
+
+              <h4>🗑️ Desinstalación correcta:</h4>
+              <ol class="pasos-desinstalacion">
+                <li><strong>Acceso:</strong> Configuración → Aplicaciones</li>
+                <li><strong>Buscar:</strong> Programa a desinstalar</li>
+                <li><strong>Seleccionar:</strong> Hacer clic en el programa</li>
+                <li><strong>Desinstalar:</strong> Hacer clic en "Desinstalar"</li>
+                <li><strong>Confirmar:</strong> Seguir instrucciones del desinstalador</li>
+              </ol>
+
+              <h4>⚠️ Mejores prácticas:</h4>
+              <ul class="buenas-practicas">
+                <li><strong>Fuentes confiables:</strong> Solo sitios oficiales</li>
+                <li><strong>Leer antes de instalar:</strong> Revisar permisos solicitados</li>
+                <li><strong>Desinstalar correctamente:</strong> No eliminar carpetas manualmente</li>
+                <li><strong>Mantener actualizado:</strong> Instalar actualizaciones</li>
+              </ul>
+            `
+          },
+          {
+            id: 5,
+            titulo: "Panel de Control - Centro de configuración",
+            contenido: `
+              <h3>⚙️ Panel de Control: Centro de Configuración</h3>
+              <p>El <strong>Panel de Control</strong> es el centro tradicional de configuración de Windows.</p>
+              
+              <h4>🎯 Secciones principales:</h4>
+              <div class="panel-secciones">
+                <div class="seccion-item">
+                  <h5>🖥️ Sistema y seguridad</h5>
+                  <p>Firewall, Windows Update, herramientas del sistema</p>
+                </div>
+                <div class="seccion-item">
+                  <h5>🔧 Hardware y sonido</h5>
+                  <p>Dispositivos, impresoras, sonido, energía</p>
+                </div>
+                <div class="seccion-item">
+                  <h5>🎨 Apariencia y personalización</h5>
+                  <p>Temas, pantalla, barra de tareas</p>
+                </div>
+                <div class="seccion-item">
+                  <h5>👥 Cuentas de usuario</h5>
+                  <p>Gestión de usuarios, control parental</p>
+                </div>
+              </div>
+
+              <h4>🔍 Acceso al Panel de Control:</h4>
+              <ul class="accesos-panel">
+                <li><strong>Búsqueda:</strong> Escribir "Panel de control" en el menú Inicio</li>
+                <li><strong>Ejecutar:</strong> Windows + R, escribir "control"</li>
+                <li><strong>Configuración:</strong> Configuración → Sistema → Acerca de → Panel de control</li>
+              </ul>
+            `
+          }
+        ],
+        multimedia: {
+          videos: [
+            {
+              titulo: "Windows Defender: configuración completa",
+              descripcion: "Guía paso a paso para configurar Windows Defender",
+              duracion: "8:45",
+              url: "/videos/intro-windows/windows-defender-configuracion.mp4",
+              thumbnail: "/images/intro-windows/video-defender-config-thumb.jpg"
+            },
+            {
+              titulo: "Firewall de Windows: protección de red",
+              descripcion: "Configurar el firewall para máxima seguridad",
+              duracion: "10:20",
+              url: "/videos/intro-windows/firewall-configuracion.mp4",
+              thumbnail: "/images/intro-windows/video-firewall-thumb.jpg"
+            },
+            {
+              titulo: "Archivos ZIP: comprimir y extraer",
+              descripcion: "Domina la compresión de archivos en Windows",
+              duracion: "7:15",
+              url: "/videos/intro-windows/archivos-zip-tutorial.mp4",
+              thumbnail: "/images/intro-windows/video-zip-thumb.jpg"
+            },
+            {
+              titulo: "Instalar y desinstalar programas",
+              descripcion: "Gestión segura de software en Windows",
+              duracion: "9:30",
+              url: "/videos/intro-windows/gestion-programas.mp4",
+              thumbnail: "/images/intro-windows/video-programas-thumb.jpg"
+            }
+          ],
+          imagenes: [
+            {
+              titulo: "Interfaz de Windows Defender",
+              descripcion: "Panel principal de Windows Defender Security Center",
+              url: "/images/intro-windows/defender-interfaz.png",
+              alt: "Pantalla principal de Windows Defender mostrando estado de protección"
+            },
+            {
+              titulo: "Configuración del Firewall",
+              descripcion: "Panel de configuración del Firewall de Windows",
+              url: "/images/intro-windows/firewall-configuracion.png",
+              alt: "Ventana de configuración del Firewall con opciones de red"
+            },
+            {
+              titulo: "Crear archivo ZIP",
+              descripcion: "Menú contextual para crear archivos comprimidos",
+              url: "/images/intro-windows/crear-zip.png",
+              alt: "Menú contextual mostrando opción 'Enviar a carpeta comprimida'"
+            },
+            {
+              titulo: "Panel de Control principal",
+              descripcion: "Vista principal del Panel de Control con categorías",
+              url: "/images/intro-windows/panel-control.png",
+              alt: "Interfaz del Panel de Control con todas las categorías visibles"
+            }
+          ],
+          simuladores: [
+            {
+              titulo: "Simulador de Windows Defender",
+              descripcion: "Práctica interactiva de configuración de antivirus",
+              url: "/simuladores/intro-windows/defender-simulator.html",
+              duracion: "15 minutos"
+            },
+            {
+              titulo: "Laboratorio de compresión ZIP",
+              descripcion: "Práctica de creación y extracción de archivos comprimidos",
+              url: "/simuladores/intro-windows/zip-lab.html",
+              duracion: "12 minutos"
+            }
+          ],
+          recursos: [
+            {
+              titulo: "Guía completa de Windows Defender",
+              descripcion: "Manual detallado de todas las funciones de Windows Defender",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/guia-windows-defender.pdf"
+            },
+            {
+              titulo: "Lista de verificación de seguridad del sistema",
+              descripcion: "Checklist para mantener tu sistema seguro",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/checklist-seguridad-sistema.pdf"
+            },
+            {
+              titulo: "Comandos útiles del Panel de Control",
+              descripcion: "Accesos rápidos y comandos para configuraciones avanzadas",
+              tipo: "PDF",
+              url: "/recursos/intro-windows/comandos-panel-control.pdf"
+            }
+          ]
+        },
+        actividades: [
+          {
+            id: 1,
+            titulo: "Configuración de Windows Defender",
+            tipo: "configuracion",
+            descripcion: "Configurar Windows Defender para máxima protección",
+            instrucciones: [
+              "Acceder a Windows Security desde Configuración",
+              "Verificar estado de protección antivirus",
+              "Realizar un análisis rápido del sistema",
+              "Configurar análisis programados",
+              "Revisar historial de amenazas detectadas",
+              "Configurar exclusiones si es necesario"
+            ],
+            duracion: "15 minutos"
+          },
+          {
+            id: 2,
+            titulo: "Gestión del Firewall de Windows",
+            tipo: "configuracion",
+            descripcion: "Configurar el firewall para diferentes tipos de red",
+            instrucciones: [
+              "Acceder a la configuración del Firewall",
+              "Verificar estado para redes privadas y públicas",
+              "Configurar una aplicación permitida",
+              "Revisar reglas de entrada y salida",
+              "Cambiar configuración entre red privada y pública",
+              "Probar conectividad después de cambios"
+            ],
+            duracion: "20 minutos"
+          },
+          {
+            id: 3,
+            titulo: "Compresión y extracción de archivos",
+            tipo: "practica",
+            descripcion: "Trabajar con archivos ZIP para organizar documentos",
+            instrucciones: [
+              "Crear una carpeta con varios archivos de prueba",
+              "Comprimir la carpeta en un archivo ZIP",
+              "Verificar el tamaño del archivo comprimido",
+              "Extraer el archivo ZIP en una nueva ubicación",
+              "Comparar archivos originales con extraídos",
+              "Crear un ZIP con múltiples carpetas"
+            ],
+            duracion: "18 minutos"
+          },
+          {
+            id: 4,
+            titulo: "Instalación y desinstalación segura",
+            tipo: "practica",
+            descripcion: "Gestionar programas de manera segura en el sistema",
+            instrucciones: [
+              "Descargar un programa gratuito de una fuente confiable",
+              "Instalar el programa siguiendo mejores prácticas",
+              "Verificar que el programa funcione correctamente",
+              "Acceder a la lista de programas instalados",
+              "Desinstalar el programa usando el método correcto",
+              "Verificar que la desinstalación fue completa"
+            ],
+            duracion: "25 minutos"
+          },
+          {
+            id: 5,
+            titulo: "Navegación por el Panel de Control",
+            tipo: "exploracion",
+            descripcion: "Familiarizarse con las opciones del Panel de Control",
+            instrucciones: [
+              "Acceder al Panel de Control usando diferentes métodos",
+              "Explorar la categoría Sistema y seguridad",
+              "Revisar opciones de Hardware y sonido",
+              "Acceder a configuración de Cuentas de usuario",
+              "Explorar Apariencia y personalización",
+              "Crear acceso directo a opciones frecuentes"
+            ],
+            duracion: "20 minutos"
+          }
+        ],
+        actividadesPracticas: [
+          {
+            id: 1,
+            titulo: "Configuración completa de seguridad",
+            tipo: "proyecto",
+            duracion: "35 minutos",
+            objetivos: [
+              "Establecer un sistema de seguridad robusto",
+              "Configurar todas las herramientas de protección",
+              "Crear protocolos de mantenimiento"
+            ],
+            instrucciones: [
+              "Realizar auditoría completa del estado actual de seguridad",
+              "Configurar Windows Defender con análisis programados",
+              "Ajustar configuraciones del Firewall según necesidades",
+              "Crear sistema de respaldo usando compresión",
+              "Documentar configuraciones aplicadas",
+              "Establecer rutina de mantenimiento mensual",
+              "Probar todas las configuraciones implementadas",
+              "Crear guía de recuperación ante problemas"
+            ]
+          },
+          {
+            id: 2,
+            titulo: "Organización digital avanzada",
+            tipo: "organizacion",
+            duracion: "30 minutos",
+            objetivos: [
+              "Implementar sistema eficiente de archivos",
+              "Optimizar almacenamiento usando compresión",
+              "Establecer protocolo de gestión de software"
+            ],
+            instrucciones: [
+              "Crear estructura de carpetas para documentos importantes",
+              "Comprimir archivos antiguos para liberar espacio",
+              "Organizar programas instalados por categorías",
+              "Desinstalar software innecesario correctamente",
+              "Configurar accesos rápidos en Panel de Control",
+              "Documentar sistema organizacional creado",
+              "Establecer rutina de mantenimiento semanal"
+            ]
+          }
+        ],
+        evaluacion: {
+          prerequisitos: [
+            "Tema 1: Elementos y funciones básicas",
+            "Tema 2: Explorador de Windows", 
+            "Tema 3: Escritorio de Windows",
+            "Tema 4: Barra de tareas",
+            "Tema 5: Menú de Inicio",
+            "Tema 6: Papelera de reciclaje",
+            "Tema 7: Gestión de usuarios y seguridad"
+          ],
+          criterios: [
+            "Configurar Windows Defender para protección óptima del sistema",
+            "Gestionar el Firewall de Windows según tipos de red",
+            "Crear y extraer archivos comprimidos eficientemente",
+            "Instalar y desinstalar programas usando métodos seguros",
+            "Navegar y utilizar el Panel de Control para configuraciones del sistema",
+            "Aplicar mejores prácticas de seguridad y mantenimiento",
+            "Resolver problemas básicos usando herramientas del sistema"
+          ],
+          tiempoEstimado: "40 minutos"
         }
       }
     },
     'paint': {
       '1': {
-        titulo: "Introducción a Paint",
+        titulo: "Interfaz y herramientas",
         duracion: "18-22 minutos",
         objetivos: [
-          "Comprender qué es Paint y su propósito",
-          "Conocer la historia y evolución de Paint",
-          "Familiarizarse con la interfaz y herramientas básicas",
-          "Aprender conceptos fundamentales de diseño gráfico digital"
+          "Explorar y conocer la interfaz completa de Paint",
+          "Identificar y utilizar el cuadro de herramientas",
+          "Dominar la barra de menús y sus funciones",
+          "Configurar el área de trabajo de manera eficiente",
+          "Utilizar la paleta de colores y sistema de colores"
         ],
         secciones: [
           {
             id: 1,
-            titulo: "¿Qué es Paint?",
+            titulo: "Explorando la Interfaz de Paint",
             contenido: `
-              <h3>🎨 Definición de Paint</h3>
-              <p><strong>Microsoft Paint</strong> es un programa de dibujo y edición de imágenes básico incluido gratuitamente en todas las versiones de Windows desde 1985.</p>
-              
-              <h4>Características principales:</h4>
-              <ul>
-                <li><strong>Simplicidad:</strong> Interfaz fácil e intuitiva para principiantes</li>
-                <li><strong>Accesibilidad:</strong> Viene preinstalado en Windows</li>
-                <li><strong>Ligereza:</strong> Consume pocos recursos del sistema</li>
-                <li><strong>Versatilidad básica:</strong> Permite crear y editar imágenes simples</li>
-                <li><strong>Formatos múltiples:</strong> Guarda en PNG, JPEG, BMP, GIF</li>
-              </ul>
+              <h3>🖥️ Conociendo el Entorno de Trabajo</h3>
+              <p>La interfaz de Paint está diseñada para ser <strong>simple e intuitiva</strong>, permitiendo que cualquier usuario pueda comenzar a crear de inmediato.</p>
 
-              <div class="usos-paint">
-                <h4>🎯 ¿Para qué se usa Paint?</h4>
-                <div class="usos-grid">
-                  <div class="uso-item">
-                    <h5>📝 Dibujo básico</h5>
-                    <p>Crear ilustraciones simples, diagramas, esquemas</p>
-                  </div>
-                  <div class="uso-item">
-                    <h5>✂️ Edición simple</h5>
-                    <p>Recortar, redimensionar, rotar imágenes</p>
-                  </div>
-                  <div class="uso-item">
-                    <h5>📐 Anotaciones</h5>
-                    <p>Añadir texto, flechas, formas a capturas</p>
-                  </div>
-                  <div class="uso-item">
-                    <h5>🖍️ Arte digital básico</h5>
-                    <p>Primeros pasos en diseño gráfico digital</p>
-                  </div>
+              <h4>📍 Componentes Principales del Entorno</h4>
+              <div class="area-interfaz">
+                <h5>1. 📋 Barra de Título</h5>
+                <ul>
+                  <li><strong>Nombre del archivo:</strong> Muestra el archivo actual que estás editando</li>
+                  <li><strong>Estado de guardado:</strong> Indica con (*) si hay cambios sin guardar</li>
+                  <li><strong>Controles de ventana:</strong> Minimizar, maximizar, cerrar</li>
+                  <li><strong>Información rápida:</strong> Dimensiones básicas del lienzo</li>
+                </ul>
+              </div>
+
+              <div class="area-interfaz">
+                <h5>2. � Cinta de Opciones (Ribbon)</h5>
+                <p>El corazón del control de Paint, organizado en pestañas lógicas:</p>
+                
+                <div class="pestana-detalle">
+                  <h6>📁 Pestaña Archivo</h6>
+                  <ul>
+                    <li><strong>Gestión de archivos:</strong> Nuevo, Abrir, Guardar, Guardar como</li>
+                    <li><strong>Impresión:</strong> Configurar página, vista previa, imprimir</li>
+                    <li><strong>Propiedades:</strong> Información detallada de la imagen</li>
+                    <li><strong>Configuración:</strong> Opciones de la aplicación</li>
+                  </ul>
+                </div>
+                
+                <div class="pestana-detalle">
+                  <h6>🏠 Pestaña Inicio</h6>
+                  <ul>
+                    <li><strong>Herramientas de dibujo:</strong> Lápiz, pincel, relleno, texto</li>
+                    <li><strong>Formas geométricas:</strong> Línea, rectángulo, círculo, polígono</li>
+                    <li><strong>Gestión de colores:</strong> Paleta, selector, mezclador</li>
+                    <li><strong>Edición de imagen:</strong> Seleccionar, recortar, redimensionar</li>
+                  </ul>
+                </div>
+                
+                <div class="pestana-detalle">
+                  <h6>�️ Pestaña Ver</h6>
+                  <ul>
+                    <li><strong>Zoom:</strong> Acercar, alejar, ajustar a ventana</li>
+                    <li><strong>Ayudas visuales:</strong> Reglas, cuadrícula, líneas guía</li>
+                    <li><strong>Modos de vista:</strong> Normal, pantalla completa</li>
+                    <li><strong>Información:</strong> Coordenadas, dimensiones</li>
+                  </ul>
                 </div>
               </div>
 
-              <div class="ventajas-paint">
-                <h4>✅ Ventajas de Paint</h4>
+              <div class="area-interfaz">
+                <h5>3. 🎨 Área de Trabajo (Lienzo)</h5>
                 <ul>
-                  <li><strong>Gratuito:</strong> Incluido en Windows sin costo adicional</li>
-                  <li><strong>Fácil de aprender:</strong> Perfecto para principiantes</li>
-                  <li><strong>Rápido:</strong> Se abre y funciona instantáneamente</li>
-                  <li><strong>Universal:</strong> Todos los usuarios Windows lo tienen</li>
-                  <li><strong>Básico pero efectivo:</strong> Ideal para tareas simples</li>
+                  <li><strong>Superficie de dibujo:</strong> Área blanca donde creas tu obra</li>
+                  <li><strong>Tamaño personalizable:</strong> Ajusta dimensiones según necesidad</li>
+                  <li><strong>Barras de desplazamiento:</strong> Para navegar en imágenes grandes</li>
+                  <li><strong>Marcadores visuales:</strong> Esquinas para redimensionar</li>
                 </ul>
+              </div>
 
-                <h4>❌ Limitaciones de Paint</h4>
+              <div class="area-interfaz">
+                <h5>4. 📊 Barra de Estado Inferior</h5>
                 <ul>
-                  <li>No maneja capas (layers)</li>
-                  <li>Herramientas limitadas comparado con software profesional</li>
-                  <li>No soporta efectos avanzados</li>
-                  <li>Calidad limitada para trabajo profesional</li>
-                  <li>No tiene función deshacer ilimitado</li>
+                  <li><strong>Coordenadas del cursor:</strong> Posición exacta en píxeles</li>
+                  <li><strong>Dimensiones de imagen:</strong> Ancho x Alto actuales</li>
+                  <li><strong>Control de zoom:</strong> Deslizador para ajustar vista</li>
+                  <li><strong>Información contextual:</strong> Detalles de la herramienta activa</li>
                 </ul>
               </div>
 
@@ -2540,56 +11487,53 @@ export const ContenidoProvider = ({ children }) => {
             },
             actividades: [
               {
-                tipo: "reflexion",
-                pregunta: "¿Has usado Paint antes? ¿Para qué tipo de tareas lo has utilizado?",
-                ayuda: "Piensa en capturas de pantalla, dibujos simples, ediciones básicas, etc."
+                tipo: "exploracion",
+                pregunta: "Abre Paint y explora cada área de la interfaz. ¿Qué función cumple cada sección?",
+                ayuda: "Examina la barra de título, cinta de opciones, área de trabajo y barra de estado"
               }
             ]
           },
           {
             id: 2,
-            titulo: "Historia y Evolución de Paint",
+            titulo: "Cuadro de Herramientas - Herramientas de Dibujo",
             contenido: `
-              <h3>📜 La Historia de Microsoft Paint</h3>
-              
-              <div class="timeline-paint">
-                <div class="timeline-item">
-                  <h4>1985 - Paint 1.0</h4>
-                  <div class="paint-version">
-                    <ul>
-                      <li>Incluido con <strong>Windows 1.0</strong></li>
-                      <li>Herramientas muy básicas: pincel, línea, rectángulo</li>
-                      <li>Solo colores en <strong>blanco y negro</strong></li>
-                      <li>Formato de archivo .MSP (Microsoft Paint)</li>
-                    </ul>
-                    <p class="dato-historico">📖 <strong>Dato:</strong> Originalmente se llamaba "Paintbrush"</p>
-                  </div>
+              <h3>�️ Dominando las Herramientas de Dibujo</h3>
+              <p>El cuadro de herramientas de Paint contiene todas las herramientas necesarias para crear y editar imágenes. Cada herramienta tiene funciones específicas y técnicas de uso.</p>
+
+              <div class="herramientas-dibujo">
+                <h4>✏️ Herramientas Básicas de Dibujo</h4>
+                
+                <div class="herramienta-detalle">
+                  <h5>📝 Lápiz</h5>
+                  <ul>
+                    <li><strong>Función:</strong> Dibujo libre de líneas finas y precisas</li>
+                    <li><strong>Grosor:</strong> 1 píxel (no configurable)</li>
+                    <li><strong>Uso típico:</strong> Bocetos, detalles finos, líneas precisas</li>
+                    <li><strong>Técnica:</strong> Ideal para trabajo detallado y contornos</li>
+                    <li><strong>Consejo:</strong> Perfecto para dibujos técnicos y esquemas</li>
+                  </ul>
                 </div>
                 
-                <div class="timeline-item">
-                  <h4>1990 - Paint 2.0 (Windows 3.0)</h4>
-                  <div class="paint-version">
-                    <ul>
-                      <li>Introducción del <strong>color</strong> (16 colores)</li>
-                      <li>Herramienta de <strong>relleno</strong> (bote de pintura)</li>
-                      <li>Soporte para archivos <strong>.BMP</strong></li>
-                      <li>Herramienta de selección mejorada</li>
-                    </ul>
-                    <p class="mejora">🎨 <strong>Revolución:</strong> El color cambió completamente las posibilidades</p>
-                  </div>
+                <div class="herramienta-detalle">
+                  <h5>🖌️ Pincel</h5>
+                  <ul>
+                    <li><strong>Función:</strong> Dibujo libre con trazos más gruesos y suaves</li>
+                    <li><strong>Tamaños:</strong> Fino, mediano, grueso, muy grueso</li>
+                    <li><strong>Uso típico:</strong> Pintura artística, rellenos, efectos de sombra</li>
+                    <li><strong>Técnica:</strong> Presión constante para trazos uniformes</li>
+                    <li><strong>Consejo:</strong> Ideal para dar volumen y textura</li>
+                  </ul>
                 </div>
                 
-                <div class="timeline-item">
-                  <h4>1995 - Paint (Windows 95)</h4>
-                  <div class="paint-version">
-                    <ul>
-                      <li><strong>256 colores</strong> disponibles</li>
-                      <li>Herramienta de <strong>texto</strong> mejorada</li>
-                      <li>Función <strong>Deshacer</strong> (limitada)</li>
-                      <li>Interfaz renovada con barra de herramientas</li>
-                    </ul>
-                    <p class="popularidad">📈 <strong>Auge:</strong> Se volvió muy popular entre usuarios domésticos</p>
-                  </div>
+                <div class="herramienta-detalle">
+                  <h5>🌊 Aerógrafo</h5>
+                  <ul>
+                    <li><strong>Función:</strong> Efecto de spray suave y difuminado</li>
+                    <li><strong>Intensidad:</strong> Varía según tiempo de presión</li>
+                    <li><strong>Uso típico:</strong> Sombras, degradados, efectos atmosféricos</li>
+                    <li><strong>Técnica:</strong> Movimientos circulares para mejor cobertura</li>
+                    <li><strong>Consejo:</strong> Mantén presionado para mayor intensidad</li>
+                  </ul>
                 </div>
                 
                 <div class="timeline-item">
@@ -2699,19 +11643,22 @@ export const ContenidoProvider = ({ children }) => {
           },
           {
             id: 3,
-            titulo: "Interfaz y Herramientas Básicas",
+            titulo: "Configuración del Área de Trabajo",
             contenido: `
-              <h3>🔧 Conociendo la Interfaz de Paint</h3>
+              <h3>⚙️ Optimizando tu Espacio de Trabajo</h3>
+              <p>Configurar adecuadamente el área de trabajo te permitirá trabajar de manera más eficiente y cómoda en Paint.</p>
 
-              <div class="areas-interfaz">
-                <h4>📍 Áreas Principales de la Interfaz</h4>
+              <div class="configuracion-area">
+                <h4>� Configuración del Lienzo</h4>
                 
-                <div class="area-interfaz">
-                  <h5>1. 📋 Barra de Título</h5>
+                <div class="config-lienzo">
+                  <h5>� Redimensionar Imagen</h5>
                   <ul>
-                    <li>Muestra el nombre del archivo actual</li>
-                    <li>Controles de ventana (minimizar, maximizar, cerrar)</li>
-                    <li>Indica si hay cambios sin guardar (*)</li>
+                    <li><strong>Acceso:</strong> Inicio → Imagen → Redimensionar</li>
+                    <li><strong>Por porcentaje:</strong> Mantiene proporciones (recomendado)</li>
+                    <li><strong>Por píxeles:</strong> Control exacto de dimensiones</li>
+                    <li><strong>Mantener relación de aspecto:</strong> Evita distorsión</li>
+                    <li><strong>Consejo:</strong> Siempre verifica antes de aplicar</li>
                   </ul>
                 </div>
 
@@ -2907,37 +11854,34 @@ export const ContenidoProvider = ({ children }) => {
           },
           {
             id: 4,
-            titulo: "Conceptos de Diseño Gráfico Digital",
+            titulo: "Utilización de la Paleta de Colores",
             contenido: `
-              <h3>🎨 Fundamentos del Diseño Gráfico Digital</h3>
+              <h3>🎨 Dominando el Sistema de Colores en Paint</h3>
+              <p>El manejo eficiente de los colores es fundamental para crear obras atractivas y profesionales en Paint.</p>
 
-              <div class="conceptos-basicos">
-                <h4>📐 Conceptos Básicos de Imagen Digital</h4>
+              <div class="sistema-colores">
+                <h4>🎯 Sistema de Color Primario y Secundario</h4>
                 
-                <div class="concepto-digital">
-                  <h5>🔳 Píxeles</h5>
-                  <p><strong>Definición:</strong> Los píxeles son los puntos individuales de color que forman una imagen digital.</p>
+                <div class="colores-primarios">
+                  <h5>� Color Primario (Color 1)</h5>
                   <ul>
-                    <li><strong>Pixel =</strong> Picture Element (Elemento de Imagen)</li>
-                    <li>Cada píxel tiene una <strong>posición exacta</strong> y un <strong>color específico</strong></li>
-                    <li>Más píxeles = Mayor detalle y calidad</li>
-                    <li>En Paint puedes ver píxeles individuales con zoom alto</li>
+                    <li><strong>Activación:</strong> Clic izquierdo en cualquier color de la paleta</li>
+                    <li><strong>Función:</strong> Color principal para dibujo y contornos</li>
+                    <li><strong>Uso en herramientas:</strong> Lápiz, pincel, formas (contorno)</li>
+                    <li><strong>Indicador visual:</strong> Cuadro superior izquierdo en la paleta</li>
+                    <li><strong>Técnica:</strong> Úsalo para elementos principales y contornos</li>
                   </ul>
-                  <p class="analogia">💡 <strong>Analogía:</strong> Como los mosaicos antiguos, donde cada tesela es un píxel</p>
                 </div>
 
-                <div class="concepto-digital">
-                  <h5>📏 Resolución</h5>
-                  <p><strong>Definición:</strong> El número total de píxeles en una imagen (ancho × alto).</p>
-                  <div class="resolucion-ejemplos">
-                    <ul>
-                      <li><strong>Baja resolución:</strong> 320×240 píxeles (imagen pequeña/pixelada)</li>
-                      <li><strong>Resolución media:</strong> 1024×768 píxeles (calidad estándar)</li>
-                      <li><strong>Alta resolución:</strong> 1920×1080 píxeles (Full HD)</li>
-                      <li><strong>Ultra alta:</strong> 4K (3840×2160 píxeles)</li>
-                    </ul>
-                  </div>
-                  <p class="importante">⚠️ <strong>Importante:</strong> Mayor resolución = archivos más grandes</p>
+                <div class="colores-secundarios">
+                  <h5>� Color Secundario (Color 2)</h5>
+                  <ul>
+                    <li><strong>Activación:</strong> Clic derecho en cualquier color de la paleta</li>
+                    <li><strong>Función:</strong> Color de relleno y fondo</li>
+                    <li><strong>Uso en herramientas:</strong> Relleno de formas, fondo del borrador</li>
+                    <li><strong>Indicador visual:</strong> Cuadro inferior derecho en la paleta</li>
+                    <li><strong>Técnica:</strong> Ideal para fondos y rellenos de área</li>
+                  </ul>
                 </div>
 
                 <div class="concepto-digital">
@@ -3194,11 +12138,11 @@ export const ContenidoProvider = ({ children }) => {
         evaluacion: {
           preRequisitos: ["Conocimientos básicos de Windows"],
           criterios: [
-            "Explicar qué es Paint y sus usos principales",
-            "Conocer la evolución histórica de Paint",
-            "Identificar y usar las herramientas básicas",
-            "Aplicar conceptos básicos de diseño gráfico",
-            "Entender formatos de archivo y cuándo usarlos"
+            "Explorar y navegar eficientemente por la interfaz de Paint",
+            "Identificar y utilizar correctamente el cuadro de herramientas",
+            "Dominar el uso de herramientas de dibujo (lápiz, pincel, aerógrafo)",
+            "Configurar el área de trabajo según las necesidades del proyecto",
+            "Utilizar el sistema de colores primarios y secundarios efectivamente"
           ],
           tiempoEstimado: "22 minutos"
         }
@@ -4247,274 +13191,6 @@ export const ContenidoProvider = ({ children }) => {
             "Evaluar y mejorar sus propios diseños usando criterios de diseño"
           ],
           tiempoEstimado: "25 minutos"
-        }
-      },
-      '3': {
-        titulo: "Texto y Herramientas de Selección",
-        duracion: "18-22 minutos",
-        objetivos: [
-          "Dominar las herramientas de texto en Paint",
-          "Aprender técnicas de selección y recorte",
-          "Integrar texto y gráficos efectivamente",
-          "Crear documentos visuales profesionales"
-        ],
-        secciones: [
-          {
-            id: 1,
-            titulo: "Herramientas de Texto",
-            contenido: `
-              <div class="seccion-contenido">
-                <h3>📝 Trabajando con Texto en Paint</h3>
-                
-                <div class="herramienta-texto">
-                  <h4>🔤 Herramienta de Texto Básica</h4>
-                  <div class="texto-basico">
-                    <h5>Activación y Uso</h5>
-                    <ul>
-                      <li>Seleccionar herramienta "A" en la barra lateral</li>
-                      <li>Hacer clic donde quieres colocar el texto</li>
-                      <li>Aparece cuadro de texto editable</li>
-                      <li>Escribir el contenido deseado</li>
-                      <li>Hacer clic fuera para finalizar</li>
-                    </ul>
-
-                    <h5>⚙️ Propiedades del Texto</h5>
-                    <ul>
-                      <li><strong>Fuente:</strong> Arial, Times New Roman, Comic Sans, etc.</li>
-                      <li><strong>Tamaño:</strong> Rango de 8pt a 72pt</li>
-                      <li><strong>Estilo:</strong> Normal, Negrita, Cursiva, Subrayado</li>
-                      <li><strong>Color:</strong> Usa color primario seleccionado</li>
-                      <li><strong>Fondo:</strong> Transparente u opaco</li>
-                    </ul>
-
-                    <h5>💡 Consejos para Texto Efectivo</h5>
-                    <ul>
-                      <li><strong>Legibilidad:</strong> Alto contraste con el fondo</li>
-                      <li><strong>Simplicidad:</strong> Máximo 2 fuentes por diseño</li>
-                      <li><strong>Jerarquía:</strong> Tamaños diferentes para importancia</li>
-                      <li><strong>Espaciado:</strong> Dejar respiro alrededor del texto</li>
-                    </ul>
-                  </div>
-
-                  <div class="texto-decorativo">
-                    <h4>🎨 Técnicas Decorativas</h4>
-                    <ul>
-                      <li><strong>Contorno:</strong> Texto con borde usando colores contrastantes</li>
-                      <li><strong>Sombra:</strong> Duplicar texto y desplazar ligeramente</li>
-                      <li><strong>Relleno:</strong> Texto sólido sobre fondo transparente</li>
-                      <li><strong>Integración:</strong> Combinar con formas geométricas</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            `,
-            multimedia: {
-              imagen: '/images/teoria/texto-paint.png',
-              video: '/videos/teoria/texto-basico.mp4'
-            },
-            actividades: [
-              'Crear textos con diferentes fuentes y tamaños',
-              'Experimentar con texto transparente y opaco',
-              'Aplicar estilos: negrita, cursiva, subrayado'
-            ]
-          },
-          {
-            id: 2,
-            titulo: "Herramientas de Selección",
-            contenido: `
-              <div class="seccion-contenido">
-                <h3>✂️ Selección y Recorte</h3>
-                
-                <div class="tipos-seleccion">
-                  <h4>🔲 Selección Rectangular</h4>
-                  <ul>
-                    <li><strong>Uso:</strong> Seleccionar áreas rectangulares</li>
-                    <li><strong>Técnica:</strong> Arrastrar esquina a esquina</li>
-                    <li><strong>Aplicación:</strong> Recortar, mover elementos</li>
-                  </ul>
-
-                  <h4>⭕ Selección Libre</h4>
-                  <ul>
-                    <li><strong>Uso:</strong> Formas irregulares</li>
-                    <li><strong>Técnica:</strong> Dibujar contorno manual</li>
-                    <li><strong>Aplicación:</strong> Recortes precisos</li>
-                  </ul>
-                </div>
-
-                <div class="operaciones">
-                  <h4>🔄 Operaciones con Selecciones</h4>
-                  <ul>
-                    <li><strong>Mover:</strong> Arrastrar dentro de selección</li>
-                    <li><strong>Copiar:</strong> Ctrl+C para duplicar</li>
-                    <li><strong>Cortar:</strong> Ctrl+X para mover</li>
-                    <li><strong>Pegar:</strong> Ctrl+V para colocar</li>
-                    <li><strong>Redimensionar:</strong> Arrastrar esquinas</li>
-                  </ul>
-
-                  <h4>🌈 Opciones de Fondo</h4>
-                  <ul>
-                    <li><strong>Transparente:</strong> Solo contenido, sin fondo</li>
-                    <li><strong>Opaco:</strong> Incluye color de fondo</li>
-                    <li><strong>Uso práctico:</strong> Esencial para superposiciones</li>
-                  </ul>
-                </div>
-              </div>
-            `,
-            multimedia: {
-              imagen: '/images/teoria/seleccion-paint.png',
-              video: '/videos/teoria/seleccion-tecnicas.mp4'
-            },
-            actividades: [
-              'Practicar selección rectangular y libre',
-              'Mover y redimensionar elementos',
-              'Usar fondos transparentes y opacos'
-            ]
-          },
-          {
-            id: 3,
-            titulo: "Integración Texto-Gráficos",
-            contenido: `
-              <div class="seccion-contenido">
-                <h3>🖼️ Combinando Elementos</h3>
-                
-                <div class="principios">
-                  <h4>⚖️ Principios de Integración</h4>
-                  <ul>
-                    <li><strong>Jerarquía:</strong> Título > Subtítulo > Cuerpo</li>
-                    <li><strong>Proximidad:</strong> Agrupar elementos relacionados</li>
-                    <li><strong>Contraste:</strong> Destacar lo importante</li>
-                    <li><strong>Repetición:</strong> Mantener consistencia</li>
-                  </ul>
-                </div>
-
-                <div class="layouts">
-                  <h4>📐 Diseños Comunes</h4>
-                  
-                  <h5>🎫 Póster/Cartel</h5>
-                  <ul>
-                    <li>Título prominente arriba</li>
-                    <li>Imagen central dominante</li>
-                    <li>Info secundaria abajo</li>
-                  </ul>
-
-                  <h5>🏷️ Etiqueta</h5>
-                  <ul>
-                    <li>Texto breve y directo</li>
-                    <li>Forma de fondo definida</li>
-                    <li>Alto contraste</li>
-                  </ul>
-                </div>
-
-                <div class="flujo">
-                  <h4>🔄 Flujo de Trabajo</h4>
-                  <ol>
-                    <li><strong>Planear:</strong> Boceto mental</li>
-                    <li><strong>Estructura:</strong> Formas de fondo</li>
-                    <li><strong>Texto:</strong> Títulos y contenido</li>
-                    <li><strong>Detalles:</strong> Elementos decorativos</li>
-                    <li><strong>Refinar:</strong> Ajustar colores/espacios</li>
-                  </ol>
-                </div>
-              </div>
-            `,
-            multimedia: {
-              imagen: '/images/teoria/integracion-paint.png',
-              video: '/videos/teoria/diseno-integrado.mp4'
-            },
-            actividades: [
-              'Crear cartel con texto e imagen',
-              'Diseñar etiqueta con formas y texto',
-              'Aplicar principios de jerarquía'
-            ]
-          },
-          {
-            id: 4,
-            titulo: "Proyecto Final",
-            contenido: `
-              <div class="seccion-contenido">
-                <h3>🎯 Proyecto Integrador</h3>
-                
-                <div class="especificaciones">
-                  <h4>📋 Especificaciones</h4>
-                  <ul>
-                    <li><strong>Objetivo:</strong> Póster informativo</li>
-                    <li><strong>Tamaño:</strong> 600x800 píxeles</li>
-                    <li><strong>Elementos:</strong> Título, imagen, texto</li>
-                    <li><strong>Límites:</strong> 4 colores, 2 fuentes</li>
-                  </ul>
-                </div>
-
-                <div class="pasos">
-                  <h4>👣 Pasos del Proyecto</h4>
-                  <ol>
-                    <li><strong>Concepto:</strong> Elegir tema</li>
-                    <li><strong>Layout:</strong> Estructura con formas</li>
-                    <li><strong>Contenido:</strong> Agregar textos</li>
-                    <li><strong>Visual:</strong> Integrar gráficos</li>
-                    <li><strong>Pulir:</strong> Ajustar detalles</li>
-                  </ol>
-                </div>
-
-                <div class="evaluacion">
-                  <h4>✅ Criterios</h4>
-                  <ul>
-                    <li>□ Legibilidad del texto</li>
-                    <li>□ Jerarquía visual clara</li>
-                    <li>□ Uso efectivo del color</li>
-                    <li>□ Composición equilibrada</li>
-                    <li>□ Integración armoniosa</li>
-                  </ul>
-                </div>
-              </div>
-            `,
-            multimedia: {
-              imagen: '/images/teoria/proyecto-final.png',
-              video: '/videos/teoria/proyecto-completo.mp4'
-            },
-            actividades: [
-              'Completar proyecto final',
-              'Aplicar todos los conceptos',
-              'Crear documento visual profesional'
-            ]
-          }
-        ],
-        recursos: {
-          documentos: [
-            {
-              titulo: "Guía de Tipografía Básica",
-              tipo: "PDF",
-              url: "/recursos/paint/tipografia-basica.pdf"
-            },
-            {
-              titulo: "Plantillas de Proyectos",
-              tipo: "ZIP",
-              url: "/recursos/paint/plantillas.zip"
-            }
-          ],
-          videos: [
-            {
-              titulo: "Masterclass: Texto y Diseño",
-              duracion: "15 min",
-              url: "/videos/texto-diseno.mp4"
-            }
-          ],
-          enlaces: [
-            {
-              titulo: "Google Fonts",
-              url: "https://fonts.google.com/"
-            }
-          ]
-        },
-        evaluacion: {
-          preRequisitos: ["Tema 1: Introducción a Paint", "Tema 2: Formas y Figuras Geométricas"],
-          criterios: [
-            "Usar herramientas de texto efectivamente",
-            "Aplicar técnicas de selección y recorte",
-            "Integrar texto y gráficos armoniosamente",
-            "Crear documentos con jerarquía clara",
-            "Completar proyecto final con calidad profesional"
-          ],
-          tiempoEstimado: "22 minutos"
         }
       }
     },
@@ -6546,7 +15222,7 @@ export const ContenidoProvider = ({ children }) => {
             "Aplicar transformaciones (mover, rotar, escalar) con precisión",
             "Combinar múltiples formas para crear objetos reconocibles",
             "Seguir metodología de modelado progresivo",
-            "Crear modelos 3D complejos usando solo formas primitivas",
+            "Crear modelos 3D complejos usando solo formas primitivas"
           ],
           tiempoEstimado: "30 minutos"
         }
@@ -7546,7 +16222,7 @@ export const ContenidoProvider = ({ children }) => {
             "Aplicar texturas y materiales de forma efectiva y realista",
             "Configurar esquemas de iluminación apropiados para diferentes objetivos",
             "Crear efectos visuales avanzados usando combinación de técnicas",
-            "Completar proyecto integrador con calidad profesional",
+            "Completar proyecto integrador con calidad profesional"
           ],
           tiempoEstimado: "28 minutos"
         }
@@ -8137,7 +16813,7 @@ export const ContenidoProvider = ({ children }) => {
             "Organizar objetos en el espacio 3D de manera coherente",
             "Configurar fondos y ambientes apropiados para la narrativa",
             "Crear escenas que comuniquen historias claras",
-            "Demostrar dominio técnico en construcción de escenarios",
+            "Demostrar dominio técnico en construcción de escenarios"
           ],
           tiempoEstimado: "30 minutos"
         }

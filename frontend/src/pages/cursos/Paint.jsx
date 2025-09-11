@@ -12,38 +12,30 @@ export default function Paint() {
     temas: [
       {
         id: 1,
-        titulo: "Herramientas básicas de dibujo",
-        tematica: "Exploración y uso de herramientas creativas",
-        contenido: "Descubre y domina las herramientas fundamentales de Paint para crear dibujos y diseños básicos.",
+        titulo: "Interfaz y herramientas",
+        tematica: "Entorno y cuadro de herramientas",
+        contenido: "Conoce la interfaz de Paint y familiarízate con todas las herramientas disponibles en el cuadro de herramientas para comenzar a crear.",
         actividades: [
-          "Conocer la interfaz de Paint",
-          "Usar pincel y lápiz",
-          "Aplicar herramienta de borrado",
-          "Seleccionar colores de la paleta"
+          "Explorar la interfaz de Paint",
+          "Identificar el cuadro de herramientas",
+          "Conocer la barra de menús",
+          "Configurar el área de trabajo",
+          "Utilizar la paleta de colores"
         ]
       },
       {
         id: 2,
-        titulo: "Formas",
-        tematica: "Creación y manipulación visual",
-        contenido: "Aprende a crear formas geométricas y manipularlas para crear composiciones visuales atractivas.",
+        titulo: "Técnicas básicas",
+        tematica: "Dibujo libre y formas, Relleno, borrador, pincel, Cuadros de texto y recortes",
+        contenido: "Domina las técnicas fundamentales de Paint: desde el dibujo libre hasta la creación de formas, uso del relleno, borrador, pincel, y manejo de texto y recortes.",
         actividades: [
-          "Dibujar líneas y curvas",
-          "Crear círculos y rectángulos",
-          "Usar herramienta de polígono",
-          "Rellenar formas con colores"
-        ]
-      },
-      {
-        id: 3,
-        titulo: "Texto y recortes",
-        tematica: "Incorporación de elementos gráficos adicionales",
-        contenido: "Incorpora texto a tus creaciones y aprende técnicas de recorte para combinar diferentes elementos.",
-        actividades: [
-          "Insertar y formatear texto",
-          "Seleccionar y recortar áreas",
-          "Copiar y pegar elementos",
-          "Combinar texto e imágenes"
+          "Practicar dibujo libre con diferentes herramientas",
+          "Crear formas geométricas básicas",
+          "Aplicar relleno y degradados",
+          "Usar borrador y pincel efectivamente",
+          "Insertar y formatear cuadros de texto",
+          "Realizar recortes y selecciones",
+          "Combinar técnicas para crear composiciones"
         ]
       }
     ]

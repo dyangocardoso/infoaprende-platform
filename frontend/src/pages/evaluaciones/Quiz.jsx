@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useEvaluacion } from '../../context/EvaluacionContext';
-import { useProgreso } from '../../context/ProgresoContext';
+import { Link, useParams } from 'react-router-dom';
+import { useEvaluacion } from '../../hooks/useEvaluacion';
 import './Quiz.css';
 
 export default function Quiz() {
   const { cursoId, temaId } = useParams();
-  const navigate = useNavigate();
   const { getPreguntas, completarQuiz, getEstadisticasQuiz } = useEvaluacion();
-  const { progreso } = useProgreso();
   
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [respuestas, setRespuestas] = useState([]);

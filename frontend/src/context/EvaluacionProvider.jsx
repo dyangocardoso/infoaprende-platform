@@ -1,17 +1,8 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useProgreso } from './ProgresoContext';
+import React, { useState, useEffect } from 'react';
+import { useProgreso } from '../hooks/useProgreso';
+import { EvaluacionContext } from './EvaluacionContext';
 
-const EvaluacionContext = createContext();
-
-export const useEvaluacion = () => {
-  const context = useContext(EvaluacionContext);
-  if (!context) {
-    throw new Error('useEvaluacion debe ser usado dentro de EvaluacionProvider');
-  }
-  return context;
-};
-
-export const EvaluacionProvider = ({ children }) => {
+export default function EvaluacionProvider({ children }) {
   const { completarLeccion } = useProgreso();
   const [evaluaciones, setEvaluaciones] = useState({
     quizzesCompletados: [],
@@ -259,6 +250,136 @@ export const EvaluacionProvider = ({ children }) => {
     },
     'intro-windows': {
       '1': {
+        titulo: "Evaluación: Elementos y funciones básicas",
+        preguntas: [
+          {
+            id: 1,
+            pregunta: "¿Cuál es la función principal del ratón en Windows?",
+            opciones: [
+              "Solo mover el cursor",
+              "Seleccionar, hacer clic, arrastrar y navegar por la interfaz",
+              "Cambiar colores de pantalla",
+              "Acelerar el sistema"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "El ratón permite interactuar con Windows mediante selección, clics, arrastre y navegación por menús y ventanas."
+          },
+          {
+            id: 2,
+            pregunta: "¿Qué combinación de teclas permite copiar un elemento seleccionado?",
+            opciones: [
+              "Ctrl + X",
+              "Ctrl + V", 
+              "Ctrl + C",
+              "Ctrl + Z"
+            ],
+            respuestaCorrecta: 2,
+            explicacion: "Ctrl + C es el atajo universal para copiar elementos seleccionados."
+          },
+          {
+            id: 3,
+            pregunta: "¿Cómo se maximiza una ventana en Windows?",
+            opciones: [
+              "Doble clic en la barra de título",
+              "Clic en el botón X",
+              "Arrastrar hacia los bordes",
+              "Presionar Alt + F4"
+            ],
+            respuestaCorrecta: 0,
+            explicacion: "El doble clic en la barra de título maximiza o restaura una ventana."
+          },
+          {
+            id: 4,
+            pregunta: "¿Para qué sirve el Teclado en Pantalla?",
+            opciones: [
+              "Decorar el escritorio",
+              "Permitir escritura sin teclado físico",
+              "Acelerar el sistema",
+              "Bloquear el sistema"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "El Teclado en Pantalla permite escribir usando el ratón cuando no hay teclado físico disponible."
+          },
+          {
+            id: 5,
+            pregunta: "¿Qué sucede al presionar la tecla Windows?",
+            opciones: [
+              "Se cierra el sistema",
+              "Se abre el menú Inicio",
+              "Se minimiza todo",
+              "Se abre el explorador"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "La tecla Windows abre el menú Inicio, punto central de navegación en Windows."
+          }
+        ]
+      },
+      '2': {
+        titulo: "Evaluación: Explorador de Windows",
+        preguntas: [
+          {
+            id: 1,
+            pregunta: "¿Cuál es la función principal del panel de navegación en el Explorador?",
+            opciones: [
+              "Mostrar propiedades de archivos",
+              "Navegar entre carpetas y unidades",
+              "Reproducir archivos multimedia",
+              "Editar archivos de texto"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "El panel de navegación permite navegar fácilmente entre diferentes carpetas y unidades del sistema."
+          },
+          {
+            id: 2,
+            pregunta: "¿Qué atajo de teclado abre el Explorador de Windows?",
+            opciones: [
+              "Ctrl + E",
+              "Windows + E",
+              "Alt + E",
+              "Shift + E"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Windows + E es el atajo estándar para abrir el Explorador de Windows."
+          },
+          {
+            id: 3,
+            pregunta: "¿Cuál es la diferencia entre Cortar y Copiar archivos?",
+            opciones: [
+              "No hay diferencia",
+              "Cortar elimina el archivo original, Copiar lo mantiene",
+              "Copiar es más rápido",
+              "Solo funciona con carpetas"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Cortar mueve el archivo (elimina el original), mientras que Copiar crea una duplicación manteniendo el original."
+          },
+          {
+            id: 4,
+            pregunta: "¿Qué muestra la vista de Detalles en el Explorador?",
+            opciones: [
+              "Solo nombres de archivos",
+              "Nombre, tamaño, fecha de modificación y tipo",
+              "Solo íconos grandes",
+              "Solo carpetas"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "La vista Detalles muestra información completa: nombre, tamaño, fecha y tipo de archivo."
+          },
+          {
+            id: 5,
+            pregunta: "¿Cómo se puede buscar un archivo específico?",
+            opciones: [
+              "Solo navegando manualmente",
+              "Usando el cuadro de búsqueda",
+              "Reiniciando el sistema",
+              "Solo desde el menú Inicio"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "El cuadro de búsqueda en el Explorador permite encontrar archivos y carpetas rápidamente."
+          }
+        ]
+      },
+      '3': {
         titulo: "Evaluación: Escritorio de Windows",
         preguntas: [
           {
@@ -275,253 +396,508 @@ export const EvaluacionProvider = ({ children }) => {
           },
           {
             id: 2,
-            pregunta: "¿Para qué sirve la Barra de Tareas?",
+            pregunta: "¿Cómo se puede cambiar el fondo de pantalla?",
             opciones: [
-              "Para decorar la pantalla",
-              "Para mostrar programas abiertos y acceder al menú Inicio",
-              "Para cambiar el fondo de pantalla",
-              "Para apagar el computador"
+              "Solo reinstalando Windows",
+              "Clic derecho en el escritorio → Personalizar",
+              "Solo desde el Panel de Control",
+              "No se puede cambiar"
             ],
             respuestaCorrecta: 1,
-            explicacion: "La Barra de Tareas muestra programas abiertos, permite acceder al menú Inicio y contiene notificaciones del sistema."
+            explicacion: "El método más rápido es hacer clic derecho en el escritorio y seleccionar 'Personalizar'."
           },
           {
             id: 3,
-            pregunta: "¿Qué contiene el menú Inicio de Windows?",
+            pregunta: "¿Qué son los accesos directos en el escritorio?",
             opciones: [
-              "Solo juegos",
-              "Programas instalados, configuración y opciones de apagado",
-              "Solo archivos de música",
-              "Solo fotos"
+              "Archivos temporales",
+              "Enlaces rápidos a programas, archivos o carpetas",
+              "Virus del sistema",
+              "Decoraciones de pantalla"
             ],
             respuestaCorrecta: 1,
-            explicacion: "El menú Inicio proporciona acceso a todos los programas instalados, configuración del sistema y opciones de energía."
+            explicacion: "Los accesos directos son enlaces que permiten abrir rápidamente programas, archivos o carpetas."
           },
           {
             id: 4,
-            pregunta: "¿Cómo se puede cambiar el fondo de pantalla?",
+            pregunta: "¿Cómo se pueden organizar automáticamente los íconos del escritorio?",
             opciones: [
-              "Es imposible cambiarlo",
-              "Clic derecho en el escritorio → Personalizar",
-              "Solo desde el menú Inicio",
+              "No es posible",
+              "Clic derecho → Ver → Organizar íconos automáticamente",
+              "Solo manualmente uno por uno",
               "Reiniciando el computador"
             ],
             respuestaCorrecta: 1,
-            explicacion: "Se puede cambiar el fondo haciendo clic derecho en el escritorio y seleccionando 'Personalizar' o desde Configuración."
+            explicacion: "Windows puede organizar automáticamente los íconos usando la opción en el menú contextual."
+          },
+          {
+            id: 5,
+            pregunta: "¿Qué es el protector de pantalla?",
+            opciones: [
+              "Un programa antivirus",
+              "Una imagen o animación que aparece cuando el PC está inactivo",
+              "Un limpiador de archivos",
+              "Un acelerador del sistema"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "El protector de pantalla es una imagen o animación que se activa tras un período de inactividad."
           }
         ]
       },
-      '2': {
-        titulo: "Evaluación: Explorador de Archivos",
+      '4': {
+        titulo: "Evaluación: Barra de tareas",
         preguntas: [
           {
             id: 1,
-            pregunta: "¿Qué es el Explorador de Archivos?",
+            pregunta: "¿Cuáles son las partes principales de la barra de tareas?",
             opciones: [
-              "Un navegador web",
-              "Una herramienta para navegar y administrar archivos y carpetas",
-              "Un editor de texto",
-              "Un reproductor de música"
+              "Solo el botón Inicio",
+              "Botón Inicio, área de aplicaciones y área de notificaciones",
+              "Solo aplicaciones abiertas",
+              "Solo el reloj"
             ],
             respuestaCorrecta: 1,
-            explicacion: "El Explorador de Archivos permite navegar, buscar, copiar, mover y administrar archivos y carpetas en el computador."
+            explicacion: "La barra de tareas tiene tres partes principales: botón Inicio, área de aplicaciones y área de notificaciones."
           },
           {
             id: 2,
-            pregunta: "¿Cuál es la diferencia entre un archivo y una carpeta?",
+            pregunta: "¿Cómo se ancla un programa a la barra de tareas?",
             opciones: [
-              "No hay diferencia",
-              "Los archivos contienen datos, las carpetas organizan y contienen archivos",
-              "Las carpetas son más importantes",
-              "Los archivos son más grandes"
+              "No se puede anclar",
+              "Clic derecho en el programa → Anclar a la barra de tareas",
+              "Solo arrastrando",
+              "Solo desde el menú Inicio"
             ],
             respuestaCorrecta: 1,
-            explicacion: "Los archivos contienen información específica (documentos, fotos, etc.), mientras que las carpetas sirven para organizar y agrupar archivos."
+            explicacion: "Se puede anclar haciendo clic derecho en el programa y seleccionando 'Anclar a la barra de tareas'."
           },
           {
             id: 3,
-            pregunta: "¿Cómo se puede crear una nueva carpeta?",
+            pregunta: "¿Para qué sirve el área de notificaciones?",
             opciones: [
-              "No se puede crear",
-              "Clic derecho → Nuevo → Carpeta",
-              "Solo desde el menú Inicio",
-              "Apagando el computador"
+              "Solo mostrar la hora",
+              "Mostrar íconos del sistema, notificaciones y acceso rápido a configuraciones",
+              "Solo para decorar",
+              "Cambiar fondos de pantalla"
             ],
             respuestaCorrecta: 1,
-            explicacion: "Se puede crear una carpeta haciendo clic derecho en un espacio vacío del Explorador y seleccionando 'Nuevo' → 'Carpeta'."
+            explicacion: "El área de notificaciones muestra íconos del sistema, hora, notificaciones y acceso rápido a configuraciones."
           },
           {
             id: 4,
+            pregunta: "¿Cómo se puede personalizar la apariencia de la barra de tareas?",
+            opciones: [
+              "No se puede personalizar",
+              "Clic derecho en la barra → Configuración de la barra de tareas",
+              "Solo cambiando el tema de Windows",
+              "Solo desde el Panel de Control"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Se personaliza haciendo clic derecho en la barra de tareas y accediendo a su configuración."
+          },
+          {
+            id: 5,
+            pregunta: "¿Qué significa que un programa esté 'anclado' a la barra de tareas?",
+            opciones: [
+              "Que está bloqueado",
+              "Que aparece permanentemente para acceso rápido",
+              "Que está infectado",
+              "Que no se puede usar"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Un programa anclado aparece permanentemente en la barra para acceso rápido, esté o no en ejecución."
+          }
+        ]
+      },
+      '5': {
+        titulo: "Evaluación: Menú de Inicio",
+        preguntas: [
+          {
+            id: 1,
+            pregunta: "¿Cuáles son las principales secciones del menú Inicio?",
+            opciones: [
+              "Solo lista de programas",
+              "Lista de aplicaciones, mosaicos y opciones de usuario",
+              "Solo buscador",
+              "Solo configuración"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "El menú Inicio incluye lista de aplicaciones, área de mosaicos y opciones de usuario/energía."
+          },
+          {
+            id: 2,
+            pregunta: "¿Cómo se busca un programa en el menú Inicio?",
+            opciones: [
+              "Solo navegando manualmente",
+              "Escribiendo su nombre directamente después de abrir el menú",
+              "Solo usando el Explorador",
+              "No se puede buscar"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Al abrir el menú Inicio y escribir, Windows busca automáticamente programas y archivos."
+          },
+          {
+            id: 3,
+            pregunta: "¿Qué son los mosaicos en el menú Inicio?",
+            opciones: [
+              "Elementos decorativos",
+              "Accesos directos visuales a aplicaciones",
+              "Archivos temporales",
+              "Configuraciones del sistema"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Los mosaicos son accesos directos visuales que pueden mostrar información dinámica de las aplicaciones."
+          },
+          {
+            id: 4,
+            pregunta: "¿Dónde se encuentran las opciones de apagado en el menú Inicio?",
+            opciones: [
+              "No están disponibles",
+              "En la esquina inferior izquierda del menú",
+              "Solo en el escritorio",
+              "Solo con Ctrl+Alt+Supr"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Las opciones de energía (apagar, reiniciar, suspender) están en la esquina inferior izquierda del menú."
+          },
+          {
+            id: 5,
+            pregunta: "¿Cómo se puede personalizar el menú Inicio?",
+            opciones: [
+              "No se puede personalizar",
+              "Configuración → Personalización → Inicio",
+              "Solo cambiando de usuario",
+              "Solo con software externo"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Se personaliza desde Configuración → Personalización → Inicio, donde se pueden ajustar mosaicos y apariencia."
+          }
+        ]
+      },
+      '6': {
+        titulo: "Evaluación: Papelera de reciclaje",
+        preguntas: [
+          {
+            id: 1,
             pregunta: "¿Qué es la Papelera de Reciclaje?",
             opciones: [
               "Un programa antivirus",
-              "Un lugar temporal donde van los archivos eliminados",
+              "Un área temporal donde se almacenan archivos eliminados",
               "Una aplicación de limpieza",
               "Un navegador web"
             ],
             respuestaCorrecta: 1,
-            explicacion: "La Papelera de Reciclaje almacena temporalmente archivos eliminados, permitiendo recuperarlos antes del borrado definitivo."
+            explicacion: "La Papelera es un área temporal que almacena archivos eliminados antes del borrado definitivo."
+          },
+          {
+            id: 2,
+            pregunta: "¿Cómo se restaura un archivo desde la Papelera?",
+            opciones: [
+              "No se puede restaurar",
+              "Clic derecho en el archivo → Restaurar",
+              "Solo copiando manualmente",
+              "Reiniciando el sistema"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Se restaura haciendo clic derecho en el archivo dentro de la Papelera y seleccionando 'Restaurar'."
+          },
+          {
+            id: 3,
+            pregunta: "¿Qué sucede cuando se vacía la Papelera?",
+            opciones: [
+              "Los archivos se mueven a otra carpeta",
+              "Los archivos se eliminan permanentemente",
+              "Los archivos se comprimen",
+              "Nada, es solo visual"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Al vaciar la Papelera, los archivos se eliminan permanentemente y no se pueden recuperar fácilmente."
+          },
+          {
+            id: 4,
+            pregunta: "¿Dónde se puede configurar el tamaño máximo de la Papelera?",
+            opciones: [
+              "No se puede configurar",
+              "Clic derecho en la Papelera → Propiedades",
+              "Solo desde el Panel de Control",
+              "Solo reiniciando Windows"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "En las Propiedades de la Papelera se puede configurar el tamaño máximo y otras opciones."
+          },
+          {
+            id: 5,
+            pregunta: "¿Cuándo NO van los archivos a la Papelera?",
+            opciones: [
+              "Siempre van a la Papelera",
+              "Al usar Shift + Supr o eliminar desde unidades externas",
+              "Solo los domingos",
+              "Cuando el archivo es muy pequeño"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Los archivos se eliminan permanentemente al usar Shift + Supr o al eliminar desde unidades USB/externas."
+          }
+        ]
+      },
+      '7': {
+        titulo: "Evaluación: Gestión de usuarios y seguridad",
+        preguntas: [
+          {
+            id: 1,
+            pregunta: "¿Cuál es la diferencia principal entre una cuenta Administrador y una Estándar?",
+            opciones: [
+              "No hay diferencias",
+              "El Administrador puede instalar software y modificar configuraciones del sistema",
+              "Solo el nombre",
+              "La cuenta Estándar es más rápida"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "La cuenta Administrador tiene permisos completos para instalar software y modificar configuraciones del sistema."
+          },
+          {
+            id: 2,
+            pregunta: "¿Qué es el Control Parental en Windows?",
+            opciones: [
+              "Una función decorativa",
+              "Sistema para restringir y supervisar el uso del equipo por menores",
+              "Un juego",
+              "Una función solo para empresas"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "El Control Parental permite establecer límites de tiempo, restringir contenido y supervisar actividad."
+          },
+          {
+            id: 3,
+            pregunta: "¿Cómo se puede compartir una carpeta en la red?",
+            opciones: [
+              "No es posible",
+              "Clic derecho en la carpeta → Propiedades → Compartir",
+              "Solo copiando manualmente",
+              "Solo con internet"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Se comparte una carpeta desde sus Propiedades, en la pestaña Compartir, configurando permisos apropiados."
+          },
+          {
+            id: 4,
+            pregunta: "¿Qué son los permisos de archivos?",
+            opciones: [
+              "Decoraciones del sistema",
+              "Reglas que definen quién puede leer, escribir o ejecutar archivos",
+              "Solo para programadores",
+              "Archivos temporales"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Los permisos definen qué acciones pueden realizar diferentes usuarios sobre archivos y carpetas."
+          },
+          {
+            id: 5,
+            pregunta: "¿Para qué sirve cambiar la contraseña regularmente?",
+            opciones: [
+              "No sirve para nada",
+              "Mejorar la seguridad y prevenir accesos no autorizados",
+              "Acelerar el sistema",
+              "Solo por decoración"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Cambiar contraseñas regularmente mejora la seguridad y reduce riesgos de acceso no autorizado."
+          }
+        ]
+      },
+      '8': {
+        titulo: "Evaluación: Herramientas y utilidades",
+        preguntas: [
+          {
+            id: 1,
+            pregunta: "¿Cuál es la función principal de Windows Defender?",
+            opciones: [
+              "Limpiar archivos temporales",
+              "Proteger contra virus y malware en tiempo real",
+              "Comprimir archivos",
+              "Gestionar usuarios"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Windows Defender es el antivirus integrado que protege contra virus y malware en tiempo real."
+          },
+          {
+            id: 2,
+            pregunta: "¿Qué tipo de archivos se crean al comprimir con ZIP?",
+            opciones: [
+              "Archivos más grandes",
+              "Archivos comprimidos que ocupan menos espacio",
+              "Archivos duplicados",
+              "Archivos temporales"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Los archivos ZIP son archivos comprimidos que ocupan menos espacio y pueden contener múltiples archivos."
+          },
+          {
+            id: 3,
+            pregunta: "¿Cómo se desinstala correctamente un programa en Windows?",
+            opciones: [
+              "Eliminar su carpeta manualmente",
+              "Configuración → Aplicaciones → Seleccionar programa → Desinstalar",
+              "Solo arrastrar a la Papelera",
+              "Formatear el disco duro"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "La forma correcta es usar Configuración → Aplicaciones para desinstalar completamente el programa."
+          },
+          {
+            id: 4,
+            pregunta: "¿Qué es el Panel de Control?",
+            opciones: [
+              "Un juego de Windows",
+              "Centro tradicional de configuración del sistema",
+              "Un programa de edición",
+              "Una herramienta solo para programadores"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "El Panel de Control es el centro tradicional donde se configuran diversos aspectos del sistema."
+          },
+          {
+            id: 5,
+            pregunta: "¿Por qué es importante el Firewall de Windows?",
+            opciones: [
+              "Solo para acelerar internet",
+              "Para controlar el tráfico de red y bloquear amenazas",
+              "Para cambiar fondos de pantalla",
+              "No es importante"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "El Firewall controla qué programas pueden acceder a internet y bloquea conexiones maliciosas."
           }
         ]
       }
     },
     'paint': {
       '1': {
-        titulo: "Evaluación: Conceptos Básicos de Paint",
+        titulo: "Evaluación: Interfaz y herramientas",
         preguntas: [
           {
             id: 1,
-            pregunta: "¿Qué es Microsoft Paint?",
+            pregunta: "¿Cuál es la función principal de la Cinta de Opciones (Ribbon) en Paint?",
             opciones: [
-              "Un procesador de textos",
-              "Un programa simple de dibujo y edición de imágenes",
-              "Un navegador web",
-              "Un reproductor de música"
+              "Solo decorar la interfaz",
+              "Organizar todas las herramientas y comandos en pestañas",
+              "Mostrar solo colores",
+              "Controlar el volumen"
             ],
             respuestaCorrecta: 1,
-            explicacion: "Microsoft Paint es una aplicación básica de dibujo y edición de imágenes incluida en Windows."
+            explicacion: "La Cinta de Opciones organiza todas las herramientas de Paint en pestañas lógicas (Archivo, Inicio, Ver) para facilitar el acceso."
           },
           {
             id: 2,
-            pregunta: "¿Cuáles son los formatos de imagen más comunes que maneja Paint?",
+            pregunta: "¿Dónde se encuentra el cuadro de herramientas principal en Paint?",
             opciones: [
-              "Solo TXT",
-              "BMP, JPG, PNG, GIF",
-              "Solo DOC",
-              "Solo PDF"
+              "En la barra de estado inferior",
+              "En la pestaña Inicio de la Cinta de Opciones",
+              "Solo en menús desplegables",
+              "No existe en Paint"
             ],
             respuestaCorrecta: 1,
-            explicacion: "Paint puede abrir y guardar imágenes en varios formatos como BMP, JPEG, PNG, GIF, entre otros."
+            explicacion: "El cuadro de herramientas principal se encuentra en la pestaña Inicio, donde están organizadas las herramientas de dibujo, formas y colores."
           },
           {
             id: 3,
-            pregunta: "¿Para qué sirve la herramienta Pincel en Paint?",
+            pregunta: "¿Qué información muestra la barra de estado en la parte inferior de Paint?",
             opciones: [
-              "Para escribir texto",
-              "Para dibujar líneas a mano alzada con diferentes grosores",
-              "Para borrar",
-              "Para copiar imágenes"
+              "Solo la hora actual",
+              "Coordenadas del cursor, dimensiones de imagen y control de zoom",
+              "Solo el nombre del archivo",
+              "Información del sistema operativo"
             ],
             respuestaCorrecta: 1,
-            explicacion: "La herramienta Pincel permite dibujar líneas curvas y formas a mano alzada con diferentes tamaños y colores."
+            explicacion: "La barra de estado muestra información útil como las coordenadas exactas del cursor, las dimensiones de la imagen y controles de zoom."
           },
           {
             id: 4,
-            pregunta: "¿Cómo se puede cambiar el color de dibujo en Paint?",
+            pregunta: "¿Cómo se puede configurar el área de trabajo para mayor precisión al dibujar?",
             opciones: [
-              "No se puede cambiar",
-              "Haciendo clic en la paleta de colores",
-              "Solo reiniciando el programa",
-              "Escribiendo el nombre del color"
+              "No se puede configurar",
+              "Activando la cuadrícula y las reglas desde la pestaña Ver",
+              "Solo reiniciando Paint",
+              "Cambiando el color de fondo"
             ],
             respuestaCorrecta: 1,
-            explicacion: "Se selecciona un color haciendo clic en la paleta de colores o usando los botones de color primario y secundario."
+            explicacion: "Desde la pestaña Ver se puede activar la cuadrícula y las reglas, que ayudan a dibujar con mayor precisión y alineación."
+          },
+          {
+            id: 5,
+            pregunta: "¿Cuál es la diferencia entre Color 1 (primario) y Color 2 (secundario) en la paleta de colores?",
+            opciones: [
+              "No hay diferencia",
+              "Color 1 para contornos (clic izquierdo), Color 2 para rellenos (clic derecho)",
+              "Color 1 es más brillante",
+              "Color 2 solo funciona los domingos"
+            ],
+            respuestaCorrecta: 1,
+            explicacion: "Color 1 se usa para trazos y contornos (clic izquierdo), mientras que Color 2 se usa para rellenos y fondos (clic derecho)."
           }
         ]
       },
       '2': {
-        titulo: "Evaluación: Herramientas de Dibujo",
+        titulo: "Evaluación: Técnicas básicas",
         preguntas: [
           {
             id: 1,
-            pregunta: "¿Qué herramienta se usa para dibujar círculos perfectos?",
+            pregunta: "¿Cuál es la mejor técnica para realizar dibujo libre efectivo en Paint?",
             opciones: [
-              "Pincel",
-              "Lápiz",
-              "Elipse (manteniendo Shift presionado)",
-              "Borrador"
+              "Dibujar muy rápido sin control",
+              "Usar movimientos lentos y controlados con la herramienta adecuada",
+              "Solo usar el mouse, nunca el trackpad",
+              "Dibujar solo con líneas rectas"
             ],
-            respuestaCorrecta: 2,
-            explicacion: "La herramienta Elipse, manteniendo presionada la tecla Shift, permite dibujar círculos perfectos."
+            respuestaCorrecta: 1,
+            explicacion: "Para dibujo libre efectivo se recomienda usar movimientos lentos y controlados, eligiendo la herramienta apropiada (lápiz para precisión, pincel para trazos suaves)."
           },
           {
             id: 2,
-            pregunta: "¿Para qué sirve la herramienta Relleno (bote de pintura)?",
+            pregunta: "¿Cómo se crean formas geométricas básicas perfectas en Paint?",
             opciones: [
-              "Para borrar",
-              "Para dibujar líneas",
-              "Para llenar áreas cerradas con color",
-              "Para escribir texto"
+              "Solo dibujando a mano alzada",
+              "Usando las herramientas de formas y manteniendo Shift para proporciones perfectas",
+              "No se pueden crear formas perfectas en Paint",
+              "Solo con herramientas externas"
             ],
-            respuestaCorrecta: 2,
-            explicacion: "La herramienta Relleno llena instantáneamente áreas cerradas con el color seleccionado."
+            respuestaCorrecta: 1,
+            explicacion: "Se usan las herramientas de formas (rectángulo, elipse, línea) y se mantiene presionada la tecla Shift para crear formas perfectas (cuadrados, círculos, líneas rectas)."
           },
           {
             id: 3,
-            pregunta: "¿Cuál es la diferencia entre el Pincel y el Lápiz?",
+            pregunta: "¿Cuál es la función principal del Borrador en Paint y cómo se usa efectivamente?",
             opciones: [
-              "No hay diferencia",
-              "El Pincel crea trazos suaves, el Lápiz trazos más duros y definidos",
-              "El Lápiz es más grande",
-              "El Pincel solo dibuja en negro"
+              "Solo elimina todo el dibujo",
+              "Borra selectivamente áreas específicas, puede configurarse en diferentes tamaños",
+              "Solo funciona con el color negro",
+              "No existe herramienta borrador en Paint"
             ],
             respuestaCorrecta: 1,
-            explicacion: "El Pincel produce trazos suaves y difuminados, mientras que el Lápiz crea líneas más nítidas y definidas."
+            explicacion: "El Borrador elimina selectivamente partes del dibujo, se puede configurar en diferentes tamaños y borra aplicando el color de fondo (generalmente blanco)."
           },
           {
             id: 4,
-            pregunta: "¿Cómo se puede deshacer la última acción en Paint?",
+            pregunta: "¿Cómo se insertan y formatean cuadros de texto en Paint?",
             opciones: [
-              "No se puede deshacer",
-              "Ctrl + Z",
-              "Alt + F4",
-              "Cerrando el programa"
+              "No se puede insertar texto en Paint",
+              "Seleccionar herramienta Texto (A), hacer clic donde se quiere el texto, escribir y formatear",
+              "Solo pegando texto desde Word",
+              "El texto se inserta automáticamente"
             ],
             respuestaCorrecta: 1,
-            explicacion: "Ctrl + Z es el atajo universal para deshacer la última acción realizada en Paint y muchas otras aplicaciones."
-          }
-        ]
-      },
-      '3': {
-        titulo: "Evaluación: Edición y Efectos",
-        preguntas: [
-          {
-            id: 1,
-            pregunta: "¿Cómo se puede rotar una imagen en Paint?",
-            opciones: [
-              "No se puede rotar",
-              "Menú Imagen → Rotar",
-              "Solo con el mouse",
-              "Apagando el computador"
-            ],
-            respuestaCorrecta: 1,
-            explicacion: "Se puede rotar una imagen usando las opciones del menú 'Imagen' o los botones de rotación en la cinta de herramientas."
+            explicacion: "Se selecciona la herramienta Texto (icono A), se hace clic donde se quiere colocar el texto, se escribe el contenido y se puede formatear usando las opciones de fuente."
           },
           {
-            id: 2,
-            pregunta: "¿Qué permite hacer la herramienta Selección?",
+            id: 5,
+            pregunta: "¿Cuál es la técnica correcta para realizar recortes y selecciones en Paint?",
             opciones: [
-              "Solo dibujar",
-              "Seleccionar partes de la imagen para copiar, mover o eliminar",
-              "Cambiar colores",
-              "Guardar archivos"
+              "No se pueden hacer recortes en Paint",
+              "Usar herramientas de Selección (rectangular o libre), seleccionar área, luego Ctrl+X para recortar",
+              "Solo usando el borrador",
+              "Los recortes se hacen automáticamente"
             ],
             respuestaCorrecta: 1,
-            explicacion: "La herramienta Selección permite marcar áreas de la imagen para realizar operaciones como copiar, cortar, mover o aplicar efectos."
-          },
-          {
-            id: 3,
-            pregunta: "¿Cómo se puede cambiar el tamaño de una imagen en Paint?",
-            opciones: [
-              "Es imposible cambiar el tamaño",
-              "Menú Inicio → Cambiar tamaño",
-              "Solo aumentando el zoom",
-              "Dibujando encima"
-            ],
-            respuestaCorrecta: 1,
-            explicacion: "Se puede cambiar el tamaño de la imagen usando la opción 'Cambiar tamaño' en el menú Inicio o Imagen."
-          },
-          {
-            id: 4,
-            pregunta: "¿Para qué sirve la función Zoom en Paint?",
-            opciones: [
-              "Para cambiar el tamaño del archivo",
-              "Para acercar o alejar la vista sin modificar la imagen",
-              "Para rotar la imagen",
-              "Para cambiar colores"
-            ],
-            respuestaCorrecta: 1,
-            explicacion: "El Zoom permite acercar o alejar la vista de la imagen para trabajar con más detalle sin cambiar el tamaño real de la imagen."
+            explicacion: "Se usa la herramienta de Selección (rectangular o forma libre) para delimitar el área deseada, luego Ctrl+X para recortar o Ctrl+C para copiar la selección."
           }
         ]
       }

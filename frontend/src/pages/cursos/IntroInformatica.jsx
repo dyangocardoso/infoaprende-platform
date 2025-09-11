@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useProgreso } from '../../context/ProgresoContext';
+import { useProgreso } from '../../hooks/useProgreso';
 import './CursoBase.css';
 
 export default function IntroInformatica() {
@@ -349,73 +349,137 @@ export default function IntroInformatica() {
 
   const botonInfo = getBotonPrincipalInfo();
 
+  const diagnosticarBotones = () => {
+    console.log('=== DIAGNÓSTICO COMPLETO DE PROGRESO ===');
+    
+    // Verificar funciones del contexto
+    console.log('Funciones disponibles:', {
+      getProgresoCurso: typeof getProgresoCurso,
+      isTemaCompletado: typeof isTemaCompletado,
+      isLeccionCompletada: typeof isLeccionCompletada
+    });
+
+    // Probar getProgresoCurso
+    try {
+      const progreso = getProgresoCurso('intro-informatica');
+      console.log('✅ getProgresoCurso funciona:', progreso);
+    } catch (error) {
+      console.error('❌ Error en getProgresoCurso:', error);
+    }
+
+    // Verificar progreso actual
+    const progresoActual = getProgresoCurso('intro-informatica');
+    console.log('📊 Progreso actual del curso:', progresoActual);
+    
+    // Probar funciones de tema
+    console.log('📚 Estado de todos los temas:');
+    unidadData.temas.forEach(tema => {
+      try {
+        const temaCompletado = isTemaCompletado('intro-informatica', tema.id);
+        const leccionCompletada = isLeccionCompletada('intro-informatica', tema.id);
+        console.log(`  Tema ${tema.id} "${tema.titulo}":`, {
+          temaCompletado,
+          leccionCompletada
+        });
+      } catch (error) {
+        console.error(`❌ Error verificando tema ${tema.id}:`, error);
+      }
+    });
+
+    // Simular la lógica del botón "Continuar curso"
+    console.log('🔍 Simulando lógica del botón "Continuar curso":');
+    let siguienteTema = null;
+    for (let tema of unidadData.temas) {
+      const temaCompletado = isTemaCompletado('intro-informatica', tema.id);
+      console.log(`  Revisando tema ${tema.id}: completado=${temaCompletado}`);
+      if (!temaCompletado) {
+        siguienteTema = tema;
+        console.log(`  ✅ Siguiente tema encontrado: ${tema.titulo} (ID: ${tema.id})`);
+        break;
+      }
+    }
+    
+    if (!siguienteTema) {
+      siguienteTema = unidadData.temas[0];
+      console.log(`  🔄 Todos completados, volviendo al primer tema: ${siguienteTema.titulo}`);
+    }
+    
+    const urlEsperada = `/leccion/intro-informatica/${siguienteTema.id}`;
+    console.log(`  🎯 URL que debería generarse: ${urlEsperada}`);
+
+    // Probar navegación
+    console.log('Navigate function:', typeof navigate);
+    
+    // Verificar datos de unidad
+    console.log('Datos de unidad válidos:', {
+      tituloExiste: !!unidadData.titulo,
+      temasCount: unidadData.temas?.length || 0,
+      primeraTemaTitulo: unidadData.temas[0]?.titulo,
+      temasIds: unidadData.temas?.map(t => t.id)
+    });
+
+    // Información del botón principal
+    try {
+      const botonInfo = getBotonPrincipalInfo();
+      console.log('✅ Información del botón principal:', botonInfo);
+    } catch (error) {
+      console.error('❌ Error en getBotonPrincipalInfo:', error);
+    }
+
+    // Verificar localStorage
+    const progresoLocal = localStorage.getItem('progreso-infoaprende');
+    console.log('💾 Progreso en localStorage:', progresoLocal ? JSON.parse(progresoLocal) : 'No encontrado');
+
+    showNotification('🔍 Diagnóstico completado. Revisa la consola para detalles completos.', 'info');
+  };
+
   return (
     <div className="curso-container">
       {/* Notificaciones */}
       {notification.show && (
-        <div className={`notification ${notification.type}`}>
+        <div className={`notification alert alert-${notification.type}`} style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          zIndex: 1000,
+          maxWidth: '400px',
+          padding: '15px 20px',
+          borderRadius: '8px',
+          backgroundColor: notification.type === 'success' ? '#d4edda' : notification.type === 'error' ? '#f8d7da' : '#d1ecf1',
+          border: `1px solid ${notification.type === 'success' ? '#c3e6cb' : notification.type === 'error' ? '#f5c6cb' : '#bee5eb'}`,
+          color: notification.type === 'success' ? '#155724' : notification.type === 'error' ? '#721c24' : '#0c5460',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+        }}>
           {notification.message}
         </div>
       )}
 
-      {/* Encabezado del curso */}
-      <div className="curso-header">
-        <div className="breadcrumb">
-          <Link to="/">Inicio</Link> &gt; <span>{unidadData.titulo}</span>
-        </div>
-        <div className="curso-hero">
-          <div className="curso-icono">
-            <i className={unidadData.icono}></i>
-          </div>
-          <div className="curso-info">
-            <h1>{unidadData.titulo}</h1>
-            <p className="curso-descripcion">{unidadData.descripcion}</p>
-            
-            {/* Progreso visual */}
-            <div className="progreso-container">
-              <div className="progreso-barra">
-                <div 
-                  className="progreso-relleno" 
-                  style={{ width: `${progresoCurso.porcentaje}%` }}
-                ></div>
-              </div>
-              <div className="progreso-info">
-                <span>{progresoCurso.porcentaje}% completado</span>
-                <span>({progresoCurso.temasCompletados}/{unidadData.temas.length} temas)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Breadcrumb */}
+      <nav className="breadcrumb">
+        <Link to="/">🏠 Inicio</Link>
+        <span> / </span>
+        <span>{unidadData.titulo}</span>
+      </nav>
 
-      {/* Acciones principales */}
-      <div className="curso-acciones">
-        <div className="accion-principal">
-          <button 
-            className={botonInfo.clase}
-            onClick={handleComenzarCursoCompleto}
-            title={botonInfo.descripcion}
-          >
-            <i className={botonInfo.icono}></i>
-            {botonInfo.texto}
-          </button>
-          <p className="btn-descripcion">{botonInfo.descripcion}</p>
+      {/* Header de la unidad */}
+      <header className="curso-header">
+        <div className="curso-icon">
+          <i className={unidadData.icono}></i>
         </div>
-        
-        <div className="acciones-secundarias">
-          <button 
-            className="btn btn-outline-secondary"
-            onClick={handleGuardarParaDespues}
-            title="Guardar curso para estudiar más tarde"
-          >
-            <i className="fas fa-bookmark"></i>
-            Guardar para después
-          </button>
+        <div className="curso-info">
+          <h1>{unidadData.titulo}</h1>
+          <p>{unidadData.descripcion}</p>
+          <div className="curso-stats">
+            <span><i className="fas fa-book"></i> {unidadData.temas.length} Temas</span>
+            <span><i className="fas fa-clock"></i> 4-6 horas</span>
+            <span><i className="fas fa-signal"></i> Intermedio</span>
+            <span><i className="fas fa-chart-line"></i> {progresoCurso.porcentaje}% Completado</span>
+          </div>
         </div>
-      </div>
+      </header>
 
       {/* Lista de temas */}
-      <div className="curso-contenido">
+      <div className="temas-container">
         <h2>📚 Contenido del Curso</h2>
         <div className="temas-list">
           {unidadData.temas.map((tema) => {
@@ -471,12 +535,15 @@ export default function IntroInformatica() {
                       <i className="fas fa-play"></i>
                       {leccionCompletada ? 'Revisar Tema' : 'Comenzar Tema'}
                     </button>
-                    <Link to={`/evaluacion/intro-informatica/${tema.id}`}>
+                    <Link to={`/quiz/intro-informatica/${tema.id}`}>
                       <button className="btn btn-warning">
-                        <i className="fas fa-quiz"></i>
+                        <i className="fas fa-clipboard-check"></i>
                         Evaluación
                       </button>
                     </Link>
+                    <button className="btn btn-outline">
+                      <i className="fas fa-file-pdf"></i> Material de Apoyo
+                    </button>
                   </div>
                 </div>
               )}
@@ -484,6 +551,57 @@ export default function IntroInformatica() {
             );
           })}
         </div>
+      </div>
+
+      {/* Acciones del curso */}
+      <div className="curso-actions">
+        <button 
+          className={botonInfo.clase}
+          onClick={handleComenzarCursoCompleto}
+          title={botonInfo.descripcion}
+        >
+          <i className={botonInfo.icono}></i> {botonInfo.texto}
+        </button>
+        <button 
+          className="btn btn-outline btn-lg"
+          onClick={handleGuardarParaDespues}
+          title="Guarda este curso en tu lista para estudiarlo más tarde"
+        >
+          <i className="fas fa-bookmark"></i> Guardar para después
+        </button>
+        
+        {/* Botón de diagnóstico completo - TEMPORAL */}
+        <button 
+          className="btn btn-info btn-sm"
+          onClick={diagnosticarBotones}
+          title="Diagnóstico completo de funcionalidades"
+          style={{fontSize: '12px', padding: '8px 12px', marginRight: '10px'}}
+        >
+          <i className="fas fa-stethoscope"></i> Diagnóstico
+        </button>
+
+        {/* Botón para limpiar progreso - TEMPORAL */}
+        <button 
+          className="btn btn-danger btn-sm"
+          onClick={() => {
+            localStorage.removeItem('progreso-infoaprende');
+            window.location.reload();
+          }}
+          title="Limpiar todo el progreso guardado"
+          style={{fontSize: '12px', padding: '8px 12px', marginRight: '10px'}}
+        >
+          <i className="fas fa-trash"></i> Limpiar Progreso
+        </button>
+        
+        {/* Información adicional del progreso */}
+        {progresoCurso.porcentaje > 0 && (
+          <div className="progreso-info">
+            <small>
+              <i className="fas fa-chart-line"></i> 
+              Progreso: {progresoCurso.completadas} de {unidadData.temas.length} temas completados
+            </small>
+          </div>
+        )}
       </div>
     </div>
   );
