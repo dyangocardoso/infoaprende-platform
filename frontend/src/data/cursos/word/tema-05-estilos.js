@@ -1,0 +1,198 @@
+/**
+ * Tema 5: Estilos
+ * Curso: Procesador de Texto Word
+ */
+
+export default {
+  id: '5',
+  titulo: "Estilos",
+  tematica: "Aplicación, creación y gestión de estilos en documentos",
+  duracion: "20-25 minutos",
+  objetivos: [
+    "Comprender el propósito y ventajas de los estilos para la presentación profesional y estructurada de documentos",
+    "Aplicar estilos predefinidos y personalizados para títulos, subtítulos y texto",
+    "Gestionar la galería de estilos y reutilizar estilos en diferentes documentos",
+    "Implementar algoritmos básicos para la organización y formato mediante estilos en Word",
+    "Vincular la teoría con la práctica mediante ejemplos y procedimientos en la interfaz de Word"
+  ],
+  secciones: [
+    {
+      id: 1,
+      titulo: "¿Qué son los estilos en Word?",
+      contenido: `
+        <h3>🎨 ¿Qué son los Estilos?</h3>
+        <p>Un <strong>estilo</strong> en Word es un conjunto de formatos (fuente, color, tamaño, espaciado, alineación) que se aplican de forma rápida y uniforme a diferentes partes del documento.<br>
+        <strong>¿Por qué es importante?</strong> Porque permite mantener coherencia visual, facilita la navegación y ahorra tiempo en la edición.<br>
+        <strong>¿Para qué?</strong> Para estructurar el documento y generar índices automáticos.</p>
+        <p><strong>Ejemplo contextualizado:</strong> Un docente aplica el estilo "Título 1" a los capítulos y "Título 2" a los subtemas, logrando un documento organizado y fácil de navegar.</p>
+        <h4>Algoritmo básico (pseudocódigo):</h4>
+        <pre>
+// Aplicar estilo a texto
+Seleccionar texto
+Elegir estilo en la galería
+Verificar formato aplicado
+        </pre>
+        <p><strong>Vinculación teoría-práctica:</strong> Para entregar un informe profesional, utiliza estilos para títulos y subtítulos, facilitando la generación de tabla de contenido.</p>
+      `
+    },
+    {
+      id: 2,
+      titulo: "Aplicar estilos predefinidos",
+      contenido: `
+        <h4>🖱️ Aplicar Estilos</h4>
+        <ul>
+          <li>Seleccionar texto y elegir un estilo de la galería.</li>
+          <li>Estilos para títulos, subtítulos, texto normal, citas, etc.</li>
+          <li>Vista previa instantánea al pasar el mouse.</li>
+        </ul>
+        <p><strong>Ejemplo contextualizado:</strong> Un estudiante selecciona el texto de un capítulo y aplica el estilo "Título 1" para diferenciarlo visualmente.</p>
+        <h4>Algoritmo (pseudocódigo):</h4>
+        <pre>
+// Aplicar estilo predefinido
+Seleccionar texto
+Ir a la galería de estilos
+Elegir el estilo deseado
+        </pre>
+        <p><strong>Vinculación teoría-práctica:</strong> Para mejorar la presentación, aplica estilos predefinidos en cada sección del documento.</p>
+      `
+    },
+    {
+      id: 3,
+      titulo: "Crear y modificar estilos personalizados",
+      contenido: `
+        <h4>✏️ Crear y Modificar Estilos</h4>
+        <ul>
+          <li>Crear un nuevo estilo desde formato seleccionado.</li>
+          <li>Modificar fuente, color, espaciado y alineación.</li>
+          <li>Actualizar un estilo existente con nuevos formatos.</li>
+        </ul>
+        <p><strong>Ejemplo contextualizado:</strong> Un usuario crea un estilo personalizado para resaltar citas textuales con fondo amarillo y fuente cursiva.</p>
+        <h4>Algoritmo (pseudocódigo):</h4>
+        <pre>
+// Crear estilo personalizado
+Seleccionar texto con formato deseado
+Ir a "Nuevo estilo" en la galería
+Asignar nombre y guardar
+        </pre>
+        <p><strong>Vinculación teoría-práctica:</strong> Para destacar elementos clave, crea estilos personalizados y aplícalos en todo el documento.</p>
+      `
+    },
+    {
+      id: 4,
+      titulo: "Gestión de la galería de estilos",
+      contenido: `
+        <h4>📚 Galería de Estilos</h4>
+        <ul>
+          <li>Agregar o quitar estilos de la galería.</li>
+          <li>Organizar estilos favoritos.</li>
+          <li>Restablecer la galería a valores predeterminados.</li>
+        </ul>
+        <p><strong>Ejemplo contextualizado:</strong> Un docente elimina estilos que no utiliza y organiza los más frecuentes para agilizar la edición de sus guías.</p>
+        <h4>Algoritmo (pseudocódigo):</h4>
+        <pre>
+// Gestionar galería de estilos
+Abrir galería de estilos
+Agregar/quitar estilos según preferencia
+Organizar estilos favoritos
+        </pre>
+        <p><strong>Vinculación teoría-práctica:</strong> Para optimizar el flujo de trabajo, personaliza la galería de estilos según tus necesidades.</p>
+      `
+    },
+    {
+      id: 5,
+      titulo: "Estructura y navegación con estilos",
+      contenido: `
+        <h4>🗂️ Estructura y Navegación</h4>
+        <ul>
+          <li>Usar estilos para crear una tabla de contenido.</li>
+          <li>Navegar rápidamente entre secciones.</li>
+          <li>Mejorar la accesibilidad del documento.</li>
+        </ul>
+        <p><strong>Ejemplo contextualizado:</strong> Un estudiante aplica estilos a los títulos y genera automáticamente la tabla de contenido y el panel de navegación.</p>
+        <h4>Algoritmo (pseudocódigo):</h4>
+        <pre>
+// Generar tabla de contenido
+Aplicar estilos a títulos y subtítulos
+Ir a "Referencias" > "Tabla de contenido"
+Insertar tabla automática
+        </pre>
+        <p><strong>Vinculación teoría-práctica:</strong> Para facilitar la consulta, estructura el documento con estilos y genera la tabla de contenido.</p>
+      `
+    },
+    {
+      id: 6,
+      titulo: "Reutilización y actualización de estilos",
+      contenido: `
+        <h4>♻️ Reutilización de Estilos</h4>
+        <ul>
+          <li>Copiar estilos entre documentos.</li>
+          <li>Actualizar estilos en todo el documento.</li>
+          <li>Guardar estilos personalizados como plantilla.</li>
+        </ul>
+        <p><strong>Ejemplo contextualizado:</strong> Un usuario guarda sus estilos personalizados en una plantilla y los reutiliza en nuevos proyectos.</p>
+        <h4>Algoritmo (pseudocódigo):</h4>
+        <pre>
+// Reutilizar estilos
+Guardar estilos como plantilla
+Abrir nuevo documento y aplicar plantilla
+Actualizar estilos según necesidad
+        </pre>
+        <p><strong>Vinculación teoría-práctica:</strong> Para mantener la coherencia en varios documentos, reutiliza y actualiza estilos mediante plantillas.</p>
+      `
+    }
+  ],
+  actividades: [
+    "Aplica estilos predefinidos a títulos y subtítulos en un documento",
+    "Crea y guarda un estilo personalizado",
+    "Organiza la galería de estilos y elimina los que no usas",
+    "Utiliza estilos para generar una tabla de contenido",
+    "Copia estilos de un documento a otro usando plantillas"
+  ],
+  recursos: [
+    {
+      titulo: "Guía de estilos en Word",
+      url: "/recursos/word/guia-estilos-word.pdf",
+      tipo: "pdf"
+    },
+    {
+      titulo: "Video: Uso avanzado de estilos en Word",
+      url: "/videos/word/estilos-avanzados-word.mp4",
+      tipo: "video"
+    }
+  ],
+  evaluacion: {
+    tipo: "cuestionario",
+    preguntas: [
+      {
+        pregunta: "¿Para qué sirven los estilos en Word?",
+        opciones: [
+          "Aplicar formato uniforme y estructurar el documento",
+          "Insertar imágenes",
+          "Corregir ortografía",
+          "Cambiar el idioma del documento"
+        ],
+        respuesta: 0
+      },
+      {
+        pregunta: "¿Cómo se crea un estilo personalizado?",
+        opciones: [
+          "Solo desde la galería de estilos",
+          "Aplicando formato y guardando como nuevo estilo",
+          "No se pueden crear estilos personalizados",
+          "Desde el panel de navegación"
+        ],
+        respuesta: 1
+      },
+      {
+        pregunta: "¿Qué permite la galería de estilos?",
+        opciones: [
+          "Organizar y acceder rápidamente a estilos frecuentes",
+          "Insertar tablas",
+          "Revisar ortografía",
+          "Traducir el documento"
+        ],
+        respuesta: 0
+      }
+    ]
+  }
+};

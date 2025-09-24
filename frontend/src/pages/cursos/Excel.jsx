@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CursoBase.css';
+import temasExcel from '../../data/cursos/excel/index.js';
 
 export default function Excel() {
   const [selectedTema, setSelectedTema] = useState(null);
@@ -9,92 +10,7 @@ export default function Excel() {
     titulo: "Tabulador Electrónico Excel",
     icono: "fas fa-file-excel",
     descripcion: "Gestiona datos y crea análisis con hojas de cálculo",
-    temas: [
-      {
-        id: 1,
-        titulo: "Introducción",
-        tematica: "Familiarización con el entorno",
-        contenido: "Conoce la interfaz de Excel, sus elementos principales y las funciones básicas para comenzar a trabajar.",
-        actividades: [
-          "Explorar la interfaz de Excel",
-          "Conocer filas, columnas y celdas",
-          "Navegar por hojas de cálculo",
-          "Usar la cinta de opciones"
-        ]
-      },
-      {
-        id: 2,
-        titulo: "Edición de datos",
-        tematica: "Ingreso y modificación de información",
-        contenido: "Aprende a ingresar, editar y validar diferentes tipos de datos en las celdas de Excel.",
-        actividades: [
-          "Introducir texto y números",
-          "Editar contenido de celdas",
-          "Usar tipos de datos especiales",
-          "Validar entrada de datos"
-        ]
-      },
-      {
-        id: 3,
-        titulo: "Manipulación de celdas",
-        tematica: "Organización del contenido digital",
-        contenido: "Domina las técnicas para seleccionar, copiar, mover y organizar el contenido en las celdas.",
-        actividades: [
-          "Seleccionar rangos de celdas",
-          "Copiar, cortar y pegar datos",
-          "Insertar y eliminar filas/columnas",
-          "Redimensionar celdas"
-        ]
-      },
-      {
-        id: 4,
-        titulo: "Formatos",
-        tematica: "Personalización visual de datos",
-        contenido: "Mejora la presentación de tus datos aplicando formatos de número, texto y celdas.",
-        actividades: [
-          "Formatear números y fechas",
-          "Aplicar estilos de fuente",
-          "Usar colores y bordes",
-          "Crear formatos personalizados"
-        ]
-      },
-      {
-        id: 5,
-        titulo: "Estructura del libro",
-        tematica: "Gestión de hojas y organización interna",
-        contenido: "Organiza tu trabajo gestionando múltiples hojas dentro de un libro de Excel.",
-        actividades: [
-          "Crear y eliminar hojas",
-          "Renombrar y reordenar hojas",
-          "Vincular datos entre hojas",
-          "Proteger hojas y libros"
-        ]
-      },
-      {
-        id: 6,
-        titulo: "Fórmulas",
-        tematica: "Automatización del cálculo",
-        contenido: "Crea fórmulas y usa funciones para automatizar cálculos y análisis de datos.",
-        actividades: [
-          "Crear fórmulas básicas",
-          "Usar funciones matemáticas",
-          "Aplicar referencias de celdas",
-          "Usar funciones lógicas simples"
-        ]
-      },
-      {
-        id: 7,
-        titulo: "Formato condicional",
-        tematica: "Representación dinámica de criterios",
-        contenido: "Aplica formato condicional para resaltar datos importantes y crear representaciones visuales dinámicas.",
-        actividades: [
-          "Crear reglas de formato condicional",
-          "Usar escalas de colores",
-          "Aplicar barras de datos",
-          "Configurar iconos condicionales"
-        ]
-      }
-    ]
+    temas: temasExcel // Usar la lista importada
   };
 
   const handleTemaClick = (tema) => {
@@ -153,7 +69,7 @@ export default function Excel() {
                   <div className="tema-activities">
                     <h4>🎯 Actividades</h4>
                     <ul>
-                      {tema.actividades.map((actividad, index) => (
+                      {tema.actividades && tema.actividades.map((actividad, index) => (
                         <li key={index}>{actividad}</li>
                       ))}
                     </ul>

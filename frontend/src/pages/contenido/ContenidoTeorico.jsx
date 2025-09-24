@@ -14,13 +14,48 @@ export default function ContenidoTeorico() {
   const [respuestaActividad, setRespuestaActividad] = useState('');
   const [actividadesCompletadas, setActividadesCompletadas] = useState([]);
   
+  // Estados para el contenido cargado
+  const [contenidoLeccion, setContenidoLeccion] = useState(null);
+  const [secciones, setSecciones] = useState([]);
+  const [seccion, setSeccion] = useState(null);
+  const [recursos, setRecursos] = useState(null);
+  const [cargando, setCargando] = useState(true);
+  
   // Usar ref para el tiempo de inicio para evitar re-renders
   const tiempoInicioRef = useRef(Date.now());
 
-  const contenidoLeccion = getContenidoLeccion(cursoId, temaId);
-  const secciones = getSecciones(cursoId, temaId);
-  const seccion = getSeccion(cursoId, temaId, seccionId || seccionActual);
-  const recursos = getRecursos(cursoId, temaId);
+  // Cargar contenido de forma asíncrona
+  useEffect(() => {
+    const cargarContenido = async () => {
+      try {
+        setCargando(true);
+        
+        // Cargar datos en paralelo
+        const [leccion, seccionesData, recursosData] = await Promise.all([
+          getContenidoLeccion(cursoId, temaId),
+          getSecciones(cursoId, temaId),
+          getRecursos(cursoId, temaId)
+        ]);
+        
+        setContenidoLeccion(leccion);
+        setSecciones(seccionesData);
+        setRecursos(recursosData);
+        
+        // Cargar sección específica
+        const seccionData = await getSeccion(cursoId, temaId, seccionId || seccionActual);
+        setSeccion(seccionData);
+        
+      } catch (error) {
+        console.error('Error cargando contenido:', error);
+      } finally {
+        setCargando(false);
+      }
+    };
+
+    if (cursoId && temaId) {
+      cargarContenido();
+    }
+  }, [cursoId, temaId, seccionId, seccionActual, getContenidoLeccion, getSecciones, getSeccion, getRecursos]);
 
   // Función para registrar tiempo de estudio
   const registrarTiempoEstudio = useCallback(() => {
@@ -44,7 +79,7 @@ export default function ContenidoTeorico() {
   };
 
   const seccionSiguiente = () => {
-    if (seccionActual < secciones.length) {
+    if (seccionActual < (secciones?.length || 0)) {
       irASeccion(seccionActual + 1);
     }
   };
@@ -83,6 +118,18 @@ export default function ContenidoTeorico() {
     return titulos[cursoId] || 'Curso';
   };
 
+  // Mostrar indicador de carga mientras se cargan los datos
+  if (cargando) {
+    return (
+      <div className="contenido-container">
+        <div className="loading-message">
+          <h2>🔄 Cargando contenido...</h2>
+          <p>Por favor espera mientras se carga el material de estudio.</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!contenidoLeccion || !seccion) {
     return (
       <div className="contenido-container">
@@ -112,7 +159,7 @@ export default function ContenidoTeorico() {
           <h1>{contenidoLeccion.titulo}</h1>
           <div className="leccion-meta">
             <span><i className="fas fa-clock"></i> {contenidoLeccion.duracion}</span>
-            <span><i className="fas fa-book-open"></i> Sección {seccionActual} de {secciones.length}</span>
+            <span><i className="fas fa-book-open"></i> Sección {seccionActual} de {secciones?.length || 0}</span>
             <span><i className="fas fa-target"></i> Teórico</span>
           </div>
         </div>
@@ -122,15 +169,15 @@ export default function ContenidoTeorico() {
           <div className="progreso-bar">
             <div 
               className="progreso-fill" 
-              style={{width: `${(seccionActual / secciones.length) * 100}%`}}
+              style={{width: `${(seccionActual / (secciones?.length || 1)) * 100}%`}}
             ></div>
           </div>
-          <span className="progreso-texto">{Math.round((seccionActual / secciones.length) * 100)}% completado</span>
+          <span className="progreso-texto">{Math.round((seccionActual / (secciones?.length || 1)) * 100)}% completado</span>
         </div>
       </div>
 
       {/* Objetivos de aprendizaje */}
-      {seccionActual === 1 && (
+      {seccionActual === 1 && contenidoLeccion?.objetivos && (
         <div className="objetivos-section">
           <h3>🎯 Objetivos de Aprendizaje</h3>
           <ul className="objetivos-list">
@@ -147,7 +194,7 @@ export default function ContenidoTeorico() {
         <aside className="sidebar-navegacion">
           <h4>📚 Contenidos</h4>
           <ul className="lista-secciones">
-            {secciones.map((sec) => (
+            {secciones?.map((sec) => (
               <li 
                 key={sec.id} 
                 className={`seccion-item ${seccionActual === sec.id ? 'active' : ''}`}
@@ -157,11 +204,11 @@ export default function ContenidoTeorico() {
                 <span className="seccion-titulo">{sec.titulo}</span>
                 {seccionActual > sec.id && <i className="fas fa-check-circle completed"></i>}
               </li>
-            ))}
+            )) || <li>No hay secciones disponibles</li>}
           </ul>
 
           {/* Recursos adicionales */}
-          {recursos.documentos && recursos.documentos.length > 0 && (
+          {recursos?.documentos && recursos.documentos.length > 0 && (
             <div className="recursos-sidebar">
               <h4>📎 Recursos</h4>
               <ul>
@@ -229,7 +276,7 @@ export default function ContenidoTeorico() {
             )}
 
             {/* Actividades interactivas */}
-            {seccion.actividades && seccion.actividades.length > 0 && (
+            {seccion?.actividades && seccion.actividades.length > 0 && (
               <div className="actividades-section">
                 <h3>🎯 Actividades de Refuerzo</h3>
                 {seccion.actividades.map((actividad, index) => {
@@ -293,10 +340,10 @@ export default function ContenidoTeorico() {
             </button>
 
             <div className="navegacion-centro">
-              <span>Sección {seccionActual} de {secciones.length}</span>
+              <span>Sección {seccionActual} de {secciones?.length || 0}</span>
             </div>
 
-            {seccionActual < secciones.length ? (
+            {seccionActual < (secciones?.length || 0) ? (
               <button 
                 className="btn btn-primary" 
                 onClick={seccionSiguiente}
