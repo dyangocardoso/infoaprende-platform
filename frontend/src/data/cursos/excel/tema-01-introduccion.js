@@ -24,13 +24,29 @@ export default {
         <p><strong>Excel</strong> es un programa de hoja de cálculo desarrollado por Microsoft, diseñado para organizar, analizar y visualizar datos de manera eficiente. Su principal fortaleza radica en la capacidad de automatizar cálculos, gestionar grandes volúmenes de información y facilitar la toma de decisiones basada en datos.</p>
         <p><strong>¿Por qué usar Excel?</strong> Porque permite:</p>
         <ul>
-          <li>Realizar cálculos automáticos y complejos con fórmulas y funciones.</li>
+          <li>Realizar cálulos automáticos y complejos con fórmulas y funciones.</li>
           <li>Visualizar datos mediante gráficos y tablas dinámicas.</li>
           <li>Ordenar, filtrar y validar información para encontrar patrones y errores.</li>
           <li>Automatizar tareas repetitivas (por ejemplo, cálculo de promedios mensuales).</li>
         </ul>
         <p><strong>Ejemplo contextualizado:</strong> Un docente puede usar Excel para registrar las calificaciones de sus estudiantes, calcular promedios automáticamente y detectar quiénes necesitan refuerzo.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/que-es-excel.png",
+          descripcion: "Pantalla de inicio de Excel mostrando una hoja de cálculo en blanco"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/que-es-excel.mp4",
+          descripcion: "Video introductorio: ¿Qué es Excel y para qué sirve?"
+        }
+      ],
+      actividades: [
+        "Describe con tus palabras para qué sirve Excel y da un ejemplo de uso en tu vida cotidiana.",
+        "Identifica tres ventajas de usar Excel para organizar información."
+      ]
     },
     {
       id: 2,
@@ -45,7 +61,23 @@ export default {
           <li><strong>Barra de estado:</strong> Muestra información útil (promedio, suma, recuento de celdas seleccionadas, etc.).</li>
         </ul>
         <p><strong>Vinculación práctica:</strong> Para sumar rápidamente una columna de números, selecciona el rango y observa la barra de estado: Excel muestra la suma automáticamente.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/interfaz-excel.png",
+          descripcion: "Elementos principales de la interfaz de Excel señalados en pantalla"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/interfaz-excel.mp4",
+          descripcion: "Video: Recorrido por la interfaz de Excel"
+        }
+      ],
+      actividades: [
+        "Explora el entorno de Excel y localiza sus elementos principales. Describe para qué sirve cada uno.",
+        "Realiza una suma rápida usando la barra de estado."
+      ]
     },
     {
       id: 3,
@@ -67,7 +99,18 @@ Para cada celda en el rango A2:A11:
 Promedio = Suma / cantidad de celdas
         </pre>
         <p>En Excel: <code>=PROMEDIO(A2:A11)</code></p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "video",
+          url: "/videos/excel/navegacion-basica.mp4",
+          descripcion: "Video: Navegación y acciones básicas en Excel"
+        }
+      ],
+      actividades: [
+        "Desplázate entre hojas y celdas usando el teclado y realiza una suma simple.",
+        "Calcula el promedio de una columna de notas usando la función PROMEDIO."
+      ]
     },
     {
       id: 4,
@@ -85,7 +128,23 @@ Promedio = Suma / cantidad de celdas
         <p><strong>Ejemplo de función condicional:</strong> <code>=SI(A2>=11, "Aprobado", "Desaprobado")</code></p>
         <p><strong>Diagrama de flujo:</strong></p>
         <img src="/recursos/excel/diagrama-flujo-si.png" alt="Diagrama de flujo función SI" style="max-width:300px;">
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/recursos/excel/diagrama-flujo-si.png",
+          descripcion: "Diagrama de flujo de la función SI en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/tipos-datos.mp4",
+          descripcion: "Video: Tipos de datos y su impacto en los cálculos en Excel"
+        }
+      ],
+      actividades: [
+        "Identifica los diferentes tipos de datos que puedes ingresar en una celda.",
+        "Prueba una función condicional (SI) en una hoja de cálculo."
+      ]
     },
     {
       id: 5,
@@ -98,94 +157,108 @@ Promedio = Suma / cantidad de celdas
           <li>Ajustar el zoom y la vista de la hoja para trabajar con comodidad.</li>
         </ul>
         <p><strong>Ejemplo práctico:</strong> Para cambiar el tema, ve a "Archivo" &rarr; "Opciones" &rarr; "General" &rarr; "Personalizar la copia de Microsoft Office".</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "video",
+          url: "/videos/excel/personalizacion-excel.mp4",
+          descripcion: "Video: Personalización de la interfaz y experiencia de usuario en Excel"
+        }
+      ],
+      actividades: [
+        "Cambia el tema de color de Excel y ajusta el zoom. Explica cómo mejora tu experiencia.",
+        "Muestra u oculta la barra de fórmulas y la barra de estado."
+      ]
     }
   ],
-  actividades: [
-    "Explora el entorno de Excel y localiza sus elementos principales. Describe para qué sirve cada uno.",
-    "Desplázate entre hojas y celdas usando el teclado y realiza una suma simple.",
-    "Cambia el tema de color de Excel y ajusta el zoom. Explica cómo mejora tu experiencia.",
-    "Identifica los diferentes tipos de datos que puedes ingresar en una celda y prueba una función condicional (SI)."
-  ],
-  recursos: [
-    {
-      titulo: "Guía visual de Excel",
-      url: "/recursos/excel/guia-introduccion-excel.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Primeros pasos en Excel",
-      url: "/videos/excel/primeros-pasos-excel.mp4",
-      tipo: "video"
-    },
-    {
-      titulo: "Diagrama de flujo: función SI",
-      url: "/recursos/excel/diagrama-flujo-si.png",
-      tipo: "imagen"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía visual de Excel",
+        url: "/recursos/excel/guia-introduccion-excel.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Excel para principiantes",
+        url: "https://support.microsoft.com/es-es/office/introducción-a-excel-7b8ab8e0-7e7c-4f0d-8b3c-3e7e3fa5b8e0"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Primeros pasos en Excel",
+        url: "/videos/excel/primeros-pasos-excel.mp4"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Qué elemento permite escribir fórmulas en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Barra de fórmulas",
           "Cinta de opciones",
           "Área de trabajo",
           "Hoja de cálculo"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cómo se llama el archivo principal de Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Libro",
           "Hoja",
           "Celda",
           "Área de trabajo"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cuál de los siguientes NO es un tipo de dato en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Imagen",
           "Texto",
           "Número",
           "Fecha"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Para qué sirve la cinta de opciones?",
+        tipo: "opcion-multiple",
         opciones: [
           "Acceder a comandos y herramientas",
           "Insertar imágenes únicamente",
           "Cambiar el idioma de Windows",
           "Cerrar el archivo"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cuál es el algoritmo básico para calcular el promedio de una columna de notas?",
+        tipo: "opcion-multiple",
         opciones: [
           "Sumar todos los valores y dividir por la cantidad de celdas",
           "Restar el menor valor al mayor",
           "Multiplicar todos los valores",
           "Sumar solo los valores pares"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué función de Excel permite tomar decisiones según un criterio?",
+        tipo: "opcion-multiple",
         opciones: [
           "SI",
           "SUMA",
           "PROMEDIO",
           "MAX"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

@@ -285,68 +285,85 @@ const tema04EscenariosComposicion = {
       dificultad: "Avanzado"
     }
   ],
-  recursos: [
-    {
-      tipo: "teoria",
-      titulo: "Principios de Composición Visual",
-      descripcion: "Fundamentos teóricos de la composición aplicados al 3D",
-      url: "#"
-    },
-    {
-      tipo: "ejemplos",
-      titulo: "Galería de Escenarios Exemplares",
-      descripcion: "Colección de escenarios bien compuestos para inspiración",
-      url: "#"
-    },
-    {
-      tipo: "plantillas",
-      titulo: "Plantillas de Composición",
-      descripcion: "Esquemas base para diferentes tipos de escenarios",
-      url: "#"
-    }
-  ],
-  evaluacion: {
-    tipo: "proyecto",
-    titulo: "Evaluación: Escenario narrativo completo",
-    descripcion: "Crea un escenario complejo que demuestre dominio de composición y narrativa visual",
-    criterios: [
+  recursos: {
+    documentos: [
       {
-        aspecto: "Aplicación de Principios Compositivos",
-        descripcion: "Uso efectivo de reglas de composición 3D",
-        puntos: 30
+        tipo: "teoria",
+        titulo: "Principios de Composición Visual",
+        descripcion: "Fundamentos teóricos de la composición aplicados al 3D",
+        url: "#"
       },
       {
-        aspecto: "Construcción por Capas",
-        descripcion: "Organización sistemática y jerárquica de elementos",
-        puntos: 25
+        tipo: "ejemplos",
+        titulo: "Galería de Escenarios Exemplares",
+        descripcion: "Colección de escenarios bien compuestos para inspiración",
+        url: "#"
       },
       {
-        aspecto: "Narrativa Visual",
-        descripcion: "Claridad y efectividad del storytelling visual",
-        puntos: 25
-      },
-      {
-        aspecto: "Gestión de Complejidad",
-        descripcion: "Control efectivo de múltiples elementos sin caos visual",
-        puntos: 20
+        tipo: "plantillas",
+        titulo: "Plantillas de Composición",
+        descripcion: "Esquemas base para diferentes tipos de escenarios",
+        url: "#"
       }
     ],
-    instrucciones: [
-      "Elige un tema específico (ej: 'Laboratorio de inventor loco', 'Jardín secreto', 'Estación espacial')",
-      "Planifica la composición siguiendo principios teóricos",
-      "Construye el escenario aplicando metodología por capas",
-      "Incluye una narrativa visual clara y coherente",
-      "Gestiona al menos 15 elementos diferentes manteniendo claridad",
-      "Configura iluminación que apoye mood y narrativa",
-      "Presenta el resultado desde múltiples perspectivas"
-    ],
-    tiempoLimite: "120 minutos",
-    puntuacionMaxima: 100,
-    entregables: [
-      "Archivo del proyecto Paint 3D",
-      "3 capturas desde ángulos diferentes",
-      "Documento explicando la narrativa visual",
-      "Sketch inicial de planificación compositiva"
+    enlaces: [],
+    videos: []
+  },
+  evaluacion: {
+    tipo: "cuestionario",
+    titulo: "Quiz: Composición y escenarios en Paint 3D",
+    descripcion: "Responde las siguientes preguntas sobre los principios de composición y construcción de escenarios en Paint 3D.",
+    preguntas: [
+      {
+        pregunta: "¿Qué principio ayuda a distribuir elementos en diferentes planos de profundidad?",
+        opciones: [
+          "Regla de los tercios tridimensional",
+          "Jerarquía visual",
+          "Flujo visual",
+          "Equilibrio simétrico"
+        ],
+        respuesta: 0
+      },
+      {
+        pregunta: "¿Cuál es el propósito de la narrativa visual en una escena 3D?",
+        opciones: [
+          "Organizar los colores",
+          "Contar una historia mediante elementos visuales",
+          "Ajustar la iluminación",
+          "Crear equilibrio simétrico"
+        ],
+        respuesta: 1
+      },
+      {
+        pregunta: "¿Qué factor NO afecta el peso visual de un objeto en 3D?",
+        opciones: [
+          "Volumen físico",
+          "Color y contraste",
+          "Posición relativa",
+          "Idioma del software"
+        ],
+        respuesta: 3
+      },
+      {
+        pregunta: "¿Para qué sirve la construcción por capas en escenarios 3D?",
+        opciones: [
+          "Organizar elementos de forma jerárquica",
+          "Eliminar objetos duplicados",
+          "Cambiar el fondo de la escena",
+          "Ajustar el brillo"
+        ],
+        respuesta: 0
+      },
+      {
+        pregunta: "¿Qué elemento concentra la máxima atención visual en una composición?",
+        opciones: [
+          "Punto focal",
+          "Plano medio",
+          "Espacio negativo",
+          "Narrativa visual"
+        ],
+        respuesta: 0
+      }
     ]
   },
   glosario: [

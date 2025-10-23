@@ -23,7 +23,23 @@ export default {
         <p>El ingreso y la edición correcta de datos es la base para cualquier análisis en Excel. Si los datos son incorrectos o están mal organizados, los resultados de los cálculos y gráficos serán erróneos.</p>
         <p><strong>¿Para qué?</strong> Para garantizar la confiabilidad de la información, facilitar el análisis y evitar errores en reportes y cálculos.</p>
         <p><strong>Ejemplo contextualizado:</strong> En una lista de asistencia, un error en la fecha o el nombre puede afectar el conteo de presentes y ausentes.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/edicion-datos-importancia.png",
+          descripcion: "Ejemplo de datos correctamente y erróneamente ingresados en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/importancia-edicion-datos.mp4",
+          descripcion: "Video: Importancia de la edición de datos en Excel"
+        }
+      ],
+      actividades: [
+        "Explica con tus palabras por qué es fundamental ingresar datos correctamente en Excel.",
+        "Da un ejemplo de cómo un error de edición puede afectar un cálculo."
+      ]
     },
     {
       id: 2,
@@ -36,7 +52,18 @@ export default {
           <li>Validar el tipo de dato: evita ingresar texto donde debe ir un número.</li>
         </ul>
         <p><strong>Ejemplo práctico:</strong> Para ingresar una fecha, escribe <code>18/09/2025</code> y presiona Enter. Excel la reconocerá como fecha y permitirá operaciones como sumar días.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "video",
+          url: "/videos/excel/ingreso-datos.mp4",
+          descripcion: "Video: Ingreso de datos y recomendaciones en Excel"
+        }
+      ],
+      actividades: [
+        "Ingresa datos de diferentes tipos en varias celdas y observa cómo los reconoce Excel.",
+        "Utiliza el autocompletar para crear una serie de días o meses."
+      ]
     },
     {
       id: 3,
@@ -58,7 +85,23 @@ Para i desde 1 hasta N-1:
             Intercambiar nombre[i] y nombre[j]
         </pre>
         <p>En Excel: selecciona el rango y usa "Ordenar A-Z" en la pestaña "Datos".</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/modificar-eliminar-datos.png",
+          descripcion: "Ejemplo de edición y eliminación de datos en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/modificar-eliminar-datos.mp4",
+          descripcion: "Video: Modificación y eliminación de datos en Excel"
+        }
+      ],
+      actividades: [
+        "Modifica y elimina datos en una hoja de Excel y observa cómo cambian los resultados de las fórmulas.",
+        "Ordena una lista de nombres y describe el proceso paso a paso."
+      ]
     },
     {
       id: 4,
@@ -71,7 +114,18 @@ Para i desde 1 hasta N-1:
           <li>Opciones avanzadas: pegado especial, transponer, etc.</li>
         </ul>
         <p><strong>Ejemplo práctico:</strong> Copia una columna de notas y pégala en otra hoja usando Ctrl+C y Ctrl+V. Usa "Pegado especial" para pegar solo los valores y no las fórmulas.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "video",
+          url: "/videos/excel/portapapeles.mp4",
+          descripcion: "Video: Copiar, cortar y pegar datos en Excel"
+        }
+      ],
+      actividades: [
+        "Utiliza copiar, cortar y pegar para reorganizar información en una hoja de Excel.",
+        "Prueba el pegado especial para copiar solo valores o formatos."
+      ]
     },
     {
       id: 5,
@@ -83,74 +137,97 @@ Para i desde 1 hasta N-1:
           <li>Detectar y corregir errores con las herramientas de revisión.</li>
         </ul>
         <p><strong>Ejemplo práctico:</strong> Para evitar que se ingresen valores fuera de un rango, selecciona la columna, ve a "Datos" &rarr; "Validación de datos" y define el criterio (por ejemplo, solo números entre 0 y 20).</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/validacion-correccion.png",
+          descripcion: "Ejemplo de validación y corrección de datos en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/validacion-correccion.mp4",
+          descripcion: "Video: Validación y corrección de datos en Excel"
+        }
+      ],
+      actividades: [
+        "Configura una validación de datos para restringir los valores permitidos en una columna.",
+        "Detecta y corrige un error usando las herramientas de revisión."
+      ]
     }
   ],
-  actividades: [
-    "Ingresa datos en varias celdas y modifícalos. Explica cómo afecta a los cálculos automáticos.",
-    "Utiliza copiar, cortar y pegar para reorganizar información en una hoja de Excel.",
-    "Ordena una lista de nombres y describe el proceso paso a paso.",
-    "Configura una validación de datos para restringir los valores permitidos en una columna."
-  ],
-  recursos: [
-    {
-      titulo: "Guía de edición de datos en Excel",
-      url: "/recursos/excel/guia-edicion-datos.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Edición y validación de datos en Excel",
-      url: "/videos/excel/edicion-validacion-datos.mp4",
-      tipo: "video"
-    },
-    {
-      titulo: "Diagrama de flujo: ordenamiento de datos",
-      url: "/recursos/excel/diagrama-flujo-ordenar.png",
-      tipo: "imagen"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de edición de datos en Excel",
+        url: "/recursos/excel/guia-edicion-datos.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Excel sobre edición de datos",
+        url: "https://support.microsoft.com/es-es/office/editar-o-reemplazar-datos-en-una-celda-3f2b1b4e-2c7e-4b8a-8c5e-1b8e6c7c1e7c"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Edición y validación de datos en Excel",
+        url: "/videos/excel/edicion-validacion-datos.mp4"
+      }
+    ],
+    imagenes: [
+      {
+        titulo: "Diagrama de flujo: ordenamiento de datos",
+        url: "/recursos/excel/diagrama-flujo-ordenar.png"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Por qué es importante validar los datos en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Para evitar errores y asegurar la calidad de la información",
           "Para cambiar el color de las celdas",
           "Para insertar imágenes",
           "Para crear gráficos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué comando permite deshacer un cambio?",
+        tipo: "opcion-multiple",
         opciones: [
           "Ctrl+Z",
           "Ctrl+X",
           "Ctrl+C",
           "Ctrl+V"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cuál es el algoritmo básico para ordenar una lista de nombres?",
+        tipo: "opcion-multiple",
         opciones: [
           "Comparar e intercambiar elementos hasta que estén en orden",
           "Sumar todos los valores",
           "Multiplicar los valores",
           "Copiar y pegar los datos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué herramienta de Excel permite restringir los valores que se pueden ingresar en una celda?",
+        tipo: "opcion-multiple",
         opciones: [
           "Validación de datos",
           "Formato condicional",
           "Pegado especial",
           "Autocompletar"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

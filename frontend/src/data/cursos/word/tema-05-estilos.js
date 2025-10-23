@@ -33,7 +33,18 @@ Elegir estilo en la galería
 Verificar formato aplicado
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para entregar un informe profesional, utiliza estilos para títulos y subtítulos, facilitando la generación de tabla de contenido.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/estilos-ejemplo.png",
+          descripcion: "Ejemplo visual de estilos aplicados en un documento Word"
+        }
+      ],
+      actividades: [
+        "Identifica en un documento real las partes que podrían beneficiarse del uso de estilos.",
+        "Explica con tus palabras por qué los estilos facilitan la edición de documentos largos."
+      ]
     },
     {
       id: 2,
@@ -54,7 +65,18 @@ Ir a la galería de estilos
 Elegir el estilo deseado
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para mejorar la presentación, aplica estilos predefinidos en cada sección del documento.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "video",
+          url: "/videos/word/aplicar-estilos.mp4",
+          descripcion: "Demostración de aplicación de estilos predefinidos en Word"
+        }
+      ],
+      actividades: [
+        "Abre un documento y aplica al menos tres estilos diferentes en distintas secciones.",
+        "Describe cómo cambia la apariencia del documento al usar estilos."
+      ]
     },
     {
       id: 3,
@@ -75,7 +97,18 @@ Ir a "Nuevo estilo" en la galería
 Asignar nombre y guardar
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para destacar elementos clave, crea estilos personalizados y aplícalos en todo el documento.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "video",
+          url: "/videos/word/crear-estilo-personalizado.mp4",
+          descripcion: "Cómo crear y modificar estilos personalizados en Word"
+        }
+      ],
+      actividades: [
+        "Crea un estilo personalizado para resaltar advertencias en tus documentos.",
+        "Modifica un estilo existente y observa el cambio global en el documento."
+      ]
     },
     {
       id: 4,
@@ -96,7 +129,18 @@ Agregar/quitar estilos según preferencia
 Organizar estilos favoritos
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para optimizar el flujo de trabajo, personaliza la galería de estilos según tus necesidades.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/galeria-estilos.png",
+          descripcion: "Vista de la galería de estilos personalizada en Word"
+        }
+      ],
+      actividades: [
+        "Organiza la galería de estilos de acuerdo a tus necesidades.",
+        "Elimina estilos que no utilices y agrega tus favoritos."
+      ]
     },
     {
       id: 5,
@@ -117,7 +161,18 @@ Ir a "Referencias" > "Tabla de contenido"
 Insertar tabla automática
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para facilitar la consulta, estructura el documento con estilos y genera la tabla de contenido.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "video",
+          url: "/videos/word/tabla-contenido.mp4",
+          descripcion: "Generación de tabla de contenido usando estilos en Word"
+        }
+      ],
+      actividades: [
+        "Aplica estilos a títulos y subtítulos y genera una tabla de contenido automática.",
+        "Utiliza el panel de navegación para moverte entre secciones."
+      ]
     },
     {
       id: 6,
@@ -138,60 +193,75 @@ Abrir nuevo documento y aplicar plantilla
 Actualizar estilos según necesidad
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para mantener la coherencia en varios documentos, reutiliza y actualiza estilos mediante plantillas.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/plantilla-estilos.png",
+          descripcion: "Ejemplo de plantilla de estilos reutilizable en Word"
+        }
+      ],
+      actividades: [
+        "Guarda tus estilos personalizados como plantilla y aplícalos en un nuevo documento.",
+        "Actualiza un estilo en la plantilla y observa el cambio en todos los documentos que la usan."
+      ]
     }
   ],
-  actividades: [
-    "Aplica estilos predefinidos a títulos y subtítulos en un documento",
-    "Crea y guarda un estilo personalizado",
-    "Organiza la galería de estilos y elimina los que no usas",
-    "Utiliza estilos para generar una tabla de contenido",
-    "Copia estilos de un documento a otro usando plantillas"
-  ],
-  recursos: [
-    {
-      titulo: "Guía de estilos en Word",
-      url: "/recursos/word/guia-estilos-word.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Uso avanzado de estilos en Word",
-      url: "/videos/word/estilos-avanzados-word.mp4",
-      tipo: "video"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de estilos en Word",
+        url: "/recursos/word/guia-estilos-word.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Word sobre estilos",
+        url: "https://support.microsoft.com/es-es/office/usar-estilos-en-word-1d4d4dce-5b1a-4542-9e9a-7b3e7e3fa5b8"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Uso avanzado de estilos en Word",
+        url: "/videos/word/estilos-avanzados-word.mp4"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Para qué sirven los estilos en Word?",
+        tipo: "opcion-multiple",
         opciones: [
           "Aplicar formato uniforme y estructurar el documento",
           "Insertar imágenes",
           "Corregir ortografía",
           "Cambiar el idioma del documento"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cómo se crea un estilo personalizado?",
+        tipo: "opcion-multiple",
         opciones: [
           "Solo desde la galería de estilos",
           "Aplicando formato y guardando como nuevo estilo",
           "No se pueden crear estilos personalizados",
           "Desde el panel de navegación"
         ],
-        respuesta: 1
+        respuestaCorrecta: 1
       },
       {
         pregunta: "¿Qué permite la galería de estilos?",
+        tipo: "opcion-multiple",
         opciones: [
           "Organizar y acceder rápidamente a estilos frecuentes",
           "Insertar tablas",
           "Revisar ortografía",
           "Traducir el documento"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

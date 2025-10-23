@@ -33,7 +33,22 @@ Para cada celda en la columna:
         Mostrar advertencia y bloquear ingreso
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para evitar errores en la captura de notas, aplica validación de datos y ordena la lista antes de imprimir reportes.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-validacion-datos.png",
+          descripcion: "Ejemplo de validación de datos y organización en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/validacion-depuracion-datos.mp4",
+          descripcion: "Video: Validación y depuración de datos en Excel"
+        }
+      ],
+      actividades: [
+        "Ordena una lista de datos por diferentes criterios y filtra la información relevante."
+      ]
     },
     {
       id: 2,
@@ -53,7 +68,17 @@ Aplicar ordenamiento según criterio
 Activar filtro y seleccionar valores deseados
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para preparar un informe, filtra los datos por grupo y ordena por promedio para identificar a los mejores estudiantes.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-ordenar-filtrar.png",
+          descripcion: "Ejemplo de ordenamiento y filtrado de datos en Excel"
+        }
+      ],
+      actividades: [
+        "Filtra y ordena datos para mostrar solo la información relevante."
+      ]
     },
     {
       id: 3,
@@ -74,7 +99,17 @@ Para cada celda en la columna:
         Mostrar advertencia y bloquear ingreso
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para asegurar la calidad de los registros, aplica validación de lista y rango en las columnas clave.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-validacion-unica.png",
+          descripcion: "Ejemplo de validación única y mensajes de advertencia en Excel"
+        }
+      ],
+      actividades: [
+        "Aplica validación para restringir valores y evitar duplicados en una columna."
+      ]
     },
     {
       id: 4,
@@ -95,85 +130,120 @@ Ir a "Datos" > "Quitar duplicados"
 Confirmar columnas a revisar
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Antes de generar reportes, depura la base de datos y aplica filtros para mostrar solo la información relevante.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-depuracion-datos.png",
+          descripcion: "Ejemplo de depuración y eliminación de duplicados en Excel"
+        }
+      ],
+      actividades: [
+        "Depura una base de datos eliminando registros erróneos y duplicados.",
+        "Utiliza formato condicional para resaltar valores fuera de rango.",
+        "Describe con tus palabras el algoritmo que sigue Excel al validar y organizar datos."
+      ]
     }
   ],
-  actividades: [
-    "Ordena una lista de datos por diferentes criterios y filtra la información relevante.",
-    "Aplica validación para restringir valores y evitar duplicados en una columna.",
-    "Depura una base de datos eliminando registros erróneos y duplicados.",
-    "Utiliza formato condicional para resaltar valores fuera de rango.",
-    "Describe con tus palabras el algoritmo que sigue Excel al validar y organizar datos."
-  ],
-  recursos: [
-    {
-      titulo: "Guía de validación y organización de datos",
-      url: "/recursos/excel/guia-validacion-organizacion.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Validación y depuración de datos en Excel",
-      url: "/videos/excel/validacion-depuracion-datos.mp4",
-      tipo: "video"
-    },
-    {
-      titulo: "Diagrama de flujo: proceso de validación de datos",
-      url: "/recursos/excel/diagrama-flujo-validacion-datos.png",
-      tipo: "imagen"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de validación y organización de datos",
+        url: "/recursos/excel/guia-validacion-organizacion.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Excel sobre validación de datos",
+        url: "https://support.microsoft.com/es-es/office/aplicar-la-validación-de-datos-a-celdas-29fecbcc-d1b9-42c1-9d76-eff3ce5f7249"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Validación y depuración de datos en Excel",
+        url: "/videos/excel/validacion-depuracion-datos.mp4"
+      }
+    ],
+    imagenes: [
+      {
+        titulo: "Ejemplo de validación de datos y organización en Excel",
+        url: "/images/excel/ejemplo-validacion-datos.png"
+      },
+      {
+        titulo: "Ejemplo de ordenamiento y filtrado de datos en Excel",
+        url: "/images/excel/ejemplo-ordenar-filtrar.png"
+      },
+      {
+        titulo: "Ejemplo de validación única y mensajes de advertencia en Excel",
+        url: "/images/excel/ejemplo-validacion-unica.png"
+      },
+      {
+        titulo: "Ejemplo de depuración y eliminación de duplicados en Excel",
+        url: "/images/excel/ejemplo-depuracion-datos.png"
+      },
+      {
+        titulo: "Diagrama de flujo: proceso de validación de datos",
+        url: "/recursos/excel/diagrama-flujo-validacion-datos.png"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Cuál es el objetivo principal de la validación de datos en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Evitar errores, inconsistencias y valores no permitidos",
           "Insertar imágenes",
           "Eliminar celdas",
           "Cambiar el formato de celda"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cómo se ordenan y filtran los datos en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Usando las opciones de ordenar y filtrar en la barra de herramientas",
           "Eliminando celdas",
           "Insertando una imagen",
           "Cambiando el color de fondo"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué algoritmo sigue Excel al eliminar duplicados?",
+        tipo: "opcion-multiple",
         opciones: [
           "Revisa las columnas seleccionadas y elimina registros repetidos",
           "Elimina los datos originales",
           "Cambia el color de toda la hoja",
           "No realiza ninguna acción"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Por qué es útil aplicar formato condicional en la organización de datos?",
+        tipo: "opcion-multiple",
         opciones: [
           "Para resaltar información clave y facilitar la depuración visual",
           "Para sumar valores",
           "Para buscar datos en otra tabla",
           "Para unir textos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué recurso puedes consultar para aprender a validar y depurar datos en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Guía de validación y organización de datos",
           "Manual de instalación de Windows",
           "Tutorial de PowerPoint",
           "Guía de macros en Word"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

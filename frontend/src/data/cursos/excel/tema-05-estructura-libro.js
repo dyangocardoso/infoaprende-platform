@@ -41,7 +41,23 @@ Para cada periodo en la lista de periodos:
     Crear nueva hoja con nombre del periodo
     Copiar datos correspondientes a esa hoja
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/gestion-hojas-ejemplo.png",
+          descripcion: "Ejemplo de libro de Excel con varias hojas organizadas por periodo"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/gestion-hojas.mp4",
+          descripcion: "Video: Cómo crear, renombrar y eliminar hojas en Excel"
+        }
+      ],
+      actividades: [
+        "Crea y renombra varias hojas en un libro de Excel para diferentes periodos o áreas.",
+        "Organiza la información de un proyecto en hojas separadas y crea una hoja resumen con totales."
+      ]
     },
     {
       id: 2,
@@ -59,11 +75,26 @@ Para cada periodo en la lista de periodos:
         <pre>
 // Copiar una hoja a otro libro
 Seleccionar hoja origen
-Clic derecho &rarr; "Mover o copiar..."
+Clic derecho → "Mover o copiar..."
 Elegir libro destino y marcar "Crear una copia"
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para iniciar un nuevo ciclo escolar, copia la hoja de control de asistencia y actualiza solo los nombres de los estudiantes.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/mover-copiar-hojas-ejemplo.png",
+          descripcion: "Ejemplo de mover y copiar hojas en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/mover-copiar-hojas.mp4",
+          descripcion: "Video: Mover y copiar hojas en Excel"
+        }
+      ],
+      actividades: [
+        "Copia una hoja de plantilla a otro archivo y actualiza los datos según el nuevo contexto."
+      ]
     },
     {
       id: 3,
@@ -85,85 +116,132 @@ Para cada hoja en el libro:
     Total = Total + valor de la celda objetivo
 Mostrar Total
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/estructura-interna-ejemplo.png",
+          descripcion: "Ejemplo de agrupación y protección de hojas en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/estructura-interna.mp4",
+          descripcion: "Video: Gestión avanzada de la estructura interna en Excel"
+        }
+      ],
+      actividades: [
+        "Agrupa varias hojas y aplica el mismo formato a todas simultáneamente.",
+        "Protege la hoja de promedios y explica por qué es importante restringir cambios en ciertas hojas."
+      ]
     }
   ],
-  actividades: [
-    "Crea y renombra varias hojas en un libro de Excel para diferentes periodos o áreas.",
-    "Organiza la información de un proyecto en hojas separadas y crea una hoja resumen con totales.",
-    "Copia una hoja de plantilla a otro archivo y actualiza los datos según el nuevo contexto.",
-    "Agrupa varias hojas y aplica el mismo formato a todas simultáneamente.",
-    "Protege la hoja de promedios y explica por qué es importante restringir cambios en ciertas hojas."
-  ],
-  recursos: [
-    {
-      titulo: "Guía de gestión de hojas",
-      url: "/recursos/excel/guia-gestion-hojas.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Organización avanzada de libros en Excel",
-      url: "/videos/excel/organizacion-libros-avanzada.mp4",
-      tipo: "video"
-    },
-    {
-      titulo: "Diagrama de flujo: consolidación de datos entre hojas",
-      url: "/recursos/excel/diagrama-flujo-consolidacion-hojas.png",
-      tipo: "imagen"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de gestión de hojas",
+        url: "/recursos/excel/guia-gestion-hojas.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Excel sobre gestión de hojas",
+        url: "https://support.microsoft.com/es-es/office/insertar-eliminar-y-organizar-hojas-de-c%C3%A1lculo-19d3d21a-0b11-4b8c-9c3b-6c6b6b49148b"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Organización avanzada de libros en Excel",
+        url: "/videos/excel/organizacion-libros-avanzada.mp4"
+      },
+      {
+        titulo: "Video: Cómo crear, renombrar y eliminar hojas en Excel",
+        url: "/videos/excel/gestion-hojas.mp4"
+      },
+      {
+        titulo: "Video: Mover y copiar hojas en Excel",
+        url: "/videos/excel/mover-copiar-hojas.mp4"
+      },
+      {
+        titulo: "Video: Gestión avanzada de la estructura interna en Excel",
+        url: "/videos/excel/estructura-interna.mp4"
+      }
+    ],
+    imagenes: [
+      {
+        titulo: "Ejemplo de libro de Excel con varias hojas organizadas por periodo",
+        url: "/images/excel/gestion-hojas-ejemplo.png"
+      },
+      {
+        titulo: "Ejemplo de mover y copiar hojas en Excel",
+        url: "/images/excel/mover-copiar-hojas-ejemplo.png"
+      },
+      {
+        titulo: "Ejemplo de agrupación y protección de hojas en Excel",
+        url: "/images/excel/estructura-interna-ejemplo.png"
+      },
+      {
+        titulo: "Diagrama de flujo: consolidación de datos entre hojas",
+        url: "/recursos/excel/diagrama-flujo-consolidacion-hojas.png"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Cuál es la principal ventaja de organizar la información en varias hojas dentro de un libro de Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Facilita la organización, el análisis y la actualización de datos",
           "Elimina datos duplicados",
           "Inserta gráficos automáticamente",
           "Valida datos sin intervención"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cómo se copia una hoja a otro libro de Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Clic derecho en la pestaña de la hoja, 'Mover o copiar...', elegir libro destino y marcar 'Crear una copia'",
           "Arrastrando una celda",
           "Insertando una imagen",
           "Cambiando el formato de celda"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué algoritmo sigue Excel al consolidar datos de varias hojas?",
+        tipo: "opcion-multiple",
         opciones: [
           "Suma los valores de la celda objetivo en cada hoja y muestra el total",
           "Elimina las hojas vacías",
           "Cambia el color de las hojas",
           "No realiza ninguna acción"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Por qué es importante proteger ciertas hojas en un libro de Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Para evitar modificaciones accidentales o no autorizadas",
           "Para cambiar el color de la hoja",
           "Para insertar imágenes",
           "No es importante"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué recurso puedes consultar para aprender a consolidar datos entre hojas?",
+        tipo: "opcion-multiple",
         opciones: [
           "Diagrama de flujo: consolidación de datos entre hojas",
           "Manual de instalación de Windows",
           "Tutorial de PowerPoint",
           "Guía de macros en Word"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

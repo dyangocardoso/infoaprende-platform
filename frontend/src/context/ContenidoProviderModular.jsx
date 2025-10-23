@@ -19,7 +19,10 @@ export default function ContenidoProviderModular({ children }) {
     'paint-3d',
     'word',
     'powerpoint',
-    'excel'
+    'excel',
+    'access',
+    'redes',
+    'ciberseguridad'
   ]));
 
   // Estado para errores y logs

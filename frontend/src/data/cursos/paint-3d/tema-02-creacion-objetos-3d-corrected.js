@@ -247,27 +247,28 @@ const tema02CreacionObjetos3D = {
       dificultad: "Avanzado"
     }
   ],
-  recursos: [
-    {
-      tipo: "guia",
-      titulo: "Proporciones y escalas en modelado 3D",
-      descripcion: "Guía para mantener proporciones realistas en tus modelos",
-      url: "#"
-    },
-    {
-      tipo: "tutorial",
-      titulo: "Atajos de teclado para modelado eficiente",
-      descripcion: "Comandos rápidos para acelerar tu flujo de trabajo",
-      url: "#"
-    },
-    {
-      tipo: "video",
-      titulo: "Masterclass: De concepto a modelo 3D",
-      descripcion: "Proceso completo de modelado desde idea inicial hasta resultado final",
-      duracion: "25 min",
-      url: "#"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Proporciones y escalas en modelado 3D",
+        descripcion: "Guía para mantener proporciones realistas en tus modelos",
+        url: "#"
+      },
+      {
+        titulo: "Atajos de teclado para modelado eficiente",
+        descripcion: "Comandos rápidos para acelerar tu flujo de trabajo",
+        url: "#"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Masterclass: De concepto a modelo 3D",
+        descripcion: "Proceso completo de modelado desde idea inicial hasta resultado final",
+        duracion: "25 min",
+        url: "#"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "proyecto",
     titulo: "Evaluación: Proyecto de modelado completo",

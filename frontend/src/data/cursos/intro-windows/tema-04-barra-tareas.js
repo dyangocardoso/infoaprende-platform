@@ -114,18 +114,40 @@ export default {
     "Configura los iconos visibles en el área de notificaciones",
     "Prueba los atajos de teclado para cambiar entre ventanas"
   ],
-  recursos: [
-    {
-      titulo: "Guía visual de la barra de tareas",
-      url: "/recursos/intro-windows/guia-barra-tareas.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Personalización avanzada de la barra de tareas",
-      url: "/videos/intro-windows/personalizacion-barra-tareas.mp4",
-      tipo: "video"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía visual de la barra de tareas",
+        url: "/recursos/intro-windows/guia-barra-tareas.pdf",
+        tipo: "pdf"
+      },
+      {
+        titulo: "Cheatsheet: Atajos para barra de tareas",
+        url: "/recursos/intro-windows/atajos-barra-tareas.pdf",
+        tipo: "pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Soporte Microsoft - Barra de tareas",
+        url: "https://support.microsoft.com/es-es/windows/barra-de-tareas-en-windows",
+        tipo: "externo"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Personalización avanzada de la barra de tareas",
+        url: "/videos/intro-windows/personalizacion-barra-tareas.mp4",
+        duracion: "06:12"
+      }
+    ],
+    imagenes: [
+      {
+        titulo: "Ejemplo: barra de tareas personalizada",
+        url: "/images/intro-windows/barra-tareas-ejemplo.png"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
     preguntas: [

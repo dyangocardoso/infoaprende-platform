@@ -4,7 +4,7 @@
  */
 
 // Importar todos los temas del curso
-import { tema01InterfazHerramientas } from './tema-01-interfaz-herramientas.js';
+import tema01InterfazHerramientas from './tema-01-interfaz-herramientas.js';
 import tema02TecnicasBasicas from './tema-02-tecnicas-basicas-corrected.js';
 
 // Metadatos del curso

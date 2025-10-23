@@ -38,7 +38,23 @@ Seleccionar número de filas y columnas
 Colocar la tabla en el documento
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para presentar datos ordenados, inserta tablas y adapta su tamaño según la información.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/ejemplo-tabla-insercion.png",
+          descripcion: "Ejemplo de tabla insertada en Word para organizar información"
+        },
+        {
+          tipo: "video",
+          url: "/videos/word/insertar-tabla.mp4",
+          descripcion: "Video: Cómo insertar y crear tablas en Word"
+        }
+      ],
+      actividades: [
+        "Inserta una tabla en un documento y organiza datos relevantes.",
+        "Explica cómo la tabla mejora la presentación de la información."
+      ]
     },
     {
       id: 2,
@@ -59,7 +75,23 @@ Usar opciones de agregar/eliminar/mover
 Ajustar tamaño según necesidad
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para actualizar información, edita las filas y columnas de la tabla según los cambios requeridos.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/edicion-tabla-ejemplo.png",
+          descripcion: "Ejemplo de edición de filas y columnas en una tabla de Word"
+        },
+        {
+          tipo: "video",
+          url: "/videos/word/editar-tabla.mp4",
+          descripcion: "Video: Edición de filas, columnas y celdas en Word"
+        }
+      ],
+      actividades: [
+        "Agrega y elimina filas y columnas en una tabla de prueba.",
+        "Modifica el tamaño de las celdas y observa el resultado."
+      ]
     },
     {
       id: 3,
@@ -80,7 +112,23 @@ Ir a "Herramientas de tabla" > "Diseño"
 Elegir estilo y personalizar colores/bordes
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para destacar información relevante, aplica formato y estilos que faciliten la lectura.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/estilos-tabla-ejemplo.png",
+          descripcion: "Ejemplo de formato y estilos aplicados a una tabla en Word"
+        },
+        {
+          tipo: "video",
+          url: "/videos/word/formato-tabla.mp4",
+          descripcion: "Video: Aplicar formato y estilos a tablas en Word"
+        }
+      ],
+      actividades: [
+        "Aplica diferentes estilos de formato a una tabla.",
+        "Personaliza el diseño de una tabla con colores y bordes."
+      ]
     },
     {
       id: 4,
@@ -101,7 +149,23 @@ Usar opción "Combinar" o "Dividir" en herramientas de tabla
 Ajustar el diseño según necesidad
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para adaptar la estructura de la tabla, combina o divide celdas según el tipo de información.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/combinar-celdas-ejemplo.png",
+          descripcion: "Ejemplo de combinación y división de celdas en una tabla de Word"
+        },
+        {
+          tipo: "video",
+          url: "/videos/word/combinar-dividir-celdas.mp4",
+          descripcion: "Video: Cómo combinar y dividir celdas en tablas de Word"
+        }
+      ],
+      actividades: [
+        "Combina y divide celdas en una tabla de ejemplo.",
+        "Crea un encabezado que abarque varias columnas combinando celdas."
+      ]
     },
     {
       id: 5,
@@ -122,60 +186,80 @@ Ir a "Herramientas de tabla" > "Presentación"
 Agregar encabezados, ordenar y filtrar datos
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para mejorar la presentación y análisis de datos, utiliza las herramientas de diseño y presentación de tablas.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/herramientas-tabla-ejemplo.png",
+          descripcion: "Ejemplo de herramientas de diseño y presentación en tablas de Word"
+        },
+        {
+          tipo: "video",
+          url: "/videos/word/herramientas-tabla.mp4",
+          descripcion: "Video: Herramientas de diseño y presentación de tablas en Word"
+        }
+      ],
+      actividades: [
+        "Ordena los datos de una tabla alfabéticamente.",
+        "Repite el encabezado de una tabla en varias páginas impresas."
+      ]
     }
   ],
-  actividades: [
-    "Crea una tabla y aplica diferentes estilos de formato",
-    "Agrega y elimina filas y columnas en una tabla de prueba",
-    "Combina y divide celdas en una tabla",
-    "Personaliza el diseño de una tabla con colores y bordes",
-    "Ordena los datos de una tabla alfabéticamente"
-  ],
-  recursos: [
-    {
-      titulo: "Guía de tablas en Word",
-      url: "/recursos/word/guia-tablas-word.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Tablas en Word",
-      url: "/videos/word/tablas-word.mp4",
-      tipo: "video"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de tablas en Word",
+        url: "/recursos/word/guia-tablas-word.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Word sobre tablas",
+        url: "https://support.microsoft.com/es-es/office/insertar-o-crear-una-tabla-en-word-0b8ad8c9-0b8a-4b4a-bc3e-7b3e7e3fa5b8"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Tablas en Word",
+        url: "/videos/word/tablas-word.mp4"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Cómo se inserta una tabla en Word?",
+        tipo: "opcion-multiple",
         opciones: [
           "Desde la cinta de opciones, pestaña Insertar",
           "Desde la barra de estado",
           "Desde el panel de navegación",
           "No se pueden insertar tablas"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Para qué sirve la opción de combinar celdas?",
+        tipo: "opcion-multiple",
         opciones: [
           "Unir varias celdas en una sola",
           "Dividir una celda en varias",
           "Eliminar filas",
           "Cambiar el color de la tabla"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué permite hacer la herramienta de diseño de tabla?",
+        tipo: "opcion-multiple",
         opciones: [
           "Personalizar el formato y presentación de la tabla",
           "Insertar imágenes",
           "Corregir ortografía",
           "Traducir el documento"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

@@ -99,18 +99,40 @@ export default {
     "Configura las carpetas que aparecen junto al botón de encendido",
     "Prueba los atajos de teclado para abrir y navegar el menú de inicio"
   ],
-  recursos: [
-    {
-      titulo: "Guía visual del menú de inicio",
-      url: "/recursos/intro-windows/guia-menu-inicio.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Personalización avanzada del menú de inicio",
-      url: "/videos/intro-windows/personalizacion-menu-inicio.mp4",
-      tipo: "video"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía visual del menú de inicio",
+        url: "/recursos/intro-windows/guia-menu-inicio.pdf",
+        tipo: "pdf"
+      },
+      {
+        titulo: "Guía rápida: Mosaicos y grupos en el menú de inicio",
+        url: "/recursos/intro-windows/atajos-menu-inicio.pdf",
+        tipo: "pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Soporte Microsoft - Personalizar el menú de inicio",
+        url: "https://support.microsoft.com/es-es/windows/personalizar-el-men%C3%BA-de-inicio-en-windows",
+        tipo: "externo"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Personalización avanzada del menú de inicio",
+        url: "/videos/intro-windows/personalizacion-menu-inicio.mp4",
+        duracion: "05:45"
+      }
+    ],
+    imagenes: [
+      {
+        titulo: "Ejemplo: menú de inicio con mosaicos organizados",
+        url: "/images/intro-windows/menu-inicio-ejemplo.png"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
     preguntas: [

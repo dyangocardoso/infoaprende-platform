@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useProgreso } from '../../hooks/useProgreso';
 import './LeccionTema.css';
 import './CursoBase.css';
+import redesTemas from '../../data/cursos/redes/index.js';
 
 // Datos de ejemplo para las lecciones
 const leccionData = {
@@ -151,7 +152,6 @@ const leccionData = {
             descripcion: "Ajusta tu postura según las recomendaciones",
             tips: [
               "Mano relajada sobre el ratón",
-              "Muñeca recta y apoyada",
               "Brazo paralelo al escritorio",
               "Hombros relajados"
             ]
@@ -724,7 +724,8 @@ const leccionData = {
           }
         }
       ]
-    }
+    },
+    'redes': redesTemas.temas
   }
 };
 

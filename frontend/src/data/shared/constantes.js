@@ -151,7 +151,10 @@ export const IDS_CURSOS = {
   PAINT_3D: 'paint-3d',
   WORD: 'word',
   POWERPOINT: 'powerpoint',
-  EXCEL: 'excel'
+  EXCEL: 'excel',
+  ACCESS: 'access',
+  REDES: 'redes',
+  CIBERSEGURIDAD: 'ciberseguridad',
 };
 
 // Configuración de desarrollo

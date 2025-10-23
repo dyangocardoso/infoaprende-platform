@@ -15,7 +15,10 @@ import Paint3D from './pages/cursos/Paint3D';
 import Word from './pages/cursos/Word';
 import PowerPoint from './pages/cursos/PowerPoint';
 import Excel from './pages/cursos/Excel';
+import Access from './pages/cursos/Access';
 import LeccionTema from './pages/cursos/LeccionTema';
+import Redes from './pages/cursos/Redes';
+import Ciberseguridad from './pages/cursos/Ciberseguridad';
 
 // Importar componentes de evaluaciones
 import Quiz from './pages/evaluaciones/Quiz';
@@ -158,6 +161,9 @@ export default function AppRouter() {
         <Route path="/curso/word" element={<Word />} />
         <Route path="/curso/powerpoint" element={<PowerPoint />} />
         <Route path="/curso/excel" element={<Excel />} />
+        <Route path="/curso/access" element={<Access />} />
+        <Route path="/curso/redes" element={<Redes />} />
+        <Route path="/curso/ciberseguridad" element={<Ciberseguridad />} />
         
         {/* Rutas de lecciones individuales */}
         <Route path="/leccion/:cursoId/:temaId" element={<LeccionTema />} />

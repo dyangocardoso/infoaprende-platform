@@ -43,7 +43,23 @@ Para cada celda en el rango:
     Si valor de la celda <= 10:
         Aplicar formato de fondo rojo
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/formato-celdas-ejemplo.png",
+          descripcion: "Ejemplo de celdas con diferentes formatos de color y fuente"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/formatos-excel.mp4",
+          descripcion: "Video: Cómo aplicar formatos básicos en Excel"
+        }
+      ],
+      actividades: [
+        "Aplica diferentes formatos a una tabla de datos: cambia tipo de letra, color de fondo y agrega bordes.",
+        "Resalta en verde las celdas con valores mayores a 10 y en rojo las menores o iguales a 10."
+      ]
     },
     {
       id: 2,
@@ -66,7 +82,23 @@ Para cada celda en la fila de encabezado:
 Para cada celda en las filas de datos:
     Alinear texto según el tipo de dato
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/alineacion-estilos-ejemplo.png",
+          descripcion: "Ejemplo de alineación y estilos en una tabla de Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/alineacion-estilos.mp4",
+          descripcion: "Video: Alineación y estilos en tablas de Excel"
+        }
+      ],
+      actividades: [
+        "Alinea los títulos de una tabla al centro y los datos numéricos a la derecha.",
+        "Crea una tabla de asistencia y aplica un estilo predefinido para diferenciar encabezados y filas alternas."
+      ]
     },
     {
       id: 3,
@@ -89,85 +121,128 @@ Para cada celda en la columna "Estado":
         Aplicar fondo verde
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para monitorear el avance de tareas, usa formato condicional para marcar en rojo las tareas pendientes y en verde las completadas.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/condicional-ejemplo.png",
+          descripcion: "Ejemplo de formato condicional resaltando pagos vencidos y pagados"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/formato-condicional.mp4",
+          descripcion: "Video: Cómo aplicar formato condicional en Excel"
+        }
+      ],
+      actividades: [
+        "Utiliza formato condicional para resaltar automáticamente las celdas con valores superiores a un umbral definido.",
+        "Describe con tus palabras el algoritmo que sigue Excel al aplicar formato condicional a un rango de celdas."
+      ]
     }
   ],
-  actividades: [
-    "Aplica diferentes formatos a una tabla de datos: cambia tipo de letra, color de fondo y agrega bordes.",
-    "Utiliza formato condicional para resaltar automáticamente las celdas con valores superiores a un umbral definido.",
-    "Alinea los títulos de una tabla al centro y los datos numéricos a la derecha.",
-    "Crea una tabla de asistencia y aplica un estilo predefinido para diferenciar encabezados y filas alternas.",
-    "Describe con tus palabras el algoritmo que sigue Excel al aplicar formato condicional a un rango de celdas."
-  ],
-  recursos: [
-    {
-      titulo: "Video: Formatos en Excel",
-      url: "/videos/excel/formatos-excel.mp4",
-      tipo: "video"
-    },
-    {
-      titulo: "Guía de formato condicional en Excel",
-      url: "/recursos/excel/guia-formato-condicional.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Diagrama de flujo: formato condicional",
-      url: "/recursos/excel/diagrama-flujo-formato-condicional.png",
-      tipo: "imagen"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de formato condicional en Excel",
+        url: "/recursos/excel/guia-formato-condicional.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Excel sobre formato de celdas",
+        url: "https://support.microsoft.com/es-es/office/dar-formato-a-una-hoja-de-c%C3%A1lculo-3f2b1b4e-2c7e-4b8a-8c5e-1b8e6c7c1e7c"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Formatos en Excel",
+        url: "/videos/excel/formatos-excel.mp4"
+      },
+      {
+        titulo: "Video: Alineación y estilos en tablas de Excel",
+        url: "/videos/excel/alineacion-estilos.mp4"
+      },
+      {
+        titulo: "Video: Cómo aplicar formato condicional en Excel",
+        url: "/videos/excel/formato-condicional.mp4"
+      }
+    ],
+    imagenes: [
+      {
+        titulo: "Ejemplo de celdas con diferentes formatos de color y fuente",
+        url: "/images/excel/formato-celdas-ejemplo.png"
+      },
+      {
+        titulo: "Ejemplo de alineación y estilos en una tabla de Excel",
+        url: "/images/excel/alineacion-estilos-ejemplo.png"
+      },
+      {
+        titulo: "Ejemplo de formato condicional resaltando pagos vencidos y pagados",
+        url: "/images/excel/condicional-ejemplo.png"
+      },
+      {
+        titulo: "Diagrama de flujo: formato condicional",
+        url: "/recursos/excel/diagrama-flujo-formato-condicional.png"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Cuál es el objetivo principal de aplicar formato a las celdas en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Facilitar la interpretación y presentación de los datos",
           "Eliminar datos duplicados",
           "Insertar gráficos",
           "Validar datos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cómo se aplica un formato condicional a un rango de celdas?",
+        tipo: "opcion-multiple",
         opciones: [
           "Seleccionando el rango y usando la opción 'Formato condicional' en la barra de herramientas",
           "Haciendo doble clic en la celda",
           "Arrastrando la celda",
           "Insertando una imagen"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué algoritmo sigue Excel al resaltar celdas con valores mayores a un umbral?",
+        tipo: "opcion-multiple",
         opciones: [
           "Evalúa cada celda y aplica el formato solo si cumple la condición",
           "Cambia el color de toda la hoja",
           "Elimina las celdas que no cumplen",
           "No realiza ninguna acción"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Por qué es importante la alineación de los datos en una tabla?",
+        tipo: "opcion-multiple",
         opciones: [
           "Para mejorar la legibilidad y comparación de la información",
           "Para cambiar el color de la hoja",
           "Para insertar imágenes",
           "No es importante"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué recurso puedes consultar para aprender a aplicar formato condicional en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Guía de formato condicional en Excel",
           "Manual de instalación de Windows",
           "Tutorial de PowerPoint",
           "Guía de macros en Word"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

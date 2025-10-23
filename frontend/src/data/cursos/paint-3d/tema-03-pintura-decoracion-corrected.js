@@ -283,27 +283,31 @@ const tema03PinturaDecoracion = {
       dificultad: "Avanzado"
     }
   ],
-  recursos: [
-    {
-      tipo: "tutorial",
-      titulo: "Guía Completa de Pinceles Paint 3D",
-      descripcion: "Tutorial detallado sobre cada herramienta de pintura",
-      url: "#",
-      duracion: "15 min"
-    },
-    {
-      tipo: "referencia",
-      titulo: "Biblioteca de Texturas",
-      descripcion: "Colección de texturas adicionales para proyectos",
-      url: "#"
-    },
-    {
-      tipo: "teoria",
-      titulo: "Fundamentos de Teoría del Color",
-      descripcion: "Conceptos esenciales sobre color y armonías cromáticas",
-      url: "#"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        tipo: "tutorial",
+        titulo: "Guía Completa de Pinceles Paint 3D",
+        descripcion: "Tutorial detallado sobre cada herramienta de pintura",
+        url: "#",
+        duracion: "15 min"
+      },
+      {
+        tipo: "referencia",
+        titulo: "Biblioteca de Texturas",
+        descripcion: "Colección de texturas adicionales para proyectos",
+        url: "#"
+      },
+      {
+        tipo: "teoria",
+        titulo: "Fundamentos de Teoría del Color",
+        descripcion: "Conceptos esenciales sobre color y armonías cromáticas",
+        url: "#"
+      }
+    ],
+    enlaces: [],
+    videos: []
+  },
   evaluacion: {
     tipo: "proyecto",
     titulo: "Evaluación: Objeto personalizado completo",

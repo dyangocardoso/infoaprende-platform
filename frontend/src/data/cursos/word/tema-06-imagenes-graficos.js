@@ -38,7 +38,23 @@ Seleccionar origen (equipo o en línea)
 Elegir imagen y colocar en el documento
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para mejorar la explicación de un tema, inserta imágenes relevantes y colócalas junto al texto correspondiente.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/ejemplo-insercion-imagen.png",
+          descripcion: "Ejemplo de imagen insertada en Word para ilustrar un procedimiento"
+        },
+        {
+          tipo: "video",
+          url: "/videos/word/insertar-imagen.mp4",
+          descripcion: "Video demostrativo: Cómo insertar imágenes en Word"
+        }
+      ],
+      actividades: [
+        "Inserta una imagen en un documento y ubícala junto al texto explicativo.",
+        "Explica cómo la imagen mejora la comprensión del contenido."
+      ]
     },
     {
       id: 2,
@@ -59,7 +75,23 @@ Usar herramientas de formato (recortar, ajustar, efectos)
 Aplicar cambios y verificar resultado
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para resaltar información clave, edita las imágenes y aplica estilos que se adapten al contexto del documento.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/edicion-imagen-ejemplo.png",
+          descripcion: "Ejemplo de imagen recortada y con efecto artístico aplicado"
+        },
+        {
+          tipo: "video",
+          url: "/videos/word/editar-imagen.mp4",
+          descripcion: "Video: Edición y formato de imágenes en Word"
+        }
+      ],
+      actividades: [
+        "Recorta una imagen y aplica un efecto artístico en Word.",
+        "Compara el resultado antes y después de la edición."
+      ]
     },
     {
       id: 3,
@@ -80,7 +112,23 @@ Seleccionar tipo de forma
 Personalizar color y borde
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para organizar ideas visualmente, utiliza formas y SmartArt en esquemas y diagramas.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/ejemplo-formas.png",
+          descripcion: "Ejemplo de formas básicas y SmartArt en Word"
+        },
+        {
+          tipo: "video",
+          url: "/videos/word/insertar-formas.mp4",
+          descripcion: "Video: Cómo insertar y personalizar formas en Word"
+        }
+      ],
+      actividades: [
+        "Inserta al menos dos formas y personaliza sus colores y bordes.",
+        "Crea un diagrama de flujo sencillo usando SmartArt."
+      ]
     },
     {
       id: 4,
@@ -101,7 +149,23 @@ Elegir tipo de gráfico
 Editar datos y personalizar formato
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para presentar información cuantitativa, crea gráficos y ajusta su diseño para facilitar la interpretación.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/grafico-barras-ejemplo.png",
+          descripcion: "Ejemplo de gráfico de barras personalizado en Word"
+        },
+        {
+          tipo: "video",
+          url: "/videos/word/crear-grafico.mp4",
+          descripcion: "Video: Creación y personalización de gráficos de datos en Word"
+        }
+      ],
+      actividades: [
+        "Crea un gráfico de barras y personaliza los colores de las categorías.",
+        "Edita los datos de un gráfico y observa los cambios en el diseño."
+      ]
     },
     {
       id: 5,
@@ -122,60 +186,80 @@ Usar opciones de alineación y agrupación
 Ajustar posición según necesidad
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para lograr un diseño profesional, organiza y alinea los elementos gráficos en el documento.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/word/organizacion-graficos.png",
+          descripcion: "Ejemplo de organización y alineación de elementos gráficos en Word"
+        },
+        {
+          tipo: "video",
+          url: "/videos/word/organizar-graficos.mp4",
+          descripcion: "Video: Organización y alineación de elementos gráficos en Word"
+        }
+      ],
+      actividades: [
+        "Agrupa al menos dos imágenes y formas y muévelas juntas.",
+        "Alinea los elementos gráficos respecto al texto y observa el resultado."
+      ]
     }
   ],
-  actividades: [
-    "Inserta una imagen y aplícale diferentes estilos y efectos",
-    "Crea un gráfico de barras y personaliza su diseño",
-    "Inserta y organiza varias formas en un documento",
-    "Agrupa y desagrupa elementos gráficos",
-    "Alinea imágenes y formas respecto al texto"
-  ],
-  recursos: [
-    {
-      titulo: "Guía de imágenes y gráficos en Word",
-      url: "/recursos/word/guia-imagenes-graficos.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Imágenes y gráficos en Word",
-      url: "/videos/word/imagenes-graficos-word.mp4",
-      tipo: "video"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de imágenes y gráficos en Word",
+        url: "/recursos/word/guia-imagenes-graficos.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Word sobre imágenes y gráficos",
+        url: "https://support.microsoft.com/es-es/office/insertar-im%C3%A1genes-en-microsoft-word-7e5e6b0e-9c3c-4b8a-8c5e-1b8e6c7c1e7c"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Imágenes y gráficos en Word",
+        url: "/videos/word/imagenes-graficos-word.mp4"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Cómo se inserta una imagen desde el equipo?",
+        tipo: "opcion-multiple",
         opciones: [
           "Insertar > Imágenes > Este dispositivo",
           "Insertar > Formas",
           "Insertar > Gráfico",
           "Insertar > SmartArt"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Para qué sirve la herramienta Recortar?",
+        tipo: "opcion-multiple",
         opciones: [
           "Cambiar el color de la imagen",
           "Eliminar partes no deseadas de la imagen",
           "Insertar una nueva imagen",
           "Aplicar efectos artísticos"
         ],
-        respuesta: 1
+        respuestaCorrecta: 1
       },
       {
         pregunta: "¿Qué permite hacer la opción Agrupar?",
+        tipo: "opcion-multiple",
         opciones: [
           "Unir varios objetos gráficos para moverlos juntos",
           "Insertar una tabla",
           "Cambiar el idioma del documento",
           "Corregir ortografía"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

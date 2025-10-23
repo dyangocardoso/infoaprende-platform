@@ -37,7 +37,23 @@ Para cada celda en el rango:
     Si no:
         Mantener formato normal
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/condicional-ejemplo.png",
+          descripcion: "Ejemplo de formato condicional resaltando notas aprobadas y desaprobadas"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/formato-condicional.mp4",
+          descripcion: "Video: Formato condicional en Excel"
+        }
+      ],
+      actividades: [
+        "Aplica formato condicional para resaltar automáticamente las celdas con valores inferiores a un umbral definido.",
+        "Describe con tus palabras el algoritmo que sigue Excel al aplicar formato condicional a un rango de celdas."
+      ]
     },
     {
       id: 2,
@@ -59,7 +75,23 @@ Para cada celda en el rango:
     Determinar valor mínimo y máximo del rango
     Asignar color según la posición relativa del valor
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/escalas-barras-iconos.png",
+          descripcion: "Ejemplo de escalas de color, barras de datos e iconos en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/escalas-barras-iconos.mp4",
+          descripcion: "Video: Visualización dinámica con escalas, barras e iconos en Excel"
+        }
+      ],
+      actividades: [
+        "Utiliza escalas de color para visualizar el rendimiento de un grupo de estudiantes.",
+        "Emplea iconos para indicar niveles de cumplimiento en una lista de tareas."
+      ]
     },
     {
       id: 3,
@@ -80,85 +112,127 @@ Para cada fila en la tabla:
     Si fórmula lógica devuelve VERDADERO:
         Aplicar formato especial
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/formula-condicional-ejemplo.png",
+          descripcion: "Ejemplo de regla personalizada con fórmula en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/formulas-condicionales.mp4",
+          descripcion: "Video: Reglas personalizadas y fórmulas en formato condicional"
+        }
+      ],
+      actividades: [
+        "Crea una regla personalizada con fórmula para resaltar casos especiales en una tabla."
+      ]
     }
   ],
-  actividades: [
-    "Aplica formato condicional para resaltar automáticamente las celdas con valores inferiores a un umbral definido.",
-    "Utiliza escalas de color para visualizar el rendimiento de un grupo de estudiantes.",
-    "Crea una regla personalizada con fórmula para resaltar casos especiales en una tabla.",
-    "Emplea iconos para indicar niveles de cumplimiento en una lista de tareas.",
-    "Describe con tus palabras el algoritmo que sigue Excel al aplicar formato condicional a un rango de celdas."
-  ],
-  recursos: [
-    {
-      titulo: "Video: Formato condicional en Excel",
-      url: "/videos/excel/formato-condicional.mp4",
-      tipo: "video"
-    },
-    {
-      titulo: "Guía de reglas y fórmulas de formato condicional",
-      url: "/recursos/excel/guia-formato-condicional.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Diagrama de flujo: aplicación de formato condicional",
-      url: "/recursos/excel/diagrama-flujo-formato-condicional.png",
-      tipo: "imagen"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de reglas y fórmulas de formato condicional",
+        url: "/recursos/excel/guia-formato-condicional.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Excel sobre formato condicional",
+        url: "https://support.microsoft.com/es-es/office/aplicar-formato-condicional-en-excel-3f2b1b4e-2c7e-4b8a-8c5e-1b8e6c7c1e7c"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Formato condicional en Excel",
+        url: "/videos/excel/formato-condicional.mp4"
+      },
+      {
+        titulo: "Video: Visualización dinámica con escalas, barras e iconos en Excel",
+        url: "/videos/excel/escalas-barras-iconos.mp4"
+      },
+      {
+        titulo: "Video: Reglas personalizadas y fórmulas en formato condicional",
+        url: "/videos/excel/formulas-condicionales.mp4"
+      }
+    ],
+    imagenes: [
+      {
+        titulo: "Ejemplo de formato condicional resaltando notas aprobadas y desaprobadas",
+        url: "/images/excel/condicional-ejemplo.png"
+      },
+      {
+        titulo: "Ejemplo de escalas de color, barras de datos e iconos en Excel",
+        url: "/images/excel/escalas-barras-iconos.png"
+      },
+      {
+        titulo: "Ejemplo de regla personalizada con fórmula en Excel",
+        url: "/images/excel/formula-condicional-ejemplo.png"
+      },
+      {
+        titulo: "Diagrama de flujo: aplicación de formato condicional",
+        url: "/recursos/excel/diagrama-flujo-formato-condicional.png"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Cuál es el objetivo principal del formato condicional en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Resaltar automáticamente información relevante según criterios definidos",
           "Eliminar datos duplicados",
           "Insertar gráficos",
           "Validar datos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cómo se aplica una regla de formato condicional a un rango de celdas?",
+        tipo: "opcion-multiple",
         opciones: [
           "Desde el menú de formato condicional, seleccionando la regla deseada",
           "Insertando una imagen",
           "Cambiando el color de fondo manualmente",
           "Eliminando celdas"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué algoritmo sigue Excel al aplicar una escala de color?",
+        tipo: "opcion-multiple",
         opciones: [
           "Asigna colores según la posición relativa del valor entre el mínimo y el máximo",
           "Cambia el color de toda la hoja",
           "Elimina las celdas que no cumplen",
           "No realiza ninguna acción"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Para qué sirven las reglas personalizadas con fórmulas en formato condicional?",
+        tipo: "opcion-multiple",
         opciones: [
           "Para aplicar formatos basados en condiciones complejas o múltiples criterios",
           "Para sumar valores",
           "Para buscar datos en otra tabla",
           "Para unir textos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué recurso puedes consultar para aprender a crear reglas avanzadas de formato condicional?",
+        tipo: "opcion-multiple",
         opciones: [
           "Guía de reglas y fórmulas de formato condicional",
           "Manual de instalación de Windows",
           "Tutorial de PowerPoint",
           "Guía de macros en Word"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

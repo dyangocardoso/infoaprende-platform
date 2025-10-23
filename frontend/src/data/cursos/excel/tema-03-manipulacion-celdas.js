@@ -41,7 +41,18 @@ Para cada celda en el rango origen:
     Leer valor de la celda
     Escribir valor en la celda destino correspondiente
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "video",
+          url: "/videos/excel/seleccion-movimiento.mp4",
+          descripcion: "Video: Selección y movimiento de celdas en Excel"
+        }
+      ],
+      actividades: [
+        "Selecciona y mueve celdas en una hoja de cálculo, luego copia el rango a otra ubicación y verifica que los datos se mantengan.",
+        "Explica con tus palabras el algoritmo que sigue Excel al copiar un rango de celdas."
+      ]
     },
     {
       id: 2,
@@ -63,7 +74,23 @@ Desplazar hacia abajo todas las filas desde N
 Crear una nueva fila vacía en N
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para eliminar una columna de notas antiguas, selecciónala y usa el comando de eliminación. Observa cómo se ajustan las fórmulas automáticamente.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/insercion-eliminacion.png",
+          descripcion: "Ejemplo de inserción y eliminación de filas y columnas en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/insercion-eliminacion.mp4",
+          descripcion: "Video: Inserción y eliminación de celdas, filas y columnas en Excel"
+        }
+      ],
+      actividades: [
+        "Inserta una fila y una columna en una tabla de datos, luego elimina una columna y observa el ajuste de las fórmulas.",
+        "Describe con tus palabras el algoritmo que sigue Excel al insertar una fila en medio de una tabla de datos."
+      ]
     },
     {
       id: 3,
@@ -85,85 +112,36 @@ Para cada celda en el rango destino:
     Valor = Valor + incremento
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para copiar una fórmula de suma a lo largo de una columna, escribe la fórmula en la primera celda y usa autollenado para replicarla en las demás.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/autollenado-organizacion.png",
+          descripcion: "Ejemplo de autollenado y organización de datos en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/autollenado-organizacion.mp4",
+          descripcion: "Video: Autollenado y organización de datos en Excel"
+        }
+      ],
+      actividades: [
+        "Utiliza el autollenado para crear una serie de fechas y otra de números pares.",
+        "Explica cómo el autollenado puede ahorrar tiempo en la gestión de listas o cálculos repetitivos."
+      ]
     }
   ],
-  actividades: [
-    "Selecciona y mueve celdas en una hoja de cálculo, luego copia el rango a otra ubicación y verifica que los datos se mantengan.",
-    "Inserta una fila y una columna en una tabla de datos, luego elimina una columna y observa el ajuste de las fórmulas.",
-    "Utiliza el autollenado para crear una serie de fechas y otra de números pares.",
-    "Describe con tus palabras el algoritmo que sigue Excel al insertar una fila en medio de una tabla de datos.",
-    "Explica cómo el autollenado puede ahorrar tiempo en la gestión de listas o cálculos repetitivos."
-  ],
-  recursos: [
-    {
-      titulo: "Guía de manipulación de celdas",
-      url: "/recursos/excel/guia-manipulacion-celdas.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Técnicas de selección y autollenado en Excel",
-      url: "/videos/excel/tecnicas-seleccion-autollenado.mp4",
-      tipo: "video"
-    },
-    {
-      titulo: "Diagrama de flujo: inserción de filas",
-      url: "/recursos/excel/diagrama-flujo-insercion-fila.png",
-      tipo: "imagen"
-    }
-  ],
-  evaluacion: {
-    tipo: "cuestionario",
-    preguntas: [
+  recursos: {
+    documentos: [
       {
-        pregunta: "¿Cuál es la utilidad principal de seleccionar un rango de celdas?",
-        opciones: [
-          "Aplicar acciones sobre varios datos a la vez",
-          "Cambiar el color de la hoja",
-          "Insertar imágenes",
-          "Cerrar el archivo"
-        ],
-        respuesta: 0
-      },
+        titulo: "Guía de manipulación de celdas",
+        url: "/recursos/excel/guia-manipulacion-celdas.pdf"
+      }
+    ],
+    enlaces: [
       {
-        pregunta: "¿Qué sucede al insertar una fila en medio de una tabla de datos?",
-        opciones: [
-          "Las filas inferiores se desplazan hacia abajo",
-          "Se eliminan los datos de la tabla",
-          "Se borra toda la hoja",
-          "No ocurre nada"
-        ],
-        respuesta: 0
-      },
-      {
-        pregunta: "¿Cómo se utiliza el autollenado para crear una serie de números?",
-        opciones: [
-          "Escribiendo el primer número y arrastrando el controlador de relleno",
-          "Copiando y pegando manualmente cada número",
-          "Insertando una imagen",
-          "Usando el menú de formato"
-        ],
-        respuesta: 0
-      },
-      {
-        pregunta: "¿Qué algoritmo sigue Excel al copiar un rango de celdas?",
-        opciones: [
-          "Lee cada celda del rango y la pega en la ubicación destino",
-          "Elimina las celdas originales",
-          "Cambia el color de las celdas",
-          "No realiza ninguna acción"
-        ],
-        respuesta: 0
-      },
-      {
-        pregunta: "¿Por qué es importante revisar las fórmulas al eliminar filas o columnas?",
-        opciones: [
-          "Porque pueden verse afectadas y dar resultados incorrectos",
-          "Porque cambia el color de la hoja",
-          "Porque se borra el archivo",
-          "No es importante"
-        ],
-        respuesta: 0
+        titulo: "Documentación oficial de Microsoft Excel sobre manipulación de celdas",
+        url: "https://support.microsoft.com/es-es/office/mover-o-copiar-celdas-y-contenido-de-celdas-7ab0bb7b-3a9e-4b56-a3c9-6c943"
       }
     ]
   }

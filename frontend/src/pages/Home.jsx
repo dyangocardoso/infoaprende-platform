@@ -323,7 +323,7 @@ export default function Home() {
             </div>
 
             {/* 11. Introducción a las Redes Informáticas */}
-            <div className="tema-card" data-course-id="redes-informaticas">
+            <div className="tema-card" data-course-id="redes">
               <div className="tema-icon">
                 <i className="fas fa-network-wired"></i>
               </div>
@@ -331,18 +331,18 @@ export default function Home() {
                 <div className="progress-bar-mini">
                   <div 
                     className="progress-fill-mini" 
-                    style={{width: `${getProgresoCurso('redes-informaticas').porcentaje}%`}}
+                    style={{width: `${getProgresoCurso('redes').porcentaje}%`}}
                   ></div>
                 </div>
                 <span className="progress-text-mini">
-                  {getProgresoCurso('redes-informaticas').porcentaje}% completado
+                  {getProgresoCurso('redes').porcentaje}% completado
                 </span>
               </div>
               <h3>Introducción a las Redes Informáticas</h3>
               <p>Fundamentos de conectividad y comunicación digital</p>
-              <Link to="/curso/redes-informaticas">
+              <Link to="/curso/redes">
                 <button className="btn-tema">
-                  {getProgresoCurso('redes-informaticas').completado ? '✅ Completado' : 'Explorar'}
+                  {getProgresoCurso('redes').completado ? '✅ Completado' : 'Explorar'}
                 </button>
               </Link>
             </div>

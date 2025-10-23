@@ -3,7 +3,7 @@
  * Curso: Procesador de Texto Word
  */
 
-export default {
+const tema04 = {
   id: '4',
   titulo: "Ortografía y gramática",
   tematica: "Corrección ortográfica, gramatical y herramientas de revisión",
@@ -33,7 +33,17 @@ Revisar palabras subrayadas
 Corregir errores con clic derecho
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para evitar errores en un informe, activa la revisión automática y corrige cada sugerencia antes de guardar.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/corrector-ortografico.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Escribe un texto con errores y utiliza el corrector para corregirlos.",
+          ayuda: "Observa las palabras subrayadas y usa el clic derecho para corregir."
+        }
+      ]
     },
     {
       id: 2,
@@ -54,7 +64,17 @@ Aceptar o ignorar sugerencias
 Corregir errores y guardar cambios
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para mejorar la calidad de los textos, revisa y acepta sugerencias relevantes antes de imprimir.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/revision-sugerencias.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Revisa todo el documento usando la función F7.",
+          ayuda: "Presiona F7 y sigue las sugerencias del corrector."
+        }
+      ]
     },
     {
       id: 3,
@@ -75,7 +95,17 @@ Agregar o eliminar del diccionario
 Verificar que no se marque como error
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para trabajar con documentos especializados, personaliza el diccionario y revisa los términos clave.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/diccionario-personalizado.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Agrega una palabra nueva al diccionario personalizado.",
+          ayuda: "Haz clic derecho sobre la palabra y selecciona 'Agregar al diccionario'."
+        }
+      ]
     },
     {
       id: 4,
@@ -96,7 +126,17 @@ Seleccionar idioma deseado
 Aplicar a todo el documento
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para entregar trabajos en otro idioma, configura la revisión y verifica que no haya errores.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/idioma-revision.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Cambia el idioma de revisión del documento.",
+          ayuda: "Ve a la pestaña Revisar y selecciona Idioma."
+        }
+      ]
     },
     {
       id: 5,
@@ -117,61 +157,74 @@ Presionar Shift + F7
 Elegir sinónimo adecuado
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para enriquecer la redacción, consulta sinónimos y sugerencias antes de finalizar el documento.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/sinonimos-sugerencias.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Utiliza el diccionario de sinónimos para mejorar una frase en tu documento.",
+          ayuda: "Selecciona una palabra y presiona Shift + F7."
+        }
+      ]
     }
   ],
-  actividades: [
-    "Escribe un texto con errores y utiliza el corrector para corregirlos",
-    "Agrega una palabra nueva al diccionario personalizado",
-    "Cambia el idioma de revisión del documento",
-    "Utiliza el diccionario de sinónimos para mejorar una frase",
-    "Revisa todo el documento usando la función F7"
-  ],
-  recursos: [
-    {
-      titulo: "Guía de ortografía y gramática en Word",
-      url: "/recursos/word/guia-ortografia-gramatica.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Revisión ortográfica y gramatical en Word",
-      url: "/videos/word/revision-ortografica-word.mp4",
-      tipo: "video"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de ortografía y gramática en Word",
+        url: "/recursos/word/guia-ortografia-gramatica.pdf",
+        tipo: "pdf"
+      }
+    ],
+    enlaces: [],
+    videos: [
+      {
+        titulo: "Video: Revisión ortográfica y gramatical en Word",
+        url: "/videos/word/revision-ortografica-word.mp4",
+        duracion: "5:30"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
     preguntas: [
       {
         pregunta: "¿Cómo se activa el corrector ortográfico en Word?",
+        tipo: "opcion_multiple",
         opciones: [
           "Desde la barra de estado",
           "Desde la cinta de opciones, pestaña Revisar",
           "No se puede activar",
           "Solo con atajos de teclado"
         ],
-        respuesta: 1
+        respuestaCorrecta: 1
       },
       {
         pregunta: "¿Qué significa una palabra subrayada en rojo?",
+        tipo: "opcion_multiple",
         opciones: [
           "Error gramatical",
           "Error ortográfico",
           "Palabra aceptada",
           "No tiene significado"
         ],
-        respuesta: 1
+        respuestaCorrecta: 1
       },
       {
         pregunta: "¿Para qué sirve el diccionario de sinónimos?",
+        tipo: "opcion_multiple",
         opciones: [
           "Buscar palabras con significado similar",
           "Corregir errores ortográficos",
           "Traducir palabras",
           "Eliminar palabras duplicadas"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }
 };
+
+export default tema04;

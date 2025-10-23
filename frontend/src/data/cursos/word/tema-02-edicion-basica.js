@@ -3,7 +3,7 @@
  * Curso: Procesador de Texto Word
  */
 
-export default {
+const tema02 = {
   id: '2',
   titulo: "Edición básica",
   tematica: "Escritura, selección, copiar, cortar, pegar y deshacer cambios",
@@ -33,7 +33,17 @@ Revisar y corregir errores
 Modificar palabras y frases según necesidad
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para entregar un trabajo escolar, revisa y edita el texto antes de guardar el documento final.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/edicion-basica.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Escribe un párrafo y edítalo usando las funciones de copiar, cortar y pegar.",
+          ayuda: "Utiliza los atajos de teclado y el menú contextual."
+        }
+      ]
     },
     {
       id: 2,
@@ -54,7 +64,17 @@ Mantener Shift y mover con flechas
 Soltar Shift al finalizar selección
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para aplicar formato a todo el documento, selecciona todo el texto y usa la cinta de opciones.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/seleccion-texto.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Selecciona todo el texto y cambia su formato desde la cinta de opciones.",
+          ayuda: "Utiliza Ctrl + E y las opciones de formato."
+        }
+      ]
     },
     {
       id: 3,
@@ -76,7 +96,17 @@ Ubicar cursor en destino
 Presionar Ctrl + V para pegar
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para reorganizar ideas, corta y pega párrafos en el orden más lógico.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/copiar-cortar-pegar.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Copia y pega un fragmento de texto en diferentes partes del documento.",
+          ayuda: "Utiliza Ctrl + C, Ctrl + X y Ctrl + V."
+        }
+      ]
     },
     {
       id: 4,
@@ -96,7 +126,17 @@ Si hay error, presionar Ctrl + Z
 Si se desea recuperar, presionar Ctrl + Y
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para evitar perder información, usa deshacer y rehacer durante la edición.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/deshacer-rehacer.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Utiliza deshacer y rehacer para revertir y repetir acciones en un documento de prueba.",
+          ayuda: "Prueba Ctrl + Z y Ctrl + Y."
+        }
+      ]
     },
     {
       id: 5,
@@ -118,7 +158,17 @@ Elegir formato en la cinta de opciones o usar atajo
 Verificar resultado
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para mejorar la presentación, aplica formato a los elementos clave del documento.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/formato-basico.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Aplica formato de negrita, cursiva y subrayado a diferentes palabras en un documento de prueba.",
+          ayuda: "Utiliza Ctrl + N, Ctrl + K y Ctrl + S."
+        }
+      ]
     },
     {
       id: 6,
@@ -139,61 +189,74 @@ Presionar Enter para nuevo párrafo
 Seleccionar y borrar para eliminar
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para estructurar correctamente el documento, inserta y elimina párrafos según la lógica del contenido.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/parrafos-saltos.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Inserta y elimina varios párrafos en un documento de prueba.",
+          ayuda: "Utiliza Enter, retroceso y suprimir."
+        }
+      ]
     }
   ],
-  actividades: [
-    "Escribe un párrafo y edítalo usando las funciones de copiar, cortar y pegar",
-    "Utiliza deshacer y rehacer para revertir y repetir acciones",
-    "Aplica formato de negrita, cursiva y subrayado a diferentes palabras",
-    "Inserta y elimina varios párrafos en un documento de prueba",
-    "Selecciona todo el texto y cambia su formato desde la cinta de opciones"
-  ],
-  recursos: [
-    {
-      titulo: "Guía de edición básica en Word",
-      url: "/recursos/word/guia-edicion-basica.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Edición y formato básico en Word",
-      url: "/videos/word/edicion-formato-basico-word.mp4",
-      tipo: "video"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de edición básica en Word",
+        url: "/recursos/word/guia-edicion-basica.pdf",
+        tipo: "pdf"
+      }
+    ],
+    enlaces: [],
+    videos: [
+      {
+        titulo: "Video: Edición y formato básico en Word",
+        url: "/videos/word/edicion-formato-basico-word.mp4",
+        duracion: "5:00"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
     preguntas: [
       {
         pregunta: "¿Cuál es la función de Ctrl + C en Word?",
+        tipo: "opcion_multiple",
         opciones: [
           "Cortar texto seleccionado",
           "Copiar texto seleccionado",
           "Pegar texto copiado",
           "Deshacer la última acción"
         ],
-        respuesta: 1
+        respuestaCorrecta: 1
       },
       {
         pregunta: "¿Cómo se selecciona todo el texto de un documento?",
+        tipo: "opcion_multiple",
         opciones: [
           "Ctrl + E",
           "Ctrl + N",
           "Ctrl + S",
           "Ctrl + Z"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué permite la función deshacer?",
+        tipo: "opcion_multiple",
         opciones: [
           "Repetir la última acción",
           "Revertir la última acción realizada",
           "Aplicar formato de texto",
           "Insertar una imagen"
         ],
-        respuesta: 1
+        respuestaCorrecta: 1
       }
     ]
   }
 };
+
+export default tema02;

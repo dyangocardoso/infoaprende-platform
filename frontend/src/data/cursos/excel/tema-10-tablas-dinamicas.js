@@ -33,7 +33,22 @@ Ir a "Insertar" > "Tabla"
 Confirmar el rango y encabezados
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para analizar calificaciones, convierte la lista de notas en una tabla y usa el filtro para ver solo los aprobados.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-tabla.png",
+          descripcion: "Ejemplo de tabla con formato y filtros en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/creacion-tablas.mp4",
+          descripcion: "Video: Creación y formato de tablas en Excel"
+        }
+      ],
+      actividades: [
+        "Convierte un rango de datos en una tabla y aplica formato condicional para resaltar valores clave."
+      ]
     },
     {
       id: 2,
@@ -42,7 +57,7 @@ Confirmar el rango y encabezados
         <h3>🧩 Creación y Formato de Tablas</h3>
         <ol>
           <li><strong>Selecciona el rango de datos</strong> que deseas convertir en tabla.</li>
-          <li>Haz clic en <strong>"Insertar" &rarr; "Tabla"</strong> y confirma el rango.</li>
+          <li>Haz clic en <strong>Insertar &rarr; Tabla</strong> y confirma el rango.</li>
           <li>Personaliza el formato: aplica estilos, colores y formatos condicionales.</li>
         </ol>
         <p><strong>Ejemplo contextualizado:</strong> Para visualizar mejor la asistencia, aplica un estilo de tabla con filas alternas de color y resalta los días con ausencias.</p>
@@ -54,7 +69,17 @@ Aplicar estilo predefinido
 Agregar formato condicional según criterios
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para identificar rápidamente los estudiantes con más faltas, usa formato condicional en la columna de asistencia.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-tabla-formato.png",
+          descripcion: "Ejemplo de tabla personalizada con estilos y formato condicional"
+        }
+      ],
+      actividades: [
+        "Personaliza el formato de una tabla aplicando estilos y formato condicional."
+      ]
     },
     {
       id: 3,
@@ -74,7 +99,23 @@ Elegir ubicación y campos a analizar
 Configurar filas, columnas y valores
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para analizar el rendimiento académico por materia y periodo, crea una tabla dinámica y agrupa los datos según los criterios deseados.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-tabla-dinamica.png",
+          descripcion: "Ejemplo de tabla dinámica en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/creacion-analisis-tablas-dinamicas.mp4",
+          descripcion: "Video: Creación y análisis de tablas dinámicas en Excel"
+        }
+      ],
+      actividades: [
+        "Crea una tabla dinámica para analizar la asistencia por grupo y periodo.",
+        "Filtra y agrupa los datos en una tabla dinámica para responder preguntas específicas."
+      ]
     },
     {
       id: 4,
@@ -96,85 +137,123 @@ Modificar formato y diseño
 Extraer conclusiones de los resultados
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Usa la tabla dinámica para justificar decisiones administrativas basadas en datos reales y actualizados.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-analisis-tabla-dinamica.png",
+          descripcion: "Ejemplo de análisis y operaciones en tabla dinámica"
+        }
+      ],
+      actividades: [
+        "Modifica el diseño y formato de una tabla dinámica para mejorar la interpretación visual.",
+        "Describe con tus palabras el algoritmo que sigue Excel al crear y analizar una tabla dinámica."
+      ]
     }
   ],
-  actividades: [
-    "Convierte un rango de datos en una tabla y aplica formato condicional para resaltar valores clave.",
-    "Crea una tabla dinámica para analizar la asistencia por grupo y periodo.",
-    "Filtra y agrupa los datos en una tabla dinámica para responder preguntas específicas.",
-    "Modifica el diseño y formato de una tabla dinámica para mejorar la interpretación visual.",
-    "Describe con tus palabras el algoritmo que sigue Excel al crear y analizar una tabla dinámica."
-  ],
-  recursos: [
-    {
-      titulo: "Guía de tablas y tablas dinámicas",
-      url: "/recursos/excel/guia-tablas-dinamicas.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Creación y análisis de tablas dinámicas en Excel",
-      url: "/videos/excel/creacion-analisis-tablas-dinamicas.mp4",
-      tipo: "video"
-    },
-    {
-      titulo: "Diagrama de flujo: proceso de tabla dinámica",
-      url: "/recursos/excel/diagrama-flujo-tabla-dinamica.png",
-      tipo: "imagen"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de tablas y tablas dinámicas",
+        url: "/recursos/excel/guia-tablas-dinamicas.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Excel sobre tablas dinámicas",
+        url: "https://support.microsoft.com/es-es/office/crear-una-tabla-dinámica-para-analizar-datos-de-hoja-de-cálculo-en-excel-00baf399-3d5e-4118-b3ac-74fb7b2b6b8a"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Creación y análisis de tablas dinámicas en Excel",
+        url: "/videos/excel/creacion-analisis-tablas-dinamicas.mp4"
+      },
+      {
+        titulo: "Video: Creación y formato de tablas en Excel",
+        url: "/videos/excel/creacion-tablas.mp4"
+      }
+    ],
+    imagenes: [
+      {
+        titulo: "Ejemplo de tabla con formato y filtros en Excel",
+        url: "/images/excel/ejemplo-tabla.png"
+      },
+      {
+        titulo: "Ejemplo de tabla personalizada con estilos y formato condicional",
+        url: "/images/excel/ejemplo-tabla-formato.png"
+      },
+      {
+        titulo: "Ejemplo de tabla dinámica en Excel",
+        url: "/images/excel/ejemplo-tabla-dinamica.png"
+      },
+      {
+        titulo: "Ejemplo de análisis y operaciones en tabla dinámica",
+        url: "/images/excel/ejemplo-analisis-tabla-dinamica.png"
+      },
+      {
+        titulo: "Diagrama de flujo: proceso de tabla dinámica",
+        url: "/recursos/excel/diagrama-flujo-tabla-dinamica.png"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Cuál es el objetivo principal de una tabla dinámica?",
+        tipo: "opcion-multiple",
         opciones: [
           "Resumir, analizar y explorar grandes volúmenes de datos",
           "Eliminar datos duplicados",
           "Insertar imágenes",
           "Validar datos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cómo se convierte un rango en tabla?",
+        tipo: "opcion-multiple",
         opciones: [
           "Usando el menú 'Insertar' > 'Tabla'",
           "Eliminando celdas",
           "Cambiando el formato de celda",
           "Insertando una imagen"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué algoritmo sigue Excel al crear una tabla dinámica?",
+        tipo: "opcion-multiple",
         opciones: [
           "Selecciona los datos, configura campos y calcula automáticamente totales y promedios",
           "Elimina los datos originales",
           "Cambia el color de toda la hoja",
           "No realiza ninguna acción"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Por qué es útil aplicar formato condicional en una tabla?",
+        tipo: "opcion-multiple",
         opciones: [
           "Para resaltar información clave y facilitar el análisis visual",
           "Para sumar valores",
           "Para buscar datos en otra tabla",
           "Para unir textos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué recurso puedes consultar para aprender a crear y analizar tablas dinámicas en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Guía de tablas y tablas dinámicas",
           "Manual de instalación de Windows",
           "Tutorial de PowerPoint",
           "Guía de macros en Word"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

@@ -193,21 +193,25 @@ const tema01ExploracionPaint3D = {
       dificultad: "Intermedio"
     }
   ],
-  recursos: [
-    {
-      tipo: "video",
-      titulo: "Tour completo de Paint 3D",
-      descripcion: "Video oficial de Microsoft mostrando las características principales",
-      url: "#",
-      duracion: "10 min"
-    },
-    {
-      tipo: "tutorial",
-      titulo: "Primeros pasos en 3D",
-      descripcion: "Guía paso a paso para crear tu primer proyecto",
-      url: "#"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        tipo: "tutorial",
+        titulo: "Primeros pasos en 3D",
+        descripcion: "Guía paso a paso para crear tu primer proyecto",
+        url: "#"
+      }
+    ],
+    enlaces: [],
+    videos: [
+      {
+        titulo: "Tour completo de Paint 3D",
+        descripcion: "Video oficial de Microsoft mostrando las características principales",
+        url: "#",
+        duracion: "10 min"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "practica",
     titulo: "Evaluación: Dominio de herramientas básicas",

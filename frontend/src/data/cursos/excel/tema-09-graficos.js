@@ -36,7 +36,22 @@ Si se desea mostrar proporciones:
     Usar gráfico circular
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para analizar ventas mensuales, selecciona los datos y crea un gráfico de líneas para visualizar la evolución.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-grafico-barras.png",
+          descripcion: "Ejemplo de gráfico de barras en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/creacion-graficos.mp4",
+          descripcion: "Video: Creación y personalización de gráficos en Excel"
+        }
+      ],
+      actividades: [
+        "Crea un gráfico de barras para comparar resultados de diferentes grupos y personaliza los colores."
+      ]
     },
     {
       id: 2,
@@ -45,7 +60,7 @@ Si se desea mostrar proporciones:
         <h3>🧩 Creación de Gráficos en Excel</h3>
         <ol>
           <li><strong>Selecciona el rango de datos relevante</strong> (incluye etiquetas y valores).</li>
-          <li>Ve a la pestaña <strong>"Insertar"</strong> y elige el tipo de gráfico adecuado.</li>
+          <li>Ve a la pestaña <strong>Insertar</strong> y elige el tipo de gráfico adecuado.</li>
           <li>Personaliza el gráfico: agrega títulos, leyendas y etiquetas.</li>
         </ol>
         <p><strong>Ejemplo contextualizado:</strong> Para mostrar la asistencia de alumnos por mes, selecciona la tabla de asistencia y crea un gráfico de columnas.</p>
@@ -58,7 +73,17 @@ Agregar título y etiquetas
 Personalizar colores y formato
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para comparar promedios de calificaciones, selecciona la columna de promedios y crea un gráfico de barras. Personaliza los colores para cada grupo.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-grafico-columnas.png",
+          descripcion: "Ejemplo de gráfico de columnas en Excel"
+        }
+      ],
+      actividades: [
+        "Elabora un gráfico de líneas para mostrar la evolución de un indicador a lo largo del tiempo."
+      ]
     },
     {
       id: 3,
@@ -80,7 +105,17 @@ Agregar etiquetas y leyendas
 Resaltar elementos según criterios
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para presentar resultados en una reunión, personaliza el gráfico con colores institucionales y agrega el logotipo de la escuela.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-grafico-personalizado.png",
+          descripcion: "Ejemplo de gráfico personalizado con colores y etiquetas"
+        }
+      ],
+      actividades: [
+        "Agrega etiquetas de datos y leyendas a un gráfico existente para mejorar la interpretación."
+      ]
     },
     {
       id: 4,
@@ -103,85 +138,119 @@ Para cada elemento del gráfico:
     Extraer conclusiones
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Utiliza el gráfico para justificar propuestas de mejora en el área educativa o administrativa.</p>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-analisis-grafico.png",
+          descripcion: "Ejemplo de análisis e interpretación de un gráfico en Excel"
+        }
+      ],
+      actividades: [
+        "Analiza un gráfico y redacta conclusiones sobre los datos representados.",
+        "Describe con tus palabras el algoritmo que sigue Excel al crear y personalizar un gráfico."
+      ]
     }
   ],
-  actividades: [
-    "Crea un gráfico de barras para comparar resultados de diferentes grupos y personaliza los colores.",
-    "Elabora un gráfico de líneas para mostrar la evolución de un indicador a lo largo del tiempo.",
-    "Agrega etiquetas de datos y leyendas a un gráfico existente para mejorar la interpretación.",
-    "Analiza un gráfico y redacta conclusiones sobre los datos representados.",
-    "Describe con tus palabras el algoritmo que sigue Excel al crear y personalizar un gráfico."
-  ],
-  recursos: [
-    {
-      titulo: "Video: Creación y personalización de gráficos en Excel",
-      url: "/videos/excel/creacion-graficos.mp4",
-      tipo: "video"
-    },
-    {
-      titulo: "Guía de interpretación de gráficos",
-      url: "/recursos/excel/guia-interpretacion-graficos.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Diagrama de flujo: proceso de creación de gráficos",
-      url: "/recursos/excel/diagrama-flujo-creacion-graficos.png",
-      tipo: "imagen"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de interpretación de gráficos",
+        url: "/recursos/excel/guia-interpretacion-graficos.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Excel sobre gráficos",
+        url: "https://support.microsoft.com/es-es/office/crear-un-gr%C3%A1fico-desde-inicio-a-fin-0baf3996-3d5e-4118-b3ac-74fb7b2b6b8a"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Creación y personalización de gráficos en Excel",
+        url: "/videos/excel/creacion-graficos.mp4"
+      }
+    ],
+    imagenes: [
+      {
+        titulo: "Ejemplo de gráfico de barras en Excel",
+        url: "/images/excel/ejemplo-grafico-barras.png"
+      },
+      {
+        titulo: "Ejemplo de gráfico de columnas en Excel",
+        url: "/images/excel/ejemplo-grafico-columnas.png"
+      },
+      {
+        titulo: "Ejemplo de gráfico personalizado con colores y etiquetas",
+        url: "/images/excel/ejemplo-grafico-personalizado.png"
+      },
+      {
+        titulo: "Ejemplo de análisis e interpretación de un gráfico en Excel",
+        url: "/images/excel/ejemplo-analisis-grafico.png"
+      },
+      {
+        titulo: "Diagrama de flujo: proceso de creación de gráficos",
+        url: "/recursos/excel/diagrama-flujo-creacion-graficos.png"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Cuál es el objetivo principal de crear gráficos en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Transformar datos en información visual para facilitar el análisis",
           "Eliminar datos duplicados",
           "Insertar imágenes automáticamente",
           "Validar datos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cómo se crea y personaliza un gráfico en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Seleccionando datos, insertando el gráfico y modificando colores y etiquetas",
           "Arrastrando una celda",
           "Cambiando el formato de celda",
           "Eliminando datos duplicados"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué algoritmo sigue Excel al analizar un gráfico?",
+        tipo: "opcion-multiple",
         opciones: [
           "Compara valores, identifica tendencias y extrae conclusiones",
           "Elimina los datos originales",
           "Cambia el color de toda la hoja",
           "No realiza ninguna acción"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Por qué es útil personalizar el formato de los gráficos?",
+        tipo: "opcion-multiple",
         opciones: [
           "Para mejorar la interpretación y resaltar información clave",
           "Para sumar valores",
           "Para buscar datos en otra tabla",
           "Para unir textos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué recurso puedes consultar para aprender a interpretar gráficos en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Guía de interpretación de gráficos",
           "Manual de instalación de Windows",
           "Tutorial de PowerPoint",
           "Guía de macros en Word"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

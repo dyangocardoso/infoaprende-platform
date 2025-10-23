@@ -4,12 +4,13 @@
  * Creado: 2025-09-12T15-07-20
  */
 
+// ...existing code...
 import React, { useEffect, useState } from 'react';
 import ContenidoProviderModular from './ContenidoProviderModular.jsx';
 import { validarCursoCompleto } from '../data/shared/validadores.js';
 
 export default function ContenidoProviderCompatibilidad({ children }) {
-  const [sistemaActivo, setSistemaActivo] = useState('modular');
+  // Eliminado 'sistemaActivo' porque no se usa (limpieza de código).
   const [erroresCarga, setErroresCarga] = useState([]);
   
   useEffect(() => {
@@ -35,33 +36,19 @@ export default function ContenidoProviderCompatibilidad({ children }) {
     } catch (error) {
       console.error('❌ Error en sistema modular:', error);
       setErroresCarga([error.message]);
-      // Fallback al sistema anterior si está disponible
-      setSistemaActivo('fallback');
+      // En caso de error se muestra el banner de errores; el fallback se puede implementar si se necesita.
     }
   };
   
-  if (erroresCarga.length > 0 && process.env.NODE_ENV === 'development') {
-    return (
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: '#ffebee',
-        border: '1px solid #f44336',
-        padding: '10px',
-        zIndex: 9999
-      }}>
-        <h4>⚠️ Advertencias del Sistema Modular:</h4>
-        <ul>
-          {erroresCarga.map((error, index) => (
-            <li key={index}>{error}</li>
-          ))}
-        </ul>
-        <small>Esto solo se muestra en desarrollo</small>
-      </div>
-    );
-  }
-  
-  return <ContenidoProviderModular>{children}</ContenidoProviderModular>;
+  // ...existing code...
+  return (
+    <>
+      {erroresCarga.length > 0 && (
+        <div style={{ background: '#fff3cd', color: '#856404', padding: 8, borderRadius: 4, marginBottom: 8 }}>
+          <strong>Advertencia de carga:</strong> {erroresCarga.join('; ')}
+        </div>
+      )}
+      <ContenidoProviderModular>{children}</ContenidoProviderModular>
+    </>
+  );
 }

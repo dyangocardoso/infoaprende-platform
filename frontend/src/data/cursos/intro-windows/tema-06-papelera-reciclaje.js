@@ -93,18 +93,24 @@ export default {
     "Prueba eliminar un archivo usando Shift+Supr",
     "Personaliza el icono de la papelera en el escritorio"
   ],
-  recursos: [
-    {
-      titulo: "Guía visual de la papelera de reciclaje",
-      url: "/recursos/intro-windows/guia-papelera-reciclaje.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Gestión avanzada de la papelera de reciclaje",
-      url: "/videos/intro-windows/gestion-papelera-reciclaje.mp4",
-      tipo: "video"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía visual de la papelera de reciclaje",
+        url: "/recursos/intro-windows/guia-papelera-reciclaje.pdf",
+        tipo: "pdf"
+      }
+    ],
+    enlaces: [],
+    videos: [
+      {
+        titulo: "Video: Gestión avanzada de la papelera de reciclaje",
+        url: "/videos/intro-windows/gestion-papelera-reciclaje.mp4",
+        duracion: "06:20"
+      }
+    ],
+    imagenes: []
+  },
   evaluacion: {
     tipo: "cuestionario",
     preguntas: [

@@ -41,7 +41,22 @@ Seleccionar celda destino
 Insertar imagen desde archivo
 Redimensionar y mover según necesidad
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-insercion-imagen.png",
+          descripcion: "Ejemplo de imagen insertada y ajustada en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/insercion-ajuste-imagenes.mp4",
+          descripcion: "Video: Inserción y ajuste de imágenes en Excel"
+        }
+      ],
+      actividades: [
+        "Inserta una imagen relevante en una hoja de Excel y ajusta su tamaño y posición."
+      ]
     },
     {
       id: 2,
@@ -67,7 +82,22 @@ Seleccionar rango de datos
 Insertar gráfico del tipo deseado
 Personalizar colores y etiquetas
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/ejemplo-grafico-barras.png",
+          descripcion: "Ejemplo de gráfico de barras personalizado en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/creacion-ajuste-graficos.mp4",
+          descripcion: "Video: Creación y ajuste de gráficos en Excel"
+        }
+      ],
+      actividades: [
+        "Crea un gráfico de barras a partir de una tabla de datos y personaliza su formato."
+      ]
     },
     {
       id: 3,
@@ -88,85 +118,115 @@ Insertar elemento gráfico junto a los datos
 Agregar título o comentario explicativo
 Ajustar formato para evitar superposición
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/recursos/excel/diagrama-flujo-integracion-graficos.png",
+          descripcion: "Diagrama de flujo: integración de gráficos y datos"
+        }
+      ],
+      actividades: [
+        "Integra un diagrama de flujo junto a una tabla de datos y explica su relación.",
+        "Elabora un dashboard sencillo combinando imágenes, gráficos y tablas."
+      ]
     }
   ],
-  actividades: [
-    "Inserta una imagen relevante en una hoja de Excel y ajusta su tamaño y posición.",
-    "Crea un gráfico de barras a partir de una tabla de datos y personaliza su formato.",
-    "Integra un diagrama de flujo junto a una tabla de datos y explica su relación.",
-    "Elabora un dashboard sencillo combinando imágenes, gráficos y tablas.",
-    "Describe con tus palabras el algoritmo que sigue Excel al insertar y ajustar un elemento gráfico."
-  ],
-  recursos: [
-    {
-      titulo: "Guía de imágenes y diagramas",
-      url: "/recursos/excel/guia-imagenes-diagramas.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Creación y ajuste de gráficos en Excel",
-      url: "/videos/excel/creacion-ajuste-graficos.mp4",
-      tipo: "video"
-    },
-    {
-      titulo: "Diagrama de flujo: integración de gráficos y datos",
-      url: "/recursos/excel/diagrama-flujo-integracion-graficos.png",
-      tipo: "imagen"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de imágenes y diagramas",
+        url: "/recursos/excel/guia-imagenes-diagramas.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Excel sobre imágenes y gráficos",
+        url: "https://support.microsoft.com/es-es/office/insertar-im%C3%A1genes-en-excel-0f5b4e1a-0b8a-4b8a-8c5e-1b8e6c7c1e7c"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Inserción y ajuste de imágenes en Excel",
+        url: "/videos/excel/insercion-ajuste-imagenes.mp4"
+      },
+      {
+        titulo: "Video: Creación y ajuste de gráficos en Excel",
+        url: "/videos/excel/creacion-ajuste-graficos.mp4"
+      }
+    ],
+    imagenes: [
+      {
+        titulo: "Ejemplo de imagen insertada y ajustada en Excel",
+        url: "/images/excel/ejemplo-insercion-imagen.png"
+      },
+      {
+        titulo: "Ejemplo de gráfico de barras personalizado en Excel",
+        url: "/images/excel/ejemplo-grafico-barras.png"
+      },
+      {
+        titulo: "Diagrama de flujo: integración de gráficos y datos",
+        url: "/recursos/excel/diagrama-flujo-integracion-graficos.png"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Cuál es el objetivo principal de insertar imágenes en una hoja de Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Ilustrar, contextualizar y complementar los datos",
           "Eliminar datos duplicados",
           "Insertar fórmulas automáticamente",
           "Validar datos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cómo se inserta y ajusta una imagen en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Desde el menú 'Insertar', luego redimensionando y moviendo la imagen",
           "Arrastrando una celda",
           "Cambiando el formato de celda",
           "Eliminando datos duplicados"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué algoritmo sigue Excel al crear y personalizar un gráfico?",
+        tipo: "opcion-multiple",
         opciones: [
           "Selecciona los datos, inserta el gráfico y permite personalizar colores y etiquetas",
           "Elimina los datos originales",
           "Cambia el color de toda la hoja",
           "No realiza ninguna acción"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Por qué es útil integrar imágenes y diagramas con los datos?",
+        tipo: "opcion-multiple",
         opciones: [
           "Para enriquecer el análisis y facilitar la comunicación de resultados",
           "Para sumar valores",
           "Para buscar datos en otra tabla",
           "Para unir textos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué recurso puedes consultar para aprender a crear y ajustar gráficos en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Guía de imágenes y diagramas",
           "Manual de instalación de Windows",
           "Tutorial de PowerPoint",
           "Guía de macros en Word"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

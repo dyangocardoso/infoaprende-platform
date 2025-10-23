@@ -315,32 +315,32 @@ const tema05ExposicionCreativa = {
       dificultad: "Avanzado"
     }
   ],
-  recursos: [
-    {
-      tipo: "template",
-      titulo: "Plantillas de Portfolio",
-      descripcion: "Layouts prediseñados para diferentes tipos de presentación",
-      url: "#"
-    },
-    {
-      tipo: "guia",
-      titulo: "Guía de Optimización de Imágenes",
-      descripcion: "Técnicas para balance perfecto entre calidad y tamaño",
-      url: "#"
-    },
-    {
-      tipo: "ejemplos",
-      titulo: "Galería de Portfolios Excepcionales",
-      descripcion: "Inspiración de presentaciones profesionales exitosas",
-      url: "#"
-    },
-    {
-      tipo: "herramientas",
-      titulo: "Herramientas Complementarias",
-      descripcion: "Software recomendado para edición y optimización",
-      url: "#"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Plantillas de Portfolio",
+        descripcion: "Layouts prediseñados para diferentes tipos de presentación",
+        url: "#"
+      },
+      {
+        titulo: "Guía de Optimización de Imágenes",
+        descripcion: "Técnicas para balance perfecto entre calidad y tamaño",
+        url: "#"
+      },
+      {
+        titulo: "Galería de Portfolios Excepcionales",
+        descripcion: "Inspiración de presentaciones profesionales exitosas",
+        url: "#"
+      },
+      {
+        titulo: "Herramientas Complementarias",
+        descripcion: "Software recomendado para edición y optimización",
+        url: "#"
+      }
+    ],
+    enlaces: [],
+    videos: []
+  },
   evaluacion: {
     tipo: "portfolio",
     titulo: "Evaluación: Portfolio profesional completo",

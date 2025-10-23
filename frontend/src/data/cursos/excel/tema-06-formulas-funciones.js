@@ -36,7 +36,23 @@ Para cada celda en el rango:
     Total = Total + valor de la celda
 Mostrar Total
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/formula-basica-ejemplo.png",
+          descripcion: "Ejemplo de fórmula básica sumando varias celdas"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/formulas-basicas.mp4",
+          descripcion: "Video: Cómo crear y editar fórmulas en Excel"
+        }
+      ],
+      actividades: [
+        "Crea fórmulas para sumar, restar y promediar datos de una tabla.",
+        "Modifica un dato y observa cómo se actualiza el resultado de la fórmula."
+      ]
     },
     {
       id: 2,
@@ -61,7 +77,23 @@ Para cada celda en el rango:
     Contador = Contador + 1
 Promedio = Suma / Contador
         </pre>
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/funciones-basicas-ejemplo.png",
+          descripcion: "Ejemplo de uso de funciones SUMA y PROMEDIO en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/funciones-basicas.mp4",
+          descripcion: "Video: Uso de funciones básicas en Excel"
+        }
+      ],
+      actividades: [
+        "Utiliza funciones básicas para encontrar el valor máximo y mínimo de un conjunto de datos.",
+        "Calcula el promedio de una columna de notas y agrega un nuevo dato para ver el cambio."
+      ]
     },
     {
       id: 3,
@@ -87,85 +119,123 @@ Para cada estudiante en la lista:
         </pre>
         <p><strong>Diagrama de flujo:</strong></p>
         <img src="/recursos/excel/diagrama-flujo-si.png" alt="Diagrama de flujo función SI" style="max-width:300px;">
-      `
+      `,
+      multimedia: [
+        {
+          tipo: "imagen",
+          url: "/images/excel/funcion-si-ejemplo.png",
+          descripcion: "Ejemplo de función SI y BUSCARV en Excel"
+        },
+        {
+          tipo: "video",
+          url: "/videos/excel/funciones-avanzadas.mp4",
+          descripcion: "Video: Uso de funciones avanzadas en Excel"
+        }
+      ],
+      actividades: [
+        "Aplica la función SI para clasificar automáticamente los resultados de una evaluación.",
+        "Emplea BUSCARV para buscar información en una tabla de alumnos.",
+        "Concatena nombre y apellido de una lista usando la función CONCATENAR."
+      ]
     }
   ],
-  actividades: [
-    "Crea fórmulas para sumar, restar y promediar datos de una tabla.",
-    "Utiliza funciones básicas para encontrar el valor máximo y mínimo de un conjunto de datos.",
-    "Aplica la función SI para clasificar automáticamente los resultados de una evaluación.",
-    "Emplea BUSCARV para buscar información en una tabla de alumnos.",
-    "Concatena nombre y apellido de una lista usando la función CONCATENAR."
-  ],
-  recursos: [
-    {
-      titulo: "Guía de fórmulas y funciones",
-      url: "/recursos/excel/guia-formulas-funciones.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Uso práctico de funciones en Excel",
-      url: "/videos/excel/uso-funciones-excel.mp4",
-      tipo: "video"
-    },
-    {
-      titulo: "Diagrama de flujo: función SI",
-      url: "/recursos/excel/diagrama-flujo-si.png",
-      tipo: "imagen"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de fórmulas y funciones",
+        url: "/recursos/excel/guia-formulas-funciones.pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Documentación oficial de Microsoft Excel sobre fórmulas y funciones",
+        url: "https://support.microsoft.com/es-es/office/introducción-a-las-fórmulas-en-excel-ecfdc708-9162-49e8-b993-c311f47ca173"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Uso práctico de funciones en Excel",
+        url: "/videos/excel/uso-funciones-excel.mp4"
+      },
+      {
+        titulo: "Video: Cómo crear y editar fórmulas en Excel",
+        url: "/videos/excel/formulas-basicas.mp4"
+      },
+      {
+        titulo: "Video: Uso de funciones básicas en Excel",
+        url: "/videos/excel/funciones-basicas.mp4"
+      },
+      {
+        titulo: "Video: Uso de funciones avanzadas en Excel",
+        url: "/videos/excel/funciones-avanzadas.mp4"
+      }
+    ],
+    imagenes: [
+      {
+        titulo: "Ejemplo de fórmula básica sumando varias celdas",
+        url: "/images/excel/formula-basica-ejemplo.png"
+      },
+      {
+        titulo: "Ejemplo de uso de funciones SUMA y PROMEDIO en Excel",
+        url: "/images/excel/funciones-basicas-ejemplo.png"
+      },
+      {
+        titulo: "Ejemplo de función SI y BUSCARV en Excel",
+        url: "/images/excel/funcion-si-ejemplo.png"
+      },
+      {
+        titulo: "Diagrama de flujo: función SI",
+        url: "/recursos/excel/diagrama-flujo-si.png"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
-    preguntas: [
+    cuestionario: [
       {
         pregunta: "¿Con qué símbolo inicia una fórmula en Excel?",
-        opciones: [
-          "=",
-          "+",
-          "-",
-          "*"
-        ],
-        respuesta: 0
+        tipo: "opcion-multiple",
+        opciones: ["=", "+", "-", "*"],
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Cuál es una función básica de Excel?",
-        opciones: [
-          "SUMA",
-          "BUSCARV",
-          "SI",
-          "FECHA"
-        ],
-        respuesta: 0
+        tipo: "opcion-multiple",
+        opciones: ["SUMA", "BUSCARV", "SI", "FECHA"],
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué algoritmo sigue Excel al calcular el promedio de un rango?",
+        tipo: "opcion-multiple",
         opciones: [
           "Suma los valores y divide entre la cantidad de celdas",
           "Multiplica todos los valores",
           "Resta el menor valor al mayor",
           "Concatena los valores como texto"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Para qué sirve la función SI en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Tomar decisiones automáticas según un criterio",
           "Sumar valores",
           "Buscar datos en otra tabla",
           "Unir textos"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué recurso puedes consultar para aprender a usar funciones avanzadas en Excel?",
+        tipo: "opcion-multiple",
         opciones: [
           "Guía de fórmulas y funciones",
           "Manual de instalación de Windows",
           "Tutorial de PowerPoint",
           "Guía de macros en Word"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }

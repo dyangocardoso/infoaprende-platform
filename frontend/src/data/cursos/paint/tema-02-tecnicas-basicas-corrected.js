@@ -478,67 +478,39 @@ const tema02TecnicasBasicas = {
       nivel_dificultad: "Avanzado"
     }
   ],
-  recursos: [
-    {
-      tipo: "referencia",
-      titulo: "Guía de combinaciones de colores",
-      descripcion: "Tabla completa de armonías cromáticas y paletas recomendadas",
-      contenido: `
-        **Combinaciones básicas efectivas:**
-        - Rojo + Verde = Contraste complementario dinámico
-        - Azul + Naranja = Contraste vibrante y energético
-        - Amarillo + Violeta = Contraste cálido-frío equilibrado
-        
-        **Paletas temáticas recomendadas:**
-        - Naturaleza: verdes variados, marrones tierra, azules cielo
-        - Atardecer: naranjas cálidos, rojos intensos, amarillos dorados
-        - Invierno: azules fríos, grises neutros, blancos puros
-        - Primavera: verdes claros, rosas suaves, amarillos luminosos
-      `,
-      url: "#"
-    },
-    {
-      tipo: "tutorial",
-      titulo: "Atajos de teclado esenciales",
-      descripcion: "Combinaciones de teclas para trabajar más eficientemente en Paint",
-      contenido: `
-        **Herramientas principales:**
-        - B = Pincel (brush)
-        - E = Borrador (eraser) 
-        - S = Seleccionar (select)
-        - F = Relleno (fill)
-        - I = Gotero/selector de color
-        
-        **Edición fundamental:**
-        - Ctrl + C = Copiar selección
-        - Ctrl + V = Pegar contenido
-        - Ctrl + X = Cortar selección
-        - Ctrl + Z = Deshacer acción
-        - Ctrl + Y = Rehacer acción
-        - Delete = Eliminar selección
-        
-        **Navegación y visualización:**
-        - Ctrl + + = Acercar zoom
-        - Ctrl + - = Alejar zoom  
-        - Ctrl + 0 = Zoom 100% (tamaño real)
-        - Ctrl + A = Seleccionar todo
-      `,
-      url: "#"
-    },
-    {
-      tipo: "plantilla",
-      titulo: "Ejercicios de práctica descargables",
-      descripcion: "Plantillas y ejercicios estructurados para practicar técnicas",
-      url: "/recursos/paint/plantillas-practica.zip"
-    },
-    {
-      tipo: "video",
-      titulo: "Demostración de técnicas avanzadas",
-      descripcion: "Video tutorial mostrando aplicación práctica de todas las técnicas",
-      url: "#",
-      duracion: "15 minutos"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de combinaciones de colores",
+        descripcion: "Tabla completa de armonías cromáticas y paletas recomendadas",
+        url: "/docs/paint/guia-combinaciones-colores.md"
+      },
+      {
+        titulo: "Atajos de teclado esenciales",
+        descripcion: "Combinaciones de teclas para trabajar más eficientemente en Paint",
+        url: "/docs/paint/atajos-teclado-paint.md"
+      },
+      {
+        titulo: "Plantillas de práctica (zip)",
+        descripcion: "Plantillas y ejercicios estructurados para practicar técnicas",
+        url: "/recursos/paint/plantillas-practica.zip"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Artículo: Combinaciones cromáticas básicas",
+        url: "https://example.com/recursos/colores-paint",
+        tipo: "externo"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Demostración de técnicas avanzadas",
+        url: "/videos/paint/demostracion-tecnicas-avanzadas.mp4",
+        duracion: "15:00"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "proyecto",
     titulo: "Evaluación: Collage digital creativo",

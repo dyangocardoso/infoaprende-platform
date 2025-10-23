@@ -3,7 +3,7 @@
  * Curso: Procesador de Texto Word
  */
 
-export default {
+const tema03 = {
   id: '3',
   titulo: "Formato de documento",
   tematica: "Formato de texto, párrafos, alineación, listas y estilos",
@@ -33,7 +33,17 @@ Elegir tipo de fuente, tamaño y color
 Aplicar negrita, cursiva o subrayado según necesidad
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para entregar un informe, aplica formato a los títulos y resalta las conclusiones con color y subrayado.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/formato-texto.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Aplica diferentes formatos de texto en un documento de prueba.",
+          ayuda: "Utiliza la cinta de opciones para cambiar fuente, tamaño y color."
+        }
+      ]
     },
     {
       id: 2,
@@ -54,7 +64,17 @@ Elegir tipo de alineación en la cinta de opciones
 Configurar sangría y espaciado según requerimientos
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para cumplir normas de entrega, ajusta la alineación y el espaciado de los párrafos en el documento final.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/alineacion-justificacion.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Alinea y justifica varios párrafos en un documento de prueba.",
+          ayuda: "Prueba los diferentes tipos de alineación en la cinta de opciones."
+        }
+      ]
     },
     {
       id: 3,
@@ -75,7 +95,17 @@ Elegir tipo de lista en la cinta de opciones
 Personalizar símbolo o estilo si es necesario
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para estructurar instrucciones, utiliza listas numeradas y viñetas en el documento.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/listas.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Crea listas con viñetas y numeración personalizadas en un documento de Word.",
+          ayuda: "Utiliza las opciones de listas en la cinta de opciones."
+        }
+      ]
     },
     {
       id: 4,
@@ -96,7 +126,17 @@ Elegir estilo en la cinta de opciones
 Modificar estilo si es necesario
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para generar un índice automático, aplica estilos a los títulos y subtítulos del documento.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/estilos-titulos.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Utiliza estilos rápidos para títulos y subtítulos en un documento de Word.",
+          ayuda: "Prueba los estilos predefinidos y crea uno personalizado."
+        }
+      ]
     },
     {
       id: 5,
@@ -117,61 +157,74 @@ Ir a opciones de párrafo en la cinta
 Ajustar valores de espaciado y sangría
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para mejorar la legibilidad, ajusta el espaciado y la sangría en los apartados del documento.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/espaciado-sangria.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Configura el espaciado y la sangría de un párrafo en un documento de Word.",
+          ayuda: "Utiliza las opciones de párrafo en la cinta."
+        }
+      ]
     }
   ],
-  actividades: [
-    "Aplica diferentes formatos de texto en un documento de prueba",
-    "Alinea y justifica varios párrafos",
-    "Crea listas con viñetas y numeración personalizadas",
-    "Utiliza estilos rápidos para títulos y subtítulos",
-    "Configura el espaciado y la sangría de un párrafo"
-  ],
-  recursos: [
-    {
-      titulo: "Guía de formato de documentos en Word",
-      url: "/recursos/word/guia-formato-documento.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Formato y estilos en Word",
-      url: "/videos/word/formato-estilos-word.mp4",
-      tipo: "video"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de formato de documentos en Word",
+        url: "/recursos/word/guia-formato-documento.pdf",
+        tipo: "pdf"
+      }
+    ],
+    enlaces: [],
+    videos: [
+      {
+        titulo: "Video: Formato y estilos en Word",
+        url: "/videos/word/formato-estilos-word.mp4",
+        duracion: "6:00"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
     preguntas: [
       {
         pregunta: "¿Cómo se cambia el tipo de fuente en Word?",
+        tipo: "opcion_multiple",
         opciones: [
           "Desde la barra de estado",
           "Desde la cinta de opciones, pestaña Inicio",
           "Desde el panel de navegación",
           "No se puede cambiar"
         ],
-        respuesta: 1
+        respuestaCorrecta: 1
       },
       {
         pregunta: "¿Para qué sirven los estilos rápidos?",
+        tipo: "opcion_multiple",
         opciones: [
           "Insertar imágenes",
           "Aplicar formato predefinido a títulos y texto",
           "Crear tablas",
           "Cambiar el idioma del documento"
         ],
-        respuesta: 1
+        respuestaCorrecta: 1
       },
       {
         pregunta: "¿Qué permite la opción de justificar un párrafo?",
+        tipo: "opcion_multiple",
         opciones: [
           "Alinear el texto a ambos márgenes",
           "Centrar el texto únicamente",
           "Alinear a la derecha únicamente",
           "No tiene función"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }
 };
+
+export default tema03;

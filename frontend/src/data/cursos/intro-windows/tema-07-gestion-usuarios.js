@@ -101,18 +101,30 @@ export default {
     "Configura el control parental para un usuario menor de edad",
     "Actualiza Windows y revisa las opciones de seguridad"
   ],
-  recursos: [
-    {
-      titulo: "Guía de gestión de usuarios en Windows",
-      url: "/recursos/intro-windows/guia-gestion-usuarios.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Seguridad y control parental en Windows",
-      url: "/videos/intro-windows/seguridad-control-parental.mp4",
-      tipo: "video"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía de gestión de usuarios en Windows",
+        url: "/recursos/intro-windows/guia-gestion-usuarios.pdf",
+        tipo: "pdf"
+      }
+    ],
+    enlaces: [
+      {
+        titulo: "Soporte Microsoft - Cuentas de usuario",
+        url: "https://support.microsoft.com/es-es/windows/cuentas-de-usuario-en-windows",
+        tipo: "externo"
+      }
+    ],
+    videos: [
+      {
+        titulo: "Video: Seguridad y control parental en Windows",
+        url: "/videos/intro-windows/seguridad-control-parental.mp4",
+        duracion: "10:40"
+      }
+    ],
+    imagenes: []
+  },
   evaluacion: {
     tipo: "cuestionario",
     preguntas: [

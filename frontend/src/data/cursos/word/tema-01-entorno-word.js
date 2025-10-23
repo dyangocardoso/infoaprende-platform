@@ -3,7 +3,7 @@
  * Curso: Procesador de Texto Word
  */
 
-export default {
+const tema01 = {
   id: '1',
   titulo: "Entorno de Word",
   tematica: "Interfaz, cinta de opciones, paneles y navegación básica",
@@ -35,7 +35,17 @@ Aplicar formato y revisar ortografía
 Guardar y exportar
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para presentar un proyecto, usa Word para estructurar el contenido, aplicar estilos y exportar a PDF.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/intro-word.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Crea un documento con portada, índice y formato uniforme.",
+          ayuda: "Utiliza las herramientas de formato y estilos de Word."
+        }
+      ]
     },
     {
       id: 2,
@@ -58,7 +68,17 @@ Ir a "Archivo" > "Opciones"
 Configurar barra de herramientas y tema
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para trabajar más rápido, agrega los comandos de uso frecuente a la barra de acceso rápido y cambia el tema a oscuro para reducir la fatiga visual.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/interfaz-principal.png"
+      },
+      actividades: [
+        {
+          tipo: "exploracion",
+          pregunta: "Explora cada parte de la interfaz de Word y describe su función.",
+          ayuda: "Observa la barra de título, cinta de opciones y barra de estado."
+        }
+      ]
     },
     {
       id: 3,
@@ -81,7 +101,17 @@ Ejecutar comando deseado
 Volver a la pestaña principal
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para editar un informe, alterna entre las pestañas para aplicar formato, insertar elementos y revisar el contenido.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/cinta-opciones.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Utiliza la cinta de opciones para dar formato a un documento y agregar una tabla.",
+          ayuda: "Prueba las pestañas Inicio e Insertar."
+        }
+      ]
     },
     {
       id: 4,
@@ -102,7 +132,17 @@ Buscar sección o palabra clave
 Ir a la ubicación seleccionada
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para revisar un documento extenso, utiliza el panel de navegación y los estilos para facilitar la edición y revisión.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/paneles-navegacion.png"
+      },
+      actividades: [
+        {
+          tipo: "exploracion",
+          pregunta: "Utiliza el panel de navegación para buscar una palabra o sección en un documento largo.",
+          ayuda: "Activa el panel desde la pestaña Vista."
+        }
+      ]
     },
     {
       id: 5,
@@ -125,7 +165,17 @@ Seleccionar formato deseado
 Confirmar y cerrar
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para entregar trabajos, guarda el documento en PDF y verifica que el formato se mantenga.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/gestion-documentos.png"
+      },
+      actividades: [
+        {
+          tipo: "practica",
+          pregunta: "Crea y guarda un documento en diferentes formatos (docx, pdf).",
+          ayuda: "Utiliza la opción Guardar como en el menú Archivo."
+        }
+      ]
     },
     {
       id: 6,
@@ -147,61 +197,74 @@ Seleccionar preferencias de tema y herramientas
 Guardar configuración
         </pre>
         <p><strong>Vinculación teoría-práctica:</strong> Para editar varios documentos, organiza las ventanas y personaliza la interfaz para mayor eficiencia.</p>
-      `
+      `,
+      multimedia: {
+        imagen: "/images/word/personalizacion-entorno.png"
+      },
+      actividades: [
+        {
+          tipo: "exploracion",
+          pregunta: "Cambia el tema de Word y organiza ventanas para trabajar con varios documentos.",
+          ayuda: "Prueba las opciones de Vista y Personalización."
+        }
+      ]
     }
   ],
-  actividades: [
-    "Abre Word y explora cada parte de la interfaz",
-    "Crea un documento nuevo y guárdalo en tu equipo",
-    "Personaliza la barra de herramientas de acceso rápido",
-    "Utiliza el panel de navegación para buscar una palabra o sección",
-    "Cambia el tema de Word a oscuro o colorido y organiza ventanas para trabajar con varios documentos"
-  ],
-  recursos: [
-    {
-      titulo: "Guía visual del entorno de Word",
-      url: "/recursos/word/guia-entorno-word.pdf",
-      tipo: "pdf"
-    },
-    {
-      titulo: "Video: Primeros pasos en Word",
-      url: "/videos/word/primeros-pasos-word.mp4",
-      tipo: "video"
-    }
-  ],
+  recursos: {
+    documentos: [
+      {
+        titulo: "Guía visual del entorno de Word",
+        url: "/recursos/word/guia-entorno-word.pdf",
+        tipo: "pdf"
+      }
+    ],
+    enlaces: [],
+    videos: [
+      {
+        titulo: "Video: Primeros pasos en Word",
+        url: "/videos/word/primeros-pasos-word.mp4",
+        duracion: "4:00"
+      }
+    ]
+  },
   evaluacion: {
     tipo: "cuestionario",
     preguntas: [
       {
         pregunta: "¿Cuál es la función principal de la cinta de opciones?",
+        tipo: "opcion_multiple",
         opciones: [
           "Mostrar información sobre el documento",
           "Acceder a herramientas y comandos organizados en pestañas",
           "Guardar el documento",
           "Cambiar el idioma de Word"
         ],
-        respuesta: 1
+        respuestaCorrecta: 1
       },
       {
         pregunta: "¿Para qué sirve el panel de navegación?",
+        tipo: "opcion_multiple",
         opciones: [
           "Buscar y moverse entre secciones del documento",
           "Cambiar el color de la página",
           "Insertar imágenes",
           "Revisar ortografía"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       },
       {
         pregunta: "¿Qué permite la barra de herramientas de acceso rápido?",
+        tipo: "opcion_multiple",
         opciones: [
           "Acceso rápido a comandos frecuentes",
           "Insertar tablas",
           "Cambiar el diseño de página",
           "Cerrar Word"
         ],
-        respuesta: 0
+        respuestaCorrecta: 0
       }
     ]
   }
 };
+
+export default tema01;
