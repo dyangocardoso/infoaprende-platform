@@ -36,12 +36,40 @@ export const cursoInfo = {
   categoria: "Bases de datos"
 };
 
-export const obtenerTema = (id) => temas[id] || null;
+const DEFAULT_RECURSOS = {
+  documentos: [ { titulo: 'Material complementario: Access (guía rápida)', url: '/recursos/access/guia-rapida.pdf' } ],
+  enlaces: [ { titulo: 'Documentación de Microsoft Access', url: 'https://support.microsoft.com/es-es/access' } ],
+  videos: [ { titulo: 'Introducción a Microsoft Access', url: 'https://www.youtube.com/watch?v=QwQnYpF2F6A' } ]
+};
+
+const ensureRecursos = (t) => {
+  if (!t) return t;
+  if (!Object.prototype.hasOwnProperty.call(t, 'recursos')) {
+    t.recursos = { documentos: [], enlaces: [], videos: [] };
+  }
+
+  const r = t.recursos || { documentos: [], enlaces: [], videos: [] };
+  const estaVacio = (arr) => !arr || arr.length === 0;
+
+  // Si el tema no tiene recursos (todas las listas vacías), asignar recursos por defecto
+  if (estaVacio(r.documentos) && estaVacio(r.enlaces) && estaVacio(r.videos)) {
+    // clonar DEFAULT_RECURSOS para evitar referencias compartidas
+    t.recursos = JSON.parse(JSON.stringify(DEFAULT_RECURSOS));
+  }
+
+  return t;
+};
+
+export const obtenerTema = (id) => ensureRecursos(temas[id] || null);
+export const obtenerTodosTemas = () => Object.values(temas).map(ensureRecursos);
+export const temaExiste = (id) => Object.prototype.hasOwnProperty.call(temas, id);
 export const obtenerInfoCurso = () => cursoInfo;
 
 export default {
   info: cursoInfo,
   temas,
   obtenerTema,
-  obtenerInfoCurso
+  obtenerTodosTemas,
+  obtenerInfoCurso,
+  temaExiste
 };
