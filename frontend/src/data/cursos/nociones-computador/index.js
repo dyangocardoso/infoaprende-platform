@@ -32,6 +32,19 @@ const ensureRecursos = (t) => {
   if (!Object.prototype.hasOwnProperty.call(t, 'recursos')) {
     t.recursos = { documentos: [], enlaces: [], videos: [] };
   }
+
+  // Si es el tema 3 y aún no tiene recursos, añadir recursos por defecto
+  if (t.id === '3') {
+    const r = t.recursos || { documentos: [], enlaces: [], videos: [] };
+    if ((r.documentos && r.documentos.length === 0) && (r.enlaces && r.enlaces.length === 0) && (r.videos && r.videos.length === 0)) {
+      t.recursos = {
+        documentos: [ { titulo: 'Ejercicios manejo del ratón', url: '/recursos/nociones-computador/raton-ejercicios.pdf' } ],
+        enlaces: [ { titulo: 'Guía básica de uso del ratón', url: '/recursos/enlaces/raton-guia.html' } ],
+        videos: [ { titulo: 'Video: manejo del ratón', url: '/recursos/videos/raton.mp4' } ]
+      };
+    }
+  }
+
   return t;
 };
 
