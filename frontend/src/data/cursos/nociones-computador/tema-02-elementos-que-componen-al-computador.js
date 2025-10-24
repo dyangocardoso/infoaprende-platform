@@ -205,5 +205,17 @@ export default {
         </div>
       `
     }
-  ]
+  ],
+  recursos: {
+    documentos: [
+      { titulo: 'Manual de componentes básicos', url: '/recursos/nociones-computador/componentes-manual.pdf' }
+    ],
+    enlaces: [
+      { titulo: 'Partes de un computador', url: 'https://www.example.com/partes-computador' },
+      { titulo: 'Conexiones básicas (USB, HDMI, audio)', url: 'https://es.wikihow.com/Conectar-perif%C3%A9ricos' }
+    ],
+    videos: [
+      { titulo: 'Conoce las partes del computador', url: 'https://www.youtube.com/watch?v=Y3g7Xz2yXkM' }
+    ]
+  }
 };

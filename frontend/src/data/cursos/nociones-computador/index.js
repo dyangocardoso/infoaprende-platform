@@ -26,8 +26,17 @@ export const temas = {
 
 // Funciones helper
 export const obtenerInfoCurso = () => cursoInfo;
-export const obtenerTema = (temaId) => temas[temaId] || null;
-export const obtenerTodosTemas = () => Object.values(temas);
+
+const ensureRecursos = (t) => {
+  if (!t) return t;
+  if (!Object.prototype.hasOwnProperty.call(t, 'recursos')) {
+    t.recursos = { documentos: [], enlaces: [], videos: [] };
+  }
+  return t;
+};
+
+export const obtenerTema = (temaId) => ensureRecursos(temas[temaId] || null);
+export const obtenerTodosTemas = () => Object.values(temas).map(ensureRecursos);
 export const temaExiste = (temaId) => Object.prototype.hasOwnProperty.call(temas, temaId);
 
 export default {

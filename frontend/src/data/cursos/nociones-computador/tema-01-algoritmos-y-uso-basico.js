@@ -148,5 +148,17 @@ export default {
         </div>
       `
     }
-  ]
+  ],
+  recursos: {
+    documentos: [
+      { titulo: 'Guía práctica: Algoritmos básicos', url: '/recursos/nociones-computador/algoritmos-guia.pdf' }
+    ],
+    enlaces: [
+      { titulo: 'Algoritmo - Wikipedia', url: 'https://es.wikipedia.org/wiki/Algoritmo' },
+      { titulo: 'Ejemplos de algoritmos cotidianos', url: 'https://www.example.com/algoritmos-ejemplos' }
+    ],
+    videos: [
+      { titulo: 'Introducción a los algoritmos', url: 'https://www.youtube.com/watch?v=8jvJcF0kq8k' }
+    ]
+  }
 };
