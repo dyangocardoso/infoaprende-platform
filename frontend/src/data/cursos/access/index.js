@@ -42,21 +42,88 @@ const DEFAULT_RECURSOS = {
   videos: [ { titulo: 'Introducción a Microsoft Access', url: 'https://www.youtube.com/watch?v=QwQnYpF2F6A' } ]
 };
 
+// Recursos por defecto relacionados con cada tema (si el tema no define recursos)
+const DEFAULT_RECURSOS_BY_TEMA = {
+  '1': {
+    documentos: [ { titulo: 'Guía del entorno de Access', url: '/recursos/access/entorno-guia.pdf' } ],
+    enlaces: [ { titulo: 'Introducción a Access - Microsoft', url: 'https://support.microsoft.com/es-es/office/introducci%C3%B3n-a-access' } ],
+    videos: [ { titulo: 'Introducción y entorno de Access', url: 'https://www.youtube.com/watch?v=QwQnYpF2F6A' } ]
+  },
+  '2': {
+    documentos: [ { titulo: 'Tipos de datos y diseño de tablas', url: '/recursos/access/tablas-tipos.pdf' } ],
+    enlaces: [ { titulo: 'Tipos de datos en Access - Microsoft', url: 'https://support.microsoft.com/es-es/office/tipos-de-datos-para-campos-y-propiedades-de-tablas-en-access-2f0e4ff2-5c8e-4a0b-bd5c-8b8b8b8b8b8' } ],
+    videos: [ { titulo: 'Crear y configurar tablas en Access', url: 'https://www.youtube.com/watch?v=6QwQnYpF2F6B' } ]
+  },
+  '3': {
+    documentos: [ { titulo: 'Relaciones e integridad referencial', url: '/recursos/access/relaciones-integridad.pdf' } ],
+    enlaces: [ { titulo: 'Crear, editar o eliminar relaciones en Access - Microsoft', url: 'https://support.microsoft.com/es-es/office/crear-editar-o-eliminar-una-relaci%C3%B3n-entre-tablas-en-access-8a6a1e7a-8a3e-4b8b-9c4e-8c6b8b8b8b8b' } ],
+    videos: [ { titulo: 'Relaciones entre tablas en Access', url: 'https://www.youtube.com/watch?v=7QwQnYpF2F6C' } ]
+  },
+  '4': {
+    documentos: [ { titulo: 'Propiedades de campos y máscaras de entrada', url: '/recursos/access/propiedades-campos.pdf' } ],
+    enlaces: [ { titulo: 'Propiedades de campo en Access - Microsoft', url: 'https://support.microsoft.com/es-es/office/introducci%C3%B3n-a-las-propiedades-de-campo-en-access-20ee0b1c-7b8a-4c3a-8c6b-8b8b8b8b8b8b' } ],
+    videos: [ { titulo: 'Configurar propiedades de campos en Access', url: 'https://www.youtube.com/watch?v=8QwQnYpF2F6D' } ]
+  },
+  '5': {
+    documentos: [ { titulo: 'Consultas: guía práctica', url: '/recursos/access/consultas-guia.pdf' } ],
+    enlaces: [ { titulo: 'Introducción a las consultas en Access - Microsoft', url: 'https://support.microsoft.com/es-es/office/introducci%C3%B3n-a-las-consultas-en-access-1c1f5b7a-2a5f-4d3a-8c6b-8b8b8b8b8b8' } ],
+    videos: [ { titulo: 'Consultas en Access: tipos y ejemplos', url: 'https://www.youtube.com/watch?v=9QwQnYpF2F6E' } ]
+  },
+  '6': {
+    documentos: [ { titulo: 'Diseño y propiedades de formularios', url: '/recursos/access/formularios-guia.pdf' } ],
+    enlaces: [ { titulo: 'Crear un formulario en Access - Microsoft', url: 'https://support.microsoft.com/es-es/office/crear-un-formulario-en-access-5d8b4a0d-3e8a-4f6e-8b8b-8b8b8b8b8b8b' } ],
+    videos: [ { titulo: 'Formularios en Access: creación y personalización', url: 'https://www.youtube.com/watch?v=10QwQnYpF2F6F' } ]
+  },
+  '7': {
+    documentos: [ { titulo: 'Informes: diseño e impresión', url: '/recursos/access/informes-guia.pdf' } ],
+    enlaces: [ { titulo: 'Crear un informe en Access - Microsoft', url: 'https://support.microsoft.com/es-es/office/crear-un-informe-en-access-3fa1a0b1-3e8a-4f6e-8b8b-8b8b8b8b8b8b' } ],
+    videos: [ { titulo: 'Informes en Access: diseño y presentación', url: 'https://www.youtube.com/watch?v=11QwQnYpF2F6G' } ]
+  },
+  '8': {
+    documentos: [ { titulo: 'Controles y datos adjuntos', url: '/recursos/access/controles-guia.pdf' } ],
+    enlaces: [ { titulo: 'Introducción a los controles en Access - Microsoft', url: 'https://support.microsoft.com/es-es/office/introducci%C3%B3n-a-los-controles-en-formularios-e-informes-de-access-20ee0b1c-7b8a-4c3a-8c6b-8b8b8b8b8b8b' } ],
+    videos: [ { titulo: 'Controles en formularios e informes de Access', url: 'https://www.youtube.com/watch?v=12QwQnYpF2F6H' } ]
+  },
+  '9': {
+    documentos: [ { titulo: 'Automatización con macros', url: '/recursos/access/macros-guia.pdf' } ],
+    enlaces: [ { titulo: 'Crear una macro de base de datos - Microsoft', url: 'https://support.microsoft.com/es-es/office/crear-una-macro-de-base-de-datos-4e7b62c6-8b8b-4c3a-8c6b-8b8b8b8b8b8b' } ],
+    videos: [ { titulo: 'Macros en Access: automatización y ejemplos', url: 'https://www.youtube.com/watch?v=13QwQnYpF2F6I' } ]
+  }
+};
+
 const ensureRecursos = (t) => {
   if (!t) return t;
-  if (!Object.prototype.hasOwnProperty.call(t, 'recursos')) {
-    t.recursos = { documentos: [], enlaces: [], videos: [] };
+
+  // Normalizar distintos formatos de recursos a la estructura {documentos, enlaces, videos}
+  let rec = t.recursos;
+
+  if (!rec) {
+    rec = { documentos: [], enlaces: [], videos: [] };
+  } else if (Array.isArray(rec)) {
+    const documentos = [];
+    const enlaces = [];
+    const videos = [];
+    rec.forEach(r => {
+      const tipo = (r.tipo || '').toLowerCase();
+      if (tipo.includes('video')) videos.push({ titulo: r.titulo, url: r.url });
+      else if (tipo.includes('pdf') || tipo.includes('document')) documentos.push({ titulo: r.titulo, url: r.url });
+      else enlaces.push({ titulo: r.titulo, url: r.url });
+    });
+    rec = { documentos, enlaces, videos };
+  } else {
+    // Asegurar claves
+    rec.documentos = rec.documentos || [];
+    rec.enlaces = rec.enlaces || [];
+    rec.videos = rec.videos || [];
   }
 
-  const r = t.recursos || { documentos: [], enlaces: [], videos: [] };
   const estaVacio = (arr) => !arr || arr.length === 0;
-
-  // Si el tema no tiene recursos (todas las listas vacías), asignar recursos por defecto
-  if (estaVacio(r.documentos) && estaVacio(r.enlaces) && estaVacio(r.videos)) {
-    // clonar DEFAULT_RECURSOS para evitar referencias compartidas
-    t.recursos = JSON.parse(JSON.stringify(DEFAULT_RECURSOS));
+  if (estaVacio(rec.documentos) && estaVacio(rec.enlaces) && estaVacio(rec.videos)) {
+    const def = (t.id && DEFAULT_RECURSOS_BY_TEMA[t.id]) ? DEFAULT_RECURSOS_BY_TEMA[t.id] : DEFAULT_RECURSOS;
+    rec = JSON.parse(JSON.stringify(def));
   }
 
+  t.recursos = rec;
   return t;
 };
 
