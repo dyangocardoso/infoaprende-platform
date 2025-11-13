@@ -8,7 +8,25 @@ const userController = require('./controllers/user.controller');
 const authMiddleware = require('./middlewares/auth.middleware');
 
 const app = express();
-app.use(cors());
+// Configurar CORS seguro: permitir orígenes listados en FRONTEND_URL (coma-separados) y localhost de desarrollo.
+const rawFrontend = process.env.FRONTEND_URL || '';
+const allowedOrigins = Array.from(new Set(
+  rawFrontend.split(',').map(s => s.trim()).filter(Boolean)
+));
+// Siempre permitir el origen de Vite (desarrollo local)
+if (!allowedOrigins.includes('http://localhost:5173')) {
+  allowedOrigins.push('http://localhost:5173');
+}
+console.log('Allowed CORS origins:', allowedOrigins);
+app.use(cors({
+  origin: (origin, callback) => {
+    // Permitir peticiones desde clientes que no envían Origin (ej. server-to-server, curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error('CORS policy: Origin not allowed'));
+  },
+  optionsSuccessStatus: 200
+}));
 app.use(express.json());
 
 const PORT = process.env.PORT || 4000;

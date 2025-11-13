@@ -6,7 +6,7 @@
 export default {
   "id": "3",
   "titulo": "Manejo del ratón",
-  "duracion": "15-20 minutos", 
+  "duracion": "15-20 minutos",
   "objetivos": [
     "Adoptar postura correcta para usar el ratón",
     "Dominar el movimiento preciso del cursor",
@@ -18,10 +18,10 @@ export default {
       id: 1,
       titulo: "Uso Correcto del Ratón",
       contenido: `
-        <h3>🖱️ Postura y Técnica Correcta</h3>
+        <h3>Postura y Técnica Correcta</h3>
         
         <div class="postura-correcta">
-          <h4>🪑 Posición del Cuerpo:</h4>
+          <h4>Posición del Cuerpo:</h4>
           <ul>
             <li><strong>Espalda recta:</strong> Apoyada en el respaldo</li>
             <li><strong>Pies en el suelo:</strong> Planos y estables</li>
@@ -29,7 +29,7 @@ export default {
             <li><strong>Muñecas rectas:</strong> Sin doblar hacia arriba o abajo</li>
           </ul>
 
-          <h4>✋ Agarre del Ratón:</h4>
+          <h4>Agarre del Ratón:</h4>
           <ul>
             <li><strong>Palma de la mano:</strong> Descansa sobre el ratón</li>
             <li><strong>Dedos relajados:</strong> Índice y medio sobre los botones</li>
@@ -37,7 +37,7 @@ export default {
             <li><strong>Sin tensión:</strong> Agarre suave y natural</li>
           </ul>
 
-          <h4>📏 Configuración del Espacio:</h4>
+          <h4>Configuración del Espacio:</h4>
           <ul>
             <li><strong>Superficie adecuada:</strong> Usar mousepad o superficie lisa</li>
             <li><strong>Espacio suficiente:</strong> Para mover libremente</li>
@@ -47,10 +47,10 @@ export default {
         </div>
 
         <div class="errores-comunes">
-          <h4>❌ Errores Comunes a Evitar:</h4>
+          <h4>Errores Comunes a Evitar:</h4>
           <ul>
             <li>Agarrar el ratón muy fuerte</li>
-            <li>Doblar la muñeca excesivamente</li>
+            <li>Doblar la muñeca exces
             <li>Usar solo las puntas de los dedos</li>
             <li>Mover todo el brazo en lugar de la muñeca</li>
           </ul>
