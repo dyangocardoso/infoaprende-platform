@@ -1,0 +1,32 @@
+{
+  "name": "InfoAprende Dev Container",
+  "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:20",
+  "forwardPorts": [4000, 5173],
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "remoteUser": "node",
+  "postCreateCommand": "cd backend && npm ci && cd ../frontend && npm ci",
+  "postStartCommand": "echo 'Dev container started. Use \"./scripts/start-with-docker.ps1\" on Windows host or run \"docker compose up --build\" inside a Docker-enabled container to start services.'",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-playwright.playwright",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode.cpptools",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
+      }
+    }
+  }
+}
