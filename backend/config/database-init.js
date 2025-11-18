@@ -9,6 +9,27 @@ async function initializeDatabase() {
     const { connectDB } = require('../config/database-smart');
     const sequelizeInstance = await connectDB();
     
+    // Ejecutar migraciones programáticamente (si no se indica SKIP_MIGRATIONS)
+    if (process.env.SKIP_MIGRATIONS === 'true') {
+      console.log('⚠️  SKIP_MIGRATIONS=true -> Se omiten migraciones automáticas');
+    } else {
+      try {
+        const { Umzug, SequelizeStorage } = require('umzug');
+        const umzug = new Umzug({
+          migrations: { glob: 'migrations/*.js' },
+          context: sequelizeInstance.getQueryInterface(),
+          storage: new SequelizeStorage({ sequelize: sequelizeInstance }),
+          logger: console
+        });
+
+        console.log('🔄 Ejecutando migraciones pendientes (umzug)...');
+        await umzug.up();
+        console.log('✅ Migraciones aplicadas');
+      } catch (mErr) {
+        console.warn('⚠️  No se ejecutaron migraciones automáticas:', mErr.message);
+      }
+    }
+
     // Importar modelos
     const defineUserModel = require('../models/user.model');
     const defineCursoModel = require('../models/curso.model');
@@ -22,31 +43,96 @@ async function initializeDatabase() {
     const Curso = defineCursoModel(sequelizeInstance);
     const Leccion = defineLeccionModel(sequelizeInstance);
     const ProgresoUsuario = defineProgresoModel(sequelizeInstance);
-    
+
+    // Intentar cargar y definir modelos docentes/evaluaciones si existen
+    let Temario, Evaluacion, Plantilla, Asignacion, Intento, Pregunta;
+    try {
+      const defineTemarioModel = require('../models/temario.sql.model');
+      const defineEvaluacionModel = require('../models/evaluacion.sql.model');
+      const definePlantillaModel = require('../models/plantilla.sql.model');
+      const defineAsignacionModel = require('../models/asignacion.sql.model');
+      const defineIntentoModel = require('../models/intento.sql.model');
+      const definePreguntaModel = require('../models/pregunta.sql.model');
+
+      Temario = defineTemarioModel(sequelizeInstance);
+      Evaluacion = defineEvaluacionModel(sequelizeInstance);
+      Plantilla = definePlantillaModel(sequelizeInstance);
+      Asignacion = defineAsignacionModel(sequelizeInstance);
+      Intento = defineIntentoModel(sequelizeInstance);
+      Pregunta = definePreguntaModel(sequelizeInstance);
+
+      // Exponer modelos docentes globalmente para controladores y rutas
+      global.Temario = Temario;
+      global.Evaluacion = Evaluacion;
+      global.Plantilla = Plantilla;
+      global.Asignacion = Asignacion;
+      global.Intento = Intento;
+      global.Pregunta = Pregunta;
+
+      console.log('✅ Modelos docentes cargados y registrados globalmente');
+    } catch (e) {
+      console.warn('⚠️  Modelos docentes no disponibles o no definidos. Se omiten:', e.message);
+    }
+
     // Configurar asociaciones
     setupAssociations(User, Curso, Leccion, ProgresoUsuario);
-    
-    // Sincronizar tablas (crear si no existen)
+
+    // Asociaciones adicionales para los modelos docentes si se cargaron
+    if (Temario && Evaluacion && Plantilla && Asignacion && Intento && Pregunta) {
+      // Temario -> User
+      Temario.belongsTo(User, { foreignKey: 'autor_id', as: 'autor' });
+      User.hasMany(Temario, { foreignKey: 'autor_id', as: 'temarios' });
+
+      // Evaluacion -> User
+      Evaluacion.belongsTo(User, { foreignKey: 'autor_id', as: 'autor' });
+      User.hasMany(Evaluacion, { foreignKey: 'autor_id', as: 'evaluaciones' });
+
+      // Evaluacion -> Plantilla
+      Evaluacion.belongsTo(Plantilla, { foreignKey: 'plantilla_id', as: 'plantilla' });
+      Plantilla.hasMany(Evaluacion, { foreignKey: 'plantilla_id', as: 'evaluaciones' });
+
+      // Asignacion -> Evaluacion
+      Asignacion.belongsTo(Evaluacion, { foreignKey: 'evaluacion_id', as: 'evaluacion' });
+      Evaluacion.hasMany(Asignacion, { foreignKey: 'evaluacion_id', as: 'asignaciones' });
+
+      // Intento -> Evaluacion, Intento -> User
+      Intento.belongsTo(Evaluacion, { foreignKey: 'evaluacion_id', as: 'evaluacion' });
+      Evaluacion.hasMany(Intento, { foreignKey: 'evaluacion_id', as: 'intentos' });
+      Intento.belongsTo(User, { foreignKey: 'alumno_id', as: 'alumno' });
+      User.hasMany(Intento, { foreignKey: 'alumno_id', as: 'intentos' });
+
+      // Pregunta -> Evaluacion
+      Pregunta.belongsTo(Evaluacion, { foreignKey: 'evaluacion_id', as: 'evaluacion' });
+      Evaluacion.hasMany(Pregunta, { foreignKey: 'evaluacion_id', as: 'pregunta_items' });
+
+      console.log('✅ Asociaciones docentes configuradas');
+    }
+
+    // Sincronizar tablas (crear si no existen) sólo para modelos no gestionados por migraciones
     console.log('🔄 Sincronizando tablas...');
     await sequelizeInstance.sync({ force: false, alter: false });
     console.log('✅ Tablas sincronizadas correctamente');
-    
+
     // Verificar si ya existen usuarios
     const userCount = await User.count();
     console.log(`👥 Usuarios existentes: ${userCount}`);
-    
+
     if (userCount === 0) {
-      console.log('🆕 Creando usuarios iniciales...');
-      await createInitialData(User, Curso, Leccion);
+      if (process.env.SKIP_SEEDS === 'true') {
+        console.log('⚠️  SKIP_SEEDS=true -> Se omiten la creación automática de datos iniciales (usuarios/cursos)');
+      } else {
+        console.log('🆕 Creando usuarios iniciales...');
+        await createInitialData(User, Curso, Leccion);
+      }
     } else {
       console.log('✅ Base de datos ya contiene datos');
     }
-    
+
     // Verificar integridad de la base de datos
     await verifyDatabaseIntegrity(User, Curso, Leccion, ProgresoUsuario);
     
     console.log('🎉 Base de datos inicializada correctamente');
-    return { User, Curso, Leccion, ProgresoUsuario, sequelize: sequelizeInstance };
+    return { User, Curso, Leccion, ProgresoUsuario, Temario, Evaluacion, Plantilla, Asignacion, Intento, Pregunta, sequelize: sequelizeInstance };
     
   } catch (error) {
     console.error('❌ Error inicializando base de datos:', error);

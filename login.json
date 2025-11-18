@@ -1,0 +1,13 @@
+﻿{
+    "token":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBpbmZvYXByZW5kZS5jb20iLCJyb2wiOiJhZG1pbmlzdHJhZG9yIiwiZ3JhZG8iOm51bGwsImlhdCI6MTc2MzA1ODc1NSwiZXhwIjoxNzYzMTQ1MTU1fQ.Q6qpb2pADWGrQCH2bhAQABT6fY1vx4bipXiT2uk9nRg",
+    "user":  {
+                 "id":  1,
+                 "nombre":  "Administrador del Sistema",
+                 "email":  "admin@infoaprende.com",
+                 "grado":  null,
+                 "rol":  "administrador",
+                 "created_at":  "2025-09-03T15:12:29.642Z",
+                 "updated_at":  "2025-10-24T13:15:54.566Z"
+             },
+    "message":  "Inicio de sesión exitoso"
+}
