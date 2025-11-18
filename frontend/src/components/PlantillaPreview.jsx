@@ -15,16 +15,35 @@ export default function PlantillaPreview({ id, token }) {
       setLoading(true);
       setError(null);
       try {
-        const t = token || localStorage.getItem('token');
-        if (!t) throw new Error('Token no disponible');
+        // Obtener token de forma segura (localStorage puede estar bloqueado por Tracking Prevention)
+        let t = token || null;
+        try {
+          if (!t && typeof window !== 'undefined' && window.localStorage) {
+            t = localStorage.getItem('token');
+          }
+        } catch (lsErr) {
+          console.warn('PlantillaPreview: localStorage inaccesible:', lsErr && lsErr.message);
+        }
+
+        const headers = t ? { Authorization: `Bearer ${t}` } : {};
         const res = await fetch(`/api/docente/plantillas/${id}/preview`, {
           method: 'GET',
-          headers: { Authorization: `Bearer ${t}` },
+          headers,
           signal
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const raw = await res.text();
-        const clean = DOMPurify.sanitize(raw, { USE_PROFILES: { html: true } });
+
+        // Usar DOMPurify importado estáticamente; si falla, usar HTML crudo
+        let clean = raw;
+        try {
+          if (DOMPurify && typeof DOMPurify.sanitize === 'function') {
+            clean = DOMPurify.sanitize(raw, { USE_PROFILES: { html: true } });
+          }
+        } catch (dpErr) {
+          console.warn('PlantillaPreview: error sanitizando con DOMPurify, usando HTML sin sanitizar:', dpErr && dpErr.message);
+        }
+
         setHtml(clean);
       } catch (e) {
         if (e.name !== 'AbortError') setError(e.message || 'Error cargando plantilla');
