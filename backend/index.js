@@ -61,6 +61,9 @@ async function initDB() {
 
 // Middleware para verificar estado de la BD
 const checkDB = (req, res, next) => {
+  // Permitir bypass controlado desde tests si es necesario
+  if (process.env.SKIP_DB_CHECK === 'true') return next();
+
   if (!dbConnected) {
     return res.status(503).json({
       error: 'Base de datos no disponible',

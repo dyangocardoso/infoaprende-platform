@@ -131,6 +131,62 @@ node test-health.js
 npm test
 ```
 
+## Notas de testing backend (mocks y require.cache)
+
+Pequeña guía para los tests del backend (Mocha + Sinon + Supertest).
+
+Variables de entorno útiles (solo en tests)
+
+- `SKIP_DB_CHECK=true` — omite el middleware que devuelve 503 si la BD no está lista. NO activar fuera de tests.
+- `SKIP_MIGRATIONS=true` — evita ejecutar migraciones automáticas al arrancar.
+- `SKIP_SEEDS=true` — evita ejecutar seeders automáticos al arrancar.
+
+Nota: la variable `TEST_FORCE_USER` fue eliminada del runtime de la app. Los tests deben inyectar/mockear el auth explícitamente.
+
+Estrategia recomendada
+
+1. Antes de `require('../index')` en cada test:
+   - Insertar mocks en `require.cache` para `./config/database-init`, `./middlewares/auth.middleware`, `./middlewares/docente.middleware`, etc.
+   - Borrar del cache las rutas que usan esos middlewares (por ejemplo `require.resolve('../routes/docente.plantillas.routes')`) y la entrada de `require.cache` de `../index`.
+   - (Opcional) establecer temporalmente `process.env.SKIP_DB_CHECK = 'true'` antes de `require` para evitar 503 si la BD se mockea.
+   - Requerir `../index` para cargar la app con los mocks activos.
+   - Restaurar variables de entorno modificadas.
+2. Mantener un `test/_setup.js` que limpie `require.cache` antes y después de cada test.
+3. Evitar cambios permanentes en `index.js` para pruebas (preferir mocks por test).
+
+Ejemplo mínimo (esquema):
+
+```javascript
+// test/_helpers.js
+function mockModule(relPath, exportsObj) {
+  try {
+    const resolved = require.resolve(relPath);
+    require.cache[resolved] = { id: resolved, filename: resolved, loaded: true, exports: exportsObj };
+  } catch (e) { /* ignore */ }
+}
+module.exports = { mockModule };
+
+// test/ejemplo.test.js
+const { mockModule } = require('./_helpers');
+let app;
+beforeEach(() => {
+  const dbInitStub = { initializeDatabase: async () => { global.Plantilla = { findByPk: async (id) => id == 1 ? { id:1, contenido_html:'<div>ok</div>' } : null }; return { Plantilla: global.Plantilla, sequelize: {} }; } };
+  mockModule('../config/database-init', dbInitStub);
+
+  const authMock = { verifyToken: (req,res,next)=>{ req.user = { id:11, role:'docente', rol:'docente' }; next(); }, verifyTokenOptional: (req,res,next)=>{ req.user = { id:11, role:'docente', rol:'docente' }; next(); } };
+  mockModule('../middlewares/auth.middleware', authMock);
+
+  try { delete require.cache[require.resolve('../routes/docente.plantillas.routes')]; } catch(e){}
+  try { delete require.cache[require.resolve('../index')]; } catch(e){}
+
+  const prev = process.env.SKIP_DB_CHECK; process.env.SKIP_DB_CHECK = 'true';
+  app = require('../index');
+  if (typeof prev === 'undefined') delete process.env.SKIP_DB_CHECK; else process.env.SKIP_DB_CHECK = prev;
+});
+
+// luego tus tests usan `app` con supertest
+```
+
 ## Siguientes mejoras sugeridas
 
 - Añadir tests E2E (Playwright) que validen login y rutas protegidas.
