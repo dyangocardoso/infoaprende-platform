@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "test": "mocha --recursive --exit",
+    "test": "set NODE_ENV=test&& mocha --recursive --exit --file test/_setup.js",
     "test:health": "node test-health.js",
     "migrate": "npx sequelize db:migrate",
     "migrate:undo": "npx sequelize db:migrate:undo:all",
