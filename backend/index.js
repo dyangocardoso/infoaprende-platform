@@ -110,6 +110,18 @@ app.put('/api/users/change-password', checkDB, authMiddleware.verifyToken, userC
 const adminRoutes = require('./routes/admin.routes');
 app.use('/api/admin', checkDB, adminRoutes);
 
+// Rutas docentes: temarios, evaluaciones, preguntas, plantillas (admin)
+const temariosRoutes = require('./routes/docente.temarios.routes');
+const evaluacionesRoutes = require('./routes/docente.evaluaciones.routes');
+const preguntasRoutes = require('./routes/docente.preguntas.routes');
+const plantillasRoutes = require('./routes/docente.plantillas.routes');
+
+app.use('/api/docente/temarios', checkDB, temariosRoutes);
+app.use('/api/docente/evaluaciones', checkDB, evaluacionesRoutes);
+// Preguntas se montan bajo /api/docente/evaluaciones/:evaluacionId/preguntas
+app.use('/api/docente/evaluaciones/:evaluacionId/preguntas', checkDB, preguntasRoutes);
+app.use('/api/docente/plantillas', checkDB, plantillasRoutes);
+
 // Ruta de test
 app.get('/api/test/test', (req, res) => {
   res.json({
@@ -147,23 +159,32 @@ app.use('*', (req, res) => {
 // Inicializar base de datos en segundo plano
 initDB();
 
-app.listen(PORT, () => {
-  console.log('');
-  console.log('🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉');
-  console.log('🚀       INFOAPRENDE BACKEND INICIADO       🚀');
-  console.log('🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉');
-  console.log('');
-  console.log(`🌐 API URL: http://localhost:${PORT}`);
-  console.log(`🎯 Frontend: http://localhost:5173`);
-  console.log(`📊 Estado: Funcionando (con o sin BD)`);
-  console.log('');
-  console.log('📝 Endpoints disponibles:');
-  console.log(`   • GET  / (información general)`);
-  console.log(`   • POST /api/users/register (registro)`);
-  console.log(`   • POST /api/users/login (login)`);
-  console.log(`   • GET  /api/users/profile (perfil)`);
-  console.log(`   • GET  /api/test/test (prueba)`);
-  console.log('');
-  console.log('✅ ¡Listo para probar la aplicación!');
-  console.log('');
-});
+// Sólo arrancar el servidor cuando este archivo es ejecutado directamente
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log('');
+    console.log('🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉');
+    console.log('🚀       INFOAPRENDE BACKEND INICIADO       🚀');
+    console.log('🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉');
+    console.log('');
+    console.log(`🌐 API URL: http://localhost:${PORT}`);
+    console.log(`🎯 Frontend: http://localhost:5173`);
+    console.log(`📊 Estado: Funcionando (con o sin BD)`);
+    console.log('');
+    console.log('📝 Endpoints disponibles:');
+    console.log(`   • GET  / (información general)`);
+    console.log(`   • POST /api/users/register (registro)`);
+    console.log(`   • POST /api/users/login (login)`);
+    console.log(`   • GET  /api/users/profile (perfil)`);
+    console.log(`   • GET  /api/test/test (prueba)`);
+    console.log('');
+    console.log('✅ ¡Listo para probar la aplicación!');
+    console.log('');
+  });
+} else {
+  // Cuando se importa el módulo (por ejemplo en tests) no arrancamos el listener
+  console.log('ℹ️  INFOAPRENDE backend importado como módulo (modo test). No se inicia el listener HTTP automáticamente.');
+}
+
+// Exportar app para tests (Supertest)
+module.exports = app;

@@ -12,7 +12,15 @@ const verifyToken = (req, res, next) => {
     if (err) {
       return res.status(403).json({ error: 'Token inválido' });
     }
-    req.user = decoded;
+    // Normalizar propiedades: algunos controladores/middlewares usan 'role', otros 'rol'
+    req.user = decoded || {};
+    // mapear 'rol' <-> 'role'
+    if (decoded && decoded.rol && !decoded.role) {
+      req.user.role = decoded.rol;
+    }
+    if (decoded && decoded.role && !decoded.rol) {
+      req.user.rol = decoded.role;
+    }
     next();
   });
 };
