@@ -2,6 +2,7 @@ const request = require('supertest');
 const { expect } = require('chai');
 const sinon = require('sinon');
 const path = require('path');
+const { setupPlantillaStub, teardownPlantillaStub } = require('./helpers/plantillaStub');
 
 // Helper para mockear módulos por ruta relativa (establece entry en require.cache)
 function mockModule(relPath, exportsObj) {
@@ -23,7 +24,7 @@ const baseUser = { id: 1, email: 'admin@infoaprende.com', rol: 'docente', role: 
 
 let app;
 
-before(async function () {
+beforeEach(async function () {
   // Permitir más tiempo para la inicialización en este hook
   this.timeout(10000);
 
@@ -31,29 +32,29 @@ before(async function () {
   process.env.SKIP_MIGRATIONS = 'true';
   process.env.SKIP_SEEDS = 'true';
 
-  // Stub simple para initializeDatabase() que devuelve modelos mínimos y un sequelize dummy
+  const dummyModel = {
+    count: async () => 0,
+    create: async (obj) => ({ id: 1, ...obj }),
+    findOne: async () => null
+  };
+  // Plantilla mock específica: devuelve una plantilla para id=1 y null para otros
+  const plantillaModel = {
+    findByPk: async (id) => {
+      if (String(id) === '1' || id === 1) {
+        return {
+          id: 1,
+          contenido_html: '<div><h1>Plantilla demo</h1><p>Contenido de prueba</p></div>',
+          recursos: JSON.stringify([]),
+          css: ''
+        };
+      }
+      return null;
+    },
+    findAll: async () => []
+  };
+
   const dbInitStub = {
     initializeDatabase: async () => {
-      const dummyModel = {
-        count: async () => 0,
-        create: async (obj) => ({ id: 1, ...obj }),
-        findOne: async () => null
-      };
-      // Plantilla mock específica: devuelve una plantilla para id=1 y null para otros
-      const plantillaModel = {
-        findByPk: async (id) => {
-          if (String(id) === '1' || id === 1) {
-            return {
-              id: 1,
-              contenido_html: '<div><h1>Plantilla demo</h1><p>Contenido de prueba</p></div>',
-              recursos: JSON.stringify([]),
-              css: ''
-            };
-          }
-          return null;
-        },
-        findAll: async () => []
-      };
       // Registrar Plantilla globalmente porque index.js no la asigna desde el retorno del init
       try { global.Plantilla = plantillaModel; } catch (e) { /* ignore */ }
 
@@ -141,25 +142,32 @@ before(async function () {
   mockModule('./middlewares/rateLimit.middleware', rateLimitStub);
   mockModule(path.resolve(__dirname, '..', 'middlewares', 'rateLimit.middleware'), rateLimitStub);
 
+  // Borrar cache de las rutas para forzar nueva carga que use los mocks
+  try { const r1 = require.resolve('../routes/docente.plantillas.routes'); if (require.cache[r1]) delete require.cache[r1]; } catch (e) {}
+  try { const r2 = require.resolve('../routes/docente.temarios.routes'); if (require.cache[r2]) delete require.cache[r2]; } catch (e) {}
+
   // Ensure the main app module is reloaded so it picks up the mocked middlewares
   try {
     const idx = require.resolve('../index');
     if (require.cache[idx]) delete require.cache[idx];
   } catch (e) { /* ignore */ }
 
-  // Clear any previously loaded middleware modules from require.cache so our mocks are used
-  Object.keys(require.cache).forEach(k => {
-    if (k && (k.includes(`${path.sep}middlewares${path.sep}`) || k.includes('/middlewares/'))) {
-      delete require.cache[k];
-    }
-  });
+  // Borrar posibles entradas previas de database-init para que nuestro mock sea usado
+  try { const dbp = require.resolve(path.resolve(__dirname, '..', 'config', 'database-init.js')); if (require.cache[dbp]) delete require.cache[dbp]; } catch (e) {}
+  try { const dbp2 = require.resolve('../config/database-init'); if (require.cache[dbp2]) delete require.cache[dbp2]; } catch (e) {}
+
+  // Set SKIP_DB_CHECK to bypass checkDB while loading app in tests
+  const prevSkipDb = process.env.SKIP_DB_CHECK;
+  process.env.SKIP_DB_CHECK = 'true';
 
   // Cargar la app después de haber colocado todos los mocks (dbInit + middlewares)
   app = require('../index');
 
-  // Fallback: middleware global de pruebas que garantiza req.user en todas las peticiones
-  // Esto evita errores 401 si algún middleware de auth no fue sustituido correctamente.
-  app.use((req, res, next) => { req.user = baseUser; next(); });
+  // Forzar global.Plantilla a nuestro mock en caso de que la inicialización real haya sobreescrito el valor
+  try { global.Plantilla = plantillaModel; } catch (e) { /* ignore */ }
+
+  // Restaurar SKIP_DB_CHECK al valor anterior
+  if (typeof prevSkipDb === 'undefined') delete process.env.SKIP_DB_CHECK; else process.env.SKIP_DB_CHECK = prevSkipDb;
 
   // Esperar hasta que global.Plantilla esté disponible (inicialización de BD mock completada)
   const waitFor = (predicate, timeout = 2000, interval = 50) => new Promise((resolve, reject) => {
@@ -187,6 +195,18 @@ after(() => {
 });
 
 describe('GET /api/docente/plantillas/:id/preview (con sinon stubs)', function () {
+  // Reinstalar el stub antes de CADA test para evitar interferencias con hooks globales
+  beforeEach(function () {
+    setupPlantillaStub();
+    try { delete require.cache[require.resolve('../index')]; } catch (e) {}
+    app = require('../index');
+  });
+
+  afterEach(function () {
+    teardownPlantillaStub();
+    try { delete require.cache[require.resolve('../index')]; } catch (e) {}
+  });
+
   it('debe devolver HTML con status 200 sin necesidad de token/BD', async function () {
     // Forzar temporalmente rol 'docente' en el fallback req.user para este test
     const prevRole = baseUser.role;
