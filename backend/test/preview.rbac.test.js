@@ -108,7 +108,19 @@ describe('Integración RBAC en preview (solo docente)', () => {
     mockModule('./middlewares/auth.middleware', authMiddlewareStubDocente);
     mockModule(path.resolve(__dirname, '..', 'middlewares', 'auth.middleware'), authMiddlewareStubDocente);
 
+    // Mockear docente.middleware como passthrough para esta recarga controlada
+    const docentePass = (req, res, next) => next();
+    mockModule('../middlewares/docente.middleware', docentePass);
+    mockModule('./middlewares/docente.middleware', docentePass);
+    mockModule(path.resolve(__dirname, '..', 'middlewares', 'docente.middleware'), docentePass);
+
+    // Ensure middleware modules are reloaded from the mocked versions
+    try { const m1 = require.resolve('../middlewares/docente.middleware'); if (require.cache[m1]) delete require.cache[m1]; } catch (e) {}
+    try { const m2 = require.resolve('../middlewares/auth.middleware'); if (require.cache[m2]) delete require.cache[m2]; } catch (e) {}
+    try { const m3 = require.resolve('../middlewares/admin.middleware'); if (require.cache[m3]) delete require.cache[m3]; } catch (e) {}
+
     // Reload app module
+    try { const rid = require.resolve('../index'); if (require.cache[rid]) delete require.cache[rid]; } catch (e) {}
     app = require('../index');
 
     const res = await request(app)

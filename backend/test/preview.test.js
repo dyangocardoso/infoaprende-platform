@@ -19,7 +19,7 @@ function mockModule(relPath, exportsObj) {
 }
 
 let sandbox;
-const baseUser = { id: 1, email: 'admin@infoaprende.com', rol: 'administrador', role: 'administrador' };
+const baseUser = { id: 1, email: 'admin@infoaprende.com', rol: 'docente', role: 'docente' };
 
 let app;
 
@@ -141,6 +141,19 @@ before(async function () {
   mockModule('./middlewares/rateLimit.middleware', rateLimitStub);
   mockModule(path.resolve(__dirname, '..', 'middlewares', 'rateLimit.middleware'), rateLimitStub);
 
+  // Ensure the main app module is reloaded so it picks up the mocked middlewares
+  try {
+    const idx = require.resolve('../index');
+    if (require.cache[idx]) delete require.cache[idx];
+  } catch (e) { /* ignore */ }
+
+  // Clear any previously loaded middleware modules from require.cache so our mocks are used
+  Object.keys(require.cache).forEach(k => {
+    if (k && (k.includes(`${path.sep}middlewares${path.sep}`) || k.includes('/middlewares/'))) {
+      delete require.cache[k];
+    }
+  });
+
   // Cargar la app después de haber colocado todos los mocks (dbInit + middlewares)
   app = require('../index');
 
@@ -175,9 +188,19 @@ after(() => {
 
 describe('GET /api/docente/plantillas/:id/preview (con sinon stubs)', function () {
   it('debe devolver HTML con status 200 sin necesidad de token/BD', async function () {
+    // Forzar temporalmente rol 'docente' en el fallback req.user para este test
+    const prevRole = baseUser.role;
+    const prevRol = baseUser.rol;
+    baseUser.role = 'docente';
+    baseUser.rol = 'docente';
+
     const res = await request(app)
       .get('/api/docente/plantillas/1/preview')
       .expect(200);
+
+    // Restaurar rol original
+    baseUser.role = prevRole;
+    baseUser.rol = prevRol;
 
     expect(res.headers['content-type']).to.match(/html/);
     expect(res.text).to.be.a('string');
@@ -185,11 +208,20 @@ describe('GET /api/docente/plantillas/:id/preview (con sinon stubs)', function (
   });
 
   it('debe devolver 404 si la plantilla no existe (sin error de autenticación)', async function () {
+    const prevRole = baseUser.role;
+    const prevRol = baseUser.rol;
+    baseUser.role = 'docente';
+    baseUser.rol = 'docente';
+
     const res = await request(app)
       .get('/api/docente/plantillas/9999999/preview')
       .expect(res => {
         if (![200, 404].includes(res.status)) throw new Error(`Status inesperado: ${res.status}`);
       });
+
+    // Restaurar rol original
+    baseUser.role = prevRole;
+    baseUser.rol = prevRol;
 
     expect(res.status === 404 || res.status === 200).to.be.true;
   });
