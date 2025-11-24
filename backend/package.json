@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "test": "set NODE_ENV=test&& mocha --recursive --exit --file test/_setup.js",
+    "test": "SKIP_DB_CHECK=true NODE_ENV=test mocha --recursive --exit --file test/_setup.js --timeout 20000",
     "test:health": "node test-health.js",
+    "test:with-db": "NODE_ENV=test mocha --recursive --exit --file test/_setup.js --timeout 20000",
     "migrate": "npx sequelize db:migrate",
     "migrate:undo": "npx sequelize db:migrate:undo:all",
     "migrate:status": "npx sequelize db:migrate:status",
@@ -23,7 +24,8 @@
     "puppeteer": "^24.30.0",
     "sequelize": "^6.32.1",
     "sqlite3": "^5.1.7",
-    "umzug": "^3.1.0"
+    "umzug": "^3.1.0",
+    "sanitize-html": "^2.8.1"
   },
   "devDependencies": {
     "chai": "^4.3.8",

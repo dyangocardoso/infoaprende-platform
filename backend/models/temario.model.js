@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+// Lista de niveles permitidos (coincide con enums SQL)
+const ALLOWED_NIVELES = ['inicial', 'primario', 'secundario', 'tecnico', 'otros'];
+
 const RecursoSchema = new Schema({
   tipo: { type: String, trim: true }, // e.g. "pdf", "link", "video"
   url: { type: String, trim: true },
@@ -15,7 +18,7 @@ const UnidadSchema = new Schema({
 
 const TemarioSchema = new Schema({
   titulo: { type: String, required: true, trim: true },
-  nivel: { type: String, required: true, enum: ['inicial', 'primario', 'secundario', 'tecnico', 'otros'] },
+  nivel: { type: String, required: true, enum: ALLOWED_NIVELES },
   descripcion: { type: String, trim: true },
   unidades: [UnidadSchema],
   autor: { type: Schema.Types.ObjectId, ref: 'User', required: true },

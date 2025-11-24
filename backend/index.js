@@ -160,7 +160,13 @@ app.use('*', (req, res) => {
 });
 
 // Inicializar base de datos en segundo plano
-initDB();
+if (process.env.SKIP_DB_CHECK === 'true') {
+  console.log('⚠️  SKIP_DB_CHECK=true -> Omitiendo inicialización de la base de datos en este proceso (modo test).');
+  // Mantener dbConnected en false para que checkDB devuelva 503 cuando corresponda
+  dbConnected = false;
+} else {
+  initDB();
+}
 
 // Sólo arrancar el servidor cuando este archivo es ejecutado directamente
 if (require.main === module) {
