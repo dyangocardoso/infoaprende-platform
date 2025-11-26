@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/client';
 import TemarioForm from '../components/TemarioForm';
+import DOMPurify from 'dompurify';
 
 export default function PanelAdmin() {
   const [users, setUsers] = useState([]);
@@ -25,6 +26,8 @@ export default function PanelAdmin() {
   const [temariosLoading, setTemariosLoading] = useState(false);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
   const [previewModalHtml, setPreviewModalHtml] = useState(null);
+  // NEW: Blob/ObjectURL para alimentar el iframe sandbox seguro
+  const [previewBlobUrl, setPreviewBlobUrl] = useState(null);
   // Estado para mostrar helper al hacer hover sobre el botón Crear Temario
   const [showTemarioHelperHover, setShowTemarioHelperHover] = useState(false);
 
@@ -191,6 +194,8 @@ export default function PanelAdmin() {
     try {
       const html = temario && temario.metadata && temario.metadata.generated_html;
       if (!html) return;
+      // Crear blob URL y almacenarla en estado para usar en iframe
+      createPreviewBlobUrl(html);
       setPreviewModalHtml(html);
       setShowPreviewModal(true);
     } catch (err) {
@@ -201,18 +206,42 @@ export default function PanelAdmin() {
   const closePreviewModal = () => {
     setShowPreviewModal(false);
     setPreviewModalHtml(null);
+    // Revocar y limpiar la URL del blob si existe
+    if (previewBlobUrl) {
+      try { URL.revokeObjectURL(previewBlobUrl); } catch { /* ignore */ }
+      setPreviewBlobUrl(null);
+    }
+  };
+
+  // Crear o recrear Blob/ObjectURL para el HTML de previsualización
+  const createPreviewBlobUrl = (html) => {
+    try {
+      if (!html) return null;
+      // Sanitizar con DOMPurify antes de crear el Blob (capa extra de seguridad en cliente)
+      const sanitized = DOMPurify.sanitize(html);
+
+      // Revocar previa URL si existe
+      if (previewBlobUrl) {
+        try { URL.revokeObjectURL(previewBlobUrl); } catch { /* ignore */ }
+        setPreviewBlobUrl(null);
+      }
+      const blob = new Blob([sanitized], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      setPreviewBlobUrl(url);
+      return url;
+    } catch (err) {
+      console.error('Error creando Blob URL para previsualización:', err);
+      return null;
+    }
   };
 
   // Abrir la previsualización en una nueva pestaña (usa Blob/ObjectURL)
   const openPreviewInNewTab = () => {
     try {
-      const html = previewModalHtml;
-      if (!html) return;
-      const blob = new Blob([html], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
+      // Preferir usar la URL ya creada para el iframe
+      const url = previewBlobUrl || (previewModalHtml ? createPreviewBlobUrl(previewModalHtml) : null);
+      if (!url) return;
       const win = window.open(url, '_blank');
-      // revocar después
-      setTimeout(() => { try { URL.revokeObjectURL(url); } catch { /* ignore */ } }, 20000);
       if (!win) window.location.href = url;
     } catch (err) {
       console.error('No se pudo abrir en nueva pestaña:', err);
@@ -222,17 +251,30 @@ export default function PanelAdmin() {
   // Descargar el HTML como archivo .html
   const downloadPreviewHtml = () => {
     try {
+      // Preferir usar la URL ya creada
+      const url = previewBlobUrl;
+      if (url) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `temario_docente.html`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        return;
+      }
+
+      // Fallback: crear y descargar inmediatamente
       const html = previewModalHtml;
       if (!html) return;
       const blob = new Blob([html], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
+      const fallbackUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url;
+      a.href = fallbackUrl;
       a.download = `temario_docente.html`;
       document.body.appendChild(a);
       a.click();
       a.remove();
-      setTimeout(() => { try { URL.revokeObjectURL(url); } catch { /* ignore */ } }, 20000);
+      setTimeout(() => { try { URL.revokeObjectURL(fallbackUrl); } catch { /* ignore */ } }, 20000);
     } catch (err) {
       console.error('Error al descargar HTML:', err);
     }
@@ -457,7 +499,20 @@ export default function PanelAdmin() {
                 <button onClick={closePreviewModal} style={{ background: '#e74c3c', color: 'white', border: 'none', padding: '6px 10px', borderRadius: 6 }}>❌ Cerrar</button>
               </div>
             </div>
-            <div style={{ padding: 12, overflow: 'auto' }} dangerouslySetInnerHTML={{ __html: previewModalHtml || '<div style="color:#666;padding:12px">No hay contenido</div>' }} />
+
+            {/* NEW: Usar iframe sandbox seguro para mostrar el HTML */}
+            <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 12 }}>
+              {previewBlobUrl ? (
+                <iframe
+                  title="Previsualización del temario"
+                  src={previewBlobUrl}
+                  sandbox="allow-same-origin"
+                  style={{ width: '100%', height: '70vh', border: 'none' }}
+                />
+              ) : (
+                <div style={{ color: '#666', padding: 12 }}>No hay contenido</div>
+              )}
+            </div>
           </div>
         </div>
       )}

@@ -145,101 +145,61 @@ npm run test:with-db
 
 Asegúrate de no establecer `SKIP_DB_CHECK=true` en entornos de producción.
 
-## Notas de testing backend (mocks y require.cache)
+### Ejecución cross-platform de tests (guía rápida)
 
-Pequeña guía para los tests del backend (Mocha + Sinon + Supertest).
+Estas instrucciones cubren Windows (PowerShell), Git Bash/WSL y Linux/macOS.
 
-Variables de entorno útiles (solo en tests)
+- Requisitos: Node.js 18+ y npm.
 
-- `SKIP_DB_CHECK=true` — omite el middleware que devuelve 503 si la BD no está lista. NO activar fuera de tests.
-- `SKIP_MIGRATIONS=true` — evita ejecutar migraciones automáticas al arrancar.
-- `SKIP_SEEDS=true` — evita ejecutar seeders automáticos al arrancar.
+Backend (Windows PowerShell):
 
-Nota: la variable `TEST_FORCE_USER` fue eliminada del runtime de la app. Los tests deben inyectar/mockear el auth explícitamente.
-
-Estrategia recomendada
-
-1. Antes de `require('../index')` en cada test:
-   - Insertar mocks en `require.cache` para `./config/database-init`, `./middlewares/auth.middleware`, `./middlewares/docente.middleware`, etc.
-   - Borrar del cache las rutas que usan esos middlewares (por ejemplo `require.resolve('../routes/docente.plantillas.routes')`) y la entrada de `require.cache` de `../index`.
-   - (Opcional) establecer temporalmente `process.env.SKIP_DB_CHECK = 'true'` antes de `require` para evitar 503 si la BD se mockea.
-   - Requerir `../index` para cargar la app con los mocks activos.
-   - Restaurar variables de entorno modificadas.
-2. Mantener un `test/_setup.js` que limpie `require.cache` antes y después de cada test.
-3. Evitar cambios permanentes en `index.js` para pruebas (preferir mocks por test).
-
-Ejemplo mínimo (esquema):
-
-```javascript
-// test/_helpers.js
-function mockModule(relPath, exportsObj) {
-  try {
-    const resolved = require.resolve(relPath);
-    require.cache[resolved] = {
-      id: resolved,
-      filename: resolved,
-      loaded: true,
-      exports: exportsObj,
-    };
-  } catch (e) {
-    /* ignore */
-  }
-}
-module.exports = { mockModule };
-
-// test/ejemplo.test.js
-const { mockModule } = require("./_helpers");
-let app;
-beforeEach(() => {
-  const dbInitStub = {
-    initializeDatabase: async () => {
-      global.Plantilla = {
-        findByPk: async (id) =>
-          id == 1 ? { id: 1, contenido_html: "<div>ok</div>" } : null,
-      };
-      return { Plantilla: global.Plantilla, sequelize: {} };
-    },
-  };
-  mockModule("../config/database-init", dbInitStub);
-
-  const authMock = {
-    verifyToken: (req, res, next) => {
-      req.user = { id: 11, role: "docente", rol: "docente" };
-      next();
-    },
-    verifyTokenOptional: (req, res, next) => {
-      req.user = { id: 11, role: "docente", rol: "docente" };
-      next();
-    },
-  };
-  mockModule("../middlewares/auth.middleware", authMock);
-
-  try {
-    delete require.cache[
-      require.resolve("../routes/docente.plantillas.routes")
-    ];
-  } catch (e) {}
-  try {
-    delete require.cache[require.resolve("../index")];
-  } catch (e) {}
-
-  const prev = process.env.SKIP_DB_CHECK;
-  process.env.SKIP_DB_CHECK = "true";
-  app = require("../index");
-  if (typeof prev === "undefined") delete process.env.SKIP_DB_CHECK;
-  else process.env.SKIP_DB_CHECK = prev;
-});
-
-// luego tus tests usan `app` con supertest
+```powershell
+cd backend
+# instalar dependencias (genera package-lock.json si no existe)
+npm install
+# ejecutar tests en modo CI (usa cross-env para soportar Windows)
+npm run test:ci
 ```
 
-## Siguientes mejoras sugeridas
+Backend (Git Bash / WSL / Linux / macOS):
 
-- Añadir tests E2E (Playwright) que validen login y rutas protegidas.
-- Añadir logging estructurado y graceful shutdown en backend.
-- Añadir despliegue automático (CD) en el workflow de GitHub Actions.
+```bash
+cd backend
+# instalación limpia (usa package-lock.json si existe)
+rm -rf node_modules && rm -f package-lock.json
+npm ci
+# o si no hay package-lock.json: npm install
+npm run test:ci
+```
 
-Si quieres que añada alguno de estos puntos ahora (README automatizado para deploy a una plataforma concreta, Playwright, o DockerHub publish) dime cuál y lo implemento.
+Frontend (Windows PowerShell / Git Bash / WSL / Linux / macOS):
+
+```bash
+cd frontend
+# limpiar e instalar (usar --legacy-peer-deps si hay conflictos de peer deps)
+rm -rf node_modules package-lock.json
+npm ci --legacy-peer-deps
+# ejecutar tests de frontend en modo CI (Vitest run)
+npm run test:ci
+```
+
+Notas importantes:
+
+- En Windows CMD puro la sintaxis para exportar variables de entorno difiere (por eso el proyecto usa `cross-env` en `backend/package.json`). Si ves errores del tipo `"SKIP_DB_CHECK" no se reconoce`, usa PowerShell, Git Bash o instala `cross-env` como devDependency (ya está incluido).
+- Para el frontend, si hay errores de peer deps durante la instalación en CI, usa `npm ci --legacy-peer-deps` o añade una entrada `engines`/resolutions apropiada.
+- Si prefieres ejecutar ambos tests secuencialmente desde la raíz del repo:
+
+```bash
+(cd backend && npm ci && npm run test:ci) && (cd frontend && npm ci --legacy-peer-deps && npm run test:ci)
+```
+
+### CI / GitHub Actions
+
+El repo incluye un workflow en `.github/workflows/ci.yml` que ejecuta build y tests. Puntos clave para CI:
+
+- Usar Node 18 en los runners para compatibilidad con dependencias nativas.
+- Instalar frontend con `--legacy-peer-deps` si el pipeline falla por peer deps.
+- Usar `npm run test:ci` en backend (ya usa `cross-env` para compatibilidad Windows).
 
 ---
 

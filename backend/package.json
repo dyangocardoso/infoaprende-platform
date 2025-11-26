@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "test": "SKIP_DB_CHECK=true NODE_ENV=test mocha --recursive --exit --file test/_setup.js --timeout 20000",
+    "test": "cross-env SKIP_DB_CHECK=true NODE_ENV=test mocha --recursive --exit --file test/_setup.js --timeout 20000",
+    "test:ci": "cross-env SKIP_DB_CHECK=true NODE_ENV=test mocha --recursive --exit --file test/_setup.js --timeout 20000",
     "test:health": "node test-health.js",
     "test:with-db": "NODE_ENV=test mocha --recursive --exit --file test/_setup.js --timeout 20000",
     "migrate": "npx sequelize db:migrate",
@@ -33,6 +34,7 @@
     "nodemon": "^3.0.0",
     "sequelize-cli": "^6.6.3",
     "sinon": "^15.2.0",
-    "supertest": "^6.3.4"
+    "supertest": "^6.3.4",
+    "cross-env": "^7.0.3"
   }
 }
