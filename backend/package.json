@@ -5,8 +5,12 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
+<<<<<<< HEAD
     "test": "set NODE_ENV=test&& mocha --recursive --exit --file test/_setup.js",
     "test:health": "node test-health.js",
+=======
+    "test": "mocha --recursive --exit",
+>>>>>>> 6b73ea3f6376340add24503b140ad5ac176672e9
     "migrate": "npx sequelize db:migrate",
     "migrate:undo": "npx sequelize db:migrate:undo:all",
     "migrate:status": "npx sequelize db:migrate:status",

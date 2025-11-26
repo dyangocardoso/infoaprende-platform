@@ -8,9 +8,13 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+<<<<<<< HEAD
     "test": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed"
+=======
+    "test": "vitest"
+>>>>>>> 6b73ea3f6376340add24503b140ad5ac176672e9
   },
   "dependencies": {
     "dompurify": "^3.3.0",
@@ -30,7 +34,10 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
     "vite": "^7.0.3",
+<<<<<<< HEAD
     "@playwright/test": "^1.47.0",
+=======
+>>>>>>> 6b73ea3f6376340add24503b140ad5ac176672e9
     "vitest": "^1.2.1"
   }
 }
