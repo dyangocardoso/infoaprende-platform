@@ -1,14 +1,18 @@
-const { defineConfig, devices } = require('@playwright/test');
+/* eslint-env node */
+import { defineConfig, devices } from '@playwright/test';
 
-module.exports = defineConfig({
+// Evitar acceso directo a `process` en entornos donde no esté definido (lint)
+const isCI = typeof globalThis !== 'undefined' && !!globalThis.process?.env?.CI;
+
+export default defineConfig({
   testDir: './tests',
   timeout: 120 * 1000,
   expect: {
     timeout: 5000
   },
   fullyParallel: false,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  forbidOnly: isCI,
+  retries: isCI ? 2 : 0,
   reporter: 'list',
   use: {
     baseURL: 'http://localhost:5173',
@@ -16,8 +20,8 @@ module.exports = defineConfig({
     trace: 'on-first-retry'
   },
   webServer: {
-    // Start docker compose to bring db + backend + frontend (Nginx) for e2e tests.
-    command: 'docker compose up --build',
+    // Arranca backend y frontend sin Docker: backend en segundo plano, frontend en primer plano
+    command: "sh -c 'npm --prefix backend run dev & npm --prefix frontend run dev'",
     port: 5173,
     reuseExistingServer: true,
     timeout: 120 * 1000

@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test('homepage loads and health endpoint responds via proxy', async ({ page, request, baseURL }) => {
   // Open the app

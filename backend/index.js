@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 // Importar controladores y middlewares
 const authController = require('./controllers/auth.controller');
@@ -28,6 +29,17 @@ app.use(cors({
   optionsSuccessStatus: 200
 }));
 app.use(express.json());
+
+// Servir archivos estáticos desde backend/public (incluye favicon)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Asegurar que /favicon.ico devuelve un recurso (si existe)
+app.get('/favicon.ico', (req, res) => {
+  const faviconPath = path.join(__dirname, 'public', 'favicon.png');
+  return res.sendFile(faviconPath, err => {
+    if (err) res.status(204).end();
+  });
+});
 
 const PORT = process.env.PORT || 4000;
 

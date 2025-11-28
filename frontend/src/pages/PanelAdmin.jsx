@@ -22,8 +22,6 @@ export default function PanelAdmin() {
   });
   const [createLoading, setCreateLoading] = useState(false);
 
-  const token = localStorage.getItem('token');
-
   useEffect(() => {
     loadUsers();
     loadStats();
@@ -39,7 +37,8 @@ export default function PanelAdmin() {
       } else {
         setMsg((res.data && res.data.message) || '❌ Error cargando usuarios');
       }
-    } catch (error) {
+    } catch (err) {
+      console.error('Error cargando usuarios:', err);
       setMsg('❌ Error de conexión');
     }
   };
@@ -69,7 +68,8 @@ export default function PanelAdmin() {
       } else {
         setMsg((res.data && res.data.message) || '❌ Error actualizando rol');
       }
-    } catch (error) {
+    } catch (err) {
+      console.error('Error actualizando rol:', err);
       setMsg('❌ Error de conexión');
     }
   };
@@ -89,7 +89,8 @@ export default function PanelAdmin() {
       } else {
         setMsg((res.data && res.data.message) || '❌ Error eliminando usuario');
       }
-    } catch (error) {
+    } catch (err) {
+      console.error('Error eliminando usuario:', err);
       setMsg('❌ Error de conexión');
     }
   };
@@ -125,7 +126,8 @@ export default function PanelAdmin() {
       } else {
         setMsg((res.data && res.data.message) || '❌ Error creando usuario');
       }
-    } catch (error) {
+    } catch (err) {
+      console.error('Error creando usuario:', err);
       setMsg('❌ Error de conexión');
     } finally {
       setCreateLoading(false);
