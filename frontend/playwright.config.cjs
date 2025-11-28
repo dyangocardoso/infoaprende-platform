@@ -15,7 +15,9 @@ module.exports = defineConfig({
   use: {
     baseURL: 'http://localhost:5173',
     actionTimeout: 0,
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure'
   },
   webServer: {
     // Usar script npm 'dev' en la raíz que ejecuta concurrently (cross-platform)
