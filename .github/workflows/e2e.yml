@@ -33,37 +33,25 @@ jobs:
       - name: Install Playwright browsers and dependencies
         run: npx playwright install --with-deps
 
-      - name: Start backend (background)
+      - name: Start backend+frontend (background, with logs)
         run: |
-          npm --prefix backend run dev > backend.log 2>&1 &
-          echo $! > backend.pid
+          set -euo pipefail
+          echo "Starting backend+frontend (e2e:start:logs)..."
+          npm run e2e:start:logs > server-combined.log 2>&1 &
+          echo $! > server.pid
+          echo "server pid: $(cat server.pid)"
 
-      - name: Start frontend (background)
+      - name: Wait for services (backend + frontend)
         run: |
-          npm --prefix frontend run dev > frontend.log 2>&1 &
-          echo $! > frontend.pid
+          npx wait-on http://localhost:${{ env.BACKEND_PORT }}/api/health http://localhost:${{ env.FRONTEND_PORT }}/ --timeout 180000
+          echo "services are ready"
 
-      - name: Wait for backend /api/health
-        run: |
-          for i in {1..60}; do
-            if curl -sSf http://localhost:${BACKEND_PORT}/api/health >/dev/null; then
-              echo "backend ready"; break
-            fi
-            echo "waiting for backend... ($i)"; sleep 2
-          done
-
-      - name: Wait for frontend (root)
-        run: |
-          for i in {1..60}; do
-            if curl -sSf http://localhost:${FRONTEND_PORT}/ >/dev/null; then
-              echo "frontend ready"; break
-            fi
-            echo "waiting for frontend... ($i)"; sleep 2
-          done
-
-      - name: Run Playwright E2E tests
+      - name: Run Playwright E2E tests (reuse existing servers)
         env:
           CI: true
+          BACKEND_PORT: ${{ env.BACKEND_PORT }}
+          FRONTEND_PORT: ${{ env.FRONTEND_PORT }}
+          PLAYWRIGHT_TRACE: ${{ env.PLAYWRIGHT_TRACE }}
         run: npx playwright test --reporter=list,html --trace ${PLAYWRIGHT_TRACE}
 
       - name: List generated Playwright artifacts
@@ -77,6 +65,23 @@ jobs:
           du -sh playwright-report || true
           du -sh test-results || true
 
+      - name: Fail if any log > 10MB
+        if: always()
+        run: |
+          MAX=$((10 * 1024 * 1024))
+          echo "Checking log sizes against ${MAX} bytes (10MB)"
+          for f in backend.log frontend.log server-combined.log; do
+            if [ -f "$f" ]; then
+              size=$(stat -c%s "$f" 2>/dev/null || echo 0)
+              echo "$f size: $size bytes"
+              if [ "$size" -gt "$MAX" ]; then
+                echo "ERROR: $f is larger than 10MB ($size bytes). Failing job to avoid oversized artifacts."
+                exit 1
+              fi
+            fi
+          done
+          echo "All logs within size limit."
+
       - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@v4
@@ -85,19 +90,21 @@ jobs:
           path: |
             playwright-report
             test-results
+          retention-days: 14
 
-      - name: Upload logs (on failure)
-        if: failure()
+      - name: Upload logs (if present)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: service-logs
           path: |
             backend.log
             frontend.log
+            server-combined.log
+          retention-days: 14
 
       - name: Stop servers
         if: always()
         run: |
-          if [ -f backend.pid ]; then kill "$(cat backend.pid)" || true; fi
-          if [ -f frontend.pid ]; then kill "$(cat frontend.pid)" || true; fi
+          if [ -f server.pid ]; then kill "$(cat server.pid)" || true; rm -f server.pid; fi
           sleep 1 || true

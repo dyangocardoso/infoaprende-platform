@@ -20,9 +20,9 @@ module.exports = defineConfig({
     video: 'retain-on-failure'
   },
   webServer: {
-    // Usar script npm 'dev' en la raíz que ejecuta concurrently (cross-platform)
-    command: 'npm run dev',
-    port: 5173,
+    // Usar script npm 'e2e:start:logs' para que Playwright controle lifecycle y genere backend.log/frontend.log
+    command: 'npm run e2e:start:logs',
+    port: process.env.FRONTEND_PORT ? Number(process.env.FRONTEND_PORT) : 5173,
     reuseExistingServer: true,
     cwd: path.resolve(__dirname, '..'),
     timeout: 180 * 1000,
@@ -32,7 +32,8 @@ module.exports = defineConfig({
       const max = Date.now() + 180000; // 3 minutos
       while (Date.now() < max) {
         try {
-          const res = await fetch('http://localhost:4000/api/health');
+          const backendPort = process.env.BACKEND_PORT || 4000;
+          const res = await fetch(`http://localhost:${backendPort}/api/health`);
           if (res.ok) return true;
         } catch (e) {
           // ignore
