@@ -10,10 +10,32 @@ jobs:
   e2e:
     name: Ejecutar E2E Playwright
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: infoaprende_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready -U postgres
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
       BACKEND_PORT: "4000" # Ajusta si tu backend usa otro puerto en CI
       FRONTEND_PORT: "5173" # Ajusta si tu frontend usa otro puerto en CI
       PLAYWRIGHT_TRACE: "on-first-retry" # Opciones: off, on, on-first-retry, retain-on-failure
+      # Postgres service env (usados por migraciones/seeders)
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: infoaprende_test
+      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/infoaprende_test
 
     steps:
       - name: Checkout
@@ -27,8 +49,47 @@ jobs:
       - name: Install backend dependencies
         run: npm ci --prefix backend
 
+      - name: Wait for Postgres (pg_isready or wait-on fallback)
+        run: |
+          echo "Waiting for Postgres to be ready..."
+          START_TIME=$(date +%s)
+          for i in {1..60}; do
+            if command -v pg_isready >/dev/null 2>&1; then
+              if pg_isready -h 127.0.0.1 -p 5432 -U postgres >/dev/null 2>&1; then
+                ELAPSED=$(( $(date +%s) - START_TIME ))
+                echo "Postgres ready after ${ELAPSED}s"
+                break
+              fi
+            else
+              # Fallback to wait-on checking TCP port
+              if npx wait-on tcp:5432 --timeout 2000 >/dev/null 2>&1; then
+                ELAPSED=$(( $(date +%s) - START_TIME ))
+                echo "Postgres ready (tcp) after ${ELAPSED}s"
+                break
+              fi
+            fi
+            sleep 2
+          done
+          # If loop finished without break, report total time
+          if ! (command -v pg_isready >/dev/null 2>&1 && pg_isready -h 127.0.0.1 -p 5432 -U postgres >/dev/null 2>&1) && ! npx wait-on tcp:5432 --timeout 2000 >/dev/null 2>&1; then
+            TOTAL=$(( $(date +%s) - START_TIME ))
+            echo "Postgres did not become ready after ${TOTAL}s"
+          fi
+
+      - name: Run database migrations and seeders (backend)
+        env:
+          NODE_ENV: test
+        run: |
+          echo "Running migrations..."
+          npm --prefix backend run migrate
+          echo "Running seeders..."
+          npm --prefix backend run seed
+
       - name: Install frontend dependencies
         run: npm ci --prefix frontend
+
+      - name: Run backend unit tests
+        run: npm --prefix backend test
 
       - name: Install Playwright browsers and dependencies
         run: npx playwright install --with-deps
@@ -84,7 +145,7 @@ jobs:
 
       - name: Upload Playwright report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: playwright-report
           path: |
@@ -94,7 +155,7 @@ jobs:
 
       - name: Upload logs (if present)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: service-logs
           path: |

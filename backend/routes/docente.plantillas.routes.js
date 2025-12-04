@@ -3,7 +3,7 @@ const router = express.Router();
 const plantillaController = require('../controllers/plantilla.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
 const adminMiddleware = require('../middlewares/admin-new.middleware');
-const docenteMiddleware = require('../middlewares/docente.middleware');
+const requireRole = require('../middlewares/role.middleware');
 
 // Nota: la gestión de plantillas se reserva a admin
 router.get('/', authMiddleware.verifyToken, adminMiddleware.requireAdmin, plantillaController.list);
@@ -13,6 +13,6 @@ router.put('/:id', authMiddleware.verifyToken, adminMiddleware.requireAdmin, pla
 router.delete('/:id', authMiddleware.verifyToken, adminMiddleware.requireAdmin, plantillaController.delete);
 router.post('/:id/export', authMiddleware.verifyToken, adminMiddleware.requireAdmin, plantillaController.export);
 // Nueva ruta para preview HTML (permitir admin o docente)
-router.get('/:id/preview', authMiddleware.verifyToken, docenteMiddleware, plantillaController.preview);
+router.get('/:id/preview', authMiddleware.verifyToken, requireRole('docente'), plantillaController.preview);
 
 module.exports = router;

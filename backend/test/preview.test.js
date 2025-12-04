@@ -19,11 +19,7 @@ function mockModule(relPath, exportsObj) {
 }
 
 let sandbox;
-<<<<<<< HEAD
 const baseUser = { id: 1, email: 'admin@infoaprende.com', rol: 'docente', role: 'docente' };
-=======
-const baseUser = { id: 1, email: 'admin@infoaprende.com', rol: 'administrador', role: 'administrador' };
->>>>>>> 6b73ea3f6376340add24503b140ad5ac176672e9
 
 let app;
 
@@ -145,13 +141,6 @@ before(async function () {
   mockModule('./middlewares/rateLimit.middleware', rateLimitStub);
   mockModule(path.resolve(__dirname, '..', 'middlewares', 'rateLimit.middleware'), rateLimitStub);
 
-<<<<<<< HEAD
-  // Ensure the main app module is reloaded so it picks up the mocked middlewares
-  try {
-    const idx = require.resolve('../index');
-    if (require.cache[idx]) delete require.cache[idx];
-  } catch (e) { /* ignore */ }
-
   // Clear any previously loaded middleware modules from require.cache so our mocks are used
   Object.keys(require.cache).forEach(k => {
     if (k && (k.includes(`${path.sep}middlewares${path.sep}`) || k.includes('/middlewares/'))) {
@@ -159,8 +148,6 @@ before(async function () {
     }
   });
 
-=======
->>>>>>> 6b73ea3f6376340add24503b140ad5ac176672e9
   // Cargar la app después de haber colocado todos los mocks (dbInit + middlewares)
   app = require('../index');
 
@@ -195,53 +182,41 @@ after(() => {
 
 describe('GET /api/docente/plantillas/:id/preview (con sinon stubs)', function () {
   it('debe devolver HTML con status 200 sin necesidad de token/BD', async function () {
-<<<<<<< HEAD
     // Forzar temporalmente rol 'docente' en el fallback req.user para este test
     const prevRole = baseUser.role;
     const prevRol = baseUser.rol;
     baseUser.role = 'docente';
     baseUser.rol = 'docente';
 
-=======
->>>>>>> 6b73ea3f6376340add24503b140ad5ac176672e9
     const res = await request(app)
       .get('/api/docente/plantillas/1/preview')
       .expect(200);
 
-<<<<<<< HEAD
     // Restaurar rol original
     baseUser.role = prevRole;
     baseUser.rol = prevRol;
 
-=======
->>>>>>> 6b73ea3f6376340add24503b140ad5ac176672e9
     expect(res.headers['content-type']).to.match(/html/);
     expect(res.text).to.be.a('string');
     expect(res.text.length).to.be.greaterThan(10);
   });
 
   it('debe devolver 404 si la plantilla no existe (sin error de autenticación)', async function () {
-<<<<<<< HEAD
     const prevRole = baseUser.role;
     const prevRol = baseUser.rol;
     baseUser.role = 'docente';
     baseUser.rol = 'docente';
 
-=======
->>>>>>> 6b73ea3f6376340add24503b140ad5ac176672e9
     const res = await request(app)
       .get('/api/docente/plantillas/9999999/preview')
       .expect(res => {
         if (![200, 404].includes(res.status)) throw new Error(`Status inesperado: ${res.status}`);
       });
 
-<<<<<<< HEAD
     // Restaurar rol original
     baseUser.role = prevRole;
     baseUser.rol = prevRol;
 
-=======
->>>>>>> 6b73ea3f6376340add24503b140ad5ac176672e9
     expect(res.status === 404 || res.status === 200).to.be.true;
   });
 });
