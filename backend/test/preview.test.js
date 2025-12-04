@@ -156,7 +156,7 @@ before(async function () {
   // Esto evita errores 401 si algún middleware de auth no fue sustituido correctamente.
   app.use((req, res, next) => { req.user = baseUser; next(); });
 
-  // Esperar hasta que global.Plantilla esté disponible (inicialización de DB mock completada)
+  // Esperar hasta que global.Plantilla esté disponible (inicialización de BD mock completada)
   const waitFor = (predicate, timeout = 2000, interval = 50) => new Promise((resolve, reject) => {
     const start = Date.now();
     (function check() {
