@@ -4,11 +4,11 @@ const Evaluacion = require('../models/evaluacion.model');
 const Intento = require('../models/intento.model');
 const Asignacion = require('../models/asignacion.model');
 const authMiddleware = require('../middlewares/auth.middleware');
-const docenteMiddleware = require('../middlewares/docente.middleware');
+const requireRole = require('../middlewares/role.middleware');
 const mongoose = require('mongoose');
 
 // Overview de una evaluación: intentos, media, desviación, tasa aprobado
-router.get('/evaluacion/:id/overview', authMiddleware, docenteMiddleware, async (req, res) => {
+router.get('/evaluacion/:id/overview', authMiddleware.verifyToken, requireRole('docente'), async (req, res) => {
   try {
     const evalId = mongoose.Types.ObjectId(req.params.id);
     const agg = await Intento.aggregate([
@@ -22,7 +22,7 @@ router.get('/evaluacion/:id/overview', authMiddleware, docenteMiddleware, async 
 });
 
 // Reporte por alumno para una evaluación
-router.get('/evaluacion/:id/alumnos', authMiddleware, docenteMiddleware, async (req, res) => {
+router.get('/evaluacion/:id/alumnos', authMiddleware.verifyToken, requireRole('docente'), async (req, res) => {
   try {
     const evalId = req.params.id;
     const agg = await Intento.aggregate([
@@ -36,7 +36,7 @@ router.get('/evaluacion/:id/alumnos', authMiddleware, docenteMiddleware, async (
 });
 
 // Progreso por temario (asumimos relaciones externas a implementar)
-router.get('/temario/:id/progreso', authMiddleware, docenteMiddleware, async (req, res) => {
+router.get('/temario/:id/progreso', authMiddleware.verifyToken, requireRole('docente'), async (req, res) => {
   try {
     // Placeholder: devolver estructura vacía. Implementar según modelo de lecciones/progreso.
     res.json({ message: 'Endpoint en desarrollo - definir esquema de lecciones y progreso' });
