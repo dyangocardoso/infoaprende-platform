@@ -1,7 +1,7 @@
 // Middleware sencillo para restringir acceso exclusivamente a usuarios con rol 'docente'
 module.exports = function (req, res, next) {
-  // Bypass en tests/desarrollo controlado por variable de entorno SKIP_AUTH o NODE_ENV=test
-  if (process.env.SKIP_AUTH === 'true' || process.env.NODE_ENV === 'test') {
+  // Bypass controlado únicamente por la variable de entorno SKIP_AUTH
+  if (process.env.SKIP_AUTH === 'true') {
     return next();
   }
 
