@@ -1,71 +1,23 @@
 const request = require('supertest');
 const { expect } = require('chai');
 const path = require('path');
-
-// Helper para mockear módulos por ruta relativa (establece entry en require.cache)
-function mockModule(relPath, exportsObj) {
-  try {
-    const resolved = require.resolve(relPath);
-    require.cache[resolved] = {
-      id: resolved,
-      filename: resolved,
-      loaded: true,
-      exports: exportsObj
-    };
-  } catch (e) {
-    // ignorar si no existe
-  }
-}
-
-let app;
-
-before(async function () {
-  this.timeout(8000);
-
-  // Mock de initializeDatabase para evitar dependencia real de BD
-  const dbInitStub = {
-    initializeDatabase: async () => {
-      const plantillaModel = {
-        findByPk: async (id) => {
-          if (String(id) === '1' || id === 1) {
-            return {
-              id: 1,
-              contenido_html: '<div><h1>Plantilla demo</h1></div>',
-              recursos: JSON.stringify([]),
-              css: ''
-            };
-          }
-          return null;
-        }
-      };
-      const dummy = { sync: async () => {} };
-      try { global.Plantilla = plantillaModel; } catch (e) { /* ignore */ }
-      return { User: dummy, Curso: dummy, Leccion: dummy, ProgresoUsuario: dummy, Plantilla: plantillaModel, sequelize: dummy };
-    }
-  };
-
-  mockModule('../config/database-init', dbInitStub);
-  mockModule('./config/database-init', dbInitStub);
-  mockModule(path.resolve(__dirname, '..', 'config', 'database-init'), dbInitStub);
-
-  // Stub auth middleware que establece un usuario NO docente
-  const authMiddlewareStub = {
-    verifyToken: (req, res, next) => { req.user = { id: 10, email: 'user@example.com', role: 'estudiante' }; next(); },
-    verifyTokenOptional: (req, res, next) => { req.user = { id: 10, email: 'user@example.com', role: 'estudiante' }; next(); }
-  };
-
-  mockModule('../middlewares/auth.middleware', authMiddlewareStub);
-  mockModule('./middlewares/auth.middleware', authMiddlewareStub);
-  mockModule(path.resolve(__dirname, '..', 'middlewares', 'auth.middleware'), authMiddlewareStub);
-
-  // NOTA: NO mockear docente.middleware -> queremos ejecutar el middleware real para comprobar RBAC
-
-  // Cargar la app
-  app = require('../index');
-});
+const proxyquire = require('proxyquire').noCallThru();
+const { buildApp } = require('./helpers/buildApp');
 
 describe('Integración RBAC en preview (solo docente)', () => {
   it('debe devolver 403 cuando el usuario no es docente', async () => {
+    const app = buildApp({ role: 'estudiante' });
+
+    const waitFor = (predicate, timeout = 2000, interval = 50) => new Promise((resolve, reject) => {
+      const start = Date.now();
+      (function check() {
+        try { if (predicate()) return resolve(true); } catch (e) {}
+        if (Date.now() - start > timeout) return reject(new Error('Timeout esperando inicialización de DB mock'));
+        setTimeout(check, interval);
+      })();
+    });
+    try { await waitFor(() => !!global.Plantilla, 3000, 50); } catch (e) { console.warn('preview.rbac.test: global.Plantilla no listo'); }
+
     const res = await request(app)
       .get('/api/docente/plantillas/1/preview')
       .expect(403);
@@ -74,54 +26,8 @@ describe('Integración RBAC en preview (solo docente)', () => {
   });
 
   it('debe permitir acceso cuando el usuario es docente (control rápido)', async () => {
-    // Para este caso reiniciamos app con auth que sí devuelve role: 'docente'
-    // Limpiar cache y volver a cargar con un auth stub que devuelve docente
-    try {
-      const resolved = require.resolve('../index');
-      delete require.cache[resolved];
-    } catch (e) {}
-
-    const dbInitStub = {
-      initializeDatabase: async () => {
-        const plantillaModel = {
-          findByPk: async (id) => {
-            if (String(id) === '1' || id === 1) {
-              return { id: 1, contenido_html: '<div><h1>Plantilla demo</h1></div>', recursos: JSON.stringify([]), css: '' };
-            }
-            return null;
-          }
-        };
-        const dummy = { sync: async () => {} };
-        try { global.Plantilla = plantillaModel; } catch (e) { /* ignore */ }
-        return { User: dummy, Curso: dummy, Leccion: dummy, ProgresoUsuario: dummy, Plantilla: plantillaModel, sequelize: dummy };
-      }
-    };
-
-    mockModule('../config/database-init', dbInitStub);
-
-    const authMiddlewareStubDocente = {
-      verifyToken: (req, res, next) => { req.user = { id: 11, email: 'docente@example.com', role: 'docente' }; next(); },
-      verifyTokenOptional: (req, res, next) => { req.user = { id: 11, email: 'docente@example.com', role: 'docente' }; next(); }
-    };
-
-    mockModule('../middlewares/auth.middleware', authMiddlewareStubDocente);
-    mockModule('./middlewares/auth.middleware', authMiddlewareStubDocente);
-    mockModule(path.resolve(__dirname, '..', 'middlewares', 'auth.middleware'), authMiddlewareStubDocente);
-
-    // Mockear docente.middleware como passthrough para esta recarga controlada
-    const docentePass = (req, res, next) => next();
-    mockModule('../middlewares/docente.middleware', docentePass);
-    mockModule('./middlewares/docente.middleware', docentePass);
-    mockModule(path.resolve(__dirname, '..', 'middlewares', 'docente.middleware'), docentePass);
-
-    // Ensure middleware modules are reloaded from the mocked versions
-    try { const m1 = require.resolve('../middlewares/docente.middleware'); if (require.cache[m1]) delete require.cache[m1]; } catch (e) {}
-    try { const m2 = require.resolve('../middlewares/auth.middleware'); if (require.cache[m2]) delete require.cache[m2]; } catch (e) {}
-    try { const m3 = require.resolve('../middlewares/admin.middleware'); if (require.cache[m3]) delete require.cache[m3]; } catch (e) {}
-
-    // Reload app module
-    try { const rid = require.resolve('../index'); if (require.cache[rid]) delete require.cache[rid]; } catch (e) {}
-    app = require('../index');
+    const app = buildApp({ role: 'docente' });
+    try { await (async function waitFor() { const start = Date.now(); while (!global.Plantilla && Date.now()-start<3000) await new Promise(r=>setTimeout(r,50)); })(); } catch (e) { console.warn('preview.rbac.test: global.Plantilla no listo'); }
 
     const res = await request(app)
       .get('/api/docente/plantillas/1/preview')
