@@ -8,36 +8,44 @@ const baseUser = { id: 1, email: 'admin@infoaprende.com', rol: 'docente', role: 
 
 let app;
 
-before(async function () {
-  // Permitir más tiempo para la inicialización en este hook
+// Construir y preparar la app antes de cada test para evitar que la limpieza global
+// de require.cache / globals de otros tests afecte a los siguientes.
+beforeEach(async function () {
   this.timeout(10000);
-
-  // Evitar que la inicialización real de la BD marque dbConnected=false
   process.env.SKIP_MIGRATIONS = 'true';
   process.env.SKIP_SEEDS = 'true';
 
-  // Construir app con buildApp simulando rol 'docente' para estos tests
   app = buildApp({ role: 'docente', dbPlantillaHtml: '<div><h1>Plantilla demo</h1><p>Contenido de prueba</p></div>' });
 
-  // Esperar hasta que la app reporte database connected en /api/health
-  const waitForHealth = (timeout = 3000, interval = 50) => new Promise((resolve, reject) => {
+  // Esperar readiness: /api/health y que preview no devuelva 503
+  const waitForReady = (timeout = 10000, interval = 50) => new Promise((resolve, reject) => {
     const start = Date.now();
     (function check() {
       request(app)
         .get('/api/health')
         .end((err, res) => {
-          if (!err && res && res.body && (res.body.database === 'connected' || res.body.database === 'Conectada')) return resolve(true);
+          const healthy = !err && res && res.body && (res.body.database === 'connected' || res.body.database === 'Conectada');
+          if (healthy) {
+            request(app)
+              .get('/api/docente/plantillas/1/preview')
+              .end((e2, r2) => {
+                if (!e2 && r2 && r2.status && r2.status !== 503) return resolve(true);
+                if (Date.now() - start > timeout) return reject(new Error('Timeout esperando readiness de preview (no 503)'));
+                setTimeout(check, interval);
+              });
+            return;
+          }
           if (Date.now() - start > timeout) return reject(new Error('Timeout esperando /api/health connected'));
           setTimeout(check, interval);
         });
     })();
   });
 
-  try { await waitForHealth(4000, 50); } catch (e) { console.warn('preview.test: /api/health no conectado en timeout'); }
+  try { await waitForReady(10000, 50); } catch (e) { throw new Error('preview.test: servicio no listo en timeout: ' + (e && e.message)); }
 });
 
-after(function () {
-  // Restaurar sandbox
+afterEach(function () {
+  // Restaurar sandbox si existe
   if (sandbox) sandbox.restore();
 });
 
