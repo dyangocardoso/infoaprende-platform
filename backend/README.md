@@ -83,6 +83,35 @@ SKIP_SEEDS=true
 
 npx sequelize db:seed:all
 
+Notas sobre PRs recientes: separación CI vs tests
+-----------------------------------------------
+
+Para mantener PRs enfocados y facilitar revisiones, recientemente se separaron los cambios de CI y los cambios de tests en ramas distintas:
+
+- PR/branch de CI: `ci/downgrade-upload-artifact` (PR #2)
+  - Contiene únicamente la modificación del workflow E2E (`.github/workflows/e2e.yml`) para usar `actions/upload-artifact@v3` y eliminar advertencias en GitHub Actions.
+  - Revisión: comprobar ejecución del workflow E2E desde el PR y que los artefactos se suban sin advertencias.
+
+- PR/branch de tests: `test/plantilla-stub` (PR #3)
+  - Añade un helper de tests `backend/test/helpers/plantillaStub.js`, documentación en `backend/test/helpers/README.md` y la integración en `backend/test/preview.test.js` (se resolvieron conflictos y se cherry-pickearon los commits correspondientes).
+  - Revisión: revisar el helper y ejecutar los tests del backend.
+
+Ubicación del helper de tests
+- `backend/test/helpers/plantillaStub.js` — instala un stub en `global.Plantilla` para evitar dependencias reales de BD en tests de preview.
+- Documentación: `backend/test/helpers/README.md`.
+
+Comandos útiles
+- Ejecutar toda la suite de tests del backend:
+  npm --prefix backend test
+- Ejecutar sólo el test de preview:
+  npm --prefix backend test -- backend/test/preview.test.js
+- Para probar localmente la rama de tests:
+  git fetch origin && git checkout test/plantilla-stub && npm --prefix backend test
+
+Notas finales
+- No se han cerrado los PRs; ambos están abiertos para revisión y la conversación en cada PR contiene notas sobre la separación de cambios y la resolución de conflictos.
+- Si quieres, puedo añadir esta nota también en el README principal del repo o commitearla y crear un PR desde la rama que prefieras. Indica si deseas que haga commit y push y a qué rama.
+
 Problemas comunes
 
 - Error de conexión: verificar `DB_HOST`, `DB_USER`, `DB_PASS`, y que Postgres acepte conexiones desde la máquina.

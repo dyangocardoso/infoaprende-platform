@@ -10,10 +10,32 @@ jobs:
   e2e:
     name: Ejecutar E2E Playwright
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: infoaprende_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready -U postgres
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
       BACKEND_PORT: "4000" # Ajusta si tu backend usa otro puerto en CI
       FRONTEND_PORT: "5173" # Ajusta si tu frontend usa otro puerto en CI
       PLAYWRIGHT_TRACE: "on-first-retry" # Opciones: off, on, on-first-retry, retain-on-failure
+      # Postgres service env (usados por migraciones/seeders)
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: infoaprende_test
+      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/infoaprende_test
 
     steps:
       - name: Checkout
@@ -84,7 +106,7 @@ jobs:
 
       - name: Upload Playwright report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: playwright-report
           path: |
@@ -94,7 +116,7 @@ jobs:
 
       - name: Upload logs (if present)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: service-logs
           path: |
