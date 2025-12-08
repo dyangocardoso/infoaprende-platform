@@ -20,10 +20,10 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd pg_isready -U postgres
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          --health-cmd "pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     env:
       BACKEND_PORT: "4000" # Ajusta si tu backend usa otro puerto en CI
@@ -88,7 +88,7 @@ jobs:
       - name: Install frontend dependencies
         # Use --legacy-peer-deps to avoid ERESOLVE failures caused by peer dep mismatches
         # (temporal workaround). Ideally align frontend deps (react/@testing-library) later.
-        run: npm ci --prefix frontend --legacy-peer-deps
+        run: npm ci --prefix frontend
 
       - name: Run backend unit tests
         run: npm --prefix backend test
