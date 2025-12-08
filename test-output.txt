@@ -1,0 +1,58 @@
+
+> infoaprende-backend@1.0.0 test
+> cross-env NODE_ENV=test mocha --recursive --exit --file test/_setup.js
+
+
+
+  docente.middleware RBAC
+Allowed CORS origins: [ 'http://localhost:5173' ]
+🔍 Inicializando base de datos...
+ℹ️  INFOAPRENDE backend importado como módulo (modo test). No se inicia el listener HTTP automáticamente.
+✅ Base de datos y modelos inicializados correctamente
+    ✔ debe rechazar acceso si no está autenticado
+Allowed CORS origins: [ 'http://localhost:5173' ]
+🔍 Inicializando base de datos...
+ℹ️  INFOAPRENDE backend importado como módulo (modo test). No se inicia el listener HTTP automáticamente.
+✅ Base de datos y modelos inicializados correctamente
+    ✔ debe rechazar acceso si el rol no es docente
+Allowed CORS origins: [ 'http://localhost:5173' ]
+🔍 Inicializando base de datos...
+ℹ️  INFOAPRENDE backend importado como módulo (modo test). No se inicia el listener HTTP automáticamente.
+✅ Base de datos y modelos inicializados correctamente
+    ✔ debe permitir acceso para usuarios con rol docente
+
+  Integración RBAC en preview (solo docente)
+Allowed CORS origins: [ 'http://localhost:5173' ]
+🔍 Inicializando base de datos...
+ℹ️  INFOAPRENDE backend importado como módulo (modo test). No se inicia el listener HTTP automáticamente.
+✅ Base de datos y modelos inicializados correctamente
+Allowed CORS origins: [ 'http://localhost:5173' ]
+🔍 Inicializando base de datos...
+ℹ️  INFOAPRENDE backend importado como módulo (modo test). No se inicia el listener HTTP automáticamente.
+✅ Base de datos y modelos inicializados correctamente
+    ✔ debe devolver 403 cuando el usuario no es docente
+Allowed CORS origins: [ 'http://localhost:5173' ]
+🔍 Inicializando base de datos...
+ℹ️  INFOAPRENDE backend importado como módulo (modo test). No se inicia el listener HTTP automáticamente.
+✅ Base de datos y modelos inicializados correctamente
+Allowed CORS origins: [ 'http://localhost:5173' ]
+🔍 Inicializando base de datos...
+ℹ️  INFOAPRENDE backend importado como módulo (modo test). No se inicia el listener HTTP automáticamente.
+✅ Base de datos y modelos inicializados correctamente
+    ✔ debe permitir acceso cuando el usuario es docente (control rápido)
+
+  GET /api/docente/plantillas/:id/preview (con sinon stubs)
+Allowed CORS origins: [ 'http://localhost:5173' ]
+🔍 Inicializando base de datos...
+ℹ️  INFOAPRENDE backend importado como módulo (modo test). No se inicia el listener HTTP automáticamente.
+✅ Base de datos y modelos inicializados correctamente
+    ✔ debe devolver HTML con status 200 sin necesidad de token/BD
+Allowed CORS origins: [ 'http://localhost:5173' ]
+🔍 Inicializando base de datos...
+ℹ️  INFOAPRENDE backend importado como módulo (modo test). No se inicia el listener HTTP automáticamente.
+✅ Base de datos y modelos inicializados correctamente
+    ✔ debe devolver 404 si la plantilla no existe (sin error de autenticación)
+
+
+  7 passing (1s)
+
