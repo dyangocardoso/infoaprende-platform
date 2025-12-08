@@ -86,7 +86,9 @@ jobs:
           npm --prefix backend run seed
 
       - name: Install frontend dependencies
-        run: npm ci --prefix frontend
+        # Use --legacy-peer-deps to avoid ERESOLVE failures caused by peer dep mismatches
+        # (temporal workaround). Ideally align frontend deps (react/@testing-library) later.
+        run: npm ci --prefix frontend --legacy-peer-deps
 
       - name: Run backend unit tests
         run: npm --prefix backend test
