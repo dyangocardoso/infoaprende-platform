@@ -15,6 +15,17 @@ describe('docente.middleware RBAC', () => {
     docenteMiddleware = require('../middlewares/docente.middleware');
   });
 
+  beforeEach(() => {
+    // limpiar posibles globals y cache antes de cada test
+    try { delete global.sequelize; } catch (e) {}
+    try { delete global.Plantilla; } catch (e) {}
+  });
+
+  afterEach(() => {
+    try { delete global.sequelize; } catch (e) {}
+    try { delete global.Plantilla; } catch (e) {}
+  });
+
   it('debe rechazar acceso si no está autenticado', () => {
     const req = {};
     const res = { status: sinon.stub().returnsThis(), json: sinon.stub().returnsThis() };

@@ -15,6 +15,28 @@ beforeEach(async function () {
   process.env.SKIP_MIGRATIONS = 'true';
   process.env.SKIP_SEEDS = 'true';
 
+  // Crear sandbox para cada test
+  sandbox = sinon.createSandbox();
+
+  // Limpiar posibles globals que puedan contaminar tests
+  try { delete global.sequelize; } catch (e) {}
+  try { delete global.Plantilla; } catch (e) {}
+
+  // Limpiar require.cache de middlewares / rutas que podrían haber sido requeridos
+  const modulesToClear = [
+    '../middlewares/auth.middleware.js',
+    '../middlewares/docente.middleware.js',
+    // añadir otros módulos si es necesario
+  ];
+  modulesToClear.forEach(rel => {
+    try {
+      const resolved = require.resolve(rel);
+      delete require.cache[resolved];
+    } catch (e) {
+      // ignorar si no existe la ruta en cache
+    }
+  });
+
   app = buildApp({ role: 'docente', dbPlantillaHtml: '<div><h1>Plantilla demo</h1><p>Contenido de prueba</p></div>' });
 
   // Esperar readiness: /api/health y que preview no devuelva 503
@@ -46,7 +68,24 @@ beforeEach(async function () {
 
 afterEach(function () {
   // Restaurar sandbox si existe
-  if (sandbox) sandbox.restore();
+  if (sandbox) {
+    try { sandbox.restore(); } catch (e) {}
+    sandbox = null;
+  }
+
+  // Limpiar require.cache y globals después de cada test para evitar contaminación
+  const modulesToClear = [
+    '../middlewares/auth.middleware.js',
+    '../middlewares/docente.middleware.js',
+  ];
+  modulesToClear.forEach(rel => {
+    try {
+      const resolved = require.resolve(rel);
+      delete require.cache[resolved];
+    } catch (e) {}
+  });
+  try { delete global.sequelize; } catch (e) {}
+  try { delete global.Plantilla; } catch (e) {}
 });
 
 describe('GET /api/docente/plantillas/:id/preview (con sinon stubs)', function () {

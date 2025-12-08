@@ -4,7 +4,48 @@ const path = require('path');
 const proxyquire = require('proxyquire').noCallThru();
 const { buildApp } = require('./helpers/buildApp');
 
+let sandbox;
+
 describe('Integración RBAC en preview (solo docente)', () => {
+  beforeEach(function () {
+    // preparar sandbox y evitar contaminación entre tests
+    sandbox = require('sinon').createSandbox();
+    process.env.SKIP_MIGRATIONS = 'true';
+    process.env.SKIP_SEEDS = 'true';
+    try { delete global.sequelize; } catch (e) {}
+    try { delete global.Plantilla; } catch (e) {}
+
+    const modulesToClear = [
+      '../middlewares/auth.middleware.js',
+      '../middlewares/docente.middleware.js',
+    ];
+    modulesToClear.forEach(rel => {
+      try {
+        const resolved = require.resolve(rel);
+        delete require.cache[resolved];
+      } catch (e) {}
+    });
+  });
+
+  afterEach(function () {
+    if (sandbox) {
+      try { sandbox.restore(); } catch (e) {}
+      sandbox = null;
+    }
+    const modulesToClear = [
+      '../middlewares/auth.middleware.js',
+      '../middlewares/docente.middleware.js',
+    ];
+    modulesToClear.forEach(rel => {
+      try {
+        const resolved = require.resolve(rel);
+        delete require.cache[resolved];
+      } catch (e) {}
+    });
+    try { delete global.sequelize; } catch (e) {}
+    try { delete global.Plantilla; } catch (e) {}
+  });
+
   it('debe devolver 403 cuando el usuario no es docente', async () => {
     const app = buildApp({ role: 'estudiante' });
 
