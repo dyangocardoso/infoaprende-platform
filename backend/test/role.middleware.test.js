@@ -58,4 +58,27 @@ describe('role.middleware.requireRole', () => {
 
     expect(next.calledOnce).to.be.true;
   });
+
+  it('debe permitir cuando la propiedad es `rol` (variación en español)', () => {
+    const req = { user: { id: 5, rol: 'docente' } };
+    const res = { status: sinon.stub().returnsThis(), json: sinon.stub().returnsThis() };
+    const next = sinon.spy();
+
+    const mw = requireRole('docente');
+    mw(req, res, next);
+
+    expect(next.calledOnce).to.be.true;
+  });
+
+  it('debe rechazar si el usuario existe pero no tiene rol definido', () => {
+    const req = { user: { id: 6 } };
+    const res = { status: sinon.stub().returnsThis(), json: sinon.stub().returnsThis() };
+    const next = sinon.spy();
+
+    const mw = requireRole('docente');
+    mw(req, res, next);
+
+    expect(res.status.calledWith(403)).to.be.true;
+    expect(next.notCalled).to.be.true;
+  });
 });
