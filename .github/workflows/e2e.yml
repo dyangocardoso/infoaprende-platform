@@ -41,6 +41,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Lint GitHub Actions workflow (actionlint)
+        # Validate the workflow file early in the job to catch syntax/semantic issues.
+        run: npx -y actionlint .github/workflows/e2e.yml
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -74,6 +78,7 @@ jobs:
           if ! (command -v pg_isready >/dev/null 2>&1 && pg_isready -h 127.0.0.1 -p 5432 -U postgres >/dev/null 2>&1) && ! npx wait-on tcp:5432 --timeout 2000 >/dev/null 2>&1; then
             TOTAL=$(( $(date +%s) - START_TIME ))
             echo "Postgres did not become ready after ${TOTAL}s"
+            exit 1
           fi
 
       - name: Run database migrations and seeders (backend)
@@ -86,8 +91,8 @@ jobs:
           npm --prefix backend run seed
 
       - name: Install frontend dependencies
-        # Use --legacy-peer-deps to avoid ERESOLVE failures caused by peer dep mismatches
-        # (temporal workaround). Ideally align frontend deps (react/@testing-library) later.
+        # Las dependencias del frontend ya están alineadas (React 18, @testing-library v14, jest-dom v6)
+        # y el workaround con --legacy-peer-deps fue removido. Mantener el lockfile regenerado si se actualiza.
         run: npm ci --prefix frontend
 
       - name: Run backend unit tests
@@ -116,6 +121,11 @@ jobs:
           FRONTEND_PORT: ${{ env.FRONTEND_PORT }}
           PLAYWRIGHT_TRACE: ${{ env.PLAYWRIGHT_TRACE }}
         run: npx playwright test --reporter=list,html --trace ${PLAYWRIGHT_TRACE}
+
+      - name: Verify required npm scripts exist
+        # Ensure CI fails early with a clear message if a referenced npm script is missing
+        run: |
+          node -e "const root=require('./package.json');const be=require('./backend/package.json');const fe=require('./frontend/package.json');const missing=[]; if(!(root.scripts && root.scripts['e2e:start:logs'])) missing.push('root:e2e:start:logs'); if(!(be.scripts && be.scripts['migrate'])) missing.push('backend:migrate'); if(!(be.scripts && be.scripts['seed'])) missing.push('backend:seed'); if(!(be.scripts && be.scripts['test'])) missing.push('backend:test'); if(!(fe.scripts && fe.scripts['test:e2e'])) missing.push('frontend:test:e2e'); if(missing.length){ console.error('Missing npm scripts: '+missing.join(', ')); process.exit(1);} console.log('All required scripts present');
 
       - name: List generated Playwright artifacts
         if: always()
