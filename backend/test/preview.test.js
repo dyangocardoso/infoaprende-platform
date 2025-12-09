@@ -2,6 +2,7 @@ const request = require('supertest');
 const { expect } = require('chai');
 const sinon = require('sinon');
 const { buildApp } = require('./helpers/buildApp');
+const path = require('path');
 
 let sandbox;
 const baseUser = { id: 1, email: 'admin@infoaprende.com', rol: 'docente', role: 'docente' };
@@ -26,7 +27,11 @@ beforeEach(async function () {
   const modulesToClear = [
     '../middlewares/auth.middleware.js',
     '../middlewares/docente.middleware.js',
-    // añadir otros módulos si es necesario
+    '../middlewares/admin.middleware.js',
+    '../middlewares/admin-new.middleware.js',
+    '../middlewares/role.middleware.js',
+    '../middlewares/logger.middleware.js',
+    '../middlewares/rateLimit.middleware.js',
   ];
   modulesToClear.forEach(rel => {
     try {
@@ -37,6 +42,7 @@ beforeEach(async function () {
     }
   });
 
+  // Cargar la app usando el helper buildApp que monta la app con estado controlado
   app = buildApp({ role: 'docente', dbPlantillaHtml: '<div><h1>Plantilla demo</h1><p>Contenido de prueba</p></div>' });
 
   // Esperar readiness: /api/health y que preview no devuelva 503
@@ -77,6 +83,11 @@ afterEach(function () {
   const modulesToClear = [
     '../middlewares/auth.middleware.js',
     '../middlewares/docente.middleware.js',
+    '../middlewares/admin.middleware.js',
+    '../middlewares/admin-new.middleware.js',
+    '../middlewares/role.middleware.js',
+    '../middlewares/logger.middleware.js',
+    '../middlewares/rateLimit.middleware.js',
   ];
   modulesToClear.forEach(rel => {
     try {
@@ -90,9 +101,19 @@ afterEach(function () {
 
 describe('GET /api/docente/plantillas/:id/preview (con sinon stubs)', function () {
   it('debe devolver HTML con status 200 sin necesidad de token/BD', async function () {
+    // Forzar temporalmente rol 'docente' en el fallback req.user para este test
+    const prevRole = baseUser.role;
+    const prevRol = baseUser.rol;
+    baseUser.role = 'docente';
+    baseUser.rol = 'docente';
+
     const res = await request(app)
       .get('/api/docente/plantillas/1/preview')
       .expect(200);
+
+    // Restaurar rol original
+    baseUser.role = prevRole;
+    baseUser.rol = prevRol;
 
     expect(res.headers['content-type']).to.match(/html/);
     expect(res.text).to.be.a('string');
@@ -100,11 +121,20 @@ describe('GET /api/docente/plantillas/:id/preview (con sinon stubs)', function (
   });
 
   it('debe devolver 404 si la plantilla no existe (sin error de autenticación)', async function () {
+    const prevRole = baseUser.role;
+    const prevRol = baseUser.rol;
+    baseUser.role = 'docente';
+    baseUser.rol = 'docente';
+
     const res = await request(app)
       .get('/api/docente/plantillas/9999999/preview')
       .expect(res => {
         if (![200, 404].includes(res.status)) throw new Error(`Status inesperado: ${res.status}`);
       });
+
+    // Restaurar rol original
+    baseUser.role = prevRole;
+    baseUser.rol = prevRol;
 
     expect(res.status === 404 || res.status === 200).to.be.true;
   });
