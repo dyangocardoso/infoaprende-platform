@@ -41,14 +41,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Lint GitHub Actions workflow (actionlint)
-        # Validate the workflow file early in the job to catch syntax/semantic issues.
-        run: npx -y actionlint .github/workflows/e2e.yml
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "18"
+
+      - name: Lint GitHub Actions workflow (actionlint)
+        # Usar la acción oficial para evitar dependencias en npm/npx en el runner.
+        # Fallback: si se prefiere ejecutar localmente vía npx usar: `npx -y actionlint .github/workflows/e2e.yml`
+        uses: rhysd/actionlint@v1
 
       - name: Install backend dependencies
         run: npm ci --prefix backend
