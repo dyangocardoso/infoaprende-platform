@@ -1,0 +1,457 @@
+Ejecutar E2E Playwright	Set up job	﻿2025-12-10T13:54:57.9530084Z Current runner version: '2.329.0'
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9555435Z ##[group]Runner Image Provisioner
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9556280Z Hosted Compute Agent
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9556879Z Version: 20251124.448
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9557504Z Commit: fda5086b43ec66ade217e5fcd18146c879571177
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9558172Z Build Date: 2025-11-24T21:16:26Z
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9558824Z ##[endgroup]
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9559367Z ##[group]Operating System
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9559932Z Ubuntu
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9560448Z 24.04.3
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9560901Z LTS
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9561546Z ##[endgroup]
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9562006Z ##[group]Runner Image
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9562660Z Image: ubuntu-24.04
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9563133Z Version: 20251126.144.1
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9564160Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251126.144/images/ubuntu/Ubuntu2404-Readme.md
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9566126Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251126.144
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9567445Z ##[endgroup]
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9568521Z ##[group]GITHUB_TOKEN Permissions
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9570617Z Contents: read
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9571286Z Metadata: read
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9571754Z Packages: read
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9572259Z ##[endgroup]
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9574708Z Secret source: Actions
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:57.9575423Z Prepare workflow directory
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:58.0019075Z Prepare all required actions
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:58.0058162Z Getting action download info
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:58.3578917Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:58.7769234Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:58.8757928Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Ejecutar E2E Playwright	Set up job	2025-12-10T13:54:59.1250966Z Complete job name: Ejecutar E2E Playwright
+Ejecutar E2E Playwright	Initialize containers	﻿2025-12-10T13:54:59.1790174Z ##[group]Checking docker version
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.1803494Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.2654509Z '1.48'
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.2666447Z Docker daemon API version: '1.48'
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.2667267Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.2826424Z '1.48'
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.2839744Z Docker client API version: '1.48'
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.2845346Z ##[endgroup]
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.2848221Z ##[group]Clean up resources from previous jobs
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.2853852Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=3d19da"
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.2999060Z ##[command]/usr/bin/docker network prune --force --filter "label=3d19da"
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.3135774Z ##[endgroup]
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.3136308Z ##[group]Create local container network
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.3146285Z ##[command]/usr/bin/docker network create --label 3d19da github_network_4af0c84a585d4ef68b5653211a65f6f5
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.3665638Z 35031ecc6899d7dc34859b4e09a2fb82663df57b40ed0805eb7f455e47581fb2
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.3683184Z ##[endgroup]
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.3707585Z ##[group]Starting postgres service container
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.3727372Z ##[command]/usr/bin/docker pull postgres:15
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.8299891Z 15: Pulling from library/postgres
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9462510Z 1733a4cd5954: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9463812Z 66fe66faf896: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9465394Z c94f51fe9236: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9466237Z 9602d06b4e70: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9467247Z fab6e4443d8a: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9468290Z f2a9e5883151: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9469209Z 8d363c2df07a: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9469972Z 9602d06b4e70: Waiting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9470625Z fab6e4443d8a: Waiting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9471311Z 5cdd56139991: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9472073Z aa55ead71133: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9472917Z 758ebfa119db: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9473832Z 798e92f9757e: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9475113Z f2a9e5883151: Waiting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9475867Z ada9fa789fdc: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9476669Z 8d363c2df07a: Waiting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9477528Z 3e738c3a66c8: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9478355Z 687b178dca38: Pulling fs layer
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9479144Z 5cdd56139991: Waiting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9479860Z aa55ead71133: Waiting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9480577Z 758ebfa119db: Waiting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9481279Z 3e738c3a66c8: Waiting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9482036Z 798e92f9757e: Waiting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9482997Z 687b178dca38: Waiting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:54:59.9483970Z ada9fa789fdc: Waiting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:00.2032174Z 66fe66faf896: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:00.4464286Z c94f51fe9236: Verifying Checksum
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:00.4467612Z c94f51fe9236: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:00.5130366Z 9602d06b4e70: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:00.8538190Z 1733a4cd5954: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.0476631Z f2a9e5883151: Verifying Checksum
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.0479266Z f2a9e5883151: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.1048369Z 8d363c2df07a: Verifying Checksum
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.1050116Z 8d363c2df07a: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.2818692Z fab6e4443d8a: Verifying Checksum
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.2824276Z fab6e4443d8a: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.3692150Z 5cdd56139991: Verifying Checksum
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.3695457Z 5cdd56139991: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.5668774Z 798e92f9757e: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.6457723Z 758ebfa119db: Verifying Checksum
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.8925821Z 758ebfa119db: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.8926513Z 1733a4cd5954: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.8938986Z ada9fa789fdc: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.9447731Z 3e738c3a66c8: Verifying Checksum
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:01.9448572Z 3e738c3a66c8: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:02.1572703Z 687b178dca38: Verifying Checksum
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:02.1575920Z 687b178dca38: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:02.7640362Z 66fe66faf896: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:02.9615059Z c94f51fe9236: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:03.0082812Z 9602d06b4e70: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:03.3339781Z fab6e4443d8a: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:03.4239947Z aa55ead71133: Verifying Checksum
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:03.4240469Z aa55ead71133: Download complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:03.4297822Z f2a9e5883151: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:03.4403543Z 8d363c2df07a: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:03.4508623Z 5cdd56139991: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.4052305Z aa55ead71133: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.4226223Z 758ebfa119db: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.4352676Z 798e92f9757e: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.4478266Z ada9fa789fdc: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.4614642Z 3e738c3a66c8: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.4735796Z 687b178dca38: Pull complete
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.4786305Z Digest: sha256:0f34b3378f8982d16add539e7b11411ee8386d43a9e0c30dcfd63d25f2f3df26
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.4799869Z Status: Downloaded newer image for postgres:15
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.4813737Z docker.io/library/postgres:15
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.4892388Z ##[command]/usr/bin/docker create --name e3c8e7e222f14bac9fdd04940cd9f542_postgres15_479ebf --label 3d19da --network github_network_4af0c84a585d4ef68b5653211a65f6f5 --network-alias postgres -p 5432:5432 --health-cmd "pg_isready -U postgres" --health-interval=10s --health-timeout=5s --health-retries=5 -e "POSTGRES_USER=postgres" -e "POSTGRES_PASSWORD=postgres" -e "POSTGRES_DB=infoaprende_test" -e GITHUB_ACTIONS=true -e CI=true postgres:15
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.5151025Z e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.5176153Z ##[command]/usr/bin/docker start e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.7092054Z e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.7118599Z ##[command]/usr/bin/docker ps --all --filter id=e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.7248996Z e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c Up Less than a second (health: starting)
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.7275181Z ##[command]/usr/bin/docker port e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.7447481Z 5432/tcp -> 0.0.0.0:5432
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.7448419Z 5432/tcp -> [::]:5432
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.7507021Z ##[endgroup]
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.7517654Z ##[group]Waiting for all services to be ready
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.7532513Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.7674527Z starting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:06.7702591Z postgres service is starting, waiting 2 seconds before checking again.
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:08.7703418Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:08.7837206Z starting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:08.7851269Z postgres service is starting, waiting 3 seconds before checking again.
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:12.7499527Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:12.7627310Z starting
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:12.7648371Z postgres service is starting, waiting 8 seconds before checking again.
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:21.1487619Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:21.1677246Z healthy
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:21.1695953Z postgres service is healthy.
+Ejecutar E2E Playwright	Initialize containers	2025-12-10T13:55:21.1696437Z ##[endgroup]
+Ejecutar E2E Playwright	Checkout	﻿2025-12-10T13:55:21.1949225Z ##[group]Run actions/checkout@v4
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1949885Z with:
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1950117Z   repository: dyangocardoso/infoaprende-platform
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1950584Z   token: ***
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1950760Z   ssh-strict: true
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1950929Z   ssh-user: git
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1951110Z   persist-credentials: true
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1951314Z   clean: true
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1951498Z   sparse-checkout-cone-mode: true
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1951714Z   fetch-depth: 1
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1951887Z   fetch-tags: false
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1952058Z   show-progress: true
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1952239Z   lfs: false
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1952397Z   submodules: false
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1952574Z   set-safe-directory: true
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1952981Z env:
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1953136Z   BACKEND_PORT: 4000
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1953320Z   FRONTEND_PORT: 5173
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1953508Z   PLAYWRIGHT_TRACE: on-first-retry
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1953737Z   PGHOST: 127.0.0.1
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1953900Z   PGPORT: 5432
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1954114Z   PGUSER: postgres
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1954291Z   PGPASSWORD: postgres
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1954643Z   PGDATABASE: infoaprende_test
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1955067Z   DATABASE_URL: ***127.0.0.1:5432/infoaprende_test
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.1955323Z ##[endgroup]
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3078750Z Syncing repository: dyangocardoso/infoaprende-platform
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3080193Z ##[group]Getting Git version info
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3080685Z Working directory is '/home/runner/work/infoaprende-platform/infoaprende-platform'
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3081312Z [command]/usr/bin/git version
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3165000Z git version 2.52.0
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3193834Z ##[endgroup]
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3210018Z Temporarily overriding HOME='/home/runner/work/_temp/d35961eb-4f5a-4829-a0d6-11191ee2a702' before making global git config changes
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3211328Z Adding repository directory to the temporary git global config as a safe directory
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3216782Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/infoaprende-platform/infoaprende-platform
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3260188Z Deleting the contents of '/home/runner/work/infoaprende-platform/infoaprende-platform'
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3263977Z ##[group]Initializing the repository
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3269027Z [command]/usr/bin/git init /home/runner/work/infoaprende-platform/infoaprende-platform
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3380480Z hint: Using 'master' as the name for the initial branch. This default branch name
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3381577Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3382224Z hint: to use in all of your new repositories, which will suppress this warning,
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3382679Z hint: call:
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3382978Z hint:
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3383458Z hint: 	git config --global init.defaultBranch <name>
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3384107Z hint:
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3384718Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3385349Z hint: 'development'. The just-created branch can be renamed via this command:
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3385970Z hint:
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3386376Z hint: 	git branch -m <name>
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3386826Z hint:
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3387457Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3388874Z Initialized empty Git repository in /home/runner/work/infoaprende-platform/infoaprende-platform/.git/
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3398400Z [command]/usr/bin/git remote add origin https://github.com/dyangocardoso/infoaprende-platform
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3433497Z ##[endgroup]
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3433901Z ##[group]Disabling automatic garbage collection
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3438674Z [command]/usr/bin/git config --local gc.auto 0
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3468225Z ##[endgroup]
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3468592Z ##[group]Setting up auth
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3475574Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3507402Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3877520Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.3908468Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.4146524Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.4178955Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.4408055Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.4443096Z ##[endgroup]
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.4443805Z ##[group]Fetching the repository
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.4451876Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +fe2a07a00a35d05c982bd61cbc5a0e6e65f2399a:refs/remotes/pull/12/merge
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.7859987Z From https://github.com/dyangocardoso/infoaprende-platform
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.7860869Z  * [new ref]         fe2a07a00a35d05c982bd61cbc5a0e6e65f2399a -> pull/12/merge
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.7900287Z ##[endgroup]
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.7900857Z ##[group]Determining the checkout info
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.7902734Z ##[endgroup]
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.7910130Z [command]/usr/bin/git sparse-checkout disable
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.7959883Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.7991039Z ##[group]Checking out the ref
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.7997596Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/12/merge
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8618862Z Note: switching to 'refs/remotes/pull/12/merge'.
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8619581Z 
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8620023Z You are in 'detached HEAD' state. You can look around, make experimental
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8622193Z changes and commit them, and you can discard any commits you make in this
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8623270Z state without impacting any branches by switching back to a branch.
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8623700Z 
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8623956Z If you want to create a new branch to retain commits you create, you may
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8624840Z do so (now or later) by using -c with the switch command. Example:
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8625253Z 
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8625405Z   git switch -c <new-branch-name>
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8625668Z 
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8625818Z Or undo this operation with:
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8625967Z 
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8626040Z   git switch -
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8626175Z 
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8626365Z Turn off this advice by setting config variable advice.detachedHead to false
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8626655Z 
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8626987Z HEAD is now at fe2a07a Merge bf46782fcf2b75b3c00069f8643cb6a0a216decc into 25a1e714f2880280e8e438e1ab1dab1ef9c848d9
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8631851Z ##[endgroup]
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8681883Z [command]/usr/bin/git log -1 --format=%H
+Ejecutar E2E Playwright	Checkout	2025-12-10T13:55:21.8708315Z fe2a07a00a35d05c982bd61cbc5a0e6e65f2399a
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	﻿2025-12-10T13:55:21.8890293Z ##[group]Run npx -y actionlint .github/workflows/e2e.yml
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8890747Z [36;1mnpx -y actionlint .github/workflows/e2e.yml[0m
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8929141Z shell: /usr/bin/bash -e {0}
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8929395Z env:
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8929558Z   BACKEND_PORT: 4000
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8929754Z   FRONTEND_PORT: 5173
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8929950Z   PLAYWRIGHT_TRACE: on-first-retry
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8930179Z   PGHOST: 127.0.0.1
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8930350Z   PGPORT: 5432
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8930508Z   PGUSER: postgres
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8930695Z   PGPASSWORD: postgres
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8930891Z   PGDATABASE: infoaprende_test
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8931478Z   DATABASE_URL: ***127.0.0.1:5432/infoaprende_test
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:21.8931750Z ##[endgroup]
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:26.4020987Z npm error could not determine executable to run
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:26.4032804Z npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2025-12-10T13_55_24_015Z-debug-0.log
+Ejecutar E2E Playwright	Lint GitHub Actions workflow (actionlint)	2025-12-10T13:55:26.4102993Z ##[error]Process completed with exit code 1.
+Ejecutar E2E Playwright	List generated Playwright artifacts	﻿2025-12-10T13:55:26.4183973Z ##[group]Run echo "== playwright-report contents =="
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4184512Z [36;1mecho "== playwright-report contents =="[0m
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4185033Z [36;1mif [ -d playwright-report ]; then ls -la playwright-report || true; else echo "playwright-report not found"; fi[0m
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4185547Z [36;1mecho "\n== test-results contents =="[0m
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4185969Z [36;1mif [ -d test-results ]; then ls -la test-results || true; else echo "test-results not found"; fi[0m
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4186383Z [36;1mecho "\n== sizes =="[0m
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4186617Z [36;1mdu -sh playwright-report || true[0m
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4186878Z [36;1mdu -sh test-results || true[0m
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4218548Z shell: /usr/bin/bash -e {0}
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4218771Z env:
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4218943Z   BACKEND_PORT: 4000
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4219148Z   FRONTEND_PORT: 5173
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4219360Z   PLAYWRIGHT_TRACE: on-first-retry
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4219586Z   PGHOST: 127.0.0.1
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4219795Z   PGPORT: 5432
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4219976Z   PGUSER: postgres
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4220156Z   PGPASSWORD: postgres
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4220365Z   PGDATABASE: infoaprende_test
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4220885Z   DATABASE_URL: ***127.0.0.1:5432/infoaprende_test
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4221162Z ##[endgroup]
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4270770Z == playwright-report contents ==
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4271219Z playwright-report not found
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4271633Z \n== test-results contents ==
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4274588Z test-results not found
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4274957Z \n== sizes ==
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4390284Z du: cannot access 'playwright-report': No such file or directory
+Ejecutar E2E Playwright	List generated Playwright artifacts	2025-12-10T13:55:26.4401701Z du: cannot access 'test-results': No such file or directory
+Ejecutar E2E Playwright	Fail if any log > 10MB	﻿2025-12-10T13:55:26.4430499Z ##[group]Run MAX=$((10 * 1024 * 1024))
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4430959Z [36;1mMAX=$((10 * 1024 * 1024))[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4431276Z [36;1mecho "Checking log sizes against ${MAX} bytes (10MB)"[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4431676Z [36;1mfor f in backend.log frontend.log server-combined.log; do[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4432011Z [36;1m  if [ -f "$f" ]; then[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4432293Z [36;1m    size=$(stat -c%s "$f" 2>/dev/null || echo 0)[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4432589Z [36;1m    echo "$f size: $size bytes"[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4432856Z [36;1m    if [ "$size" -gt "$MAX" ]; then[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4433274Z [36;1m      echo "ERROR: $f is larger than 10MB ($size bytes). Failing job to avoid oversized artifacts."[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4433686Z [36;1m      exit 1[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4433876Z [36;1m    fi[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4434042Z [36;1m  fi[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4434215Z [36;1mdone[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4434741Z [36;1mecho "All logs within size limit."[0m
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4464630Z shell: /usr/bin/bash -e {0}
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4464869Z env:
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4465041Z   BACKEND_PORT: 4000
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4465241Z   FRONTEND_PORT: 5173
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4465473Z   PLAYWRIGHT_TRACE: on-first-retry
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4465727Z   PGHOST: 127.0.0.1
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4465924Z   PGPORT: 5432
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4466105Z   PGUSER: postgres
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4466305Z   PGPASSWORD: postgres
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4466522Z   PGDATABASE: infoaprende_test
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4467039Z   DATABASE_URL: ***127.0.0.1:5432/infoaprende_test
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4467337Z ##[endgroup]
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4514280Z Checking log sizes against 10485760 bytes (10MB)
+Ejecutar E2E Playwright	Fail if any log > 10MB	2025-12-10T13:55:26.4515247Z All logs within size limit.
+Ejecutar E2E Playwright	Upload Playwright report	﻿2025-12-10T13:55:26.4565808Z ##[group]Run actions/upload-artifact@v4
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4566087Z with:
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4566263Z   name: playwright-report
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4566498Z   path: playwright-report
+Ejecutar E2E Playwright	Upload Playwright report	test-results
+Ejecutar E2E Playwright	Upload Playwright report	
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4566758Z   retention-days: 14
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4566950Z   if-no-files-found: warn
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4567165Z   compression-level: 6
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4567374Z   overwrite: false
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4567570Z   include-hidden-files: false
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4567776Z env:
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4567925Z   BACKEND_PORT: 4000
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4568109Z   FRONTEND_PORT: 5173
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4568305Z   PLAYWRIGHT_TRACE: on-first-retry
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4568548Z   PGHOST: 127.0.0.1
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4568719Z   PGPORT: 5432
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4568892Z   PGUSER: postgres
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4569067Z   PGPASSWORD: postgres
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4569266Z   PGDATABASE: infoaprende_test
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4569715Z   DATABASE_URL: ***127.0.0.1:5432/infoaprende_test
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.4569978Z ##[endgroup]
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.6730348Z Multiple search paths detected. Calculating the least common ancestor of all paths
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.6732118Z The least common ancestor is /home/runner/work/infoaprende-platform/infoaprende-platform. This will be the root directory of the artifact
+Ejecutar E2E Playwright	Upload Playwright report	2025-12-10T13:55:26.6745688Z ##[warning]No files were found with the provided path: playwright-report
+Ejecutar E2E Playwright	Upload Playwright report	test-results. No artifacts will be uploaded.
+Ejecutar E2E Playwright	Upload logs (if present)	﻿2025-12-10T13:55:26.6869623Z ##[group]Run actions/upload-artifact@v4
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6869893Z with:
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6870066Z   name: service-logs
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6870307Z   path: backend.log
+Ejecutar E2E Playwright	Upload logs (if present)	frontend.log
+Ejecutar E2E Playwright	Upload logs (if present)	server-combined.log
+Ejecutar E2E Playwright	Upload logs (if present)	
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6870588Z   retention-days: 14
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6870783Z   if-no-files-found: warn
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6870984Z   compression-level: 6
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6871175Z   overwrite: false
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6871366Z   include-hidden-files: false
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6871564Z env:
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6871726Z   BACKEND_PORT: 4000
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6871900Z   FRONTEND_PORT: 5173
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6872099Z   PLAYWRIGHT_TRACE: on-first-retry
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6872316Z   PGHOST: 127.0.0.1
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6872489Z   PGPORT: 5432
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6872655Z   PGUSER: postgres
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6872999Z   PGPASSWORD: postgres
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6873202Z   PGDATABASE: infoaprende_test
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6873700Z   DATABASE_URL: ***127.0.0.1:5432/infoaprende_test
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.6874090Z ##[endgroup]
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.9127883Z Multiple search paths detected. Calculating the least common ancestor of all paths
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.9131867Z The least common ancestor is /home/runner/work/infoaprende-platform/infoaprende-platform. This will be the root directory of the artifact
+Ejecutar E2E Playwright	Upload logs (if present)	2025-12-10T13:55:26.9135850Z ##[warning]No files were found with the provided path: backend.log
+Ejecutar E2E Playwright	Upload logs (if present)	frontend.log
+Ejecutar E2E Playwright	Upload logs (if present)	server-combined.log. No artifacts will be uploaded.
+Ejecutar E2E Playwright	Stop servers	﻿2025-12-10T13:55:26.9230059Z ##[group]Run if [ -f server.pid ]; then kill "$(cat server.pid)" || true; rm -f server.pid; fi
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9230644Z [36;1mif [ -f server.pid ]; then kill "$(cat server.pid)" || true; rm -f server.pid; fi[0m
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9231023Z [36;1msleep 1 || true[0m
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9262930Z shell: /usr/bin/bash -e {0}
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9263183Z env:
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9263359Z   BACKEND_PORT: 4000
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9263554Z   FRONTEND_PORT: 5173
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9263769Z   PLAYWRIGHT_TRACE: on-first-retry
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9264002Z   PGHOST: 127.0.0.1
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9264182Z   PGPORT: 5432
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9264533Z   PGUSER: postgres
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9264821Z   PGPASSWORD: postgres
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9265044Z   PGDATABASE: infoaprende_test
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9265760Z   DATABASE_URL: ***127.0.0.1:5432/infoaprende_test
+Ejecutar E2E Playwright	Stop servers	2025-12-10T13:55:26.9266039Z ##[endgroup]
+Ejecutar E2E Playwright	Post Checkout	﻿2025-12-10T13:55:27.9396405Z Post job cleanup.
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.0371992Z [command]/usr/bin/git version
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.0416890Z git version 2.52.0
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.0461585Z Temporarily overriding HOME='/home/runner/work/_temp/f082fa60-3d22-470b-8410-c32a4eb9e2a7' before making global git config changes
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.0462893Z Adding repository directory to the temporary git global config as a safe directory
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.0468219Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/infoaprende-platform/infoaprende-platform
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.0505128Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.0540098Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.0789813Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.0816880Z http.https://github.com/.extraheader
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.0830777Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.0865607Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.1101880Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Ejecutar E2E Playwright	Post Checkout	2025-12-10T13:55:28.1135316Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Ejecutar E2E Playwright	Stop containers	﻿2025-12-10T13:55:28.1466892Z Print service container logs: e3c8e7e222f14bac9fdd04940cd9f542_postgres15_479ebf
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1471322Z ##[command]/usr/bin/docker logs --details e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1601404Z  The files belonging to this database system will be owned by user "postgres".
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1604092Z  initdb: warning: enabling "trust" authentication for local connections
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1605464Z  initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1606863Z  2025-12-10 13:55:07.663 UTC [1] LOG:  starting PostgreSQL 15.15 (Debian 15.15-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1608278Z  2025-12-10 13:55:07.663 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1608950Z  2025-12-10 13:55:07.663 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1609752Z  2025-12-10 13:55:07.665 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1610565Z  2025-12-10 13:55:07.668 UTC [64] LOG:  database system was shut down at 2025-12-10 13:55:07 UTC
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1611297Z  2025-12-10 13:55:07.671 UTC [1] LOG:  database system is ready to accept connections
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1611849Z  This user must also own the server process.
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1612242Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1612635Z  The database cluster will be initialized with locale "en_US.utf8".
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1613301Z  The default database encoding has accordingly been set to "UTF8".
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1613953Z  The default text search configuration will be set to "english".
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1614612Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1614876Z  Data page checksums are disabled.
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1615225Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1615642Z  fixing permissions on existing directory /var/lib/postgresql/data ... ok
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1616208Z  creating subdirectories ... ok
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1616679Z  selecting dynamic shared memory implementation ... posix
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1617193Z  selecting default max_connections ... 100
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1617638Z  selecting default shared_buffers ... 128MB
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1618050Z  selecting default time zone ... Etc/UTC
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1618438Z  creating configuration files ... ok
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1618811Z  running bootstrap script ... ok
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1619212Z  performing post-bootstrap initialization ... ok
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1619629Z  syncing data to disk ... ok
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1619943Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1620178Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1620508Z  Success. You can now start the database server using:
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1620948Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1621273Z      pg_ctl -D /var/lib/postgresql/data -l logfile start
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1621695Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1622544Z  waiting for server to start....2025-12-10 13:55:07.354 UTC [48] LOG:  starting PostgreSQL 15.15 (Debian 15.15-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1624027Z  2025-12-10 13:55:07.355 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1625044Z  2025-12-10 13:55:07.358 UTC [51] LOG:  database system was shut down at 2025-12-10 13:55:07 UTC
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1625540Z  2025-12-10 13:55:07.362 UTC [48] LOG:  database system is ready to accept connections
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1625865Z   done
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1626022Z  server started
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1626204Z  CREATE DATABASE
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1626367Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1626515Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1626806Z  /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1627165Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1627392Z  2025-12-10 13:55:07.543 UTC [48] LOG:  received fast shutdown request
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1627840Z  waiting for server to shut down....2025-12-10 13:55:07.544 UTC [48] LOG:  aborting any active transactions
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1628724Z  2025-12-10 13:55:07.546 UTC [48] LOG:  background worker "logical replication launcher" (PID 54) exited with exit code 1
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1629192Z  2025-12-10 13:55:07.546 UTC [49] LOG:  shutting down
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1629545Z  2025-12-10 13:55:07.546 UTC [49] LOG:  checkpoint starting: shutdown immediate
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1630358Z  2025-12-10 13:55:07.564 UTC [49] LOG:  checkpoint complete: wrote 922 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.014 s, sync=0.002 s, total=0.018 s; sync files=301, longest=0.001 s, average=0.001 s; distance=4239 kB, estimate=4239 kB
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1631153Z  2025-12-10 13:55:07.570 UTC [48] LOG:  database system is shut down
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1631567Z   done
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1631723Z  server stopped
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1631889Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1632092Z  PostgreSQL init process complete; ready for start up.
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1632358Z  
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1638390Z Stop and remove container: e3c8e7e222f14bac9fdd04940cd9f542_postgres15_479ebf
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.1643296Z ##[command]/usr/bin/docker rm --force e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.3236924Z e8a2e020231f63e4caf200062de4b51266fae194bdb4bfcc1bd2a06e7bee3f0c
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.3267167Z Remove container network: github_network_4af0c84a585d4ef68b5653211a65f6f5
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.3271872Z ##[command]/usr/bin/docker network rm github_network_4af0c84a585d4ef68b5653211a65f6f5
+Ejecutar E2E Playwright	Stop containers	2025-12-10T13:55:28.4383197Z github_network_4af0c84a585d4ef68b5653211a65f6f5
+Ejecutar E2E Playwright	Complete job	﻿2025-12-10T13:55:28.4448310Z Cleaning up orphan processes

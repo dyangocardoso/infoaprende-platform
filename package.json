@@ -10,6 +10,7 @@
     "e2e:start:logs": "concurrently \"bash -lc \"npm --prefix backend run dev > backend.log 2>&1\"\" \"bash -lc \"npm --prefix frontend run dev > frontend.log 2>&1\"\""
   },
   "devDependencies": {
+    "actionlint": "^2.0.6",
     "concurrently": "^8.0.0"
   },
   "dependencies": {

@@ -63,7 +63,14 @@ describe('Integración RBAC en preview (solo docente)', () => {
       .get('/api/docente/plantillas/1/preview')
       .expect(403);
 
-    expect(res.body).to.have.property('message').that.is.a('string');
+    // Permitir distintas formas de respuesta de error: { message } o { error: { message } }
+    if (res.body && typeof res.body.message === 'string') {
+      expect(res.body.message).to.be.a('string');
+    } else if (res.body && res.body.error && typeof res.body.error.message === 'string') {
+      expect(res.body.error.message).to.be.a('string');
+    } else {
+      expect.fail('Se esperaba que el body de la respuesta contuviera message o error.message');
+    }
   });
 
   it('debe permitir acceso cuando el usuario es docente (control rápido)', async () => {

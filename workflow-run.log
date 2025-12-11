@@ -1,0 +1,28 @@
+Ejecutar E2E Playwright	Set up job	﻿2025-12-11T12:25:37.5768175Z Current runner version: '2.329.0'
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5793609Z ##[group]Runner Image Provisioner
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5794441Z Hosted Compute Agent
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5795073Z Version: 20251124.448
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5795885Z Commit: fda5086b43ec66ade217e5fcd18146c879571177
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5796584Z Build Date: 2025-11-24T21:16:26Z
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5797145Z ##[endgroup]
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5797797Z ##[group]Operating System
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5798333Z Ubuntu
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5798808Z 24.04.3
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5799322Z LTS
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5799790Z ##[endgroup]
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5800266Z ##[group]Runner Image
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5800861Z Image: ubuntu-24.04
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5801375Z Version: 20251126.144.1
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5802369Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251126.144/images/ubuntu/Ubuntu2404-Readme.md
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5803800Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251126.144
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5804981Z ##[endgroup]
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5806342Z ##[group]GITHUB_TOKEN Permissions
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5808178Z Contents: read
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5808801Z Metadata: read
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5809330Z Packages: read
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5809796Z ##[endgroup]
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5811877Z Secret source: Actions
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.5812580Z Prepare workflow directory
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.6247738Z Prepare all required actions
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:37.6284835Z Getting action download info
+Ejecutar E2E Playwright	Set up job	2025-12-11T12:25:38.0673569Z ##[error]Unable to resolve action `rhysd/actionlint@v1`, unable to find version `v1`
