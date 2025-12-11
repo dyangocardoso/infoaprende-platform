@@ -1,0 +1,4 @@
+# Enforce LF for YAML workflow files to avoid shellcheck/actionlint parse errors on Windows
+*.yml text eol=lf
+*.yaml text eol=lf
+.github/workflows/* text eol=lf
