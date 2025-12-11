@@ -62,3 +62,10 @@ temp/
 # Output files
 *.out
 *.output
+e2e-artifacts.tar.gz
+workflow-run.log
+runs.json
+recent_runs.json
+last_run_id.txt
+gha_run_*.log
+$null
