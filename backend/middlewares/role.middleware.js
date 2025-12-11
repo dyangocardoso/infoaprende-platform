@@ -2,21 +2,25 @@ function requireRole(requiredRole) {
   return (req, res, next) => {
     // No autenticado
     if (!req.user) {
-      return res.status(401).json({ error: 'No autenticado' });
+      const msg = 'No autenticado';
+      return res.status(401).json({ message: msg, error: { message: msg } });
     }
 
     const userRole = req.user.role || req.user.rol || null;
     if (!userRole) {
-      return res.status(403).json({ error: 'Rol no disponible' });
+      const msg = 'Rol no disponible';
+      return res.status(403).json({ message: msg, error: { message: msg } });
     }
 
     if (Array.isArray(requiredRole)) {
       if (!requiredRole.includes(userRole)) {
-        return res.status(403).json({ error: 'Acceso denegado: rol insuficiente' });
+        const msg = 'Acceso denegado: rol insuficiente';
+        return res.status(403).json({ message: msg, error: { message: msg } });
       }
     } else {
       if (userRole !== requiredRole) {
-        return res.status(403).json({ error: 'Acceso denegado: rol insuficiente' });
+        const msg = 'Acceso denegado: rol insuficiente';
+        return res.status(403).json({ message: msg, error: { message: msg } });
       }
     }
 
