@@ -58,7 +58,7 @@ jobs:
         run: |
           echo "Waiting for Postgres to be ready..."
           START_TIME=$(date +%s)
-          for i in {1..60}; do
+          for _ in {1..60}; do
             if command -v pg_isready >/dev/null 2>&1; then
               if pg_isready -h 127.0.0.1 -p 5432 -U postgres >/dev/null 2>&1; then
                 ELAPSED=$(( $(date +%s) - START_TIME ))
@@ -121,7 +121,7 @@ jobs:
           BACKEND_PORT: ${{ env.BACKEND_PORT }}
           FRONTEND_PORT: ${{ env.FRONTEND_PORT }}
           PLAYWRIGHT_TRACE: ${{ env.PLAYWRIGHT_TRACE }}
-        run: npx playwright test --reporter=list,html --trace ${PLAYWRIGHT_TRACE}
+        run: npx playwright test --reporter=list,html --trace "${PLAYWRIGHT_TRACE}"
 
       - name: Verify required npm scripts exist
         # Ensure CI fails early with a clear message if a referenced npm script is missing
