@@ -126,7 +126,7 @@ jobs:
       - name: Verify required npm scripts exist
         # Ensure CI fails early with a clear message if a referenced npm script is missing
         run: |
-          node -e "const root=require('./package.json');const be=require('./backend/package.json');const fe=require('./frontend/package.json');const missing=[]; if(!(root.scripts && root.scripts['e2e:start:logs'])) missing.push('root:e2e:start:logs'); if(!(be.scripts && be.scripts['migrate'])) missing.push('backend:migrate'); if(!(be.scripts && be.scripts['seed'])) missing.push('backend:seed'); if(!(be.scripts && be.scripts['test'])) missing.push('backend:test'); if(!(fe.scripts && fe.scripts['test:e2e'])) missing.push('frontend:test:e2e'); if(missing.length){ console.error('Missing npm scripts: '+missing.join(', ')); process.exit(1);} console.log('All required scripts present');
+          node -e "const root=require('./package.json');const be=require('./backend/package.json');const fe=require('./frontend/package.json');const missing=[]; if(!(root.scripts && root.scripts['e2e:start:logs'])) missing.push('root:e2e:start:logs'); if(!(be.scripts && be.scripts['migrate'])) missing.push('backend:migrate'); if(!(be.scripts && be.scripts['seed'])) missing.push('backend:seed'); if(!(be.scripts && be.scripts['test'])) missing.push('backend:test'); if(!(fe.scripts && fe.scripts['test:e2e'])) missing.push('frontend:test:e2e'); if(missing.length){ console.error('Missing npm scripts: '+missing.join(', ')); process.exit(1);} console.log('All required scripts present");
 
       - name: List generated Playwright artifacts
         if: always()
