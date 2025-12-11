@@ -63,6 +63,10 @@ describe('Integración RBAC en preview (solo docente)', () => {
       .get('/api/docente/plantillas/1/preview')
       .expect(403);
 
+    // DEBUG temporal: mostrar body para entender fallos en CI
+    // Elimina este log cuando el problema esté resuelto
+    console.log('DEBUG preview.403 res.body =', res.body);
+
     // Permitir distintas formas de respuesta de error: { message } o { error: { message } }
     if (res.body && typeof res.body.message === 'string') {
       expect(res.body.message).to.be.a('string');
