@@ -56,20 +56,21 @@ jobs:
 
       - name: Wait for Postgres (pg_isready or wait-on fallback)
         run: |
-          echo "Waiting for Postgres to be ready..."
+          printf 'Waiting for Postgres to be ready...\n'
           START_TIME=$(date +%s)
-          for _ in {1..60}; do
+          for i in {1..60}; do
+            printf 'attempt %d\n' "$i"
             if command -v pg_isready >/dev/null 2>&1; then
               if pg_isready -h 127.0.0.1 -p 5432 -U postgres >/dev/null 2>&1; then
                 ELAPSED=$(( $(date +%s) - START_TIME ))
-                echo "Postgres ready after ${ELAPSED}s"
+                printf 'Postgres ready after %ds\n' "$ELAPSED"
                 break
               fi
             else
               # Fallback to wait-on checking TCP port
               if npx wait-on tcp:5432 --timeout 2000 >/dev/null 2>&1; then
                 ELAPSED=$(( $(date +%s) - START_TIME ))
-                echo "Postgres ready (tcp) after ${ELAPSED}s"
+                printf 'Postgres ready (tcp) after %ds\n' "$ELAPSED"
                 break
               fi
             fi
@@ -78,7 +79,7 @@ jobs:
           # If loop finished without break, report total time
           if ! (command -v pg_isready >/dev/null 2>&1 && pg_isready -h 127.0.0.1 -p 5432 -U postgres >/dev/null 2>&1) && ! npx wait-on tcp:5432 --timeout 2000 >/dev/null 2>&1; then
             TOTAL=$(( $(date +%s) - START_TIME ))
-            echo "Postgres did not become ready after ${TOTAL}s"
+            printf 'Postgres did not become ready after %ds\n' "$TOTAL"
             exit 1
           fi
 
@@ -105,10 +106,10 @@ jobs:
       - name: Start backend+frontend (background, with logs)
         run: |
           set -euo pipefail
-          echo "Starting backend+frontend (e2e:start:logs)..."
+          printf 'Starting backend+frontend (e2e:start:logs)...\n'
           npm run e2e:start:logs > server-combined.log 2>&1 &
-          echo $! > server.pid
-          echo "server pid: $(cat server.pid)"
+          printf '%s\n' "$!" > server.pid
+          printf 'server pid: %s\n' "$(cat server.pid)"
 
       - name: Wait for services (backend + frontend)
         run: |
@@ -126,16 +127,16 @@ jobs:
       - name: Verify required npm scripts exist
         # Ensure CI fails early with a clear message if a referenced npm script is missing
         run: |
-          node -e "const root=require('./package.json');const be=require('./backend/package.json');const fe=require('./frontend/package.json');const missing=[]; if(!(root.scripts && root.scripts['e2e:start:logs'])) missing.push('root:e2e:start:logs'); if(!(be.scripts && be.scripts['migrate'])) missing.push('backend:migrate'); if(!(be.scripts && be.scripts['seed'])) missing.push('backend:seed'); if(!(be.scripts && be.scripts['test'])) missing.push('backend:test'); if(!(fe.scripts && fe.scripts['test:e2e'])) missing.push('frontend:test:e2e'); if(missing.length){ console.error('Missing npm scripts: '+missing.join(', ')); process.exit(1);} console.log('All required scripts present");
+          node -e "const root=require('./package.json');const be=require('./backend/package.json');const fe=require('./frontend/package.json');const missing=[]; if(!(root.scripts && root.scripts['e2e:start:logs'])) missing.push('root:e2e:start:logs'); if(!(be.scripts && be.scripts['migrate'])) missing.push('backend:migrate'); if(!(be.scripts && be.scripts['seed'])) missing.push('backend:seed'); if(!(be.scripts && be.scripts['test'])) missing.push('backend:test'); if(!(fe.scripts && fe.scripts['test:e2e'])) missing.push('frontend:test:e2e'); if(missing.length){ console.error('Missing npm scripts: '+missing.join(', ')); process.exit(1);} console.log('All required scripts present');"
 
       - name: List generated Playwright artifacts
         if: always()
         run: |
-          echo "== playwright-report contents =="
-          if [ -d playwright-report ]; then ls -la playwright-report || true; else echo "playwright-report not found"; fi
-          echo "\n== test-results contents =="
-          if [ -d test-results ]; then ls -la test-results || true; else echo "test-results not found"; fi
-          echo "\n== sizes =="
+          printf '== playwright-report contents ==\n'
+          if [ -d playwright-report ]; then ls -la playwright-report || true; else printf 'playwright-report not found\n'; fi
+          printf '\n== test-results contents ==\n'
+          if [ -d test-results ]; then ls -la test-results || true; else printf 'test-results not found\n'; fi
+          printf '\n== sizes ==\n'
           du -sh playwright-report || true
           du -sh test-results || true
 
@@ -143,18 +144,18 @@ jobs:
         if: always()
         run: |
           MAX=$((10 * 1024 * 1024))
-          echo "Checking log sizes against ${MAX} bytes (10MB)"
+          printf 'Checking log sizes against %s bytes (10MB)\n' "$MAX"
           for f in backend.log frontend.log server-combined.log; do
             if [ -f "$f" ]; then
               size=$(stat -c%s "$f" 2>/dev/null || echo 0)
-              echo "$f size: $size bytes"
+              printf '%s size: %s bytes\n' "$f" "$size"
               if [ "$size" -gt "$MAX" ]; then
-                echo "ERROR: $f is larger than 10MB ($size bytes). Failing job to avoid oversized artifacts."
+                printf 'ERROR: %s is larger than 10MB (%s bytes). Failing job to avoid oversized artifacts.\n' "$f" "$size"
                 exit 1
               fi
             fi
           done
-          echo "All logs within size limit."
+          printf 'All logs within size limit.\n'
 
       - name: Upload Playwright report
         if: always()
