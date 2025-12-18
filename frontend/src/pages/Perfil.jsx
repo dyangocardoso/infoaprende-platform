@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getProfile } from '../api/auth';
+import api from '../api/client';
 
 export default function Perfil() {
   const [profile, setProfile] = useState(null);
@@ -80,21 +81,14 @@ export default function Perfil() {
     setMsg('');
     
     try {
-      const response = await fetch('http://localhost:4000/api/users/change-password', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          currentPassword: passwordForm.currentPassword,
-          newPassword: passwordForm.newPassword
-        })
+      const resultObj = await api.put('/api/users/change-password', {
+        currentPassword: passwordForm.currentPassword,
+        newPassword: passwordForm.newPassword
       });
 
-      const result = await response.json();
+      const result = resultObj.data;
       
-      if (response.ok) {
+      if (resultObj.ok) {
         setMsg('✅ Contraseña actualizada correctamente');
         setPasswordForm({
           currentPassword: '',
@@ -104,7 +98,7 @@ export default function Perfil() {
         setShowPasswordEdit(false);
         setTimeout(() => setMsg(''), 3000);
       } else {
-        setMsg(result.error || 'Error al cambiar la contraseña');
+        setMsg((result && result.error) || 'Error al cambiar la contraseña');
       }
     } catch (error) {
       setMsg('Error de conexión al cambiar la contraseña');
@@ -118,24 +112,16 @@ export default function Perfil() {
     setMsg('');
     
     try {
-      const response = await fetch('http://localhost:4000/api/users/profile', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(editForm)
-      });
+      const resultObj = await api.put('/api/users/profile', editForm);
+      const result = resultObj.data;
 
-      const result = await response.json();
-      
-      if (response.ok && result.user) {
+      if (resultObj.ok && result && result.user) {
         setProfile(result.user);
         setIsEditing(false);
         setMsg('✅ Perfil actualizado correctamente');
         setTimeout(() => setMsg(''), 3000);
       } else {
-        setMsg(result.error || 'Error al actualizar el perfil');
+        setMsg((result && result.error) || 'Error al actualizar el perfil');
       }
     } catch (error) {
       setMsg('Error de conexión al actualizar el perfil');

@@ -16,7 +16,8 @@ const requireAdmin = async (req, res, next) => {
       });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'mi_clave_secreta_temporal');
+    const secret = process.env.JWT_SECRET || 'default-secret';
+    const decoded = jwt.verify(token, secret);
     const user = await User.findByPk(decoded.id);
 
     if (!user) {
@@ -55,7 +56,8 @@ const requireAdminOrTeacher = async (req, res, next) => {
       });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'mi_clave_secreta_temporal');
+    const secret = process.env.JWT_SECRET || 'default-secret';
+    const decoded = jwt.verify(token, secret);
     const user = await User.findByPk(decoded.id);
 
     if (!user) {

@@ -1,0 +1,3 @@
+﻿infoaprende-backend@1.0.0 C:\Users\PROFESOR\Desktop\INFOAPRENDE\backend
+`-- puppeteer@24.30.0
+

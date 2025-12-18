@@ -1,0 +1,183 @@
+name: E2E Playwright
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  e2e:
+    name: Ejecutar E2E Playwright
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: infoaprende_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      BACKEND_PORT: "4000" # Ajusta si tu backend usa otro puerto en CI
+      FRONTEND_PORT: "5173" # Ajusta si tu frontend usa otro puerto en CI
+      PLAYWRIGHT_TRACE: "on-first-retry" # Opciones: off, on, on-first-retry, retain-on-failure
+      # Postgres service env (usados por migraciones/seeders)
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: infoaprende_test
+      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/infoaprende_test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Lint GitHub Actions workflow (actionlint)
+        # Validate the workflow file early in the job to catch syntax/semantic issues.
+        run: npx -y actionlint .github/workflows/e2e.yml
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install backend dependencies
+        run: npm ci --prefix backend
+
+      - name: Wait for Postgres (pg_isready or wait-on fallback)
+        run: |
+          echo "Waiting for Postgres to be ready..."
+          START_TIME=$(date +%s)
+          for i in {1..60}; do
+            if command -v pg_isready >/dev/null 2>&1; then
+              if pg_isready -h 127.0.0.1 -p 5432 -U postgres >/dev/null 2>&1; then
+                ELAPSED=$(( $(date +%s) - START_TIME ))
+                echo "Postgres ready after ${ELAPSED}s"
+                break
+              fi
+            else
+              # Fallback to wait-on checking TCP port
+              if npx wait-on tcp:5432 --timeout 2000 >/dev/null 2>&1; then
+                ELAPSED=$(( $(date +%s) - START_TIME ))
+                echo "Postgres ready (tcp) after ${ELAPSED}s"
+                break
+              fi
+            fi
+            sleep 2
+          done
+          # If loop finished without break, report total time
+          if ! (command -v pg_isready >/dev/null 2>&1 && pg_isready -h 127.0.0.1 -p 5432 -U postgres >/dev/null 2>&1) && ! npx wait-on tcp:5432 --timeout 2000 >/dev/null 2>&1; then
+            TOTAL=$(( $(date +%s) - START_TIME ))
+            echo "Postgres did not become ready after ${TOTAL}s"
+            exit 1
+          fi
+
+      - name: Run database migrations and seeders (backend)
+        env:
+          NODE_ENV: test
+        run: |
+          echo "Running migrations..."
+          npm --prefix backend run migrate
+          echo "Running seeders..."
+          npm --prefix backend run seed
+
+      - name: Install frontend dependencies
+        # Las dependencias del frontend ya están alineadas (React 18, @testing-library v14, jest-dom v6)
+        # y el workaround con --legacy-peer-deps fue removido. Mantener el lockfile regenerado si se actualiza.
+        run: npm ci --prefix frontend
+
+      - name: Run backend unit tests
+        run: npm --prefix backend test
+
+      - name: Install Playwright browsers and dependencies
+        run: npx playwright install --with-deps
+
+      - name: Start backend+frontend (background, with logs)
+        run: |
+          set -euo pipefail
+          echo "Starting backend+frontend (e2e:start:logs)..."
+          npm run e2e:start:logs > server-combined.log 2>&1 &
+          echo $! > server.pid
+          echo "server pid: $(cat server.pid)"
+
+      - name: Wait for services (backend + frontend)
+        run: |
+          npx wait-on http://localhost:${{ env.BACKEND_PORT }}/api/health http://localhost:${{ env.FRONTEND_PORT }}/ --timeout 180000
+          echo "services are ready"
+
+      - name: Run Playwright E2E tests (reuse existing servers)
+        env:
+          CI: true
+          BACKEND_PORT: ${{ env.BACKEND_PORT }}
+          FRONTEND_PORT: ${{ env.FRONTEND_PORT }}
+          PLAYWRIGHT_TRACE: ${{ env.PLAYWRIGHT_TRACE }}
+        run: npx playwright test --reporter=list,html --trace ${PLAYWRIGHT_TRACE}
+
+      - name: Verify required npm scripts exist
+        # Ensure CI fails early with a clear message if a referenced npm script is missing
+        run: |
+          node -e "const root=require('./package.json');const be=require('./backend/package.json');const fe=require('./frontend/package.json');const missing=[]; if(!(root.scripts && root.scripts['e2e:start:logs'])) missing.push('root:e2e:start:logs'); if(!(be.scripts && be.scripts['migrate'])) missing.push('backend:migrate'); if(!(be.scripts && be.scripts['seed'])) missing.push('backend:seed'); if(!(be.scripts && be.scripts['test'])) missing.push('backend:test'); if(!(fe.scripts && fe.scripts['test:e2e'])) missing.push('frontend:test:e2e'); if(missing.length){ console.error('Missing npm scripts: '+missing.join(', ')); process.exit(1);} console.log('All required scripts present');
+
+      - name: List generated Playwright artifacts
+        if: always()
+        run: |
+          echo "== playwright-report contents =="
+          if [ -d playwright-report ]; then ls -la playwright-report || true; else echo "playwright-report not found"; fi
+          echo "\n== test-results contents =="
+          if [ -d test-results ]; then ls -la test-results || true; else echo "test-results not found"; fi
+          echo "\n== sizes =="
+          du -sh playwright-report || true
+          du -sh test-results || true
+
+      - name: Fail if any log > 10MB
+        if: always()
+        run: |
+          MAX=$((10 * 1024 * 1024))
+          echo "Checking log sizes against ${MAX} bytes (10MB)"
+          for f in backend.log frontend.log server-combined.log; do
+            if [ -f "$f" ]; then
+              size=$(stat -c%s "$f" 2>/dev/null || echo 0)
+              echo "$f size: $size bytes"
+              if [ "$size" -gt "$MAX" ]; then
+                echo "ERROR: $f is larger than 10MB ($size bytes). Failing job to avoid oversized artifacts."
+                exit 1
+              fi
+            fi
+          done
+          echo "All logs within size limit."
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report
+            test-results
+          retention-days: 14
+
+      - name: Upload logs (if present)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: service-logs
+          path: |
+            backend.log
+            frontend.log
+            server-combined.log
+          retention-days: 14
+
+      - name: Stop servers
+        if: always()
+        run: |
+          if [ -f server.pid ]; then kill "$(cat server.pid)" || true; rm -f server.pid; fi
+          sleep 1 || true

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import api from '../api/client';
 
 export default function PanelAdmin() {
   const [users, setUsers] = useState([]);
@@ -21,8 +22,6 @@ export default function PanelAdmin() {
   });
   const [createLoading, setCreateLoading] = useState(false);
 
-  const token = localStorage.getItem('token');
-
   useEffect(() => {
     loadUsers();
     loadStats();
@@ -30,36 +29,25 @@ export default function PanelAdmin() {
 
   const loadUsers = async () => {
     try {
-      const response = await fetch('http://localhost:4000/api/admin/users', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        setUsers(data.users);
-      } else if (response.status === 403) {
+      const res = await api.get('/api/admin/users');
+      if (res.ok) {
+        setUsers(res.data.users || []);
+      } else if (res.status === 403) {
         setMsg('❌ Acceso denegado. Solo administradores pueden ver esta página.');
       } else {
-        setMsg('❌ Error cargando usuarios');
+        setMsg((res.data && res.data.message) || '❌ Error cargando usuarios');
       }
-    } catch (error) {
+    } catch (err) {
+      console.error('Error cargando usuarios:', err);
       setMsg('❌ Error de conexión');
     }
   };
 
   const loadStats = async () => {
     try {
-      const response = await fetch('http://localhost:4000/api/admin/stats', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        setStats(data.stats);
+      const res = await api.get('/api/admin/stats');
+      if (res.ok) {
+        setStats(res.data.stats);
       }
     } catch (error) {
       console.error('Error cargando estadísticas:', error);
@@ -70,27 +58,18 @@ export default function PanelAdmin() {
 
   const handleUpdateRole = async (userId, newRole) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/admin/users/${userId}/role`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ rol: newRole })
-      });
-
-      const data = await response.json();
-      
-      if (response.ok) {
+      const res = await api.put(`/api/admin/users/${userId}/role`, { rol: newRole });
+      if (res.ok) {
         setMsg(`✅ Rol actualizado exitosamente`);
         loadUsers();
         loadStats();
         setSelectedUser(null);
         setTimeout(() => setMsg(''), 3000);
       } else {
-        setMsg(data.message || '❌ Error actualizando rol');
+        setMsg((res.data && res.data.message) || '❌ Error actualizando rol');
       }
-    } catch (error) {
+    } catch (err) {
+      console.error('Error actualizando rol:', err);
       setMsg('❌ Error de conexión');
     }
   };
@@ -101,24 +80,17 @@ export default function PanelAdmin() {
     }
 
     try {
-      const response = await fetch(`http://localhost:4000/api/admin/users/${userId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      const data = await response.json();
-      
-      if (response.ok) {
+      const res = await api.del(`/api/admin/users/${userId}`);
+      if (res.ok) {
         setMsg(`✅ Usuario eliminado exitosamente`);
         loadUsers();
         loadStats();
         setTimeout(() => setMsg(''), 3000);
       } else {
-        setMsg(data.message || '❌ Error eliminando usuario');
+        setMsg((res.data && res.data.message) || '❌ Error eliminando usuario');
       }
-    } catch (error) {
+    } catch (err) {
+      console.error('Error eliminando usuario:', err);
       setMsg('❌ Error de conexión');
     }
   };
@@ -137,18 +109,8 @@ export default function PanelAdmin() {
     setCreateLoading(true);
     
     try {
-      const response = await fetch('http://localhost:4000/api/admin/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(createForm)
-      });
-
-      const data = await response.json();
-      
-      if (response.ok) {
+      const res = await api.post('/api/admin/users', createForm);
+      if (res.ok) {
         setMsg(`✅ Usuario ${createForm.rol} creado exitosamente: ${createForm.nombre}`);
         setShowCreateForm(false);
         setCreateForm({
@@ -162,9 +124,10 @@ export default function PanelAdmin() {
         loadStats();
         setTimeout(() => setMsg(''), 4000);
       } else {
-        setMsg(data.message || '❌ Error creando usuario');
+        setMsg((res.data && res.data.message) || '❌ Error creando usuario');
       }
-    } catch (error) {
+    } catch (err) {
+      console.error('Error creando usuario:', err);
       setMsg('❌ Error de conexión');
     } finally {
       setCreateLoading(false);
