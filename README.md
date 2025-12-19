@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/dyangocardoso/info-app/actions/workflows/ci.yml/badge.svg)](https://github.com/dyangocardoso/info-app/actions/workflows/ci.yml)
 
+[![test-create-tema](https://github.com/dyangocardoso/info-app/actions/workflows/test-create-tema.yml/badge.svg)](https://github.com/dyangocardoso/info-app/actions/workflows/test-create-tema.yml) [![Validate temas](https://github.com/dyangocardoso/info-app/actions/workflows/validate-temas.yml/badge.svg)](https://github.com/dyangocardoso/info-app/actions/workflows/validate-temas.yml)
+
 Este repositorio contiene el frontend (Vite + React) y el backend (Node.js + Express) de la plataforma InfoAprende.
 
 Este README resume cómo desarrollar localmente, cómo usar Docker (compose) para levantar un entorno integrado, y cómo desplegar en plataformas en la nube. También lista las variables de entorno necesarias y pasos para CI (GitHub Actions) que ya incluye un workflow básico.
@@ -42,31 +44,32 @@ Ejemplos de archivos de ejemplo:
 
 1. Instala dependencias:
 
-```powershell
-npm --prefix backend install
-npm --prefix frontend install
-```
+   ```powershell
+   npm --prefix backend install
+   npm --prefix frontend install
+   ```
 
 2. Ejecuta el backend:
 
-```powershell
-cd backend
-npm run dev
-```
+   ```powershell
+   cd backend
+   npm run dev
+   ```
 
 3. Ejecuta el frontend (HMR):
 
-```powershell
-cd frontend
-# Opcional: crear frontend/.env con VITE_API_URL=http://localhost:4000
-npm run dev
-```
+   ```powershell
+   cd frontend
+   # Opcional: crear frontend/.env con VITE_API_URL=http://localhost:4000
+   npm run dev
+   ```
 
-Nota: durante desarrollo, si usas rutas relativas en el frontend (recomendado), configura `VITE_API_URL=http://localhost:4000` en `frontend/.env` para evitar CORS.
+   Nota: durante desarrollo, si usas rutas relativas en el frontend (recomendado), configura `VITE_API_URL=http://localhost:4000` en `frontend/.env` para evitar CORS.
 
 ## Levantar entorno integrado con Docker (recomendado para pruebas)
 
 El proyecto incluye `docker-compose.yml` que crea:
+
 - `db` (Postgres)
 - `backend` (Node)
 - `frontend` (Nginx que sirve la SPA y proxyea `/api` al backend)
@@ -78,9 +81,10 @@ docker compose up --build
 ```
 
 Visita:
-- Frontend: http://localhost:5173
-- Backend (directo): http://localhost:4000/api/health
-- Backend (proxied desde frontend): http://localhost:5173/api/health
+
+- Frontend: [http://localhost:5173](http://localhost:5173)
+- Backend (directo): [http://localhost:4000/api/health](http://localhost:4000/api/health)
+- Backend (proxied desde frontend): [http://localhost:5173/api/health](http://localhost:5173/api/health)
 
 Para bajar y limpiar:
 
@@ -97,6 +101,7 @@ docker volume rm infoaprende_db_data   # opcional, borra la base de datos
 ## CI (GitHub Actions)
 
 El repo ya incluye `.github/workflows/ci.yml` con un job básico que:
+
 - build del frontend
 - instala dependencias backend
 - arranca el backend en background
@@ -115,44 +120,53 @@ Se ha añadido una política de ramas y CODEOWNERS. Consulta `docs/BRANCH_POLICY
 Se ha añadido soporte para previsualizar plantillas en HTML sin generar PDF. Esta funcionalidad facilita mostrar temarios y contenido en la web y evita depender de Puppeteer/Chromium cuando solo se necesita visualización.
 
 Qué se añadió:
+
 - Endpoint backend: `GET /api/docente/plantillas/:id/preview` (protegido por token). Devuelve el HTML compuesto de la plantilla (partials y CSS incluidos).
 - Componente React: `frontend/src/components/PlantillaPreview.jsx` (usa DOMPurify para sanitizar antes de renderizar).
 - Ejemplo de uso incluido en `frontend/src/App.jsx` (muestra la preview demo en la página principal durante el desarrollo).
 
 Instrucciones rápidas para probar localmente
+
 1. Reiniciar backend:
-   ```bash
+
+   ```powershell
    cd backend
    npm run dev
    ```
 
 2. Instalar dependencia en frontend (DOMPurify):
-   ```bash
+
+   ```powershell
    cd frontend
    npm install dompurify
    ```
 
 3. (Opcional) Configurar id de demo en Vite env: crea `.env` en `frontend` con:
+
    ```env
    VITE_PLANTILLA_DEMO_ID=1
    ```
 
 4. Iniciar frontend:
-   ```bash
+
+   ```powershell
    cd frontend
    npm run dev
    ```
 
 5. Obtener token (login) y guardarlo en localStorage o pásalo al componente. Ejemplo de prueba con curl (sin frontend):
-   ```bash
+
+   ```powershell
    curl.exe -H "Authorization: Bearer <TOKEN>" "http://localhost:4000/api/docente/plantillas/<ID>/preview" -o preview.html
    ```
 
 Seguridad
+
 - El componente usa DOMPurify para sanitizar el HTML del servidor antes de insertarlo en el DOM. Mantén siempre sanitización al renderizar HTML provisto por el servidor.
 
 Decisión sobre PDF
-- La exportación a PDF sigue disponible en `/api/docente/plantillas/:id/export` (uso de Puppeteer). Manténla si necesitas descargas/archivado; para solo visualización usa el endpoint `preview`.
+
+- La exportación a PDF sigue disponible en `GET /api/docente/plantillas/:id/export` (uso de Puppeteer). Manténla si necesitas descargas/archivado; para solo visualización usa el endpoint `preview`.
 
 ## Tests locales
 
