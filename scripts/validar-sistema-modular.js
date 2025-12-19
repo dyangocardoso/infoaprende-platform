@@ -175,7 +175,33 @@ async function validarContenido() {
       if (!contenido.includes('export') || !contenido.includes('secciones')) {
         throw new Error(`El archivo ${tema} no tiene la estructura correcta`);
       }
-      
+
+      // Nuevo: Verificar estructura de evaluacion (si está presente)
+      if (contenido.includes('evaluacion')) {
+        // Comprobaciones básicas
+        if (!contenido.includes('descripcion') || !contenido.includes('criteriosEvaluacion')) {
+          throw new Error(`El archivo ${tema} no define correctamente el objeto evaluacion (falta descripcion o criteriosEvaluacion)`);
+        }
+
+        // Extraer pesos de criteriosEvaluacion y verificar suman 100
+        const pesoRegex = /["']?peso["']?\s*:\s*(\d+)/g;
+        let match;
+        let sumaPesos = 0;
+        let contadorPesos = 0;
+        while ((match = pesoRegex.exec(contenido)) !== null) {
+          sumaPesos += parseInt(match[1], 10);
+          contadorPesos++;
+        }
+
+        if (contadorPesos === 0) {
+          throw new Error(`El archivo ${tema} define criteriosEvaluacion pero no se detectaron pesos válidos`);
+        }
+
+        if (sumaPesos !== 100) {
+          throw new Error(`Los pesos de criteriosEvaluacion en ${tema} no suman 100 (sumaron ${sumaPesos})`);
+        }
+      }
+
       console.log(`      ✅ ${tema} - Contenido validado`);
     }
   }

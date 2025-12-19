@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tema",
+  "type": "object",
+  "required": ["title", "slug", "lecciones"],
+  "properties": {
+    "title": { "type": "string" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "description": { "type": "string" },
+    "objetivos": { "type": "array", "items": { "type": "string" } },
+    "duracion": { "type": "string" },
+    "lecciones": { "type": "array", "items": { "type": "object" } },
+    "metadatos": { "type": "object" }
+  }
+}

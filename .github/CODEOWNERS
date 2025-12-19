@@ -1,0 +1,4 @@
+# CODEOWNERS: asigna revisión automática para archivos de cursos
+/frontend/src/data/cursos/ @dyangocardoso
+# fallback: dueño para todo el repo
+* @dyangocardoso
