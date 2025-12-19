@@ -11,11 +11,22 @@ function readFile(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
   if (ext === '.json') return JSON.parse(content);
   if (ext === '.yml' || ext === '.yaml' || ext === '.md') {
-    const fm = content.match(/^-{3}[\s\S]*?-{3}/);
-    if (fm) {
-      return yaml.load(fm[0].replace(/^-{3}/g, ''));
+    // Try to extract YAML frontmatter delimited by --- markers anywhere in the file
+    // This will capture the content between the first pair of '---' markers.
+    const fm = content.match(/-{3}[ \t\r\n]*([\s\S]*?)[ \t\r\n]*-{3}/m);
+    if (fm && fm[1]) {
+      try {
+        return yaml.load(fm[1]);
+      } catch (e) {
+        throw new Error('Error parsing YAML frontmatter: ' + e.message);
+      }
     }
-    return yaml.load(content);
+    // If no explicit frontmatter, try to parse the full content as YAML (may fail for markdown files)
+    try {
+      return yaml.load(content);
+    } catch (e) {
+      throw new Error('Unsupported or malformed markdown/YAML content: ' + e.message);
+    }
   }
   throw new Error('Unsupported file extension: ' + ext);
 }

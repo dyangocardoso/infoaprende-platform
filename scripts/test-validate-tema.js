@@ -2,7 +2,7 @@ const { validate } = require('./validate-tema');
 const path = require('path');
 
 const examples = [
-  path.resolve(__dirname, 'templates', 'tema-template.md')
+  path.resolve(__dirname, '..', 'templates', 'tema-template.md')
 ];
 
 let failed = false;

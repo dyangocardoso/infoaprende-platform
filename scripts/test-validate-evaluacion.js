@@ -2,7 +2,7 @@ const { validate } = require('./validate-evaluacion');
 const path = require('path');
 
 const examples = [
-  path.resolve(__dirname, 'templates', 'evaluacion-template.md')
+  path.resolve(__dirname, '..', 'templates', 'evaluacion-template.md')
 ];
 
 let failed = false;
