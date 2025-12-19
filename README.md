@@ -71,28 +71,106 @@ El proyecto incluye `docker-compose.yml` que crea:
 - `backend` (Node)
 - `frontend` (Nginx que sirve la SPA y proxyea `/api` al backend)
 
-Consulta `docker-compose.yml` y los Dockerfiles en `frontend/` y `backend/` para detalles.
+Para levantarlo:
 
-## CI / Workflows
+```powershell
+docker compose up --build
+```
 
-Los workflows principales están en `.github/workflows/`. El workflow `test-create-tema` se encarga de validar la CLI de creación de temas y está configurado para ejecutarse en cambios relevantes.
+Visita:
+- Frontend: http://localhost:5173
+- Backend (directo): http://localhost:4000/api/health
+- Backend (proxied desde frontend): http://localhost:5173/api/health
+
+Para bajar y limpiar:
+
+```powershell
+docker compose down
+docker volume rm infoaprende_db_data   # opcional, borra la base de datos
+```
+
+### Notas sobre la configuración Docker
+
+- El frontend en contenedor sirve la build estática con Nginx. Nginx tiene una configuración que proxyea `/api` al servicio `backend:4000` dentro de la red Docker para evitar CORS.
+- El `frontend` Dockerfile acepta `ARG VITE_API_URL` en build. En `docker-compose.yml` se pasa `http://backend:4000` como build-arg.
+
+## CI (GitHub Actions)
+
+El repo ya incluye `.github/workflows/ci.yml` con un job básico que:
+- build del frontend
+- instala dependencias backend
+- arranca el backend en background
+- espera el endpoint `/api/health` y ejecuta `backend/npm test` (script que ejecuta `test-health.js`)
+
+También existe un workflow `test-create-tema` que valida la CLI de creación de temarios y se ejecuta en cambios relevantes.
+
+Puedes extender los workflows para ejecutar linter, tests frontend o publicar imágenes a un registry.
 
 ## Política de ramas y revisiones
 
 Se ha añadido una política de ramas y CODEOWNERS. Consulta `docs/BRANCH_POLICY.md` y `.github/CODEOWNERS` para los detalles y los responsables de revisión.
 
-## Contribuir
+## Preview de plantillas (HTML) — vista rápida y uso en frontend
 
-Sigue el flujo recomendado:
-1. Crear una rama con prefijo (p. ej. `feat/`, `fix/`, `infra/`).
-2. Hacer commits claros y atómicos.
-3. Push y abrir PR hacia `main`.
-4. Esperar a que los checks pasen y pedir aprobación al reviewer o CODEOWNER.
-5. Resolver todas las conversaciones antes de mergear.
+Se ha añadido soporte para previsualizar plantillas en HTML sin generar PDF. Esta funcionalidad facilita mostrar temarios y contenido en la web y evita depender de Puppeteer/Chromium cuando solo se necesita visualización.
 
-## Notas finales
+Qué se añadió:
+- Endpoint backend: `GET /api/docente/plantillas/:id/preview` (protegido por token). Devuelve el HTML compuesto de la plantilla (partials y CSS incluidos).
+- Componente React: `frontend/src/components/PlantillaPreview.jsx` (usa DOMPurify para sanitizar antes de renderizar).
+- Ejemplo de uso incluido en `frontend/src/App.jsx` (muestra la preview demo en la página principal durante el desarrollo).
 
-- Nunca subas secretos en `.env`.
-- Mantén las dependencias actualizadas y ejecuta los tests antes de abrir PRs.
+Instrucciones rápidas para probar localmente
+1. Reiniciar backend:
+   ```bash
+   cd backend
+   npm run dev
+   ```
 
-> Para detalles operativos adicionales, consulta la carpeta `docs/` y los archivos `README.md` dentro de `backend/` y `frontend/`.
+2. Instalar dependencia en frontend (DOMPurify):
+   ```bash
+   cd frontend
+   npm install dompurify
+   ```
+
+3. (Opcional) Configurar id de demo en Vite env: crea `.env` en `frontend` con:
+   ```env
+   VITE_PLANTILLA_DEMO_ID=1
+   ```
+
+4. Iniciar frontend:
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+5. Obtener token (login) y guardarlo en localStorage o pásalo al componente. Ejemplo de prueba con curl (sin frontend):
+   ```bash
+   curl.exe -H "Authorization: Bearer <TOKEN>" "http://localhost:4000/api/docente/plantillas/<ID>/preview" -o preview.html
+   ```
+
+Seguridad
+- El componente usa DOMPurify para sanitizar el HTML del servidor antes de insertarlo en el DOM. Mantén siempre sanitización al renderizar HTML provisto por el servidor.
+
+Decisión sobre PDF
+- La exportación a PDF sigue disponible en `/api/docente/plantillas/:id/export` (uso de Puppeteer). Manténla si necesitas descargas/archivado; para solo visualización usa el endpoint `preview`.
+
+## Tests locales
+
+Backend incluye un script de health check:
+
+```powershell
+cd backend
+node test-health.js
+# o
+npm test
+```
+
+## Siguientes mejoras sugeridas
+
+- Añadir tests E2E (Playwright) que validen login y rutas protegidas.
+- Añadir logging estructurado y graceful shutdown en backend.
+- Añadir despliegue automático (CD) en el workflow de GitHub Actions.
+
+---
+
+Fecha del documento: 2025-11-12
