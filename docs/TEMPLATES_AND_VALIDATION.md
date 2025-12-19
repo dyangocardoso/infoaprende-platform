@@ -1,4 +1,4 @@
-Guía rápida: creación y validación de temarios y evaluaciones
+# Guía rápida: creación y validación de temarios y evaluaciones
 
 Propósito
 
@@ -37,30 +37,42 @@ Validar archivos localmente
 
 - Validar un tema (MD/YAML/JSON):
 
-  node scripts/validate-tema.js <ruta-al-archivo>
+  ```bash
+  node scripts/validate-tema.js path/to/file
+  ```
 
 - Validar una evaluación (JSON/YAML/MD):
 
-  node scripts/validate-evaluacion.js <ruta-al-archivo>
+  ```bash
+  node scripts/validate-evaluacion.js path/to/file
+  ```
 
 - Validar plantillas de ejemplo (runner):
 
+  ```bash
   node scripts/test-validate-tema.js
   node scripts/test-validate-evaluacion.js
+  ```
 
 Ejecución de tests CLI localmente
 
 - Test de creación de la CLI (tema):
 
+  ```bash
   node scripts/test-create-tema-cli.js
+  ```
 
 - Test de creación de la CLI (evaluación):
 
+  ```bash
   node scripts/test-create-evaluacion-cli.js
+  ```
 
 - Ejecutar la suite completa (temas + CLI temas + CLI evaluaciones):
 
+  ```bash
   npm run test-create-tema-suite
+  ```
 
 Comportamiento en CI
 
