@@ -7,10 +7,10 @@
     "start": "node index.js",
     "test": "cross-env NODE_ENV=test mocha --recursive --exit --file test/_setup.js",
     "test:health": "node test-health.js",
-    "migrate": "npx sequelize db:migrate",
+    "migrate": "node ./node_modules/sequelize-cli/lib/sequelize.js db:migrate --config ./config/database-smart.js --migrations-path ./migrations",
     "migrate:undo": "npx sequelize db:migrate:undo:all",
     "migrate:status": "npx sequelize db:migrate:status",
-    "seed": "npx sequelize db:seed:all",
+    "seed": "node ./node_modules/sequelize-cli/lib/sequelize.js db:seed:all --config ./config/database-smart.js --seeders-path ./seeders",
     "copy-env": "node scripts/copy-env.js"
   },
   "dependencies": {
