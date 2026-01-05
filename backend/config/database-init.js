@@ -297,6 +297,39 @@ async function createInitialData(User, Curso, Leccion) {
     console.log(`📖 ${lecciones.length} lecciones creadas para el curso de Introducción`);
     
     console.log('✅ Datos iniciales creados correctamente');
+
+    // Asegurar que existen usuarios con las credenciales usadas por las pruebas E2E
+    try {
+      // usar contraseña predecible para pruebas E2E
+      const e2eHashed = await bcrypt.hash('password', 10);
+
+      const [docenteUser, docenteCreated] = await User.findOrCreate({
+        where: { email: 'docente@example.com' },
+        defaults: {
+          nombre: 'Docente E2E',
+          password: e2eHashed,
+          grado: null,
+          rol: 'docente'
+        }
+      });
+      const [estudianteUser, estudianteCreated] = await User.findOrCreate({
+        where: { email: 'estudiante@example.com' },
+        defaults: {
+          nombre: 'Estudiante E2E',
+          password: e2eHashed,
+          grado: '5to Grado',
+          rol: 'estudiante'
+        }
+      });
+
+      if (docenteCreated) console.log('✅ Usuario de prueba creado: docente@example.com');
+      else console.log('ℹ️  Usuario docente de prueba ya existe: docente@example.com');
+
+      if (estudianteCreated) console.log('✅ Usuario de prueba creado: estudiante@example.com');
+      else console.log('ℹ️  Usuario estudiante de prueba ya existe: estudiante@example.com');
+    } catch (e) {
+      console.warn('⚠️  No se pudieron crear usuarios de prueba E2E:', e.message);
+    }
     
   } catch (error) {
     console.error('❌ Error creando datos iniciales:', error);

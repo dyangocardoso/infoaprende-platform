@@ -1,0 +1,127 @@
+﻿2026-01-05T15:56:21.9493403Z ##[group]Run npx playwright test --reporter=list
+2026-01-05T15:56:21.9493811Z [36;1mnpx playwright test --reporter=list[0m
+2026-01-05T15:56:21.9526319Z shell: /usr/bin/bash -e {0}
+2026-01-05T15:56:21.9526746Z ##[endgroup]
+2026-01-05T15:56:23.5832686Z 
+2026-01-05T15:56:23.5833245Z Running 3 tests using 2 workers
+2026-01-05T15:56:23.5834011Z 
+2026-01-05T15:56:24.3146882Z   ✘  2 [chromium] › tests/rbac.spec.js:12:3 › RBAC docente module › docente puede crear un temario (positivo) (68ms)
+2026-01-05T15:56:25.0580828Z   ✘  3 [chromium] › tests/rbac.spec.js:12:3 › RBAC docente module › docente puede crear un temario (positivo) (retry #1) (93ms)
+2026-01-05T15:56:25.2853384Z   ✓  1 [chromium] › tests/e2e.spec.js:3:1 › homepage loads and health endpoint responds via proxy (333ms)
+2026-01-05T15:56:25.7616398Z   ✘  4 [chromium] › tests/rbac.spec.js:12:3 › RBAC docente module › docente puede crear un temario (positivo) (retry #2) (41ms)
+2026-01-05T15:56:26.4170719Z   ✘  5 [chromium] › tests/rbac.spec.js:27:3 › RBAC docente module › estudiante no puede acceder al módulo docente (negativo) (42ms)
+2026-01-05T15:56:27.1189034Z   ✘  6 [chromium] › tests/rbac.spec.js:27:3 › RBAC docente module › estudiante no puede acceder al módulo docente (negativo) (retry #1) (64ms)
+2026-01-05T15:56:27.7919814Z   ✘  7 [chromium] › tests/rbac.spec.js:27:3 › RBAC docente module › estudiante no puede acceder al módulo docente (negativo) (retry #2) (42ms)
+2026-01-05T15:56:27.8042973Z 
+2026-01-05T15:56:27.8048322Z 
+2026-01-05T15:56:27.8062910Z   1) [chromium] › tests/rbac.spec.js:12:3 › RBAC docente module › docente puede crear un temario (positivo) 
+2026-01-05T15:56:27.8063659Z 
+2026-01-05T15:56:27.8064261Z     Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+2026-01-05T15:56:27.8064767Z 
+2026-01-05T15:56:27.8065028Z     Received: [31mfalse[39m
+2026-01-05T15:56:27.8065322Z 
+2026-01-05T15:56:27.8065738Z       13 |     // Login como docente - ajustar credenciales de seed si necesario
+2026-01-05T15:56:27.8066692Z       14 |     const loginRes = await apiLogin(request, 'docente@example.com', 'password');
+2026-01-05T15:56:27.8067535Z     > 15 |     expect(loginRes.ok()).toBeTruthy();
+2026-01-05T15:56:27.8067882Z          |                           ^
+2026-01-05T15:56:27.8068199Z       16 |     const token = (await loginRes.json()).token;
+2026-01-05T15:56:27.8068473Z       17 |
+2026-01-05T15:56:27.8068994Z       18 |     const createRes = await request.post('/api/docente/temarios', {
+2026-01-05T15:56:27.8069644Z         at /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/tests/rbac.spec.js:15:27
+2026-01-05T15:56:27.8070027Z 
+2026-01-05T15:56:27.8070583Z     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+2026-01-05T15:56:27.8070981Z 
+2026-01-05T15:56:27.8071294Z     Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+2026-01-05T15:56:27.8071558Z 
+2026-01-05T15:56:27.8071680Z     Received: [31mfalse[39m
+2026-01-05T15:56:27.8071837Z 
+2026-01-05T15:56:27.8072069Z       13 |     // Login como docente - ajustar credenciales de seed si necesario
+2026-01-05T15:56:27.8072589Z       14 |     const loginRes = await apiLogin(request, 'docente@example.com', 'password');
+2026-01-05T15:56:27.8073017Z     > 15 |     expect(loginRes.ok()).toBeTruthy();
+2026-01-05T15:56:27.8073304Z          |                           ^
+2026-01-05T15:56:27.8073614Z       16 |     const token = (await loginRes.json()).token;
+2026-01-05T15:56:27.8073889Z       17 |
+2026-01-05T15:56:27.8074207Z       18 |     const createRes = await request.post('/api/docente/temarios', {
+2026-01-05T15:56:27.8074811Z         at /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/tests/rbac.spec.js:15:27
+2026-01-05T15:56:27.8075183Z 
+2026-01-05T15:56:27.8075550Z     attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-01-05T15:56:27.8076245Z     test-results/rbac-RBAC-docente-module-d-12948--crear-un-temario-positivo--chromium-retry1/trace.zip
+2026-01-05T15:56:27.8077008Z     Usage:
+2026-01-05T15:56:27.8077110Z 
+2026-01-05T15:56:27.8077607Z         npx playwright show-trace test-results/rbac-RBAC-docente-module-d-12948--crear-un-temario-positivo--chromium-retry1/trace.zip
+2026-01-05T15:56:27.8078270Z 
+2026-01-05T15:56:27.8078576Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-01-05T15:56:27.8078991Z 
+2026-01-05T15:56:27.8079321Z     Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+2026-01-05T15:56:27.8079554Z 
+2026-01-05T15:56:27.8079835Z     Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+2026-01-05T15:56:27.8080095Z 
+2026-01-05T15:56:27.8080210Z     Received: [31mfalse[39m
+2026-01-05T15:56:27.8080359Z 
+2026-01-05T15:56:27.8080565Z       13 |     // Login como docente - ajustar credenciales de seed si necesario
+2026-01-05T15:56:27.8081065Z       14 |     const loginRes = await apiLogin(request, 'docente@example.com', 'password');
+2026-01-05T15:56:27.8081496Z     > 15 |     expect(loginRes.ok()).toBeTruthy();
+2026-01-05T15:56:27.8081788Z          |                           ^
+2026-01-05T15:56:27.8082114Z       16 |     const token = (await loginRes.json()).token;
+2026-01-05T15:56:27.8082378Z       17 |
+2026-01-05T15:56:27.8082682Z       18 |     const createRes = await request.post('/api/docente/temarios', {
+2026-01-05T15:56:27.8083277Z         at /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/tests/rbac.spec.js:15:27
+2026-01-05T15:56:27.8083650Z 
+2026-01-05T15:56:27.8084114Z   2) [chromium] › tests/rbac.spec.js:27:3 › RBAC docente module › estudiante no puede acceder al módulo docente (negativo) 
+2026-01-05T15:56:27.8084509Z 
+2026-01-05T15:56:27.8084779Z     Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+2026-01-05T15:56:27.8085039Z 
+2026-01-05T15:56:27.8085153Z     Received: [31mfalse[39m
+2026-01-05T15:56:27.8085318Z 
+2026-01-05T15:56:27.8085430Z       28 |     // Login como estudiante
+2026-01-05T15:56:27.8085866Z       29 |     const loginRes = await apiLogin(request, 'estudiante@example.com', 'password');
+2026-01-05T15:56:27.8086284Z     > 30 |     expect(loginRes.ok()).toBeTruthy();
+2026-01-05T15:56:27.8086575Z          |                           ^
+2026-01-05T15:56:27.8086872Z       31 |     const token = (await loginRes.json()).token;
+2026-01-05T15:56:27.8087129Z       32 |
+2026-01-05T15:56:27.8087433Z       33 |     const accessRes = await request.post('/api/docente/temarios', {
+2026-01-05T15:56:27.8088023Z         at /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/tests/rbac.spec.js:30:27
+2026-01-05T15:56:27.8088400Z 
+2026-01-05T15:56:27.8088706Z     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+2026-01-05T15:56:27.8089124Z 
+2026-01-05T15:56:27.8089398Z     Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+2026-01-05T15:56:27.8089656Z 
+2026-01-05T15:56:27.8089780Z     Received: [31mfalse[39m
+2026-01-05T15:56:27.8089923Z 
+2026-01-05T15:56:27.8090036Z       28 |     // Login como estudiante
+2026-01-05T15:56:27.8090447Z       29 |     const loginRes = await apiLogin(request, 'estudiante@example.com', 'password');
+2026-01-05T15:56:27.8091006Z     > 30 |     expect(loginRes.ok()).toBeTruthy();
+2026-01-05T15:56:27.8091280Z          |                           ^
+2026-01-05T15:56:27.8091576Z       31 |     const token = (await loginRes.json()).token;
+2026-01-05T15:56:27.8091837Z       32 |
+2026-01-05T15:56:27.8092130Z       33 |     const accessRes = await request.post('/api/docente/temarios', {
+2026-01-05T15:56:27.8092712Z         at /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/tests/rbac.spec.js:30:27
+2026-01-05T15:56:27.8093077Z 
+2026-01-05T15:56:27.8093448Z     attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-01-05T15:56:27.8094496Z     test-results/rbac-RBAC-docente-module-e-6ceb2-al-módulo-docente-negativo--chromium-retry1/trace.zip
+2026-01-05T15:56:27.8095506Z     Usage:
+2026-01-05T15:56:27.8095679Z 
+2026-01-05T15:56:27.8096708Z         npx playwright show-trace test-results/rbac-RBAC-docente-module-e-6ceb2-al-módulo-docente-negativo--chromium-retry1/trace.zip
+2026-01-05T15:56:27.8097641Z 
+2026-01-05T15:56:27.8098241Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-01-05T15:56:27.8098667Z 
+2026-01-05T15:56:27.8099503Z     Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+2026-01-05T15:56:27.8099969Z 
+2026-01-05T15:56:27.8100522Z     Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+2026-01-05T15:56:27.8100968Z 
+2026-01-05T15:56:27.8101190Z     Received: [31mfalse[39m
+2026-01-05T15:56:27.8101439Z 
+2026-01-05T15:56:27.8101634Z       28 |     // Login como estudiante
+2026-01-05T15:56:27.8102383Z       29 |     const loginRes = await apiLogin(request, 'estudiante@example.com', 'password');
+2026-01-05T15:56:27.8103149Z     > 30 |     expect(loginRes.ok()).toBeTruthy();
+2026-01-05T15:56:27.8103632Z          |                           ^
+2026-01-05T15:56:27.8104176Z       31 |     const token = (await loginRes.json()).token;
+2026-01-05T15:56:27.8104626Z       32 |
+2026-01-05T15:56:27.8105141Z       33 |     const accessRes = await request.post('/api/docente/temarios', {
+2026-01-05T15:56:27.8106125Z         at /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/tests/rbac.spec.js:30:27
+2026-01-05T15:56:27.8106526Z 
+2026-01-05T15:56:27.8106619Z   2 failed
+2026-01-05T15:56:27.8107169Z     [chromium] › tests/rbac.spec.js:12:3 › RBAC docente module › docente puede crear un temario (positivo) 
+2026-01-05T15:56:27.8107996Z     [chromium] › tests/rbac.spec.js:27:3 › RBAC docente module › estudiante no puede acceder al módulo docente (negativo) 
+2026-01-05T15:56:27.8108470Z   1 passed (4.7s)
+2026-01-05T15:56:27.8354677Z ##[error]Process completed with exit code 1.

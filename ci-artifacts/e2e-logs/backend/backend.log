@@ -1,0 +1,62 @@
+
+> infoaprende-backend@1.0.0 start
+> node index.js
+
+Allowed CORS origins: [ 'http://localhost:5173' ]
+🔍 Inicializando base de datos...
+🚀 Iniciando configuración completa de la base de datos...
+
+🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
+🚀       INFOAPRENDE BACKEND INICIADO       🚀
+🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
+
+🌐 API URL: http://localhost:4000
+🎯 Frontend: http://localhost:5173
+📊 Estado: Funcionando (con o sin BD)
+
+📝 Endpoints disponibles:
+   • GET  / (información general)
+   • POST /api/users/register (registro)
+   • POST /api/users/login (login)
+   • GET  /api/users/profile (perfil)
+   • GET  /api/test/test (prueba)
+
+✅ ¡Listo para probar la aplicación!
+
+✅ Conectado a SQLite (temporal) exitosamente
+📁 Archivo SQLite: /home/runner/work/infoaprende-platform/infoaprende-platform/backend/database/infoaprende.sqlite
+⚠️  Para usar PostgreSQL, instálalo y reinicia el servidor
+🔄 Ejecutando migraciones pendientes (umzug)...
+{ event: 'migrating', name: '20251110115000-create-usuarios.js' }
+⚠️  No se ejecutaron migraciones automáticas: Migration 20251110115000-create-usuarios.js (up) failed: Original error: queryInterface.createTable is not a function
+📦 Creando modelos...
+✅ Modelos docentes cargados y registrados globalmente
+🔗 Configurando asociaciones...
+✅ Asociaciones configuradas
+✅ Asociaciones docentes configuradas
+🔄 Sincronizando tablas...
+✅ Tablas sincronizadas correctamente
+👥 Usuarios existentes: 0
+🆕 Creando usuarios iniciales...
+🌱 Creando datos iniciales...
+👥 Usuarios creados:
+   - Admin: admin@infoaprende.com
+   - Profesor: profesor@infoaprende.com
+   - Estudiante: estudiante@infoaprende.com
+📚 Cursos creados:
+   - Introducción a la Informática
+   - Windows Básico
+📖 3 lecciones creadas para el curso de Introducción
+✅ Datos iniciales creados correctamente
+🔍 Verificando integridad de la base de datos...
+📊 Estadísticas de la base de datos:
+   - Usuarios: 3
+   - Cursos: 2
+   - Lecciones: 3
+   - Registros de progreso: 0
+✅ Administradores encontrados: 1
+✅ Relaciones Usuario-Curso funcionando
+✅ Relaciones Curso-Lección funcionando
+✅ Verificación de integridad completada
+🎉 Base de datos inicializada correctamente
+✅ Base de datos y modelos inicializados correctamente

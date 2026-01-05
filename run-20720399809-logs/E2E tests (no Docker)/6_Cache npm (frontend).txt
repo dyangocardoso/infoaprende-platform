@@ -1,0 +1,12 @@
+﻿2026-01-05T15:55:25.5909523Z ##[group]Run actions/cache@v4
+2026-01-05T15:55:25.5909804Z with:
+2026-01-05T15:55:25.5909995Z   path: ~/.npm
+2026-01-05T15:55:25.5910433Z   key: Linux-npm-cache-frontend-edf5dd5eada7f69cf816d002ce73d5ab570e48ab563a9e4e988bd8d2e6762a14
+2026-01-05T15:55:25.5910942Z   restore-keys: Linux-npm-cache-frontend-
+
+2026-01-05T15:55:25.5911221Z   enableCrossOsArchive: false
+2026-01-05T15:55:25.5911450Z   fail-on-cache-miss: false
+2026-01-05T15:55:25.5911660Z   lookup-only: false
+2026-01-05T15:55:25.5911842Z   save-always: false
+2026-01-05T15:55:25.5912029Z ##[endgroup]
+2026-01-05T15:55:26.0088739Z Cache not found for input keys: Linux-npm-cache-frontend-edf5dd5eada7f69cf816d002ce73d5ab570e48ab563a9e4e988bd8d2e6762a14, Linux-npm-cache-frontend-

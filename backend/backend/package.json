@@ -1,4 +1,11 @@
 {
+  "name": "infoaprende-backend-sub",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npm --prefix .. run dev",
+    "start": "npm --prefix .. start",
+    "test": "npm --prefix .. test"
+  },
   "dependencies": {
     "infoaprende-backend": "file:.."
   }
