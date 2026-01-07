@@ -134,12 +134,14 @@ const temariosRoutes = require('./routes/docente.temarios.routes');
 const evaluacionesRoutes = require('./routes/docente.evaluaciones.routes');
 const preguntasRoutes = require('./routes/docente.preguntas.routes');
 const plantillasRoutes = require('./routes/docente.plantillas.routes');
+const pruebasRoutes = require('./routes/docente.pruebas.routes');
 
 app.use('/api/docente/temarios', checkDB, temariosRoutes);
 app.use('/api/docente/evaluaciones', checkDB, evaluacionesRoutes);
 // Preguntas se montan bajo /api/docente/evaluaciones/:evaluacionId/preguntas
 app.use('/api/docente/evaluaciones/:evaluacionId/preguntas', checkDB, preguntasRoutes);
 app.use('/api/docente/plantillas', checkDB, plantillasRoutes);
+app.use('/api/docente/pruebas', checkDB, pruebasRoutes);
 
 // Ruta de test
 app.get('/api/test/test', (req, res) => {

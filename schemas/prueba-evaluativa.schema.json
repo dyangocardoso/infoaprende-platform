@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PruebaEvaluativa",
+  "type": "object",
+  "required": ["curso", "tipo", "preguntas", "criteriosEvaluacion"],
+  "properties": {
+    "id": { "type": "string" },
+    "curso": { "type": "string" },
+    "tipo": { "type": "string", "enum": ["inicial", "por-niveles", "por-modulos"] },
+    "nivel": { "type": ["string", "null"] },
+    "modulos": { "type": ["array", "null"], "items": { "type": "string" } },
+    "titulo": { "type": "string" },
+    "descripcion": { "type": "string" },
+    "preguntas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "tipo", "enunciado"],
+        "properties": {
+          "id": { "type": "string" },
+          "tipo": { "type": "string", "enum": ["multiple-choice", "true-false", "short"] },
+          "enunciado": { "type": "string" },
+          "opciones": { "type": "array", "items": { "type": "string" } },
+          "respuestaCorrecta": {},
+          "puntos": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "criteriosEvaluacion": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["criterio", "peso"],
+        "properties": {
+          "criterio": { "type": "string" },
+          "peso": { "type": "number", "minimum": 0, "maximum": 100 }
+        }
+      }
+    },
+    "tiempoLimiteMin": { "type": ["number", "null"] },
+    "creadoEn": { "type": "string", "format": "date-time" },
+    "publicado": { "type": "boolean" }
+  }
+}

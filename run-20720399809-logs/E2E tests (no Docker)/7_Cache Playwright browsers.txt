@@ -1,0 +1,12 @@
+﻿2026-01-05T15:55:26.0693556Z ##[group]Run actions/cache@v4
+2026-01-05T15:55:26.0693816Z with:
+2026-01-05T15:55:26.0694028Z   path: ~/.cache/ms-playwright
+2026-01-05T15:55:26.0694492Z   key: Linux-playwright-browsers-98ea6830e4fe31d4eaf879e6442656c05338cbd4b3b28cb66228885480d9fdfd
+2026-01-05T15:55:26.0695016Z   restore-keys: Linux-playwright-browsers-
+
+2026-01-05T15:55:26.0695307Z   enableCrossOsArchive: false
+2026-01-05T15:55:26.0695549Z   fail-on-cache-miss: false
+2026-01-05T15:55:26.0695770Z   lookup-only: false
+2026-01-05T15:55:26.0695960Z   save-always: false
+2026-01-05T15:55:26.0696151Z ##[endgroup]
+2026-01-05T15:55:26.4297630Z Cache not found for input keys: Linux-playwright-browsers-98ea6830e4fe31d4eaf879e6442656c05338cbd4b3b28cb66228885480d9fdfd, Linux-playwright-browsers-

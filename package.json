@@ -3,14 +3,17 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "start:backend": "npm --prefix backend run dev",
-    "start:frontend": "npm --prefix frontend run dev",
-    "dev": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
-    "e2e:start": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
-    "e2e:start:logs": "concurrently \"bash -lc \"npm --prefix backend run dev > backend.log 2>&1\"\" \"bash -lc \"npm --prefix frontend run dev > frontend.log 2>&1\"\""
+    "create-tema": "node scripts/create-tema.js",
+    "test-create-tema": "node scripts/test-create-tema.js",
+    "test-create-tema-cli": "node scripts/test-create-tema-cli.js",
+    "test-create-evaluacion-cli": "node scripts/test-create-evaluacion-cli.js",
+    "test-create-tema-suite": "node scripts/test-create-tema-suite.js && node scripts/test-create-tema-cli.js && node scripts/test-create-evaluacion-cli.js",
+    "test": "npm run test-create-tema"
   },
   "devDependencies": {
-    "concurrently": "^8.0.0"
+    "ajv": "^8.17.1",
+    "concurrently": "^8.0.0",
+    "js-yaml": "^4.1.1"
   },
   "dependencies": {
     "axios": "^1.10.0",

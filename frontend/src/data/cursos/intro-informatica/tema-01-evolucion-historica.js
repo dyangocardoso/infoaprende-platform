@@ -24,7 +24,14 @@ export const tema01 = {
         <div class="historia-antigua">
           <h4>El Ábaco (3000 a.C.)</h4>
           <p>El <strong>ábaco</strong> fue uno de los primeros dispositivos de cálculo conocidos, utilizado en Mesopotamia, China y otras civilizaciones antiguas.</p>
-          
+          <img
+            src="/images/teoria/historia-abaco.jpg"
+            srcset="/images/teoria/historia-abaco.jpg 400w, /images/teoria/historia-abaco.jpg 800w, /images/teoria/historia-abaco.jpg 1600w"
+            sizes="(max-width:600px) 100vw, 600px"
+            alt="Ábaco"
+            loading="lazy"
+            style="max-width:600px;width:100%;height:auto;display:block;margin:0 auto;"
+          />
           <h5>Características:</h5>
           <ul>
             <li><strong>Función:</strong> Realizar operaciones aritméticas básicas</li>
@@ -42,7 +49,6 @@ export const tema01 = {
         </div>
       `,
       multimedia: {
-        imagen: "/images/teoria/historia-abaco.jpg",
         infografia: "/images/teoria/dispositivos-antiguos.png"
       }
     },

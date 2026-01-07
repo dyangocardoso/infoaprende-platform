@@ -1,0 +1,24 @@
+﻿2026-01-05T15:56:27.8417060Z ##[group]Run actions/upload-artifact@v4
+2026-01-05T15:56:27.8417414Z with:
+2026-01-05T15:56:27.8417687Z   name: e2e-logs
+2026-01-05T15:56:27.8417931Z   path: backend/backend.log
+frontend/preview.log
+
+2026-01-05T15:56:27.8418251Z   if-no-files-found: warn
+2026-01-05T15:56:27.8418468Z   compression-level: 6
+2026-01-05T15:56:27.8418662Z   overwrite: false
+2026-01-05T15:56:27.8419189Z   include-hidden-files: false
+2026-01-05T15:56:27.8419573Z ##[endgroup]
+2026-01-05T15:56:28.0567424Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-01-05T15:56:28.0571899Z The least common ancestor is /home/runner/work/infoaprende-platform/infoaprende-platform. This will be the root directory of the artifact
+2026-01-05T15:56:28.0573249Z With the provided path, there will be 2 files uploaded
+2026-01-05T15:56:28.0578431Z Artifact name is valid!
+2026-01-05T15:56:28.0579918Z Root directory input is valid!
+2026-01-05T15:56:28.2822001Z Beginning upload of artifact content to blob storage
+2026-01-05T15:56:28.5269520Z Uploaded bytes 1537
+2026-01-05T15:56:28.5908638Z Finished uploading artifact content to blob storage!
+2026-01-05T15:56:28.5911517Z SHA256 digest of uploaded artifact zip is f4db946607d9e59da3940e09eca943c4e08bc64a78c978ae3329b5e8bb34e1a3
+2026-01-05T15:56:28.5913454Z Finalizing artifact upload
+2026-01-05T15:56:28.7289051Z Artifact e2e-logs.zip successfully finalized. Artifact ID 5026347506
+2026-01-05T15:56:28.7290411Z Artifact e2e-logs has been successfully uploaded! Final size is 1537 bytes. Artifact ID is 5026347506
+2026-01-05T15:56:28.7297293Z Artifact download URL: https://github.com/dyangocardoso/infoaprende-platform/actions/runs/20720399809/artifacts/5026347506

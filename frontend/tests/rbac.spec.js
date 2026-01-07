@@ -1,8 +1,16 @@
 import { test, expect } from '@playwright/test';
 
+// Base URL para llamadas API (permitir override con TEST_API_URL en CI/local)
+// Soporta: Node env (globalThis.process.env.TEST_API_URL) o Vite env (import.meta.env.VITE_TEST_API_URL)
+const API_BASE = (
+  globalThis?.process?.env?.TEST_API_URL ||
+  (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_TEST_API_URL) ||
+  'http://localhost:4000'
+);
+
 // Helpers
 async function apiLogin(request, email, password) {
-  const res = await request.post('/api/users/login', {
+  const res = await request.post(`${API_BASE}/api/users/login`, {
     data: { email, password }
   });
   return res;
@@ -15,7 +23,7 @@ test.describe('RBAC docente module', () => {
     expect(loginRes.ok()).toBeTruthy();
     const token = (await loginRes.json()).token;
 
-    const createRes = await request.post('/api/docente/temarios', {
+    const createRes = await request.post(`${API_BASE}/api/docente/temarios`, {
       headers: { Authorization: `Bearer ${token}` },
       data: { titulo: 'Temario E2E', descripcion: 'Creado en test', nivel: 'primario' }
     });
@@ -30,7 +38,7 @@ test.describe('RBAC docente module', () => {
     expect(loginRes.ok()).toBeTruthy();
     const token = (await loginRes.json()).token;
 
-    const accessRes = await request.post('/api/docente/temarios', {
+    const accessRes = await request.post(`${API_BASE}/api/docente/temarios`, {
       headers: { Authorization: `Bearer ${token}` },
       data: { titulo: 'Intento no autorizado', descripcion: 'Debe fallar', nivel: 'primario' }
     });
