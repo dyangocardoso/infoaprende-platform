@@ -1,0 +1,42 @@
+﻿2026-01-05T15:55:26.4366544Z ##[group]Run cd frontend
+2026-01-05T15:55:26.4366816Z [36;1mcd frontend[0m
+2026-01-05T15:55:26.4367015Z [36;1mnpm run build[0m
+2026-01-05T15:55:26.4399488Z shell: /usr/bin/bash -e {0}
+2026-01-05T15:55:26.4399724Z ##[endgroup]
+2026-01-05T15:55:26.5497097Z 
+2026-01-05T15:55:26.5497640Z > frontend@0.0.0 build
+2026-01-05T15:55:26.5498117Z > vite build
+2026-01-05T15:55:26.5498305Z 
+2026-01-05T15:55:26.7543515Z [36mvite v7.0.3 [32mbuilding for production...[36m[39m
+2026-01-05T15:55:26.8091909Z transforming...
+2026-01-05T15:55:28.2160870Z [32m✓[39m 243 modules transformed.
+2026-01-05T15:55:28.4532740Z rendering chunks...
+2026-01-05T15:55:28.5507654Z [33m[plugin vite:reporter] 
+2026-01-05T15:55:28.5512088Z (!) /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/data/cursos/excel/index.js is dynamically imported by /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/context/ContenidoProviderModular.jsx but also statically imported by /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/pages/cursos/Excel.jsx, dynamic import will not move module into another chunk.
+2026-01-05T15:55:28.5514401Z [39m
+2026-01-05T15:55:28.5514717Z [33m[plugin vite:reporter] 
+2026-01-05T15:55:28.5517385Z (!) /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/data/cursos/access/index.js is dynamically imported by /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/context/ContenidoProviderModular.jsx but also statically imported by /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/pages/cursos/Access.jsx, dynamic import will not move module into another chunk.
+2026-01-05T15:55:28.5519994Z [39m
+2026-01-05T15:55:28.5520264Z [33m[plugin vite:reporter] 
+2026-01-05T15:55:28.5523454Z (!) /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/data/cursos/redes/index.js is dynamically imported by /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/context/ContenidoProviderModular.jsx but also statically imported by /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/pages/cursos/LeccionTema.jsx, /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/pages/cursos/Redes.jsx, dynamic import will not move module into another chunk.
+2026-01-05T15:55:28.5527051Z [39m
+2026-01-05T15:55:28.5527523Z [33m[plugin vite:reporter] 
+2026-01-05T15:55:28.5538678Z (!) /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/data/cursos/ciberseguridad/index.js is dynamically imported by /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/context/ContenidoProviderModular.jsx but also statically imported by /home/runner/work/infoaprende-platform/infoaprende-platform/frontend/src/pages/cursos/Ciberseguridad.jsx, dynamic import will not move module into another chunk.
+2026-01-05T15:55:28.5542101Z [39m
+2026-01-05T15:55:28.5735727Z computing gzip size...
+2026-01-05T15:55:28.5965601Z [2mdist/[22m[32mindex.html                 [39m[1m[2m  0.75 kB[22m[1m[22m[2m │ gzip:   0.44 kB[22m
+2026-01-05T15:55:28.5967241Z [2mdist/[22m[2massets/[22m[35mindex-BXtR5v3c.css  [39m[1m[2m 40.81 kB[22m[1m[22m[2m │ gzip:   7.52 kB[22m
+2026-01-05T15:55:28.5969092Z [2mdist/[22m[2massets/[22m[36mindex-CQfQt-Kz.js   [39m[1m[2m 19.44 kB[22m[1m[22m[2m │ gzip:   5.32 kB[22m
+2026-01-05T15:55:28.5970755Z [2mdist/[22m[2massets/[22m[36mindex-BBBuxDM4.js   [39m[1m[2m 59.53 kB[22m[1m[22m[2m │ gzip:  15.33 kB[22m
+2026-01-05T15:55:28.5972347Z [2mdist/[22m[2massets/[22m[36mindex-BjCZInfs.js   [39m[1m[2m 68.65 kB[22m[1m[22m[2m │ gzip:  18.25 kB[22m
+2026-01-05T15:55:28.5973973Z [2mdist/[22m[2massets/[22m[36mindex-BOW9YQGA.js   [39m[1m[2m 71.59 kB[22m[1m[22m[2m │ gzip:  14.96 kB[22m
+2026-01-05T15:55:28.5975571Z [2mdist/[22m[2massets/[22m[36mindex-qiOiuad8.js   [39m[1m[2m147.26 kB[22m[1m[22m[2m │ gzip:  32.45 kB[22m
+2026-01-05T15:55:28.5976989Z [2mdist/[22m[2massets/[22m[36mindex-WrUZRj-t.js   [39m[1m[2m176.54 kB[22m[1m[22m[2m │ gzip:  37.99 kB[22m
+2026-01-05T15:55:28.5978282Z [33m
+2026-01-05T15:55:28.5978996Z (!) Some chunks are larger than 500 kB after minification. Consider:
+2026-01-05T15:55:28.5979732Z - Using dynamic import() to code-split the application
+2026-01-05T15:55:28.5980995Z - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2026-01-05T15:55:28.5982494Z - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+2026-01-05T15:55:28.5983797Z [2mdist/[22m[2massets/[22m[36mindex-du6QNw8D.js   [39m[1m[2m235.93 kB[22m[1m[22m[2m │ gzip:  53.56 kB[22m
+2026-01-05T15:55:28.5985234Z [2mdist/[22m[2massets/[22m[36mindex-Dzmq1Erv.js   [39m[1m[33m719.84 kB[39m[22m[2m │ gzip: 188.69 kB[22m
+2026-01-05T15:55:28.6012733Z [32m✓ built in 1.82s[39m

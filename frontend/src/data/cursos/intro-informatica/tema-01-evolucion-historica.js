@@ -24,7 +24,14 @@ export const tema01 = {
         <div class="historia-antigua">
           <h4>El Ábaco (3000 a.C.)</h4>
           <p>El <strong>ábaco</strong> fue uno de los primeros dispositivos de cálculo conocidos, utilizado en Mesopotamia, China y otras civilizaciones antiguas.</p>
-          
+          <img
+            src="/images/teoria/historia-abaco.jpg"
+            srcset="/images/teoria/historia-abaco.jpg 400w, /images/teoria/historia-abaco.jpg 800w, /images/teoria/historia-abaco.jpg 1600w"
+            sizes="(max-width:500px) 100vw, 500px"
+            alt="Ábaco"
+            loading="lazy"
+            style="width:100%;max-width:500px;height:auto;display:block;margin:0 auto;"
+          />
           <h5>Características:</h5>
           <ul>
             <li><strong>Función:</strong> Realizar operaciones aritméticas básicas</li>
@@ -42,8 +49,10 @@ export const tema01 = {
         </div>
       `,
       multimedia: {
-        imagen: "/images/teoria/historia-abaco.jpg",
-        infografia: "/images/teoria/dispositivos-antiguos.png"
+        infografia: "/images/teoria/dispositivos-antiguos.jpg",
+        infografia_srcset: "/images/teoria/dispositivos-antiguos.jpg 400w, /images/teoria/dispositivos-antiguos.jpg 800w, /images/teoria/dispositivos-antiguos.jpg 1600w",
+        infografia_sizes: "(max-width:500px) 100vw, 500px",
+        infografia_style: "max-width:600px;width:100%;height:auto;display:block;margin:0 auto;"
       }
     },
     {
@@ -63,10 +72,16 @@ export const tema01 = {
             <li><strong>Propósito:</strong> Ayudar en los cálculos contables de su padre</li>
             <li><strong>Limitación:</strong> Solo suma y resta</li>
           </ul>
-
+          <img
+            src="/images/teoria/pascalina.jpg"
+            srcset="/images/teoria/pascalina.jpg 400w"
+            sizes="(max-width:400px) 100vw, 400px"
+            alt="Pascalina"
+            loading="lazy"
+            style="width:100%;max-width:400px;height:auto;display:block;margin:0 auto;"
+          />
           <h4>🔧 La Máquina de Leibniz (1673)</h4>
           <p>Gottfried Wilhelm Leibniz mejoró el diseño de Pascal creando la primera calculadora capaz de multiplicar y dividir.</p>
-          
           <h5>Avances de Leibniz:</h5>
           <ul>
             <li><strong>Cilindro escalonado:</strong> Permitía multiplicación directa</li>
@@ -74,12 +89,32 @@ export const tema01 = {
             <li><strong>Sistema binario:</strong> Leibniz también desarrolló el sistema binario</li>
             <li><strong>Influencia:</strong> Base para futuras calculadoras mecánicas</li>
           </ul>
+        
+          <img
+            src="/images/teoria/maquina_leibniz.jpg"
+            srcset="/images/teoria/maquina_leibniz.jpg 400w, /images/teoria/maquina_leibniz.jpg 800w, /images/teoria/maquina_leibniz.jpg 1600w"
+            sizes="(max-width:500px) 100vw, 500px"
+            alt="Máquina de Leibniz"
+            loading="lazy"
+            style="width:100%;max-width:500px;height:auto;display:block;margin:0 auto;"
+          />
+          <h4>🎥 Demostración de Máquinas Mecánicas</h4>
+          <!-- Reproductor de vídeo responsivo: ancho 100% hasta 1280px, mantiene aspecto 16:9 -->
+          <video
+            controls
+            preload="metadata"
+            playsinline
+            style="width:100%;max-width:1280px;aspect-ratio:16/9;height:auto;object-fit:cover;display:block;margin:1rem auto;"
+          >
+            <source src="/videos/maquinas-mecanicas.webm" type="video/webm">
+            <source src="/videos/maquinas-mecanicas.mp4" type="video/mp4">
+            Tu navegador no soporta la etiqueta <code>video</code>.
+          </video>
         </div>
       `,
-      multimedia: {
-        imagen: "/images/teoria/pascalina.jpg",
+      /** multimedia: {
         video: "/videos/maquinas-mecanicas.mp4"
-      },
+      },*/
       actividades: [
         {
           tipo: "comparacion",
@@ -97,7 +132,14 @@ export const tema01 = {
         <div class="babbage-biografia">
           <h4>👨‍🔬 Charles Babbage (1791-1871)</h4>
           <p>Matemático, inventor y ingeniero mecánico inglés, conocido como el "padre de la computadora".</p>
-          
+          <img
+            src="/images/teoria/charles_babbage.jfif"
+            srcset="/images/teoria/charles_babbage.jfif 200w"
+            sizes="(max-width:200px) 100vw, 200px"
+            alt="Charles Babbage"
+            loading="lazy"
+            style="width:100%;max-width:200px;height:auto;display:block;margin:0 auto;"
+          />
           <h5>Sus Invenciones:</h5>
           
           <h4>🔄 La Máquina Diferencial (1822)</h4>
@@ -106,7 +148,14 @@ export const tema01 = {
             <li><strong>Problema resuelto:</strong> Errores humanos en cálculos complejos</li>
             <li><strong>Limitación:</strong> Solo un tipo de cálculo por diseño</li>
           </ul>
-
+          <img
+            src="/images/teoria/maquina-diferencial.jpg"
+            srcset="/images/teoria/maquina-diferencial.jpg 400w"
+            sizes="(max-width:400px) 100vw, 400px"
+            alt="Máquina de Diferencial"
+            loading="lazy"
+            style="width:100%;max-width:400px;height:auto;display:block;margin:0 auto;"
+          />
           <h4>🎛️ La Máquina Analítica (1837)</h4>
           <p>El diseño más revolucionario de Babbage, que contenía los elementos básicos de una computadora moderna:</p>
           
@@ -117,7 +166,14 @@ export const tema01 = {
             <li><strong>Programabilidad:</strong> Podía realizar diferentes tipos de cálculos</li>
             <li><strong>Bucles y condicionales:</strong> Capacidad de tomar decisiones</li>
           </ul>
-
+          <img
+            src="/images/teoria/maquina-analitica.jpg"
+            srcset="/images/teoria/maquina-analitica.jpg 400w"
+            sizes="(max-width:400px) 100vw, 400px"
+            alt="Máquina de Diferencial"
+            loading="lazy"
+            style="width:100%;max-width:400px;height:auto;display:block;margin:0 auto;"
+          />
           <div class="impacto-historico">
             <h4>🌟 Importancia Histórica:</h4>
             <ul>
@@ -129,10 +185,10 @@ export const tema01 = {
           </div>
         </div>
       `,
-      multimedia: {
+      /**multimedia: {
         imagen: "/images/teoria/maquina-analitica.jpg",
         infografia: "/images/teoria/babbage-timeline.png"
-      }
+      }*/
     },
     {
       id: 4,
@@ -143,7 +199,14 @@ export const tema01 = {
         <div class="ada-lovelace">
           <h4>🎭 Biografía</h4>
           <p>Augusta Ada King, Condesa de Lovelace, fue una matemática y escritora inglesa, considerada la primera programadora de la historia.</p>
-          
+          <img
+            src="/images/teoria/ada_lovelace.jpg"
+            srcset="/images/teoria/ada_lovelace.jpg 400w"
+            sizes="(max-width:400px) 100vw, 400px"
+            alt="Ada Lovelace"
+            loading="lazy"
+            style="width:100%;max-width:400px;height:auto;display:block;margin:0 auto;"
+          />
           <h5>Datos importantes:</h5>
           <ul>
             <li><strong>Padre:</strong> Lord Byron (poeta famoso)</li>

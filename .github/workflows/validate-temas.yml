@@ -1,0 +1,24 @@
+name: Validate temas
+
+on:
+  pull_request:
+    paths:
+      - 'templates/**'
+      - 'content/temas/**'
+      - 'schemas/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install deps
+        run: npm install
+      - name: Run tema validation
+        run: node scripts/test-validate-tema.js
+      - name: Run evaluacion validation
+        run: node scripts/test-validate-evaluacion.js

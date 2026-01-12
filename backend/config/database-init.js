@@ -45,7 +45,7 @@ async function initializeDatabase() {
     const ProgresoUsuario = defineProgresoModel(sequelizeInstance);
 
     // Intentar cargar y definir modelos docentes/evaluaciones si existen
-    let Temario, Evaluacion, Plantilla, Asignacion, Intento, Pregunta;
+    let Temario, Evaluacion, Plantilla, Asignacion, Intento, Pregunta, Prueba;
     try {
       const defineTemarioModel = require('../models/temario.sql.model');
       const defineEvaluacionModel = require('../models/evaluacion.sql.model');
@@ -53,6 +53,7 @@ async function initializeDatabase() {
       const defineAsignacionModel = require('../models/asignacion.sql.model');
       const defineIntentoModel = require('../models/intento.sql.model');
       const definePreguntaModel = require('../models/pregunta.sql.model');
+      const definePruebaModel = require('../models/prueba-evaluativa.sql.model');
 
       Temario = defineTemarioModel(sequelizeInstance);
       Evaluacion = defineEvaluacionModel(sequelizeInstance);
@@ -60,6 +61,7 @@ async function initializeDatabase() {
       Asignacion = defineAsignacionModel(sequelizeInstance);
       Intento = defineIntentoModel(sequelizeInstance);
       Pregunta = definePreguntaModel(sequelizeInstance);
+      Prueba = definePruebaModel(sequelizeInstance);
 
       // Exponer modelos docentes globalmente para controladores y rutas
       global.Temario = Temario;
@@ -68,6 +70,7 @@ async function initializeDatabase() {
       global.Asignacion = Asignacion;
       global.Intento = Intento;
       global.Pregunta = Pregunta;
+      global.PruebaEvaluativa = Prueba;
 
       console.log('✅ Modelos docentes cargados y registrados globalmente');
     } catch (e) {
@@ -79,6 +82,11 @@ async function initializeDatabase() {
 
     // Asociaciones adicionales para los modelos docentes si se cargaron
     if (Temario && Evaluacion && Plantilla && Asignacion && Intento && Pregunta) {
+      // Registrar PruebaEvaluativa en asociaciones si está disponible
+      if (Prueba) {
+        Prueba.belongsTo(User, { foreignKey: 'autor_id', as: 'autor' });
+        User.hasMany(Prueba, { foreignKey: 'autor_id', as: 'pruebas' });
+      }
       // Temario -> User
       Temario.belongsTo(User, { foreignKey: 'autor_id', as: 'autor' });
       User.hasMany(Temario, { foreignKey: 'autor_id', as: 'temarios' });
@@ -289,6 +297,39 @@ async function createInitialData(User, Curso, Leccion) {
     console.log(`📖 ${lecciones.length} lecciones creadas para el curso de Introducción`);
     
     console.log('✅ Datos iniciales creados correctamente');
+
+    // Asegurar que existen usuarios con las credenciales usadas por las pruebas E2E
+    try {
+      // usar contraseña predecible para pruebas E2E
+      const e2eHashed = await bcrypt.hash('password', 10);
+
+      const [docenteUser, docenteCreated] = await User.findOrCreate({
+        where: { email: 'docente@example.com' },
+        defaults: {
+          nombre: 'Docente E2E',
+          password: e2eHashed,
+          grado: null,
+          rol: 'docente'
+        }
+      });
+      const [estudianteUser, estudianteCreated] = await User.findOrCreate({
+        where: { email: 'estudiante@example.com' },
+        defaults: {
+          nombre: 'Estudiante E2E',
+          password: e2eHashed,
+          grado: '5to Grado',
+          rol: 'estudiante'
+        }
+      });
+
+      if (docenteCreated) console.log('✅ Usuario de prueba creado: docente@example.com');
+      else console.log('ℹ️  Usuario docente de prueba ya existe: docente@example.com');
+
+      if (estudianteCreated) console.log('✅ Usuario de prueba creado: estudiante@example.com');
+      else console.log('ℹ️  Usuario estudiante de prueba ya existe: estudiante@example.com');
+    } catch (e) {
+      console.warn('⚠️  No se pudieron crear usuarios de prueba E2E:', e.message);
+    }
     
   } catch (error) {
     console.error('❌ Error creando datos iniciales:', error);
@@ -363,7 +404,7 @@ async function createAdminUser(email = 'admin@infoaprende.com', password = 'admi
       console.error('❌ Modelo User no está disponible');
       return;
     }
-    
+
     // Verificar si ya existe
     const existingAdmin = await User.findOne({ 
       where: { 
@@ -371,12 +412,12 @@ async function createAdminUser(email = 'admin@infoaprende.com', password = 'admi
         rol: 'administrador' 
       } 
     });
-    
+
     if (existingAdmin) {
       console.log('✅ Usuario administrador ya existe:', email);
       return existingAdmin;
     }
-    
+
     // Crear nuevo administrador
     const hashedPassword = await bcrypt.hash(password, 10);
     const admin = await User.create({
@@ -385,11 +426,11 @@ async function createAdminUser(email = 'admin@infoaprende.com', password = 'admi
       password: hashedPassword,
       rol: 'administrador'
     });
-    
+
     console.log('✅ Usuario administrador creado:', email);
     console.log('🔑 Contraseña:', password);
     return admin;
-    
+
   } catch (error) {
     console.error('❌ Error creando usuario administrador:', error);
     throw error;
@@ -398,7 +439,5 @@ async function createAdminUser(email = 'admin@infoaprende.com', password = 'admi
 
 module.exports = {
   initializeDatabase,
-  createAdminUser,
-  setupAssociations,
-  verifyDatabaseIntegrity
+  createAdminUser
 };
