@@ -1,0 +1,30 @@
+﻿2026-01-05T15:55:10.8715382Z ##[group]Run cd backend
+2026-01-05T15:55:10.8716372Z [36;1mcd backend[0m
+2026-01-05T15:55:10.8717187Z [36;1mnpm ci[0m
+2026-01-05T15:55:10.8765550Z shell: /usr/bin/bash -e {0}
+2026-01-05T15:55:10.8766514Z ##[endgroup]
+2026-01-05T15:55:13.1900186Z npm warn deprecated supertest@6.3.4: Please upgrade to supertest v7.1.3+, see release notes at https://github.com/forwardemail/supertest/releases/tag/v7.1.3 - maintenance is supported by Forward Email @ https://forwardemail.net
+2026-01-05T15:55:13.4302862Z npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+2026-01-05T15:55:13.6759929Z npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+2026-01-05T15:55:14.1042052Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2026-01-05T15:55:14.1296393Z npm warn deprecated glob@8.1.0: Glob versions prior to v9 are no longer supported
+2026-01-05T15:55:14.4584918Z npm warn deprecated gauge@4.0.4: This package is no longer supported.
+2026-01-05T15:55:14.8117504Z npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+2026-01-05T15:55:14.8941925Z npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+2026-01-05T15:55:15.0435258Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2026-01-05T15:55:15.0810047Z npm warn deprecated superagent@8.1.2: Please upgrade to superagent v10.2.2+, see release notes at https://github.com/forwardemail/superagent/releases/tag/v10.2.2 - maintenance is supported by Forward Email @ https://forwardemail.net
+2026-01-05T15:55:15.0846883Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2026-01-05T15:55:15.1393028Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2026-01-05T15:55:15.8758407Z npm warn deprecated sinon@15.2.0: 16.1.1
+2026-01-05T15:55:21.7180507Z 
+2026-01-05T15:55:21.7181415Z added 533 packages, and audited 535 packages in 11s
+2026-01-05T15:55:21.7181702Z 
+2026-01-05T15:55:21.7183752Z 79 packages are looking for funding
+2026-01-05T15:55:21.7184696Z   run `npm fund` for details
+2026-01-05T15:55:21.7205220Z 
+2026-01-05T15:55:21.7205507Z 1 high severity vulnerability
+2026-01-05T15:55:21.7207500Z 
+2026-01-05T15:55:21.7207777Z To address all issues, run:
+2026-01-05T15:55:21.7208579Z   npm audit fix
+2026-01-05T15:55:21.7209041Z 
+2026-01-05T15:55:21.7209276Z Run `npm audit` for details.

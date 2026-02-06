@@ -19,7 +19,14 @@ export default {
       titulo: "El Monitor",
       contenido: `
         <h3>🖥️ Monitor - Ventana al Mundo Digital</h3>
-        
+        <img
+              src="/images/teoria/monitor.png"
+              srcset="/images/teoria/monitor.png 400w"
+            sizes="(max-width:400px) 100vw, 400px"
+            alt="Monitor"
+            loading="lazy"
+            style="width:100%;max-width:200px;height:auto;display:block;margin:0 auto;"
+          />
         <div class="componente-detalle">
           <h4>¿Qué es?</h4>
           <p>El <strong>monitor</strong> es la pantalla donde se muestra toda la información visual del computador.</p>
@@ -54,7 +61,14 @@ export default {
       titulo: "La CPU (Unidad Central)",
       contenido: `
         <h3>🏗️ CPU - El Cerebro del Computador</h3>
-        
+        <img
+              src="/images/teoria/cpu.png"
+              srcset="/images/teoria/cpu.png 200w"
+            sizes="(max-width:200px) 100vw, 200px"
+            alt="CPU"
+            loading="lazy"
+            style="width:100%;max-width:200px;height:auto;display:block;margin:0 auto;"
+          />
         <div class="componente-detalle">
           <h4>¿Qué es?</h4>
           <p>La <strong>CPU</strong> (Unidad Central de Procesamiento) es la "torre" o caja que contiene todos los componentes principales del computador.</p>
@@ -88,7 +102,14 @@ export default {
       titulo: "Las Bocinas",
       contenido: `
         <h3>🔊 Bocinas - El Sonido del Sistema</h3>
-        
+         <img
+              src="/images/teoria/bocinas.jpg"
+              srcset="/images/teoria/bocinas.jpg 400w"
+            sizes="(max-width:400px) 100vw, 400px"
+            alt="Bocinas"
+            loading="lazy"
+            style="width:100%;max-width:200px;height:auto;display:block;margin:0 auto;"
+          />
         <div class="componente-detalle">
           <h4>¿Qué son?</h4>
           <p>Las <strong>bocinas</strong> o altavoces reproducen todos los sonidos del computador: música, videos, notificaciones y efectos.</p>
@@ -123,19 +144,57 @@ export default {
       titulo: "El Ratón (Mouse)",
       contenido: `
         <h3>🖱️ El Ratón - Dispositivo de Navegación</h3>
-        
+        <img
+              src="/images/teoria/mouse.png"
+              srcset="/images/teoria/mouse.png 200w"
+            sizes="(max-width:200px) 100vw, 200px"
+            alt="Ratón"
+            loading="lazy"
+            style="width:100%;max-width:200px;height:auto;display:block;margin:0 auto;"
+          />
         <div class="componente-detalle">
           <h4>¿Qué es?</h4>
           <p>El <strong>ratón</strong> o <strong>mouse</strong> es un dispositivo de entrada que permite controlar el cursor en la pantalla y realizar selecciones.</p>
           
           <h4>Partes del Ratón:</h4>
-          <ul>
-            <li><strong>Botón izquierdo:</strong> Para seleccionar y hacer clic</li>
-            <li><strong>Botón derecho:</strong> Para menús contextuales</li>
-            <li><strong>Rueda central:</strong> Para desplazarse (scroll)</li>
-            <li><strong>Sensor óptico:</strong> Detecta el movimiento</li>
-            <li><strong>Cable o receptor:</strong> Para conexión con la CPU</li>
-          </ul>
+
+          <style>
+            /* Alinear imagen a la derecha del contenido en la sección "Partes del Ratón" */
+            .partes-raton.media { display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; }
+            .partes-raton .media__content { flex: 1 1 300px; }
+            /* fuerza ancho fijo hasta 500px pero permite responsividad */
+            .partes-raton .media__img { flex: 0 0 500px; max-width: 500px; }
+            .partes-raton .media__img img { width: 100%; height: auto; display: block; }
+            @media (max-width: 600px) {
+              .partes-raton.media { flex-direction: column; align-items: center; text-align: center; }
+              .partes-raton .media__img { order: 2; max-width: 100%; flex: 0 0 auto; }
+              .partes-raton .media__content { order: 1; width: 100%; }
+            }
+          </style>
+
+          <div class="partes-raton media">
+            <div class="media__content">
+              <ul>
+                <li><strong>Botón izquierdo:</strong> Para seleccionar y hacer clic</li>
+                <li><strong>Botón derecho:</strong> Para menús contextuales</li>
+                <li><strong>Rueda central:</strong> Para desplazarse (scroll)</li>
+                <li><strong>Botón central:</strong> Para cambiar el DPI (sensibilidad del cursor).</li>
+                <li><strong>Botones laterales:</strong> Para navegación (adelante/atrás) o comandos en juegos.</li>
+                <li><strong>Sensor óptico:</strong> Detecta el movimiento</li>
+                <li><strong>Cable o receptor:</strong> Para conexión con la CPU</li>
+              </ul>
+            </div>
+            <div class="media__img">
+              <img
+                src="/images/teoria/partes_del_mouse.png"
+                srcset="/images/teoria/partes_del_mouse.png 500w"
+                sizes="(max-width:600px) 100vw, 500px"
+                alt="Partes del Ratón"
+                loading="lazy"
+                style="width:100%;max-width:500px;display:block;margin:0 auto;height:auto;"
+              />
+            </div>
+          </div>
 
           <h4>Tipos de Ratones:</h4>
           <ul>
@@ -169,7 +228,14 @@ export default {
       titulo: "El Teclado",
       contenido: `
         <h3>⌨️ El Teclado - Dispositivo de Entrada de Texto</h3>
-        
+        <img
+              src="/images/teoria/teclado.jpg"
+              srcset="/images/teoria/teclado.jpg 400w"
+            sizes="(max-width:400px) 100vw, 400px"
+            alt="Teclado"
+            loading="lazy"
+            style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto;"
+          />
         <div class="componente-detalle">
           <h4>¿Qué es?</h4>
           <p>El <strong>teclado</strong> es el dispositivo principal para escribir texto, números y comandos en el computador.</p>

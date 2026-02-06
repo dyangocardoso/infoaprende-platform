@@ -1,0 +1,5 @@
+﻿2026-01-05T15:55:28.6428704Z ##[group]Run cd frontend
+2026-01-05T15:55:28.6429230Z [36;1mcd frontend[0m
+2026-01-05T15:55:28.6429535Z [36;1mnohup npm run preview -- --port 5173 > preview.log 2>&1 &[0m
+2026-01-05T15:55:28.6457801Z shell: /usr/bin/bash -e {0}
+2026-01-05T15:55:28.6458035Z ##[endgroup]

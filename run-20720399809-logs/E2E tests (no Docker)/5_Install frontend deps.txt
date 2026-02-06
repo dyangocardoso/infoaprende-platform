@@ -1,0 +1,20 @@
+﻿2026-01-05T15:55:21.7459556Z ##[group]Run cd frontend
+2026-01-05T15:55:21.7459894Z [36;1mcd frontend[0m
+2026-01-05T15:55:21.7460104Z [36;1mnpm ci[0m
+2026-01-05T15:55:21.7492469Z shell: /usr/bin/bash -e {0}
+2026-01-05T15:55:21.7492769Z ##[endgroup]
+2026-01-05T15:55:25.4824116Z 
+2026-01-05T15:55:25.4824915Z added 309 packages, and audited 311 packages in 4s
+2026-01-05T15:55:25.4826723Z 
+2026-01-05T15:55:25.4827102Z 100 packages are looking for funding
+2026-01-05T15:55:25.4827606Z   run `npm fund` for details
+2026-01-05T15:55:25.5082345Z 
+2026-01-05T15:55:25.5082932Z 6 vulnerabilities (1 low, 5 moderate)
+2026-01-05T15:55:25.5083310Z 
+2026-01-05T15:55:25.5083916Z To address issues that do not require attention, run:
+2026-01-05T15:55:25.5089957Z   npm audit fix
+2026-01-05T15:55:25.5090364Z 
+2026-01-05T15:55:25.5090813Z To address all issues (including breaking changes), run:
+2026-01-05T15:55:25.5091392Z   npm audit fix --force
+2026-01-05T15:55:25.5091616Z 
+2026-01-05T15:55:25.5091805Z Run `npm audit` for details.

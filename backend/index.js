@@ -125,6 +125,10 @@ app.get('/api/users/profile', checkDB, authMiddleware.verifyToken, userControlle
 app.put('/api/users/profile', checkDB, authMiddleware.verifyToken, userController.updateProfile);
 app.put('/api/users/change-password', checkDB, authMiddleware.verifyToken, userController.changePassword);
 
+// Rutas de usuarios: perfil y otras
+const usersAttempts = require('./routes/users.attempts.routes');
+app.use('/api/users', checkDB, usersAttempts);
+
 // Rutas de administración
 const adminRoutes = require('./routes/admin.routes');
 app.use('/api/admin', checkDB, adminRoutes);
@@ -134,12 +138,22 @@ const temariosRoutes = require('./routes/docente.temarios.routes');
 const evaluacionesRoutes = require('./routes/docente.evaluaciones.routes');
 const preguntasRoutes = require('./routes/docente.preguntas.routes');
 const plantillasRoutes = require('./routes/docente.plantillas.routes');
+const pruebasRoutes = require('./routes/docente.pruebas.routes');
 
 app.use('/api/docente/temarios', checkDB, temariosRoutes);
 app.use('/api/docente/evaluaciones', checkDB, evaluacionesRoutes);
 // Preguntas se montan bajo /api/docente/evaluaciones/:evaluacionId/preguntas
 app.use('/api/docente/evaluaciones/:evaluacionId/preguntas', checkDB, preguntasRoutes);
 app.use('/api/docente/plantillas', checkDB, plantillasRoutes);
+app.use('/api/docente/pruebas', checkDB, pruebasRoutes);
+
+// Endpoint detalle de intento
+const attemptsRoutes = require('./routes/attempts.routes');
+app.use('/api/attempts', checkDB, attemptsRoutes);
+
+// Mount public evaluations API
+const publicEvals = require('./routes/evaluations.routes');
+app.use('/api/evaluations', publicEvals);
 
 // Ruta de test
 app.get('/api/test/test', (req, res) => {

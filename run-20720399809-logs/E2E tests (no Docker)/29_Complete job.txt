@@ -1,0 +1,8 @@
+﻿2026-01-05T15:56:28.9484497Z Cleaning up orphan processes
+2026-01-05T15:56:28.9793557Z Terminate orphan process: pid (2318) (npm run start)
+2026-01-05T15:56:28.9812086Z Terminate orphan process: pid (2325) (npm run preview --port 5173)
+2026-01-05T15:56:28.9846001Z Terminate orphan process: pid (2344) (sh)
+2026-01-05T15:56:28.9868384Z Terminate orphan process: pid (2345) (node)
+2026-01-05T15:56:28.9891544Z Terminate orphan process: pid (2352) (sh)
+2026-01-05T15:56:28.9916386Z Terminate orphan process: pid (2353) (node)
+2026-01-05T15:56:28.9952320Z Terminate orphan process: pid (2364) (esbuild)

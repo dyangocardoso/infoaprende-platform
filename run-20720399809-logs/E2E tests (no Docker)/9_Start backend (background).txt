@@ -1,0 +1,5 @@
+﻿2026-01-05T15:55:28.6319292Z ##[group]Run cd backend
+2026-01-05T15:55:28.6319584Z [36;1mcd backend[0m
+2026-01-05T15:55:28.6319832Z [36;1mnohup npm run start > backend.log 2>&1 &[0m
+2026-01-05T15:55:28.6351955Z shell: /usr/bin/bash -e {0}
+2026-01-05T15:55:28.6352192Z ##[endgroup]

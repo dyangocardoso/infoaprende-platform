@@ -74,6 +74,10 @@ export default {
             <li><strong>Encender la CPU:</strong>
               <ul>
                 <li>Localizar botón de encendido (Power)</li>
+                <li style="list-style:none;"><img 
+                src="/images/teoria/encendido_apagado.png" 
+                alt="Botón de Power"
+                style="width:100%;max-width:40px;height:auto;margin:0 auto;"/></li>
                 <li>Presionar una sola vez</li>
                 <li>Esperar sin tocar nada</li>
               </ul>
@@ -117,8 +121,20 @@ export default {
             <li><strong>Usar menú de Windows:</strong>
               <ul>
                 <li>Clic en botón "Inicio"</li>
+                <li style="list-style:none;"><img 
+                src="/images/teoria/boton_inicio.PNG" 
+                alt="Botón de Inicio"
+                style="width:100%;max-width:40px;height:auto;margin:0 auto;"/></li>
                 <li>Seleccionar "Apagar"</li>
+                <li style="list-style:none;"><img 
+                src="/images/teoria/icono_apagar.png" 
+                alt="Opción de Apagar"
+                style="width:100%;max-width:40px;height:auto;margin:0 auto;"/></li>
                 <li>Elegir "Apagar" del menú</li>
+                <li style="list-style:none;"><img 
+                src="/images/teoria/opcion_apagar.png" 
+                alt="Menú de Apagar"
+                style="width:100%;max-width:150px;height:auto;margin:0 auto;"/></li>
               </ul>
             </li>
             <li><strong>Esperar apagado completo:</strong>
@@ -137,14 +153,39 @@ export default {
           </ol>
         </div>
 
-        <div class="metodos-apagado">
-          <h4>🎛️ Diferentes Métodos:</h4>
-          <ul>
-            <li><strong>Apagar:</strong> Cierra todo completamente</li>
-            <li><strong>Reiniciar:</strong> Apaga y enciende automáticamente</li>
-            <li><strong>Suspender:</strong> Ahorra energía, arranque rápido</li>
-            <li><strong>Hibernar:</strong> Guarda sesión, apagado completo</li>
-          </ul>
+        <style>
+          /* Estilos locales para alinear imagen y contenido en .metodos-apagado */
+          .metodos-apagado.media { display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; }
+          .metodos-apagado .media__img { flex: 0 0 220px; max-width: 35%; }
+          .metodos-apagado .media__img img { width: 100%; height: auto; display: block; }
+          .metodos-apagado .media__content { flex: 1; min-width: 200px; }
+          @media (max-width: 600px) {
+            .metodos-apagado.media { flex-direction: column; align-items: center; text-align: center; }
+            .metodos-apagado .media__img { max-width: 400px; flex: 0 0 auto; }
+            .metodos-apagado .media__content { width: 100%; }
+          }
+        </style>
+
+        <div class="metodos-apagado media">
+          <div class="media__img">
+            <img
+              src="/images/teoria/metodos_apagar_png.png"
+              srcset="/images/teoria/metodos_apagar_png.png 400w"
+              sizes="(max-width:400px) 100vw, 400px"
+              alt="Métodos de Apagar"
+              loading="lazy"
+              style="display:block;"
+            />
+          </div>
+          <div class="media__content">
+            <h4>🎛️ Diferentes Métodos:</h4>
+            <ul>
+              <li><strong>Apagar:</strong> Cierra todo completamente</li>
+              <li><strong>Reiniciar:</strong> Apaga y enciende automáticamente</li>
+              <li><strong>Suspender:</strong> Ahorra energía, arranque rápido</li>
+              <li><strong>Hibernar:</strong> Guarda sesión, apagado completo</li>
+            </ul>
+          </div>
         </div>
       `
     }

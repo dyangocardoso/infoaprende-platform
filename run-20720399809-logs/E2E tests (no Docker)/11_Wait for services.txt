@@ -1,0 +1,13 @@
+﻿2026-01-05T15:55:28.6543581Z ##[group]Run for i in {1..30}; do
+2026-01-05T15:55:28.6544024Z [36;1mfor i in {1..30}; do[0m
+2026-01-05T15:55:28.6544828Z [36;1m  if curl -sSf http://localhost:4000/api/health >/dev/null 2>&1 && curl -sSf http://localhost:5173/ >/dev/null 2>&1; then[0m
+2026-01-05T15:55:28.6545643Z [36;1m    echo "Services up"[0m
+2026-01-05T15:55:28.6546017Z [36;1m    break[0m
+2026-01-05T15:55:28.6546340Z [36;1m  fi[0m
+2026-01-05T15:55:28.6546696Z [36;1m  echo "Waiting for services... ($i)"[0m
+2026-01-05T15:55:28.6547149Z [36;1m  sleep 2[0m
+2026-01-05T15:55:28.6547443Z [36;1mdone[0m
+2026-01-05T15:55:28.6588012Z shell: /usr/bin/bash -e {0}
+2026-01-05T15:55:28.6588425Z ##[endgroup]
+2026-01-05T15:55:28.6751350Z Waiting for services... (1)
+2026-01-05T15:55:30.7037533Z Services up

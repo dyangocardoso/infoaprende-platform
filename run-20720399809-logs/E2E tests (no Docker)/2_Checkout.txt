@@ -1,0 +1,88 @@
+﻿2026-01-05T15:55:09.1904573Z ##[group]Run actions/checkout@v4
+2026-01-05T15:55:09.1905480Z with:
+2026-01-05T15:55:09.1905960Z   repository: dyangocardoso/infoaprende-platform
+2026-01-05T15:55:09.1906732Z   token: ***
+2026-01-05T15:55:09.1907135Z   ssh-strict: true
+2026-01-05T15:55:09.1907561Z   ssh-user: git
+2026-01-05T15:55:09.1907991Z   persist-credentials: true
+2026-01-05T15:55:09.1908464Z   clean: true
+2026-01-05T15:55:09.1909058Z   sparse-checkout-cone-mode: true
+2026-01-05T15:55:09.1909576Z   fetch-depth: 1
+2026-01-05T15:55:09.1910009Z   fetch-tags: false
+2026-01-05T15:55:09.1910429Z   show-progress: true
+2026-01-05T15:55:09.1910863Z   lfs: false
+2026-01-05T15:55:09.1911255Z   submodules: false
+2026-01-05T15:55:09.1911683Z   set-safe-directory: true
+2026-01-05T15:55:09.1912395Z ##[endgroup]
+2026-01-05T15:55:09.2989016Z Syncing repository: dyangocardoso/infoaprende-platform
+2026-01-05T15:55:09.2991200Z ##[group]Getting Git version info
+2026-01-05T15:55:09.2992092Z Working directory is '/home/runner/work/infoaprende-platform/infoaprende-platform'
+2026-01-05T15:55:09.2993289Z [command]/usr/bin/git version
+2026-01-05T15:55:09.3088226Z git version 2.52.0
+2026-01-05T15:55:09.3113909Z ##[endgroup]
+2026-01-05T15:55:09.3128437Z Temporarily overriding HOME='/home/runner/work/_temp/48f99f9d-767f-490e-8442-3539ba67ee38' before making global git config changes
+2026-01-05T15:55:09.3134057Z Adding repository directory to the temporary git global config as a safe directory
+2026-01-05T15:55:09.3135586Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/infoaprende-platform/infoaprende-platform
+2026-01-05T15:55:09.3176382Z Deleting the contents of '/home/runner/work/infoaprende-platform/infoaprende-platform'
+2026-01-05T15:55:09.3179866Z ##[group]Initializing the repository
+2026-01-05T15:55:09.3184117Z [command]/usr/bin/git init /home/runner/work/infoaprende-platform/infoaprende-platform
+2026-01-05T15:55:09.3317783Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-01-05T15:55:09.3319589Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-01-05T15:55:09.3320976Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-01-05T15:55:09.3322463Z hint: call:
+2026-01-05T15:55:09.3322974Z hint:
+2026-01-05T15:55:09.3323988Z hint: 	git config --global init.defaultBranch <name>
+2026-01-05T15:55:09.3325339Z hint:
+2026-01-05T15:55:09.3326592Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-01-05T15:55:09.3328637Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-01-05T15:55:09.3330297Z hint:
+2026-01-05T15:55:09.3331027Z hint: 	git branch -m <name>
+2026-01-05T15:55:09.3331849Z hint:
+2026-01-05T15:55:09.3332931Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-01-05T15:55:09.3335222Z Initialized empty Git repository in /home/runner/work/infoaprende-platform/infoaprende-platform/.git/
+2026-01-05T15:55:09.3339157Z [command]/usr/bin/git remote add origin https://github.com/dyangocardoso/infoaprende-platform
+2026-01-05T15:55:09.3373703Z ##[endgroup]
+2026-01-05T15:55:09.3375055Z ##[group]Disabling automatic garbage collection
+2026-01-05T15:55:09.3378444Z [command]/usr/bin/git config --local gc.auto 0
+2026-01-05T15:55:09.3406796Z ##[endgroup]
+2026-01-05T15:55:09.3408131Z ##[group]Setting up auth
+2026-01-05T15:55:09.3415135Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-01-05T15:55:09.3445838Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-01-05T15:55:09.3818543Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-01-05T15:55:09.3848612Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-01-05T15:55:09.4066177Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-01-05T15:55:09.4102925Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-01-05T15:55:09.4323806Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-01-05T15:55:09.4357337Z ##[endgroup]
+2026-01-05T15:55:09.4358255Z ##[group]Fetching the repository
+2026-01-05T15:55:09.4365985Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +24372592c6b87ced4e7f18efd5b78012d1b7048c:refs/remotes/pull/16/merge
+2026-01-05T15:55:10.1510539Z From https://github.com/dyangocardoso/infoaprende-platform
+2026-01-05T15:55:10.1512858Z  * [new ref]         24372592c6b87ced4e7f18efd5b78012d1b7048c -> pull/16/merge
+2026-01-05T15:55:10.1548181Z ##[endgroup]
+2026-01-05T15:55:10.1549846Z ##[group]Determining the checkout info
+2026-01-05T15:55:10.1551379Z ##[endgroup]
+2026-01-05T15:55:10.1554862Z [command]/usr/bin/git sparse-checkout disable
+2026-01-05T15:55:10.1598128Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-01-05T15:55:10.1624564Z ##[group]Checking out the ref
+2026-01-05T15:55:10.1626908Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/16/merge
+2026-01-05T15:55:10.2236968Z Note: switching to 'refs/remotes/pull/16/merge'.
+2026-01-05T15:55:10.2238649Z 
+2026-01-05T15:55:10.2240084Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-01-05T15:55:10.2242192Z changes and commit them, and you can discard any commits you make in this
+2026-01-05T15:55:10.2244522Z state without impacting any branches by switching back to a branch.
+2026-01-05T15:55:10.2245873Z 
+2026-01-05T15:55:10.2246544Z If you want to create a new branch to retain commits you create, you may
+2026-01-05T15:55:10.2248617Z do so (now or later) by using -c with the switch command. Example:
+2026-01-05T15:55:10.2249915Z 
+2026-01-05T15:55:10.2250262Z   git switch -c <new-branch-name>
+2026-01-05T15:55:10.2250900Z 
+2026-01-05T15:55:10.2251212Z Or undo this operation with:
+2026-01-05T15:55:10.2251785Z 
+2026-01-05T15:55:10.2252087Z   git switch -
+2026-01-05T15:55:10.2252553Z 
+2026-01-05T15:55:10.2253427Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-01-05T15:55:10.2254774Z 
+2026-01-05T15:55:10.2256408Z HEAD is now at 2437259 Merge 1f8e7c31346c90987ee2ca776bb4fe6a5729e385 into 25a1e714f2880280e8e438e1ab1dab1ef9c848d9
+2026-01-05T15:55:10.2261270Z ##[endgroup]
+2026-01-05T15:55:10.2285507Z [command]/usr/bin/git log -1 --format=%H
+2026-01-05T15:55:10.2308000Z 24372592c6b87ced4e7f18efd5b78012d1b7048c
