@@ -201,11 +201,11 @@ export const tema01 = {
           <p>Augusta Ada King, Condesa de Lovelace, fue una matemática y escritora inglesa, considerada la primera programadora de la historia.</p>
           <img
             src="/images/teoria/ada_lovelace.jpg"
-            srcset="/images/teoria/ada_lovelace.jpg 400w"
-            sizes="(max-width:400px) 100vw, 400px"
+            srcset="/images/teoria/ada_lovelace.jpg 200w"
+            sizes="(max-width:200px) 100vw, 200px"
             alt="Ada Lovelace"
             loading="lazy"
-            style="width:100%;max-width:400px;height:auto;display:block;margin:0 auto;"
+            style="width:100%;max-width:200px;height:auto;display:block;margin:0 auto;"
           />
           <h5>Datos importantes:</h5>
           <ul>
@@ -236,10 +236,10 @@ export const tema01 = {
           </div>
         </div>
       `,
-      multimedia: {
+      /**multimedia: {
         imagen: "/images/teoria/ada-lovelace.jpg",
         documento: "/docs/notas-ada-lovelace.pdf"
-      },
+      },*/
       actividades: [
         {
           tipo: "reflexion",

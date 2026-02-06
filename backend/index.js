@@ -125,6 +125,10 @@ app.get('/api/users/profile', checkDB, authMiddleware.verifyToken, userControlle
 app.put('/api/users/profile', checkDB, authMiddleware.verifyToken, userController.updateProfile);
 app.put('/api/users/change-password', checkDB, authMiddleware.verifyToken, userController.changePassword);
 
+// Rutas de usuarios: perfil y otras
+const usersAttempts = require('./routes/users.attempts.routes');
+app.use('/api/users', checkDB, usersAttempts);
+
 // Rutas de administración
 const adminRoutes = require('./routes/admin.routes');
 app.use('/api/admin', checkDB, adminRoutes);
@@ -142,6 +146,14 @@ app.use('/api/docente/evaluaciones', checkDB, evaluacionesRoutes);
 app.use('/api/docente/evaluaciones/:evaluacionId/preguntas', checkDB, preguntasRoutes);
 app.use('/api/docente/plantillas', checkDB, plantillasRoutes);
 app.use('/api/docente/pruebas', checkDB, pruebasRoutes);
+
+// Endpoint detalle de intento
+const attemptsRoutes = require('./routes/attempts.routes');
+app.use('/api/attempts', checkDB, attemptsRoutes);
+
+// Mount public evaluations API
+const publicEvals = require('./routes/evaluations.routes');
+app.use('/api/evaluations', publicEvals);
 
 // Ruta de test
 app.get('/api/test/test', (req, res) => {
